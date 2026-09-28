@@ -15,6 +15,12 @@ sent to a hosted LLM API.
 and experimentation. It explores local LLMs, RAG, MITRE ATT&CK validation, and
 security-event mapping through hands-on implementation and measurement.
 
+**Learning project:** This is an independent engineering project built primarily for
+learning and experimentation. The analysis pipeline uses a local LLM and multiple
+retrieval and validation stages, so each analysis can be relatively token- and
+compute-intensive. The goal is to explore these techniques in practice, rather than
+provide a lightweight or production-cost-optimized solution.
+
 ## Screenshots
 
 ![Single-event analysis result](docs/screenshots/19.2-01-analiz-sonucu.png)

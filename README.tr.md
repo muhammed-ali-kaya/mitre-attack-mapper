@@ -16,6 +16,13 @@ mühendislik çalışmasıdır. Amaç; yerel LLM, RAG, MITRE ATT&CK doğrulamas�
 güvenlik olayı eşleştirme süreçlerini uygulamalı olarak araştırmak, ölçmek ve
 geliştirmektir.
 
+**Öğrenme projesi:** Bu proje öncelikli olarak eğitim, öğrenme ve deney amacıyla
+geliştirilmiş bağımsız bir mühendislik çalışmasıdır. Analiz pipeline'ı yerel bir LLM
+ile birlikte birden fazla retrieval ve doğrulama aşaması kullandığı için her analiz
+token ve hesaplama açısından görece maliyetlidir. Amaç hafif veya üretim maliyeti
+optimize edilmiş bir çözüm sunmaktan çok bu teknikleri uygulamalı olarak
+araştırmaktır.
+
 ## Ekran görüntüleri
 
 ![Tekli analiz sonucu](docs/screenshots/19.2-01-analiz-sonucu.png)
