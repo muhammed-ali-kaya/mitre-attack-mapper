@@ -1,0 +1,11 @@
+{
+  "_kaynak": "Kullanicinin 2026-09-03 tarihli canli kosusundan alinan GERCEK QRadar/Windows 4688 kaydi. Gorev 24'un tek biciminidir: `Command` ve `Parent Process Path` adlari 126 kayitlik G+S+H korpusunun HICBIRINDE gecmiyor (docs/beklenti_24_sema_alan_boslugu.md SS5), bu yuzden bu dosya olmadan duzeltme dogrulanamaz.",
+  "_neden_onemli": [
+    "Bicim brace_kv -- space_kv DEGIL. Beklenti belgesinin SS3b'de olculen yutulma bu kayitta GECERLI DEGIL; ayri bir arizadir.",
+    "Cocuk surec icin log HEM 'Process Path' (tam yol) HEM 'Process Name' (taban ad) yaziyor. Ebeveyn icin YALNIZCA 'Parent Process Path' yaziyor, taban ad YOK. Asimetri semada degil LOGDA.",
+    "Command degeri tirnakla BASLIYOR ama tirnak icinde BITMIYOR: '\"C:\\...\\powercfg.exe\" /setdcvalueindex ...'. Tirnakli deger okuyucusunun bu bicimde ne yaptigi olculmeli.",
+    "'Target Username' semada 'Target User Name' olarak yaziyor; _normalise_key bosluk duyarsiz oldugu icin eslesme BEKLENIYOR -- fixture bunu da kilitliyor.",
+    "'Target Account Security ID=NULL SID' ve bircok 'N/A': non_informative_values kapsaminda."
+  ],
+  "log": "{Pipe Name=N/A, Process Path=C:\\Windows\\System32\\powercfg.exe, File Directory=N/A, Filename=N/A, User Domain=WORKGROUP, Target Username=-, Event ID=4688, Process Name=powercfg.exe, User Workstation=N/A, Account Name=WINHOST-01$, Command=\"C:\\Windows\\system32\\powercfg.exe\" /setdcvalueindex SCHEME_CURRENT 7516b95f-f776-4464-8c53-06167f40cc99 8ec4b3a5-6868-48c2-be75-4f3044be88a7 0, File Extension=N/A, Object Type=N/A, Target Account Security ID=NULL SID, Class=N/A, Group ID=N/A, User Account Control=N/A, CustomProp=0, Parent Process Path=C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe}"
+}

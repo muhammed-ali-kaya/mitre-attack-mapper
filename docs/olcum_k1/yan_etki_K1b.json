@@ -1,0 +1,87 @@
+{
+  "adim": "K1b",
+  "taban": "d1439f6",
+  "korpus_kayit": 186,
+  "karar_sayisi": 341,
+  "degisen": [
+    {
+      "kol": "B60",
+      "kayit": "platform-002",
+      "teknik": "T1543.001",
+      "once": "abstain",
+      "sonra": "susma"
+    },
+    {
+      "kol": "B60",
+      "kayit": "rawlog-009",
+      "teknik": "T1685.005",
+      "once": "reject",
+      "sonra": "confirm"
+    },
+    {
+      "kol": "G",
+      "kayit": "G-026",
+      "teknik": "T1685.001",
+      "once": "susma",
+      "sonra": "reject"
+    },
+    {
+      "kol": "S",
+      "kayit": "S-A-10",
+      "teknik": "T1685.005",
+      "once": "reject",
+      "sonra": "confirm"
+    },
+    {
+      "kol": "S",
+      "kayit": "S-A-11",
+      "teknik": "T1685.001",
+      "once": "susma",
+      "sonra": "reject"
+    },
+    {
+      "kol": "S",
+      "kayit": "S-EK2-02",
+      "teknik": "T1685.001",
+      "once": "susma",
+      "sonra": "reject"
+    },
+    {
+      "kol": "S",
+      "kayit": "S-ID-07",
+      "teknik": "T1685.001",
+      "once": "susma",
+      "sonra": "confirm"
+    },
+    {
+      "kol": "S",
+      "kayit": "S-ID-09",
+      "teknik": "T1685",
+      "once": "susma",
+      "sonra": "reject"
+    },
+    {
+      "kol": "S",
+      "kayit": "S-ID-09",
+      "teknik": "T1686",
+      "once": "susma",
+      "sonra": "confirm"
+    },
+    {
+      "kol": "S",
+      "kayit": "S-ID-10",
+      "teknik": "T1686",
+      "once": "susma",
+      "sonra": "confirm"
+    },
+    {
+      "kol": "S",
+      "kayit": "S-ID-13",
+      "teknik": "T1685.001",
+      "once": "susma",
+      "sonra": "confirm"
+    }
+  ],
+  "tahmin_disi": [],
+  "gerceklesmeyen": []
+}

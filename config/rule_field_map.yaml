@@ -1,0 +1,685 @@
+# Kural kosullari -> yapisal alan haritasi (2B'nin ilk teslimi)
+#
+# NE ISE YARAR: rules/attack_mappings.yaml'daki 57 kosulun TAMAMI bugun
+# `field: Message` diyor -- yani ham log metnini regex'liyor. Bu tablo her
+# kosulun HANGI kanonik alana ait oldugunu soyler. Kural motoru bu tabloyu
+# okuyan genel bir eslestirici olacak; tablo buyudugunde KOD DEGISMEYECEK.
+#
+# KOLONLARIN KAYNAGI AYRI:
+#   desen / sira        ALINTI  -- kaynak dosyadan URETILIR, elle yazilmaz.
+#                       Elle kopyalandiginda bes desen yanlis/eksik cikti
+#                       (savenothing kirpilmis, bootstatuspolicy kirpilmis,
+#                       (?i) oneki dusmus). Test bunu yakaladi.
+#   sinif/hedef/gerekce HUKUM   -- insan karari. Bir sezgisel siniflandirici
+#                       denendi ve `(disabled|turned off|stopped)` gibi anlati
+#                       desenlerini komut satirina atadi; kullanilmadi.
+#   atesleme_60         OLCUM   -- 60 senaryoda kac kez atesledi
+#   olay_id_veride_var  OLCUM   -- gerekli olay ID'si veri setinde var mi
+#
+# SINIFLAR
+#   T        tek bir kanonik alana tasinir
+#   KARMA    desen IKI farkli seyi ariyor -> iki kosula BOLUNMELI (`bolme`)
+#   S        alan degeri degil OLAYIN ANLAMI -> config/event_semantics.yaml
+#   KANITSIZ hedef alan semada yok VE gercek yazimini gosteren log ornegi yok
+#            -> tahminle sema buyutulmez; hedef: null, aday ad ayri kolonda
+#
+# UYARI -- ATESLEME SIFIRSA TASIMA TEST EDILEMEZ
+# 49 kuralin yalnizca 14'u atesleniyor; 57 satirin 39'u sifir. Sebep buyuk
+# olcude VERI SETINDE: 60 senaryonun 45'inde hic EventID yok (duzyazi
+# girdiler) ve veride toplam 6 farkli olay ID geciyor (4688 x10, 4720, 4732,
+# 3, 11, 1102). Yani bu "35 kural OLU" demek DEGIL, "bu set 35 kurali
+# SINAYAMIYOR" demek. Kabul kriterinde ayri sayilir.
+# Ayrinti: docs/beklenti_2b_kural_kosullari.md
+
+version: 1
+kosullar:
+- teknik: T1686.003
+  desen: (?i)(rule (was )?(added|deleted|modified|changed)|setting.{0,30}changed|exception list|was restored
+    to the default|service.{0,20}stopped)
+  sinif: S
+  hedef: event_semantics
+  gerekce: '"kural eklendi/silindi" bir alan değeri değil, olayın anlamı. 4946-4954 olay ID''lerinin TAMAMI
+    zaten "güvenlik duvarı yapılandırması değişti" demek. Desen, olay ID''sinin zaten söylediğini metinden
+    tekrar okumaya çalışıyor -- ve 5156/5158 forbidden listesi işi zaten yapıyor.'
+  atesleme_60: 0
+  olay_id_veride_var: false
+  sira: 0
+- teknik: T1686
+  desen: (?i)(rule (was )?(added|deleted|modified|changed)|setting.{0,30}changed|exception list|was restored
+    to the default|service.{0,20}stopped)
+  sinif: S
+  hedef: event_semantics
+  gerekce: 'K1a'' -- T1686.003 kuralinin olay kumesi (4946-4950, 4954, 5025) ve desenin birebir kopyasi; ust
+    teknik alt teknigiyle ayni kanitla onaylanir. Sinif ve gerekce T1686.003 satiriyla ayni: aranan sey olayin
+    anlami, alan degeri degil.'
+  atesleme_60: 0
+  olay_id_veride_var: false
+  sira: 0
+- teknik: T1685.001
+  desen: (?i)Windows Event Log service was changed from .{0,30} to disabled
+  sinif: S
+  hedef: event_semantics
+  gerekce: 'K1a'' -- 7040 herhangi bir hizmetin baslangic turu degisikligi; desen olayi Windows Event Log
+    hizmetinin DEVRE DISI birakilmasina daraltir. Aranan sey olayin anlami (hangi hizmet, hangi yone), alan
+    degeri degil.'
+  atesleme_60: 0
+  olay_id_veride_var: false
+  sira: 0
+- teknik: T1685.001
+  desen: (?i)audit polic(y|ies).{0,40}changed
+  sinif: S
+  hedef: event_semantics
+  gerekce: 4719 = "denetim politikası değişti". Olay ID'si tek başına yeterli; desen aynı bilgiyi İngilizce
+    mesaj metninden çıkarmaya çalışıyor, yani Türkçe/yerelleştirilmiş Windows'ta sessizce başarısız olur.
+    K1a -- emekli T1562.002'den taşındı; 1102 ("audit log was cleared") kolu çıkarıldı, o olay T1685.005'e
+    (Clear Windows Event Logs) aittir.
+  atesleme_60: 1
+  olay_id_veride_var: true
+  sira: 0
+- teknik: T1685
+  desen: (?i)(disabled|turned off|stopped)
+  sinif: S
+  hedef: event_semantics
+  gerekce: 'Kataloğun en kırılgan koşulu: üç genel İngilizce kelime. "stopped" zararsız bir servis durdurmada
+    da geçer. Yerelleştirilmiş logda hiç eşleşmez. Aranan şey "bir koruma kapatıldı" anlamı -- event_semantics''in
+    işlem sınıfı alanına ait.'
+  atesleme_60: 0
+  olay_id_veride_var: false
+  sira: 0
+- teknik: T1003.002
+  desen: (?i)(reg\s+save\s+hklm\\sam|\\config\\SAM\b|HKLM\\SAM)
+  sinif: KARMA
+  hedef:
+  - process.command_line
+  - object.name
+  bolme:
+  - alan: process.command_line
+    desen: reg\s+save\s+hklm\\sam
+  - alan: object.name
+    desen: (\\config\\SAM\b|HKLM\\SAM)
+  - alan: process.command_line
+    desen: (\\config\\SAM\b|HKLM\\SAM)
+  gerekce: 'BAYRAK VAKA (known_regression). "reg save hklm\\sam" bir KOMUT; "\\config\\SAM" ve "HKLM\\SAM"
+    bir NESNE YOLU. İkisi tek desende. object.name yarısı ayrıca YOL NORMALİZASYONU istiyor: log "\\REGISTRY\\MACHINE\\SAM"
+    yazıyor, desen "HKLM\\SAM" arıyor. path_normalizer.py yazıldı ve bekliyor -- bağlanacağı yer burası.
+    DUZELTME (olculdu, rawlog-010): SAM YOLU olay turune gore FARKLI ALANDA yasiyor. 4656 registry erisiminde
+    object.name, 4688 surec olusturmada KOMUT SATIRI ("reg.exe save HKLM\\SAM ..."). Yol ilk tasimada
+    yalnizca object.name''e verildi ve rawlog-010 kayboldu; ucuncu kol o yuzden var. Ders: ayni kanit
+    dizesi olay turune gore baska alanda bulunur -- alan secimi tekniğe degil OLAYA baglidir. "reg\s+save"
+    kolu ayrica OLU: gercek loglar "reg.exe save" yaziyor, desen "reg save" ariyor. K1''e (kural kalitesi)
+    girdi, 2B''de duzeltilmiyor.'
+  atesleme_60: 1
+  olay_id_veride_var: true
+  sira: 0
+- teknik: T1057
+  desen: (?i)(\\tasklist\.exe|get-process|\\qprocess\.exe)
+  sinif: KARMA
+  hedef:
+  - process.name
+  - process.command_line
+  bolme:
+  - alan: process.name
+    desen: (tasklist\.exe|qprocess\.exe)
+  - alan: process.command_line
+    desen: get-process
+  gerekce: tasklist.exe ve qprocess.exe süreç ADI; get-process bir PowerShell cmdlet'i, yani süreç adı
+    powershell.exe olur ve cmdlet komut satırında geçer. Aynı desende aranmaları, process.name'e taşındığında
+    get-process kolunun sessizce ölmesine yol açar.
+  atesleme_60: 0
+  olay_id_veride_var: true
+  sira: 0
+- teknik: T1083
+  desen: (?i)(\\tree\.com|dir /s|get-childitem -recurse|\\where\.exe)
+  sinif: KARMA
+  hedef:
+  - process.name
+  - process.command_line
+  bolme:
+  - alan: process.name
+    desen: (tree\.com|where\.exe)
+  - alan: process.command_line
+    desen: (dir /s|get-childitem -recurse)
+  gerekce: 'T1057 ile aynı desen: iki ikili adı + iki kabuk komutu. "dir /s" cmd.exe''nin komut satırında
+    geçer, süreç adı "dir" diye bir şey yok.'
+  atesleme_60: 0
+  olay_id_veride_var: true
+  sira: 0
+- teknik: T1685.005
+  desen: (?i)(audit log was cleared|log file was cleared|wevtutil\s+cl\b|clear-eventlog)
+  sinif: KARMA
+  hedef:
+  - Message
+  - process.command_line
+  bolme:
+  - alan: Message
+    desen: (audit log was cleared|log file was cleared)
+    tasinmadi: S
+  - alan: process.command_line
+    desen: (wevtutil\s+cl\b|clear-eventlog)
+  gerekce: 'İlk iki kol ANLATI (1102 olayının anlamı), son ikisi KOMUT. Aynı teknik iki farklı kanıt türüyle
+    görülebiliyor: ya olay günlüğü "temizlendim" der, ya da temizleyen komut yakalanır. İkisi ayrı koşul
+    olmalı, biri diğerini maskelememeli. DUZELTME (olculdu, rawlog-009): anlati kolu ilk tasimada "event_semantics"
+    alanina verildi -- ama o bir SATIR ALANI DEGIL, ayri bir tablo. Satirda oyle bir anahtar olmadigi
+    icin kol SESSIZCE hic eslesmeyecekti. Sessiz basarisizlik yasak: kol event_semantics BAGLANANA KADAR
+    Message''da kalir ve "tasinmadi: S" ile isaretlidir. Bir test artik kurallarda gecen her alan adinin
+    satir sozlugunde GERCEKTEN var oldugunu dogruluyor.'
+  atesleme_60: 1
+  olay_id_veride_var: true
+  sira: 0
+- teknik: T1105
+  desen: (?i)(certutil.*-urlcache|bitsadmin.*/transfer|\\curl\.exe|invoke-webrequest|downloadfile|\\wget\.exe)
+  sinif: KARMA
+  hedef:
+  - process.name
+  - process.command_line
+  bolme:
+  - alan: process.name
+    desen: (curl\.exe|wget\.exe)
+  - alan: process.command_line
+    desen: (certutil.*-urlcache|bitsadmin.*/transfer|invoke-webrequest|downloadfile)
+  gerekce: 'curl.exe/wget.exe adı tek başına yeterli kanıt; certutil ve bitsadmin ise MEŞRU ikililer --
+    onları kanıt yapan şey BAYRAKLARI (-urlcache, /transfer). Bunları tek desende tutmak "certutil çalıştı"
+    ile "certutil indirdi" arasındaki farkı siliyor. Ö1''de ölçülen boşluk da tam burası: hiçbir kol `-urlcache`
+    -> indirme bağlantısını kuramıyor.'
+  atesleme_60: 1
+  olay_id_veride_var: true
+  sira: 0
+- teknik: T1486
+  desen: (?i)(cipher\s+/w|\\bcdedit\.exe.*safeboot|\.(locked|encrypted|crypt)\b)
+  sinif: KARMA
+  hedef:
+  - process.command_line
+  - file.name
+  bolme:
+  - alan: process.command_line
+    desen: (cipher\s+/w|bcdedit.*safeboot)
+  - alan: file.name
+    desen: \.(locked|encrypted|crypt)\b
+  gerekce: İki komut deseni + bir DOSYA UZANTISI. Fidye yazılımının bıraktığı ".locked" uzantısı komut
+    satırında değil dosya adında görünür; şu an Message düz metni sayesinde tesadüfen eşleşiyor.
+  atesleme_60: 0
+  olay_id_veride_var: true
+  sira: 0
+- teknik: T1071.004
+  desen: (?i)query name:\s*\S{40,}
+  sinif: KANITSIZ
+  hedef: null
+  onerilen_alan_adayi: dns.question.name
+  gerekce: '"Query Name" hiçbir test verisinde geçmiyor; 60 senaryodaki tek DNS geçişi subtech-010''da
+    Türkçe düzyazı ("DNS sorgularını kullandı"). Sysmon EventID 22 örneği gelmeden alan adı yazılmaz.'
+  atesleme_60: 0
+  olay_id_veride_var: false
+  sira: 0
+- teknik: T1550.002
+  desen: (?i)(NtLmSsp|NTLM)
+  sinif: KANITSIZ
+  hedef: null
+  onerilen_alan_adayi: auth.package
+  gerekce: NtLmSsp / AuthenticationPackageName hiçbir test verisinde yok; 4624 örneği de yok. Alan adı
+    Windows'ta AuthenticationPackageName, LmPackageName ve ECS'te winlog.event_data.* olarak geçiyor --
+    hangisi olduğu örnekle belirlenir, tahminle değil.
+  atesleme_60: 0
+  olay_id_veride_var: false
+  sira: 1
+- teknik: T1558.003
+  desen: (?i)(0x17|rc4[-_ ]?hmac)
+  sinif: KANITSIZ
+  hedef: null
+  onerilen_alan_adayi: ticket.encryption_type
+  gerekce: 'Kerberos olay ID''leri (4768/4769/4776) hiçbir test verisinde yok. "0x17" ayrıca TEHLİKELİ
+    genel bir dize: normalize edilmemiş bir handle ya da maske değeri de "0x17" olabilir. Yapısal alana
+    taşımak bu yanlış eşleşmeyi kapatır -- ama önce alanın gerçek adı gerekiyor.'
+  atesleme_60: 0
+  olay_id_veride_var: false
+  sira: 0
+- teknik: T1055.012
+  desen: (?i)(NtUnmapViewOfSection|SetThreadContext|WriteProcessMemory)
+  sinif: KANITSIZ
+  hedef: null
+  onerilen_alan_adayi: api.call
+  gerekce: Bunlar API ÇAĞRISI adları. Hiçbir Windows/Sysmon olayı bu adları yapısal bir alanda vermiyor
+    -- EDR telemetrisi gerekir. Şemada karşılığı yok ve örnek de yok; kanıt gelene kadar bırakılır.
+  atesleme_60: 0
+  olay_id_veride_var: false
+  sira: 0
+- teknik: T1059.001
+  desen: (?i)(scriptblock|script block)
+  sinif: T
+  hedef:
+  - script.block_text
+  - event.message
+  atesleme_60: 1
+  olay_id_veride_var: true
+  gerekce: '4104 olayının script bloğu zaten ayrı bir alan; koşul o alanın VARLIĞINI arıyor, içeriğini
+    değil. DUZELTME (olculdu 2026-08-18): 4104 olayinin script blogu iki bicimde gelebiliyor -- yapisal
+    ScriptBlockText alani, ya da ''Creating Scriptblock text (1 of 1): ...'' diye mesaj govdesinde. Yalnizca
+    script.block_text''e tasimak ikinci bicimi oldurdu. Ikisi de AYNI olayin kendi alanlari, baska bir
+    surecin alani degil -- ters cevirme riski yok. AYRICA: kosul zaten required_event_ids=[4104] ile buyuk
+    olcude gereksiz; yerellestirilmis Windows''ta ''Creating Scriptblock text'' cevrilir ve kosul sessizce
+    olur. K1''e (kural kalitesi) girdi.'
+  sira: 0
+- teknik: T1059.003
+  desen: (?i)(?:^|\\)cmd\.exe
+  sinif: T
+  hedef: process.name
+  atesleme_60: 0
+  olay_id_veride_var: true
+  gerekce: Tek sureç adı. Message'da aranınca cmd.exe'nin BAŞKA bir alanda geçtiği her log da eşleşiyor
+    -- örneğin ebeveyn süreç ya da erişilen görüntü olarak. process.name'e taşımak 'cmd.exe ÇALIŞTI' ile
+    'logda cmd.exe GEÇİYOR' arasındaki farkı geri getirir.
+  sira: 0
+- teknik: T1053.005
+  desen: (?i)schtasks(\.exe)?\b
+  sinif: T
+  hedef: process.name
+  atesleme_60: 2
+  olay_id_veride_var: true
+  gerekce: Düz süreç adı; `.exe` isteğe bağlı olduğu için process.name hem 'schtasks' hem 'schtasks.exe'
+    değerini karşılar.
+  sira: 0
+- teknik: T1053.005
+  desen: (?i)/(create|change)\b
+  sinif: T
+  hedef: process.command_line
+  atesleme_60: 2
+  olay_id_veride_var: true
+  gerekce: Bayrak; komut satırından başka yerde geçemez. Message'da aranması, aynı bayrağın BAŞKA bir
+    alanda geçmesiyle yanlış eşleşme riski taşıyor.
+  sira: 1
+- teknik: T1059.001
+  desen: (?i)powershell(\.exe)?\b
+  sinif: T
+  hedef: process.name
+  atesleme_60: 1
+  olay_id_veride_var: true
+  gerekce: 'Tek süreç adı; `.exe` isteğe bağlı olduğundan alan hem ''powershell'' hem ''powershell.exe''
+    değerini karşılar. Message''da aranması aşırı geniş: ''powershell'' kelimesi komut satırında, script
+    bloğunda ve mesaj düzyazısında da geçer.'
+  sira: 0
+- teknik: T1059.001
+  desen: (?i)(-enc\b|-encodedcommand|downloadstring|downloadfile|\biex\b|invoke-expression|-executionpolicy\s+bypass|-w(indowstyle)?\s+hidden)
+  sinif: T
+  hedef: process.command_line
+  atesleme_60: 1
+  olay_id_veride_var: true
+  gerekce: Bayrak ve cmdlet listesi; hepsi komut satırı. 4104 olayında alternatifi script.block_text --
+    motor iki alanı da denemeli.
+  sira: 1
+- teknik: T1003.001
+  desen: (?i)lsass\.exe
+  sinif: T
+  hedef:
+  - target.image
+  - object.name
+  atesleme_60: 0
+  olay_id_veride_var: false
+  gerekce: 'DİKKAT -- process.name DEĞİL. Sysmon EventID 10''da lsass.exe ERİŞİLEN süreçtir (TargetImage);
+    erişen süreç saldırganınkidir. process.name''e taşımak tekniği tersine çevirir. Kaldırılan QUERY_ENRICHMENT''ın
+    lsass anahtarı da tam bu ayrımı yapamadığı için bastırıcıya ihtiyaç duymuştu. DUZELTME (olculdu 2026-08-18):
+    kural HEM Sysmon 10 HEM 4656 istiyor ve lsass.exe bu iki olayda FARKLI ALANDA duruyor: Sysmon 10''da
+    TargetImage, 4656''da Object Name. Yalnizca target.image''e tasimak 4656 vakasini oldurdu. process.name
+    HALA yasak -- o ERISEN sureçtir ve tekniği tersine cevirir. Ayni ders ucuncu kez: alan secimi TEKNIGE
+    degil OLAYA baglidir.'
+  sira: 0
+- teknik: T1021.002
+  desen: (?i)(ADMIN\$|C\$|IPC\$)
+  sinif: T
+  hedef: share.name
+  atesleme_60: 0
+  olay_id_veride_var: false
+  gerekce: 5140/5145 olaylarında ShareName ayrı bir alan.
+  sira: 0
+- teknik: T1078
+  desen: (?i)logon type:\s*(3|10)
+  sinif: T
+  hedef: logon.type
+  atesleme_60: 0
+  olay_id_veride_var: false
+  gerekce: 'EN TEMİZ KAZANÇ: ''Alan: değer'' çifti mesaj metninden regex''le kazınıyor. Yapısal alanda
+    regex tamamen kalkar, KÜME ÜYELİĞİ olur: logon.type in {3, 10}. Yerelleştirilmiş Windows''ta ''Logon
+    Type:'' çevrildiği için bugünkü desen sessizce ölür.'
+  sira: 0
+- teknik: T1018
+  desen: (?i)(?:^|\\)(net|net1|nltest|arp)\.exe
+  sinif: T
+  hedef: process.name
+  atesleme_60: 0
+  olay_id_veride_var: true
+  gerekce: Süreç adı listesi; taşındığında alternasyon küme üyeliğine dönüşür.
+  sira: 0
+- teknik: T1016
+  desen: (?i)(?:^|\\)(ipconfig|netsh|route|arp|nbtstat)\.exe
+  sinif: T
+  hedef: process.name
+  atesleme_60: 0
+  olay_id_veride_var: true
+  gerekce: Ağ keşif ikilileri. Taşındığında alternasyon regex olmaktan çıkıp KÜME ÜYELİĞİNE dönüşür (process.name
+    in {...}), yani hem daha hızlı hem yanlış eşleşmeye kapalı. netsh burada keşif aracı; T1685.005'te
+    aynı ikili GÜVENLİK DUVARI KAPATMA kanıtı -- ayrımı yapan komut satırı.
+  sira: 0
+- teknik: T1082
+  desen: (?i)(?:^|\\)(systeminfo|hostname|wmic)\.exe
+  sinif: T
+  hedef: process.name
+  atesleme_60: 1
+  olay_id_veride_var: true
+  gerekce: Sistem bilgisi keşif ikilileri. wmic hem burada hem T1047'de geçiyor; ikisini ayıran şey komut
+    satırı (T1047 'process call create' arıyor). İki kuralın aynı süreç adında buluşması normal, çakışma
+    değil.
+  sira: 0
+- teknik: T1047
+  desen: (?i)(?:^|\\)(wmic|wmiprvse)\.exe
+  sinif: T
+  hedef: process.name
+  atesleme_60: 1
+  olay_id_veride_var: true
+  gerekce: WMI süreçleri. wmiprvse.exe sağlayıcı sürecidir ve WMI ile YAPILAN her işte görünür -- tek
+    başına kanıt değil, aşağıdaki komut satırı koşuluyla birlikte anlam kazanır.
+  sira: 0
+- teknik: T1047
+  desen: (?i)(process\s+call\s+create|/node:|node=)
+  sinif: T
+  hedef: process.command_line
+  atesleme_60: 1
+  olay_id_veride_var: true
+  gerekce: WMIC alt komutu ve uzak makine bayrakları. Bunlar yalnızca komut satırında bulunur; Message'da
+    aranması '/node:' dizisinin başka bir alanda geçmesiyle yanlış eşleşme riski taşır.
+  sira: 1
+- teknik: T1218.010
+  desen: (?i)(?:^|\\)regsvr32\.exe
+  sinif: T
+  hedef: process.name
+  atesleme_60: 1
+  olay_id_veride_var: true
+  gerekce: Tek süreç adı. regsvr32.exe MEŞRU bir Windows ikilisidir; onu kanıt yapan şey aşağıdaki komut
+    satırı koşuludur (/i:, scrobj.dll, URL). Ad koşulunu tek başına kanıt saymak yanlış pozitif üretir.
+  sira: 0
+- teknik: T1218.010
+  desen: (?i)(/i:|scrobj\.dll|https?://|\\\\)
+  sinif: T
+  hedef: process.command_line
+  atesleme_60: 1
+  olay_id_veride_var: true
+  gerekce: Bayrak + URL/UNC. `https?://` Message'da aranınca logdaki HERHANGİ bir URL'e (referrer, kaynak
+    alanı) çarpabiliyor; komut satırına taşımak bunu kapatır.
+  sira: 1
+- teknik: T1218.011
+  desen: (?i)(?:^|\\)rundll32\.exe
+  sinif: T
+  hedef: process.name
+  atesleme_60: 1
+  olay_id_veride_var: true
+  gerekce: 'Tek süreç adı. regsvr32 ile aynı mantık: rundll32.exe meşru bir ikilidir, kanıt olan şey ''DLL,ExportAdı''
+    biçimidir.'
+  sira: 0
+- teknik: T1218.011
+  desen: (?i)(javascript:|\.dll\s*,\s*\w+|url\.dll|shell32\.dll\s*,\s*shellexec)
+  sinif: T
+  hedef: process.command_line
+  atesleme_60: 1
+  olay_id_veride_var: true
+  gerekce: '`DLL,ExportAdı` biçimi yalnızca komut satırında görülür.'
+  sira: 1
+- teknik: T1204.002
+  desen: (?i)(winword|excel|powerpnt|outlook)\.exe
+  sinif: T
+  hedef: parent.process.name
+  atesleme_60: 0
+  olay_id_veride_var: true
+  gerekce: DİKKAT -- process.name DEĞİL. Teknik 'Office bir çocuk süreç doğurdu' diyor; Office uygulaması
+    EBEVEYNdir. process.name'e taşımak tekniği anlamsız kılar (Word'ün çalışması kanıt değildir).
+  sira: 0
+- teknik: T1204.002
+  desen: (?i)(?:^|\\)(cmd|powershell|wscript|cscript|mshta|regsvr32|rundll32)\.exe
+  sinif: T
+  hedef: process.name
+  atesleme_60: 0
+  olay_id_veride_var: true
+  gerekce: Bu yarısı ÇOCUK süreç; yukarıdaki ebeveyn koşuluyla birlikte 'Office -> kabuk' zincirini kuruyor.
+  sira: 1
+- teknik: T1566.001
+  desen: (?i)outlook\.exe
+  sinif: T
+  hedef: parent.process.name
+  atesleme_60: 0
+  olay_id_veride_var: true
+  gerekce: T1204.002 ile aynı ebeveyn/çocuk mantığı.
+  sira: 0
+- teknik: T1566.001
+  desen: (?i)(?:^|\\)(cmd|powershell|wscript|cscript|mshta)\.exe
+  sinif: T
+  hedef: process.name
+  atesleme_60: 0
+  olay_id_veride_var: true
+  gerekce: ÇOCUK süreç listesi. Yukarıdaki outlook.exe koşulu EBEVEYNi arıyor; ikisi birlikte 'e-posta
+    istemcisi bir kabuk doğurdu' zincirini kuruyor. İkisini de process.name'e taşımak zinciri yok eder
+    -- ebeveyn ayrı alanda tutulmalı.
+  sira: 1
+- teknik: T1547.001
+  desen: (?i)(\\CurrentVersion\\Run|\\CurrentVersion\\RunOnce|\\Start Menu\\Programs\\Startup)
+  sinif: T
+  hedef:
+  - object.name
+  - file.name
+  atesleme_60: 0
+  olay_id_veride_var: false
+  gerekce: 'Registry yolu + dosya yolu. T1003.002 ile aynı normalizasyon ihtiyacı: log \REGISTRY\MACHINE\...
+    yazarken desen HKLM biçimi bekliyor olabilir. K1d -- Başlangıç klasörü varyantı bir DOSYA oluşturmadır
+    (Sysmon 11, TargetFilename -> file.name); desen aynı, iki alanda aranır.'
+  sira: 0
+- teknik: T1543.003
+  desen: (?i)\\Services\\[^\\]+\\ImagePath
+  sinif: T
+  hedef: object.name
+  atesleme_60: 0
+  olay_id_veride_var: false
+  gerekce: Registry yolu. service.image_path alanı da şemada var ve 4697 olayında doğrudan geliyor --
+    taşıma sırasında hangisinin geldiğine bakılmalı.
+  sira: 0
+- teknik: T1505.003
+  desen: (?i)\\(inetpub\\wwwroot|wwwroot|htdocs)\\
+  sinif: T
+  hedef:
+  - file.name
+  - file.path
+  - process.command_line
+  atesleme_60: 0
+  olay_id_veride_var: true
+  gerekce: 'Dizin deseni; file.path yerine file.directory çünkü desen dosya ADI değil KONUM arıyor. DUZELTME
+    (olculdu 2026-08-18): file.directory HICBIR logdan uretilmiyor -- TargetFilename tam yolu file.name''e
+    koyuyor, ayri bir dizin alani cikmiyor. Kosulu oraya tasimak onu SESSIZCE oldururdu. Yol deseni, yol
+    TASIYAN alanlarin hepsinde aranir: ayni kanit dizesi olay turune gore file.name''de, file.path''te
+    ya da komut satirinda bulunur (T1003.002''deki dersin aynisi).'
+  sira: 0
+- teknik: T1505.003
+  desen: (?i)\.(aspx?|jsp|php)\b
+  sinif: T
+  hedef: file.name
+  atesleme_60: 0
+  olay_id_veride_var: true
+  gerekce: Uzantı; dosya adı alanına ait. Yukarıdaki dizin koşuluyla birlikte 'web kökünde script dosyası'
+    ifadesini kuruyor.
+  sira: 1
+- teknik: T1055
+  desen: (?i)(?:^|\\)(MsMpEng|CSFalconService|SentinelAgent|xagt)\.exe
+  yon: must_not_match
+  sinif: T
+  hedef: process.name
+  atesleme_60: 0
+  olay_id_veride_var: false
+  gerekce: 'TEK must_not_match koşulu. Güvenlik araçlarının meşru bellek erişimini eliyor. Yapısal alana
+    taşımak burada ÖZELLİKLE önemli: Message''da aranınca ajanın adı logun herhangi bir yerinde geçtiğinde
+    (örneğin erişilen süreç olarak) kural yanlışlıkla susuyor.'
+  sira: 0
+- teknik: T1055.001
+  desen: (?i)\.dll\b
+  sinif: T
+  hedef: file.name
+  atesleme_60: 0
+  olay_id_veride_var: false
+  gerekce: Uzantı. Message'da aranması çok gürültülü -- her yüklenen DLL adı mesajda geçebilir.
+  sira: 0
+- teknik: T1055.001
+  desen: (?i)(\\users\\|\\temp\\|\\programdata\\|\\appdata\\)
+  sinif: T
+  hedef:
+  - file.name
+  - file.path
+  - process.command_line
+  atesleme_60: 0
+  olay_id_veride_var: false
+  gerekce: 'Şüpheli konum listesi; dizin alanına ait. DUZELTME (olculdu 2026-08-18): file.directory HICBIR
+    logdan uretilmiyor -- TargetFilename tam yolu file.name''e koyuyor, ayri bir dizin alani cikmiyor.
+    Kosulu oraya tasimak onu SESSIZCE oldururdu. Yol deseni, yol TASIYAN alanlarin hepsinde aranir: ayni
+    kanit dizesi olay turune gore file.name''de, file.path''te ya da komut satirinda bulunur (T1003.002''deki
+    dersin aynisi).'
+  sira: 1
+- teknik: T1550.002
+  desen: (?i)logon type:\s*3
+  sinif: T
+  hedef: logon.type
+  atesleme_60: 0
+  olay_id_veride_var: false
+  gerekce: 'T1078 ile aynı: regex yerine logon.type == 3.'
+  sira: 0
+- teknik: T1021.001
+  desen: (?i)logon type:\s*10
+  sinif: T
+  hedef: logon.type
+  atesleme_60: 0
+  olay_id_veride_var: false
+  gerekce: 'T1078 ile aynı kazanç: ''Alan: değer'' çifti mesaj metninden regex''le kazınıyor. logon.type
+    == 10 karşılaştırmasına dönünce regex tamamen kalkar ve yerelleştirilmiş Windows''ta (''Oturum Açma
+    Türü:'') sessizce ölme sorunu ortadan kalkar.'
+  sira: 0
+- teknik: T1070.003
+  desen: (?i)(clear-history|remove-item.*consolehost_history|set-psreadlineoption\s+-historysavestyle\s+savenothing)
+  sinif: T
+  hedef: process.command_line
+  atesleme_60: 0
+  olay_id_veride_var: true
+  gerekce: PowerShell cmdlet'leri; 4104 olayında script.block_text de aday.
+  sira: 0
+- teknik: T1564.003
+  desen: (?i)-w(indowstyle)?\s+hidden
+  sinif: T
+  hedef: process.command_line
+  atesleme_60: 0
+  olay_id_veride_var: true
+  gerekce: 'Gizli pencere bayrağı; yalnızca komut satırında bulunur. DİKKAT: aynı desen T1059.001''in
+    komut satırı koşulunda da var, yani iki kural aynı kanıtı sayıyor. Taşıma sırasında bu tekrarın kasıtlı
+    mı olduğu gözden geçirilmeli.'
+  sira: 0
+- teknik: T1140
+  desen: (?i)certutil.*-decode
+  sinif: T
+  hedef: process.command_line
+  atesleme_60: 1
+  olay_id_veride_var: true
+  gerekce: İkili adı + bayrak birlikte aranıyor; ikisi de komut satırında olduğu için KARMA değil. K1c --
+    `-urlcache` çıkarıldı; o bayrak İNDİRME kanıtıdır ve T1105'e aittir (Görev 23 sınıf 2).
+  sira: 0
+- teknik: T1620
+  desen: (?i)(\[reflection\.assembly\]::load|system\.reflection\.assembly)
+  sinif: T
+  hedef: script.block_text
+  atesleme_60: 0
+  olay_id_veride_var: false
+  gerekce: PowerShell KODU; 4104'ün script bloğunda geçer. Komut satırında da görülebilir (-enc çözüldüğünde)
+    -- motor iki alanı da denemeli.
+  sira: 0
+- teknik: T1071.001
+  desen: (?i)destination port:\s*(80|443|8080|8443)\b
+  sinif: T
+  hedef: destination.port
+  atesleme_60: 0
+  olay_id_veride_var: true
+  gerekce: 'T1078 ile aynı kazanç: regex yerine SAYISAL küme üyeliği. Bugünkü desen ''\b'' sınırına rağmen
+    ''8443'' içinde ''443'' gibi vakalarda kırılgan; tipli alanda bu sorun yok.'
+  sira: 0
+- teknik: T1071.001
+  desen: (?i)\\(users|programdata|temp|appdata)\\
+  sinif: T
+  hedef:
+  - file.name
+  - file.path
+  - process.command_line
+  atesleme_60: 0
+  olay_id_veride_var: true
+  gerekce: 'Şüpheli konum; süreç görüntüsünün dizini. DUZELTME (olculdu 2026-08-18): file.directory HICBIR
+    logdan uretilmiyor -- TargetFilename tam yolu file.name''e koyuyor, ayri bir dizin alani cikmiyor.
+    Kosulu oraya tasimak onu SESSIZCE oldururdu. Yol deseni, yol TASIYAN alanlarin hepsinde aranir: ayni
+    kanit dizesi olay turune gore file.name''de, file.path''te ya da komut satirinda bulunur (T1003.002''deki
+    dersin aynisi).'
+  sira: 1
+- teknik: T1560
+  desen: (?i)(?:^|\\)(rar|7z|7za|winrar|tar)\.exe
+  sinif: T
+  hedef: process.name
+  atesleme_60: 0
+  olay_id_veride_var: true
+  gerekce: Arşivleyici ikilileri. Hepsi MEŞRU araçlar; kanıt olan şey aşağıdaki parola bayraklarıdır.
+    Ad koşulu tek başına her yedekleme işini işaretlerdi.
+  sira: 0
+- teknik: T1560
+  desen: (?i)(\s-hp|\s-p\S|\sa\s+-|compress-archive)
+  sinif: T
+  hedef: process.command_line
+  atesleme_60: 0
+  olay_id_veride_var: true
+  gerekce: 'Parola bayrakları. Message''da aranması ÇOK riskli: ''-p'' dizisi her yerde geçer.'
+  sira: 1
+- teknik: T1074
+  desen: (?i)\\(users\\public|programdata|windows\\temp)\\
+  sinif: T
+  hedef:
+  - file.name
+  - file.path
+  - process.command_line
+  - object.name
+  atesleme_60: 0
+  olay_id_veride_var: true
+  gerekce: 'K1d -- object.name eklendi: 4663 nesne yolunu object.name''e yazar (D3). Veri hazırlama dizinleri: herkesin yazabildiği, kalıcı ve denetlenmeyen konumlar. file.directory''ye
+    ait çünkü desen dosya ADI değil KONUM arıyor; aşağıdaki uzantı koşuluyla birlikte ''ortak dizine arşiv
+    bırakıldı'' ifadesini kuruyor. DUZELTME (olculdu 2026-08-18): file.directory HICBIR logdan uretilmiyor
+    -- TargetFilename tam yolu file.name''e koyuyor, ayri bir dizin alani cikmiyor. Kosulu oraya tasimak
+    onu SESSIZCE oldururdu. Yol deseni, yol TASIYAN alanlarin hepsinde aranir: ayni kanit dizesi olay
+    turune gore file.name''de, file.path''te ya da komut satirinda bulunur (T1003.002''deki dersin aynisi).'
+  sira: 0
+- teknik: T1074
+  desen: (?i)\.(zip|rar|7z|cab|tar|gz)\b
+  sinif: T
+  hedef:
+  - file.name
+  - object.name
+  atesleme_60: 0
+  olay_id_veride_var: true
+  gerekce: 'K1d -- object.name eklendi (4663''te dosya adı nesne yolunda durur). Arşiv uzantıları -- dosya ADI alanına ait. Message''da aranması çok gürültülü: mesaj metninde
+    geçen herhangi bir dosya adı eşleşir, olayın nesnesi olmasa bile.'
+  sira: 1
+- teknik: T1490
+  desen: (?i)(vssadmin.*delete\s+shadows|wbadmin.*delete|bcdedit.*recoveryenabled\s+no|bcdedit.*bootstatuspolicy\s+ignoreallfailures)
+  sinif: T
+  hedef: process.command_line
+  atesleme_60: 1
+  olay_id_veride_var: true
+  gerekce: İkili + alt komut, hepsi komut satırında.
+  sira: 0
+- teknik: T1489
+  desen: (?i)(net\s+stop\s|sc\s+(stop|config).*disabled|stop-service)
+  sinif: T
+  hedef: process.command_line
+  atesleme_60: 0
+  olay_id_veride_var: true
+  gerekce: 'Servis durdurma komutları. DİKKAT: T1562.001 de ''stopped'' arıyor ve ikisi aynı logda birlikte
+    eşleşebilir. Bu kural KOMUTU (yapısal, kesin), T1562.001 ANLAMI (kırılgan) arıyor -- taşıma sonrası
+    T1562.001 event_semantics''e gidince ayrım netleşir.'
+  sira: 0
+- teknik: T1686
+  desen: (?i)netsh.*(advfirewall|firewall).*(off|disable)
+  sinif: T
+  hedef: process.command_line
+  atesleme_60: 0
+  olay_id_veride_var: true
+  gerekce: İkili + alt komut + eylem, hepsi komut satırında.
+  sira: 0

@@ -1,0 +1,100 @@
+{
+  "_aciklama": "Gorev 15 -- KV yolunda sarmalanan Message'in alan kaybi. Beklenti: docs/beklenti_15_kv_alan_kaybi.md",
+  "kaynak": "tests/fixtures/qradar_2026-08-06_51rows.csv",
+  "satir": 51,
+  "O1_kaybolan_sema_ici_toplam": 0,
+  "O1_kaybolan_sema_ici": {},
+  "bilerek_kurtarilmayan_toplam": 11,
+  "bilerek_kurtarilmayan": {
+    "service.name": 11
+  },
+  "kaybolan_unknown_toplam": 0,
+  "kaybolan_unknown": {},
+  "O2_mask_cozulen": "5/5",
+  "O3_yazma_erisimi": "5/5",
+  "O4_kacis_gidis_donus": [
+    {
+      "ad": "komut satiri, ters bolulu registry yolu",
+      "giren": "reg.exe save HKLM\\SAM C:\\Users\\Public\\sam.hiv",
+      "kv": "EventID=4688 CommandLine=\"reg.exe save HKLM\\\\SAM C:\\\\Users\\\\Public\\\\sam.hiv\"",
+      "cikan": "reg.exe save HKLM\\SAM C:\\Users\\Public\\sam.hiv",
+      "korundu": true
+    },
+    {
+      "ad": "kernel gosterimli registry yolu",
+      "giren": "reg.exe export \\REGISTRY\\MACHINE\\SAM C:\\out.reg",
+      "kv": "EventID=4688 CommandLine=\"reg.exe export \\\\REGISTRY\\\\MACHINE\\\\SAM C:\\\\out.reg\"",
+      "cikan": "reg.exe export \\REGISTRY\\MACHINE\\SAM C:\\out.reg",
+      "korundu": true
+    },
+    {
+      "ad": "cift tirnakli komut satiri",
+      "giren": "cmd.exe /c \"echo merhaba\"",
+      "kv": "EventID=4688 CommandLine=\"cmd.exe /c \\\"echo merhaba\\\"\"",
+      "cikan": "cmd.exe /c \"echo merhaba\"",
+      "korundu": true
+    }
+  ],
+  "registry_satirlari": [
+    {
+      "id": "G-007",
+      "ham_yol_mask": "0x2001F",
+      "kv_yol_mask": "0x2001F",
+      "decode": [
+        "read",
+        "write"
+      ],
+      "erisim_sinifi": "write",
+      "a_bicim": "windows_message",
+      "b_bicim": "space_kv"
+    },
+    {
+      "id": "G-015",
+      "ham_yol_mask": "0x2001F",
+      "kv_yol_mask": "0x2001F",
+      "decode": [
+        "read",
+        "write"
+      ],
+      "erisim_sinifi": "write",
+      "a_bicim": "windows_message",
+      "b_bicim": "space_kv"
+    },
+    {
+      "id": "G-029",
+      "ham_yol_mask": "0x2001F",
+      "kv_yol_mask": "0x2001F",
+      "decode": [
+        "read",
+        "write"
+      ],
+      "erisim_sinifi": "write",
+      "a_bicim": "windows_message",
+      "b_bicim": "space_kv"
+    },
+    {
+      "id": "G-030",
+      "ham_yol_mask": "0x2001F",
+      "kv_yol_mask": "0x2001F",
+      "decode": [
+        "read",
+        "write"
+      ],
+      "erisim_sinifi": "write",
+      "a_bicim": "windows_message",
+      "b_bicim": "space_kv"
+    },
+    {
+      "id": "G-040",
+      "ham_yol_mask": "0x2001F",
+      "kv_yol_mask": "0x2001F",
+      "decode": [
+        "read",
+        "write"
+      ],
+      "erisim_sinifi": "write",
+      "a_bicim": "windows_message",
+      "b_bicim": "space_kv"
+    }
+  ]
+}

@@ -1,0 +1,1488 @@
+{
+  "records": [
+    {
+      "id": "T1",
+      "baslik": "SAM hive erisimi",
+      "expected_decision": "SUFFICIENT_SUSPICIOUS",
+      "expected_techniques": [
+        "T1003.002"
+      ],
+      "parser": {
+        "field_count": 13,
+        "fields": {
+          "Name": "N/A,",
+          "Path": "C:\\Windows\\System32\\reg.exe,",
+          "Directory": "N/A,",
+          "Filename": "N/A,",
+          "Domain": "CORP,",
+          "ID": "4656,",
+          "Workstation": "WKS-4471,",
+          "Server": "Security,",
+          "Type": "Key,",
+          "Accesses": "Query",
+          "Mask": "0x2000d,",
+          "Class": "N/A,",
+          "Control": "N/A,"
+        },
+        "event_id": null,
+        "process_name": null,
+        "platform": "Windows"
+      },
+      "seconds": 68.1,
+      "decision": {
+        "verdict": "malicious_or_suspicious",
+        "reason": "SAM anahtarına erişim, sistem seviyesindeki yetkilere sahip bir süreçten geldiğinde, kimlik doğrulama bilgileri erişimi olası bir işaret olabilir."
+      },
+      "observed_behaviors": [
+        "Process Name=reg.exe",
+        "Object Name=\\REGISTRY\\MACHINE\\SAM",
+        "Accesses=Query key value|Enumerate sub-keys|Read Control",
+        "Access Mask=0x2000d"
+      ],
+      "filtered_behaviors": [],
+      "gate_damage": [],
+      "pipeline_stages": {
+        "retrieval_candidates": [
+          {
+            "attack_id": "T1543.003",
+            "absolute": 0.11206372082233429,
+            "relative": 1.0
+          },
+          {
+            "attack_id": "T1012",
+            "absolute": 0.06482065469026566,
+            "relative": 0.46283582571920606
+          },
+          {
+            "attack_id": "T1552.002",
+            "absolute": 0.062281616032123566,
+            "relative": 0.4339663911982721
+          },
+          {
+            "attack_id": "T1112",
+            "absolute": 0.058616358786821365,
+            "relative": 0.3922916007391702
+          },
+          {
+            "attack_id": "T1218.002",
+            "absolute": 0.0536467544734478,
+            "relative": 0.3357860938774229
+          },
+          {
+            "attack_id": "T1003.002",
+            "absolute": 0.04708728939294815,
+            "relative": 0.2612035163232846
+          },
+          {
+            "attack_id": "T1037.001",
+            "absolute": 0.03501128777861595,
+            "relative": 0.12389669085936643
+          },
+          {
+            "attack_id": "T1552.006",
+            "absolute": 0.026726512238383293,
+            "relative": 0.029696949468112032
+          },
+          {
+            "attack_id": "T1547.004",
+            "absolute": 0.024114694446325302,
+            "relative": 0.0
+          }
+        ],
+        "retrieval_candidate_ids": [
+          "T1543.003",
+          "T1012",
+          "T1552.002",
+          "T1112",
+          "T1218.002",
+          "T1003.002",
+          "T1037.001",
+          "T1552.006",
+          "T1547.004"
+        ],
+        "llm_selected": [
+          "T1003.002",
+          "T1552.002",
+          "T1112"
+        ],
+        "after_agents": [
+          "T1003.002",
+          "T1552.002",
+          "T1112"
+        ],
+        "dropped_by_llm": [
+          "T1543.003",
+          "T1012",
+          "T1218.002",
+          "T1037.001",
+          "T1552.006",
+          "T1547.004"
+        ],
+        "dropped_by_agents": []
+      },
+      "expected_technique_trace": {
+        "T1003.002": {
+          "in_retrieval": true,
+          "in_llm_selection": true,
+          "in_final": true
+        }
+      },
+      "tactics": {
+        "expected": [
+          "Credential Access"
+        ],
+        "expected_ids": [
+          "TA0006"
+        ],
+        "produced": [
+          "Credential Access",
+          "Defense Impairment",
+          "Persistence"
+        ],
+        "matched": [
+          "Credential Access"
+        ],
+        "missing": []
+      },
+      "mappings": [
+        {
+          "attack_id": "T1003.002",
+          "llm_reported": "high",
+          "label": "medium",
+          "composite": 0.5628,
+          "components": {
+            "retrieval_similarity": 0.2612035163232846,
+            "evidence_coverage": 1.0,
+            "field_match": 0.0,
+            "event_id_relevance": null,
+            "platform_match": 1.0
+          },
+          "retrieval_absolute": 0.04708728939294815,
+          "retrieval_relative": 0.2612035163232846,
+          "tactics": [
+            "Credential Access"
+          ]
+        },
+        {
+          "attack_id": "T1552.002",
+          "llm_reported": "medium",
+          "label": "medium",
+          "composite": 0.6373,
+          "components": {
+            "retrieval_similarity": 0.4339663911982721,
+            "evidence_coverage": 1.0,
+            "field_match": 0.07692307692307693,
+            "event_id_relevance": null,
+            "platform_match": 1.0
+          },
+          "retrieval_absolute": 0.062281616032123566,
+          "retrieval_relative": 0.4339663911982721,
+          "tactics": [
+            "Credential Access"
+          ]
+        },
+        {
+          "attack_id": "T1112",
+          "llm_reported": "medium",
+          "label": "low",
+          "composite": 0.609,
+          "components": {
+            "retrieval_similarity": 0.3922916007391702,
+            "evidence_coverage": 1.0,
+            "field_match": 0.0,
+            "event_id_relevance": null,
+            "platform_match": 1.0
+          },
+          "retrieval_absolute": 0.058616358786821365,
+          "retrieval_relative": 0.3922916007391702,
+          "tactics": [
+            "Defense Impairment",
+            "Persistence"
+          ]
+        }
+      ],
+      "agents": {
+        "decisions": 4,
+        "rejected": []
+      },
+      "loop": {
+        "passes": 0,
+        "trace": []
+      }
+    }
+  ],
+  "runs": [
+    [
+      {
+        "id": "T1",
+        "baslik": "SAM hive erisimi",
+        "expected_decision": "SUFFICIENT_SUSPICIOUS",
+        "expected_techniques": [
+          "T1003.002"
+        ],
+        "parser": {
+          "field_count": 13,
+          "fields": {
+            "Name": "N/A,",
+            "Path": "C:\\Windows\\System32\\reg.exe,",
+            "Directory": "N/A,",
+            "Filename": "N/A,",
+            "Domain": "CORP,",
+            "ID": "4656,",
+            "Workstation": "WKS-4471,",
+            "Server": "Security,",
+            "Type": "Key,",
+            "Accesses": "Query",
+            "Mask": "0x2000d,",
+            "Class": "N/A,",
+            "Control": "N/A,"
+          },
+          "event_id": null,
+          "process_name": null,
+          "platform": "Windows"
+        },
+        "seconds": 89.2,
+        "decision": {
+          "verdict": "malicious_or_suspicious",
+          "reason": "SAM anahtarına erişim, sistem seviyesindeki yetkilere sahip bir süreçten geldiğinde, kimlik doğrulama bilgileri erişimi olası bir işaret olabilir."
+        },
+        "observed_behaviors": [
+          "Process Name=reg.exe",
+          "Object Name=\\REGISTRY\\MACHINE\\SAM",
+          "Accesses=Query key value|Enumerate sub-keys|Read Control",
+          "Access Mask=0x2000d"
+        ],
+        "filtered_behaviors": [],
+        "gate_damage": [],
+        "pipeline_stages": {
+          "retrieval_candidates": [
+            {
+              "attack_id": "T1543.003",
+              "absolute": 0.11206372082233429,
+              "relative": 1.0
+            },
+            {
+              "attack_id": "T1012",
+              "absolute": 0.06482065469026566,
+              "relative": 0.46283582571920606
+            },
+            {
+              "attack_id": "T1552.002",
+              "absolute": 0.062281616032123566,
+              "relative": 0.4339663911982721
+            },
+            {
+              "attack_id": "T1112",
+              "absolute": 0.058616358786821365,
+              "relative": 0.3922916007391702
+            },
+            {
+              "attack_id": "T1218.002",
+              "absolute": 0.0536467544734478,
+              "relative": 0.3357860938774229
+            },
+            {
+              "attack_id": "T1003.002",
+              "absolute": 0.04708728939294815,
+              "relative": 0.2612035163232846
+            },
+            {
+              "attack_id": "T1037.001",
+              "absolute": 0.03501128777861595,
+              "relative": 0.12389669085936643
+            },
+            {
+              "attack_id": "T1552.006",
+              "absolute": 0.026726512238383293,
+              "relative": 0.029696949468112032
+            },
+            {
+              "attack_id": "T1547.004",
+              "absolute": 0.024114694446325302,
+              "relative": 0.0
+            }
+          ],
+          "retrieval_candidate_ids": [
+            "T1543.003",
+            "T1012",
+            "T1552.002",
+            "T1112",
+            "T1218.002",
+            "T1003.002",
+            "T1037.001",
+            "T1552.006",
+            "T1547.004"
+          ],
+          "llm_selected": [
+            "T1003.002",
+            "T1552.002",
+            "T1112"
+          ],
+          "after_agents": [
+            "T1003.002",
+            "T1552.002",
+            "T1112"
+          ],
+          "dropped_by_llm": [
+            "T1543.003",
+            "T1012",
+            "T1218.002",
+            "T1037.001",
+            "T1552.006",
+            "T1547.004"
+          ],
+          "dropped_by_agents": []
+        },
+        "expected_technique_trace": {
+          "T1003.002": {
+            "in_retrieval": true,
+            "in_llm_selection": true,
+            "in_final": true
+          }
+        },
+        "tactics": {
+          "expected": [
+            "Credential Access"
+          ],
+          "expected_ids": [
+            "TA0006"
+          ],
+          "produced": [
+            "Credential Access",
+            "Defense Impairment",
+            "Persistence"
+          ],
+          "matched": [
+            "Credential Access"
+          ],
+          "missing": []
+        },
+        "mappings": [
+          {
+            "attack_id": "T1003.002",
+            "llm_reported": "high",
+            "label": "medium",
+            "composite": 0.5628,
+            "components": {
+              "retrieval_similarity": 0.2612035163232846,
+              "evidence_coverage": 1.0,
+              "field_match": 0.0,
+              "event_id_relevance": null,
+              "platform_match": 1.0
+            },
+            "retrieval_absolute": 0.04708728939294815,
+            "retrieval_relative": 0.2612035163232846,
+            "tactics": [
+              "Credential Access"
+            ]
+          },
+          {
+            "attack_id": "T1552.002",
+            "llm_reported": "medium",
+            "label": "medium",
+            "composite": 0.6373,
+            "components": {
+              "retrieval_similarity": 0.4339663911982721,
+              "evidence_coverage": 1.0,
+              "field_match": 0.07692307692307693,
+              "event_id_relevance": null,
+              "platform_match": 1.0
+            },
+            "retrieval_absolute": 0.062281616032123566,
+            "retrieval_relative": 0.4339663911982721,
+            "tactics": [
+              "Credential Access"
+            ]
+          },
+          {
+            "attack_id": "T1112",
+            "llm_reported": "medium",
+            "label": "low",
+            "composite": 0.609,
+            "components": {
+              "retrieval_similarity": 0.3922916007391702,
+              "evidence_coverage": 1.0,
+              "field_match": 0.0,
+              "event_id_relevance": null,
+              "platform_match": 1.0
+            },
+            "retrieval_absolute": 0.058616358786821365,
+            "retrieval_relative": 0.3922916007391702,
+            "tactics": [
+              "Defense Impairment",
+              "Persistence"
+            ]
+          }
+        ],
+        "agents": {
+          "decisions": 4,
+          "rejected": []
+        },
+        "loop": {
+          "passes": 0,
+          "trace": []
+        }
+      }
+    ],
+    [
+      {
+        "id": "T1",
+        "baslik": "SAM hive erisimi",
+        "expected_decision": "SUFFICIENT_SUSPICIOUS",
+        "expected_techniques": [
+          "T1003.002"
+        ],
+        "parser": {
+          "field_count": 13,
+          "fields": {
+            "Name": "N/A,",
+            "Path": "C:\\Windows\\System32\\reg.exe,",
+            "Directory": "N/A,",
+            "Filename": "N/A,",
+            "Domain": "CORP,",
+            "ID": "4656,",
+            "Workstation": "WKS-4471,",
+            "Server": "Security,",
+            "Type": "Key,",
+            "Accesses": "Query",
+            "Mask": "0x2000d,",
+            "Class": "N/A,",
+            "Control": "N/A,"
+          },
+          "event_id": null,
+          "process_name": null,
+          "platform": "Windows"
+        },
+        "seconds": 68.0,
+        "decision": {
+          "verdict": "malicious_or_suspicious",
+          "reason": "SAM anahtarına erişim, sistem seviyesindeki yetkilere sahip bir süreçten geldiğinde, kimlik doğrulama bilgileri erişimi olası bir işaret olabilir."
+        },
+        "observed_behaviors": [
+          "Process Name=reg.exe",
+          "Object Name=\\REGISTRY\\MACHINE\\SAM",
+          "Accesses=Query key value|Enumerate sub-keys|Read Control",
+          "Access Mask=0x2000d"
+        ],
+        "filtered_behaviors": [],
+        "gate_damage": [],
+        "pipeline_stages": {
+          "retrieval_candidates": [
+            {
+              "attack_id": "T1543.003",
+              "absolute": 0.11206372082233429,
+              "relative": 1.0
+            },
+            {
+              "attack_id": "T1012",
+              "absolute": 0.06482065469026566,
+              "relative": 0.46283582571920606
+            },
+            {
+              "attack_id": "T1552.002",
+              "absolute": 0.062281616032123566,
+              "relative": 0.4339663911982721
+            },
+            {
+              "attack_id": "T1112",
+              "absolute": 0.058616358786821365,
+              "relative": 0.3922916007391702
+            },
+            {
+              "attack_id": "T1218.002",
+              "absolute": 0.0536467544734478,
+              "relative": 0.3357860938774229
+            },
+            {
+              "attack_id": "T1003.002",
+              "absolute": 0.04708728939294815,
+              "relative": 0.2612035163232846
+            },
+            {
+              "attack_id": "T1037.001",
+              "absolute": 0.03501128777861595,
+              "relative": 0.12389669085936643
+            },
+            {
+              "attack_id": "T1552.006",
+              "absolute": 0.026726512238383293,
+              "relative": 0.029696949468112032
+            },
+            {
+              "attack_id": "T1547.004",
+              "absolute": 0.024114694446325302,
+              "relative": 0.0
+            }
+          ],
+          "retrieval_candidate_ids": [
+            "T1543.003",
+            "T1012",
+            "T1552.002",
+            "T1112",
+            "T1218.002",
+            "T1003.002",
+            "T1037.001",
+            "T1552.006",
+            "T1547.004"
+          ],
+          "llm_selected": [
+            "T1003.002",
+            "T1552.002",
+            "T1112"
+          ],
+          "after_agents": [
+            "T1003.002",
+            "T1552.002",
+            "T1112"
+          ],
+          "dropped_by_llm": [
+            "T1543.003",
+            "T1012",
+            "T1218.002",
+            "T1037.001",
+            "T1552.006",
+            "T1547.004"
+          ],
+          "dropped_by_agents": []
+        },
+        "expected_technique_trace": {
+          "T1003.002": {
+            "in_retrieval": true,
+            "in_llm_selection": true,
+            "in_final": true
+          }
+        },
+        "tactics": {
+          "expected": [
+            "Credential Access"
+          ],
+          "expected_ids": [
+            "TA0006"
+          ],
+          "produced": [
+            "Credential Access",
+            "Defense Impairment",
+            "Persistence"
+          ],
+          "matched": [
+            "Credential Access"
+          ],
+          "missing": []
+        },
+        "mappings": [
+          {
+            "attack_id": "T1003.002",
+            "llm_reported": "high",
+            "label": "medium",
+            "composite": 0.5628,
+            "components": {
+              "retrieval_similarity": 0.2612035163232846,
+              "evidence_coverage": 1.0,
+              "field_match": 0.0,
+              "event_id_relevance": null,
+              "platform_match": 1.0
+            },
+            "retrieval_absolute": 0.04708728939294815,
+            "retrieval_relative": 0.2612035163232846,
+            "tactics": [
+              "Credential Access"
+            ]
+          },
+          {
+            "attack_id": "T1552.002",
+            "llm_reported": "medium",
+            "label": "medium",
+            "composite": 0.6373,
+            "components": {
+              "retrieval_similarity": 0.4339663911982721,
+              "evidence_coverage": 1.0,
+              "field_match": 0.07692307692307693,
+              "event_id_relevance": null,
+              "platform_match": 1.0
+            },
+            "retrieval_absolute": 0.062281616032123566,
+            "retrieval_relative": 0.4339663911982721,
+            "tactics": [
+              "Credential Access"
+            ]
+          },
+          {
+            "attack_id": "T1112",
+            "llm_reported": "medium",
+            "label": "low",
+            "composite": 0.609,
+            "components": {
+              "retrieval_similarity": 0.3922916007391702,
+              "evidence_coverage": 1.0,
+              "field_match": 0.0,
+              "event_id_relevance": null,
+              "platform_match": 1.0
+            },
+            "retrieval_absolute": 0.058616358786821365,
+            "retrieval_relative": 0.3922916007391702,
+            "tactics": [
+              "Defense Impairment",
+              "Persistence"
+            ]
+          }
+        ],
+        "agents": {
+          "decisions": 4,
+          "rejected": []
+        },
+        "loop": {
+          "passes": 0,
+          "trace": []
+        }
+      }
+    ],
+    [
+      {
+        "id": "T1",
+        "baslik": "SAM hive erisimi",
+        "expected_decision": "SUFFICIENT_SUSPICIOUS",
+        "expected_techniques": [
+          "T1003.002"
+        ],
+        "parser": {
+          "field_count": 13,
+          "fields": {
+            "Name": "N/A,",
+            "Path": "C:\\Windows\\System32\\reg.exe,",
+            "Directory": "N/A,",
+            "Filename": "N/A,",
+            "Domain": "CORP,",
+            "ID": "4656,",
+            "Workstation": "WKS-4471,",
+            "Server": "Security,",
+            "Type": "Key,",
+            "Accesses": "Query",
+            "Mask": "0x2000d,",
+            "Class": "N/A,",
+            "Control": "N/A,"
+          },
+          "event_id": null,
+          "process_name": null,
+          "platform": "Windows"
+        },
+        "seconds": 68.1,
+        "decision": {
+          "verdict": "malicious_or_suspicious",
+          "reason": "SAM anahtarına erişim, sistem seviyesindeki yetkilere sahip bir süreçten geldiğinde, kimlik doğrulama bilgileri erişimi olası bir işaret olabilir."
+        },
+        "observed_behaviors": [
+          "Process Name=reg.exe",
+          "Object Name=\\REGISTRY\\MACHINE\\SAM",
+          "Accesses=Query key value|Enumerate sub-keys|Read Control",
+          "Access Mask=0x2000d"
+        ],
+        "filtered_behaviors": [],
+        "gate_damage": [],
+        "pipeline_stages": {
+          "retrieval_candidates": [
+            {
+              "attack_id": "T1543.003",
+              "absolute": 0.11206372082233429,
+              "relative": 1.0
+            },
+            {
+              "attack_id": "T1012",
+              "absolute": 0.06482065469026566,
+              "relative": 0.46283582571920606
+            },
+            {
+              "attack_id": "T1552.002",
+              "absolute": 0.062281616032123566,
+              "relative": 0.4339663911982721
+            },
+            {
+              "attack_id": "T1112",
+              "absolute": 0.058616358786821365,
+              "relative": 0.3922916007391702
+            },
+            {
+              "attack_id": "T1218.002",
+              "absolute": 0.0536467544734478,
+              "relative": 0.3357860938774229
+            },
+            {
+              "attack_id": "T1003.002",
+              "absolute": 0.04708728939294815,
+              "relative": 0.2612035163232846
+            },
+            {
+              "attack_id": "T1037.001",
+              "absolute": 0.03501128777861595,
+              "relative": 0.12389669085936643
+            },
+            {
+              "attack_id": "T1552.006",
+              "absolute": 0.026726512238383293,
+              "relative": 0.029696949468112032
+            },
+            {
+              "attack_id": "T1547.004",
+              "absolute": 0.024114694446325302,
+              "relative": 0.0
+            }
+          ],
+          "retrieval_candidate_ids": [
+            "T1543.003",
+            "T1012",
+            "T1552.002",
+            "T1112",
+            "T1218.002",
+            "T1003.002",
+            "T1037.001",
+            "T1552.006",
+            "T1547.004"
+          ],
+          "llm_selected": [
+            "T1003.002",
+            "T1552.002",
+            "T1112"
+          ],
+          "after_agents": [
+            "T1003.002",
+            "T1552.002",
+            "T1112"
+          ],
+          "dropped_by_llm": [
+            "T1543.003",
+            "T1012",
+            "T1218.002",
+            "T1037.001",
+            "T1552.006",
+            "T1547.004"
+          ],
+          "dropped_by_agents": []
+        },
+        "expected_technique_trace": {
+          "T1003.002": {
+            "in_retrieval": true,
+            "in_llm_selection": true,
+            "in_final": true
+          }
+        },
+        "tactics": {
+          "expected": [
+            "Credential Access"
+          ],
+          "expected_ids": [
+            "TA0006"
+          ],
+          "produced": [
+            "Credential Access",
+            "Defense Impairment",
+            "Persistence"
+          ],
+          "matched": [
+            "Credential Access"
+          ],
+          "missing": []
+        },
+        "mappings": [
+          {
+            "attack_id": "T1003.002",
+            "llm_reported": "high",
+            "label": "medium",
+            "composite": 0.5628,
+            "components": {
+              "retrieval_similarity": 0.2612035163232846,
+              "evidence_coverage": 1.0,
+              "field_match": 0.0,
+              "event_id_relevance": null,
+              "platform_match": 1.0
+            },
+            "retrieval_absolute": 0.04708728939294815,
+            "retrieval_relative": 0.2612035163232846,
+            "tactics": [
+              "Credential Access"
+            ]
+          },
+          {
+            "attack_id": "T1552.002",
+            "llm_reported": "medium",
+            "label": "medium",
+            "composite": 0.6373,
+            "components": {
+              "retrieval_similarity": 0.4339663911982721,
+              "evidence_coverage": 1.0,
+              "field_match": 0.07692307692307693,
+              "event_id_relevance": null,
+              "platform_match": 1.0
+            },
+            "retrieval_absolute": 0.062281616032123566,
+            "retrieval_relative": 0.4339663911982721,
+            "tactics": [
+              "Credential Access"
+            ]
+          },
+          {
+            "attack_id": "T1112",
+            "llm_reported": "medium",
+            "label": "low",
+            "composite": 0.609,
+            "components": {
+              "retrieval_similarity": 0.3922916007391702,
+              "evidence_coverage": 1.0,
+              "field_match": 0.0,
+              "event_id_relevance": null,
+              "platform_match": 1.0
+            },
+            "retrieval_absolute": 0.058616358786821365,
+            "retrieval_relative": 0.3922916007391702,
+            "tactics": [
+              "Defense Impairment",
+              "Persistence"
+            ]
+          }
+        ],
+        "agents": {
+          "decisions": 4,
+          "rejected": []
+        },
+        "loop": {
+          "passes": 0,
+          "trace": []
+        }
+      }
+    ],
+    [
+      {
+        "id": "T1",
+        "baslik": "SAM hive erisimi",
+        "expected_decision": "SUFFICIENT_SUSPICIOUS",
+        "expected_techniques": [
+          "T1003.002"
+        ],
+        "parser": {
+          "field_count": 13,
+          "fields": {
+            "Name": "N/A,",
+            "Path": "C:\\Windows\\System32\\reg.exe,",
+            "Directory": "N/A,",
+            "Filename": "N/A,",
+            "Domain": "CORP,",
+            "ID": "4656,",
+            "Workstation": "WKS-4471,",
+            "Server": "Security,",
+            "Type": "Key,",
+            "Accesses": "Query",
+            "Mask": "0x2000d,",
+            "Class": "N/A,",
+            "Control": "N/A,"
+          },
+          "event_id": null,
+          "process_name": null,
+          "platform": "Windows"
+        },
+        "seconds": 67.7,
+        "decision": {
+          "verdict": "malicious_or_suspicious",
+          "reason": "SAM anahtarına erişim, sistem seviyesindeki yetkilere sahip bir süreçten geldiğinde, kimlik doğrulama bilgileri erişimi olası bir işaret olabilir."
+        },
+        "observed_behaviors": [
+          "Process Name=reg.exe",
+          "Object Name=\\REGISTRY\\MACHINE\\SAM",
+          "Accesses=Query key value|Enumerate sub-keys|Read Control",
+          "Access Mask=0x2000d"
+        ],
+        "filtered_behaviors": [],
+        "gate_damage": [],
+        "pipeline_stages": {
+          "retrieval_candidates": [
+            {
+              "attack_id": "T1543.003",
+              "absolute": 0.11206372082233429,
+              "relative": 1.0
+            },
+            {
+              "attack_id": "T1012",
+              "absolute": 0.06482065469026566,
+              "relative": 0.46283582571920606
+            },
+            {
+              "attack_id": "T1552.002",
+              "absolute": 0.062281616032123566,
+              "relative": 0.4339663911982721
+            },
+            {
+              "attack_id": "T1112",
+              "absolute": 0.058616358786821365,
+              "relative": 0.3922916007391702
+            },
+            {
+              "attack_id": "T1218.002",
+              "absolute": 0.0536467544734478,
+              "relative": 0.3357860938774229
+            },
+            {
+              "attack_id": "T1003.002",
+              "absolute": 0.04708728939294815,
+              "relative": 0.2612035163232846
+            },
+            {
+              "attack_id": "T1037.001",
+              "absolute": 0.03501128777861595,
+              "relative": 0.12389669085936643
+            },
+            {
+              "attack_id": "T1552.006",
+              "absolute": 0.026726512238383293,
+              "relative": 0.029696949468112032
+            },
+            {
+              "attack_id": "T1547.004",
+              "absolute": 0.024114694446325302,
+              "relative": 0.0
+            }
+          ],
+          "retrieval_candidate_ids": [
+            "T1543.003",
+            "T1012",
+            "T1552.002",
+            "T1112",
+            "T1218.002",
+            "T1003.002",
+            "T1037.001",
+            "T1552.006",
+            "T1547.004"
+          ],
+          "llm_selected": [
+            "T1003.002",
+            "T1552.002",
+            "T1112"
+          ],
+          "after_agents": [
+            "T1003.002",
+            "T1552.002",
+            "T1112"
+          ],
+          "dropped_by_llm": [
+            "T1543.003",
+            "T1012",
+            "T1218.002",
+            "T1037.001",
+            "T1552.006",
+            "T1547.004"
+          ],
+          "dropped_by_agents": []
+        },
+        "expected_technique_trace": {
+          "T1003.002": {
+            "in_retrieval": true,
+            "in_llm_selection": true,
+            "in_final": true
+          }
+        },
+        "tactics": {
+          "expected": [
+            "Credential Access"
+          ],
+          "expected_ids": [
+            "TA0006"
+          ],
+          "produced": [
+            "Credential Access",
+            "Defense Impairment",
+            "Persistence"
+          ],
+          "matched": [
+            "Credential Access"
+          ],
+          "missing": []
+        },
+        "mappings": [
+          {
+            "attack_id": "T1003.002",
+            "llm_reported": "high",
+            "label": "medium",
+            "composite": 0.5628,
+            "components": {
+              "retrieval_similarity": 0.2612035163232846,
+              "evidence_coverage": 1.0,
+              "field_match": 0.0,
+              "event_id_relevance": null,
+              "platform_match": 1.0
+            },
+            "retrieval_absolute": 0.04708728939294815,
+            "retrieval_relative": 0.2612035163232846,
+            "tactics": [
+              "Credential Access"
+            ]
+          },
+          {
+            "attack_id": "T1552.002",
+            "llm_reported": "medium",
+            "label": "medium",
+            "composite": 0.6373,
+            "components": {
+              "retrieval_similarity": 0.4339663911982721,
+              "evidence_coverage": 1.0,
+              "field_match": 0.07692307692307693,
+              "event_id_relevance": null,
+              "platform_match": 1.0
+            },
+            "retrieval_absolute": 0.062281616032123566,
+            "retrieval_relative": 0.4339663911982721,
+            "tactics": [
+              "Credential Access"
+            ]
+          },
+          {
+            "attack_id": "T1112",
+            "llm_reported": "medium",
+            "label": "low",
+            "composite": 0.609,
+            "components": {
+              "retrieval_similarity": 0.3922916007391702,
+              "evidence_coverage": 1.0,
+              "field_match": 0.0,
+              "event_id_relevance": null,
+              "platform_match": 1.0
+            },
+            "retrieval_absolute": 0.058616358786821365,
+            "retrieval_relative": 0.3922916007391702,
+            "tactics": [
+              "Defense Impairment",
+              "Persistence"
+            ]
+          }
+        ],
+        "agents": {
+          "decisions": 4,
+          "rejected": []
+        },
+        "loop": {
+          "passes": 0,
+          "trace": []
+        }
+      }
+    ],
+    [
+      {
+        "id": "T1",
+        "baslik": "SAM hive erisimi",
+        "expected_decision": "SUFFICIENT_SUSPICIOUS",
+        "expected_techniques": [
+          "T1003.002"
+        ],
+        "parser": {
+          "field_count": 13,
+          "fields": {
+            "Name": "N/A,",
+            "Path": "C:\\Windows\\System32\\reg.exe,",
+            "Directory": "N/A,",
+            "Filename": "N/A,",
+            "Domain": "CORP,",
+            "ID": "4656,",
+            "Workstation": "WKS-4471,",
+            "Server": "Security,",
+            "Type": "Key,",
+            "Accesses": "Query",
+            "Mask": "0x2000d,",
+            "Class": "N/A,",
+            "Control": "N/A,"
+          },
+          "event_id": null,
+          "process_name": null,
+          "platform": "Windows"
+        },
+        "seconds": 67.9,
+        "decision": {
+          "verdict": "malicious_or_suspicious",
+          "reason": "SAM anahtarına erişim, sistem seviyesindeki yetkilere sahip bir süreçten geldiğinde, kimlik doğrulama bilgileri erişimi olası bir işaret olabilir."
+        },
+        "observed_behaviors": [
+          "Process Name=reg.exe",
+          "Object Name=\\REGISTRY\\MACHINE\\SAM",
+          "Accesses=Query key value|Enumerate sub-keys|Read Control",
+          "Access Mask=0x2000d"
+        ],
+        "filtered_behaviors": [],
+        "gate_damage": [],
+        "pipeline_stages": {
+          "retrieval_candidates": [
+            {
+              "attack_id": "T1543.003",
+              "absolute": 0.11206372082233429,
+              "relative": 1.0
+            },
+            {
+              "attack_id": "T1012",
+              "absolute": 0.06482065469026566,
+              "relative": 0.46283582571920606
+            },
+            {
+              "attack_id": "T1552.002",
+              "absolute": 0.062281616032123566,
+              "relative": 0.4339663911982721
+            },
+            {
+              "attack_id": "T1112",
+              "absolute": 0.058616358786821365,
+              "relative": 0.3922916007391702
+            },
+            {
+              "attack_id": "T1218.002",
+              "absolute": 0.0536467544734478,
+              "relative": 0.3357860938774229
+            },
+            {
+              "attack_id": "T1003.002",
+              "absolute": 0.04708728939294815,
+              "relative": 0.2612035163232846
+            },
+            {
+              "attack_id": "T1037.001",
+              "absolute": 0.03501128777861595,
+              "relative": 0.12389669085936643
+            },
+            {
+              "attack_id": "T1552.006",
+              "absolute": 0.026726512238383293,
+              "relative": 0.029696949468112032
+            },
+            {
+              "attack_id": "T1547.004",
+              "absolute": 0.024114694446325302,
+              "relative": 0.0
+            }
+          ],
+          "retrieval_candidate_ids": [
+            "T1543.003",
+            "T1012",
+            "T1552.002",
+            "T1112",
+            "T1218.002",
+            "T1003.002",
+            "T1037.001",
+            "T1552.006",
+            "T1547.004"
+          ],
+          "llm_selected": [
+            "T1003.002",
+            "T1552.002",
+            "T1112"
+          ],
+          "after_agents": [
+            "T1003.002",
+            "T1552.002",
+            "T1112"
+          ],
+          "dropped_by_llm": [
+            "T1543.003",
+            "T1012",
+            "T1218.002",
+            "T1037.001",
+            "T1552.006",
+            "T1547.004"
+          ],
+          "dropped_by_agents": []
+        },
+        "expected_technique_trace": {
+          "T1003.002": {
+            "in_retrieval": true,
+            "in_llm_selection": true,
+            "in_final": true
+          }
+        },
+        "tactics": {
+          "expected": [
+            "Credential Access"
+          ],
+          "expected_ids": [
+            "TA0006"
+          ],
+          "produced": [
+            "Credential Access",
+            "Defense Impairment",
+            "Persistence"
+          ],
+          "matched": [
+            "Credential Access"
+          ],
+          "missing": []
+        },
+        "mappings": [
+          {
+            "attack_id": "T1003.002",
+            "llm_reported": "high",
+            "label": "medium",
+            "composite": 0.5628,
+            "components": {
+              "retrieval_similarity": 0.2612035163232846,
+              "evidence_coverage": 1.0,
+              "field_match": 0.0,
+              "event_id_relevance": null,
+              "platform_match": 1.0
+            },
+            "retrieval_absolute": 0.04708728939294815,
+            "retrieval_relative": 0.2612035163232846,
+            "tactics": [
+              "Credential Access"
+            ]
+          },
+          {
+            "attack_id": "T1552.002",
+            "llm_reported": "medium",
+            "label": "medium",
+            "composite": 0.6373,
+            "components": {
+              "retrieval_similarity": 0.4339663911982721,
+              "evidence_coverage": 1.0,
+              "field_match": 0.07692307692307693,
+              "event_id_relevance": null,
+              "platform_match": 1.0
+            },
+            "retrieval_absolute": 0.062281616032123566,
+            "retrieval_relative": 0.4339663911982721,
+            "tactics": [
+              "Credential Access"
+            ]
+          },
+          {
+            "attack_id": "T1112",
+            "llm_reported": "medium",
+            "label": "low",
+            "composite": 0.609,
+            "components": {
+              "retrieval_similarity": 0.3922916007391702,
+              "evidence_coverage": 1.0,
+              "field_match": 0.0,
+              "event_id_relevance": null,
+              "platform_match": 1.0
+            },
+            "retrieval_absolute": 0.058616358786821365,
+            "retrieval_relative": 0.3922916007391702,
+            "tactics": [
+              "Defense Impairment",
+              "Persistence"
+            ]
+          }
+        ],
+        "agents": {
+          "decisions": 4,
+          "rejected": []
+        },
+        "loop": {
+          "passes": 0,
+          "trace": []
+        }
+      }
+    ],
+    [
+      {
+        "id": "T1",
+        "baslik": "SAM hive erisimi",
+        "expected_decision": "SUFFICIENT_SUSPICIOUS",
+        "expected_techniques": [
+          "T1003.002"
+        ],
+        "parser": {
+          "field_count": 13,
+          "fields": {
+            "Name": "N/A,",
+            "Path": "C:\\Windows\\System32\\reg.exe,",
+            "Directory": "N/A,",
+            "Filename": "N/A,",
+            "Domain": "CORP,",
+            "ID": "4656,",
+            "Workstation": "WKS-4471,",
+            "Server": "Security,",
+            "Type": "Key,",
+            "Accesses": "Query",
+            "Mask": "0x2000d,",
+            "Class": "N/A,",
+            "Control": "N/A,"
+          },
+          "event_id": null,
+          "process_name": null,
+          "platform": "Windows"
+        },
+        "seconds": 68.1,
+        "decision": {
+          "verdict": "malicious_or_suspicious",
+          "reason": "SAM anahtarına erişim, sistem seviyesindeki yetkilere sahip bir süreçten geldiğinde, kimlik doğrulama bilgileri erişimi olası bir işaret olabilir."
+        },
+        "observed_behaviors": [
+          "Process Name=reg.exe",
+          "Object Name=\\REGISTRY\\MACHINE\\SAM",
+          "Accesses=Query key value|Enumerate sub-keys|Read Control",
+          "Access Mask=0x2000d"
+        ],
+        "filtered_behaviors": [],
+        "gate_damage": [],
+        "pipeline_stages": {
+          "retrieval_candidates": [
+            {
+              "attack_id": "T1543.003",
+              "absolute": 0.11206372082233429,
+              "relative": 1.0
+            },
+            {
+              "attack_id": "T1012",
+              "absolute": 0.06482065469026566,
+              "relative": 0.46283582571920606
+            },
+            {
+              "attack_id": "T1552.002",
+              "absolute": 0.062281616032123566,
+              "relative": 0.4339663911982721
+            },
+            {
+              "attack_id": "T1112",
+              "absolute": 0.058616358786821365,
+              "relative": 0.3922916007391702
+            },
+            {
+              "attack_id": "T1218.002",
+              "absolute": 0.0536467544734478,
+              "relative": 0.3357860938774229
+            },
+            {
+              "attack_id": "T1003.002",
+              "absolute": 0.04708728939294815,
+              "relative": 0.2612035163232846
+            },
+            {
+              "attack_id": "T1037.001",
+              "absolute": 0.03501128777861595,
+              "relative": 0.12389669085936643
+            },
+            {
+              "attack_id": "T1552.006",
+              "absolute": 0.026726512238383293,
+              "relative": 0.029696949468112032
+            },
+            {
+              "attack_id": "T1547.004",
+              "absolute": 0.024114694446325302,
+              "relative": 0.0
+            }
+          ],
+          "retrieval_candidate_ids": [
+            "T1543.003",
+            "T1012",
+            "T1552.002",
+            "T1112",
+            "T1218.002",
+            "T1003.002",
+            "T1037.001",
+            "T1552.006",
+            "T1547.004"
+          ],
+          "llm_selected": [
+            "T1003.002",
+            "T1552.002",
+            "T1112"
+          ],
+          "after_agents": [
+            "T1003.002",
+            "T1552.002",
+            "T1112"
+          ],
+          "dropped_by_llm": [
+            "T1543.003",
+            "T1012",
+            "T1218.002",
+            "T1037.001",
+            "T1552.006",
+            "T1547.004"
+          ],
+          "dropped_by_agents": []
+        },
+        "expected_technique_trace": {
+          "T1003.002": {
+            "in_retrieval": true,
+            "in_llm_selection": true,
+            "in_final": true
+          }
+        },
+        "tactics": {
+          "expected": [
+            "Credential Access"
+          ],
+          "expected_ids": [
+            "TA0006"
+          ],
+          "produced": [
+            "Credential Access",
+            "Defense Impairment",
+            "Persistence"
+          ],
+          "matched": [
+            "Credential Access"
+          ],
+          "missing": []
+        },
+        "mappings": [
+          {
+            "attack_id": "T1003.002",
+            "llm_reported": "high",
+            "label": "medium",
+            "composite": 0.5628,
+            "components": {
+              "retrieval_similarity": 0.2612035163232846,
+              "evidence_coverage": 1.0,
+              "field_match": 0.0,
+              "event_id_relevance": null,
+              "platform_match": 1.0
+            },
+            "retrieval_absolute": 0.04708728939294815,
+            "retrieval_relative": 0.2612035163232846,
+            "tactics": [
+              "Credential Access"
+            ]
+          },
+          {
+            "attack_id": "T1552.002",
+            "llm_reported": "medium",
+            "label": "medium",
+            "composite": 0.6373,
+            "components": {
+              "retrieval_similarity": 0.4339663911982721,
+              "evidence_coverage": 1.0,
+              "field_match": 0.07692307692307693,
+              "event_id_relevance": null,
+              "platform_match": 1.0
+            },
+            "retrieval_absolute": 0.062281616032123566,
+            "retrieval_relative": 0.4339663911982721,
+            "tactics": [
+              "Credential Access"
+            ]
+          },
+          {
+            "attack_id": "T1112",
+            "llm_reported": "medium",
+            "label": "low",
+            "composite": 0.609,
+            "components": {
+              "retrieval_similarity": 0.3922916007391702,
+              "evidence_coverage": 1.0,
+              "field_match": 0.0,
+              "event_id_relevance": null,
+              "platform_match": 1.0
+            },
+            "retrieval_absolute": 0.058616358786821365,
+            "retrieval_relative": 0.3922916007391702,
+            "tactics": [
+              "Defense Impairment",
+              "Persistence"
+            ]
+          }
+        ],
+        "agents": {
+          "decisions": 4,
+          "rejected": []
+        },
+        "loop": {
+          "passes": 0,
+          "trace": []
+        }
+      }
+    ]
+  ]
+}

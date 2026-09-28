@@ -1,0 +1,206 @@
+# Windows olay anlambilimi (Gorev 3).
+#
+# NEDEN VAR: sistem olay ID'sini bir ETIKET gibi tasiyordu, ANLAMINI hic
+# cozmuyordu. 4657 "registry degeri degistirildi" demektir, yani tanimi geregi
+# bir YAZMA islemidir -- bu tek basina T1112/T1685 ailesine guclu bir sinyal
+# ve hicbir yerde kullanilmiyordu. Ayni sekilde 4656 yalnizca bir HANDLE
+# TALEBIDIR; erisimin gerceklestigini gostermez (o 4663'tur).
+#
+# ALANLAR
+#   anlam         : olayin tek cumlelik tarifi
+#   islem_sinifi  : read | write | create | delete | auth | audit
+#                   Salt okuma -> T1012/T1003 ailesi; yazma/silme -> T1112/
+#                   T1562/T1685 ailesi. Bu ayrim erisim maskesinden de
+#                   turetilir (access_mask.yaml); ikisi celisirse maske
+#                   kazanir, cunku olay turu genel, maske o kayda ozeldir.
+#   veri_bileseni : ATT&CK data component karsiligi (varsa)
+#   anlamli_alanlar: BU OLAYDA anlam tasiyan alanlar.
+#   erisim_gerceklesti: bu olay GERCEKLESMIS bir erisimi mi anlatiyor, yoksa
+#                   bir TALEBI mi? Varsayilan true. false ise maske o kayitta
+#                   talep edilen HAKTIR ve islem sinifini YUKSELTMEZ --
+#                   requested_class olarak ayrica raporlanir. Gorev 18;
+#                   katalogda tek false olan olay 4656'dir.
+#
+# anlamli_alanlar NEDEN GEREKLI: Gorev 12'nin ucuz on kapisi tek bir genel
+# "bilgilendirici alan sayisi"na bakarsa, 4656 icin Object Name eksikligini
+# YAKALAYAMAZ -- 15 alanin 5'i dolu olabilir ama kritik olan bos olabilir.
+# Bu liste "bu olay turu icin kritik alan eksik mi" sorusunu cevaplatir.
+
+version: 1
+
+events:
+  # --- nesne erisimi
+  "4656":
+    anlam: "Bir nesne icin erisim tanitici (handle) talep edildi"
+    islem_sinifi: read
+    veri_bileseni: ["File Access", "Windows Registry Key Access"]
+    anlamli_alanlar: ["object.name", "object.type", "access.list", "access.mask", "process.name", "account.name"]
+    # Gorev 18: maske burada TALEP EDILEN haktir. 0x2001F "yazma hakki
+    # ISTEDI" der, "yazdi" demez. Bu satir olmadan `access_class =
+    # mask_class or event_class` girisimi eylem gibi okuyordu ve Yol B
+    # (kritiklik + yazma) her handle talebinde atesliyordu.
+    erisim_gerceklesti: false
+    not: "Handle TALEBIDIR. Erisimin gerceklestigini GOSTERMEZ -- gerceklesen erisim 4663'tur. Tek basina 'okudu' demek fazla ileri gitmektir."
+  "4657":
+    anlam: "Registry degeri degistirildi"
+    islem_sinifi: write
+    veri_bileseni: ["Windows Registry Key Modification"]
+    anlamli_alanlar: ["object.name", "object.value_name", "value.old", "value.new", "operation.type", "process.name", "account.name"]
+    not: "TANIMI GEREGI yazma islemi. Erisim maskesi olmasa bile islem sinifi write'tir."
+  "4658":
+    anlam: "Nesne tanitici kapatildi"
+    islem_sinifi: audit
+    anlamli_alanlar: ["handle.id", "process.name"]
+    not: "Tek basina hicbir teknige kanit degildir; yalnizca bir handle yasam dongusu kaydi."
+  "4660":
+    anlam: "Nesne silindi"
+    islem_sinifi: delete
+    veri_bileseni: ["File Deletion", "Windows Registry Key Deletion"]
+    anlamli_alanlar: ["object.name", "handle.id", "process.name", "account.name"]
+  "4663":
+    anlam: "Nesne uzerinde erisim GERCEKLESTIRILDI"
+    islem_sinifi: read
+    veri_bileseni: ["File Access", "Windows Registry Key Access"]
+    anlamli_alanlar: ["object.name", "object.type", "access.list", "access.mask", "process.name", "account.name"]
+    not: "4656'dan farki: burada erisim gercekten oldu. Erisim maskesi yazma biti tasiyorsa islem sinifi write'a yukselir."
+  "4670":
+    anlam: "Nesne uzerindeki izinler degistirildi"
+    islem_sinifi: write
+    veri_bileseni: ["Active Directory Object Modification"]
+    anlamli_alanlar: ["object.name", "process.name", "account.name"]
+
+  # --- oturum acma
+  "4624":
+    anlam: "Hesap basariyla oturum acti"
+    islem_sinifi: auth
+    veri_bileseni: ["Logon Session Creation"]
+    anlamli_alanlar: ["account.name", "logon.type", "source.ip", "host.name", "logon.id"]
+  "4625":
+    anlam: "Hesap oturum acmayi basaramadi"
+    islem_sinifi: auth
+    veri_bileseni: ["Logon Session Creation"]
+    anlamli_alanlar: ["account.name", "logon.type", "source.ip", "host.name"]
+  "4648":
+    anlam: "Acik kimlik bilgisiyle oturum acma denendi"
+    islem_sinifi: auth
+    veri_bileseni: ["Logon Session Creation"]
+    anlamli_alanlar: ["account.name", "process.name", "host.name"]
+  "4672":
+    anlam: "Yeni oturuma ozel ayricaliklar atandi"
+    islem_sinifi: auth
+    anlamli_alanlar: ["account.name", "logon.id"]
+  "4673":
+    anlam: "Ayricalikli bir servis cagrildi"
+    islem_sinifi: audit
+    anlamli_alanlar: ["account.name", "process.name"]
+    not: "Cok gurultulu bir olaydir; tek basina supheli degildir."
+  "4634":
+    anlam: "Hesap oturumu kapatti"
+    islem_sinifi: auth
+    anlamli_alanlar: ["account.name", "logon.id"]
+
+  # --- surec
+  "4688":
+    anlam: "Yeni bir surec olusturuldu"
+    islem_sinifi: create
+    veri_bileseni: ["Process Creation"]
+    anlamli_alanlar: ["process.name", "process.command_line", "parent.process.name", "account.name"]
+  "4689":
+    anlam: "Bir surec sonlandi"
+    islem_sinifi: audit
+    anlamli_alanlar: ["process.name", "account.name"]
+  "1":
+    anlam: "Surec olusturuldu (Sysmon)"
+    islem_sinifi: create
+    veri_bileseni: ["Process Creation"]
+    anlamli_alanlar: ["process.name", "process.command_line", "parent.process.name", "account.name"]
+
+  # --- hesap yonetimi
+  "4720":
+    anlam: "Kullanici hesabi olusturuldu"
+    islem_sinifi: create
+    veri_bileseni: ["User Account Creation"]
+    anlamli_alanlar: ["account.name", "user.domain"]
+  "4726":
+    anlam: "Kullanici hesabi silindi"
+    islem_sinifi: delete
+    veri_bileseni: ["User Account Deletion"]
+    anlamli_alanlar: ["account.name", "user.domain"]
+  "4732":
+    anlam: "Guvenlik gruplu yerel bir gruba uye eklendi"
+    islem_sinifi: write
+    veri_bileseni: ["User Account Modification"]
+    anlamli_alanlar: ["account.name", "group.id"]
+  "4738":
+    anlam: "Kullanici hesabi degistirildi"
+    islem_sinifi: write
+    veri_bileseni: ["User Account Modification"]
+    anlamli_alanlar: ["account.name", "user.domain"]
+
+  # --- servis
+  "7045":
+    anlam: "Sisteme yeni bir servis kuruldu"
+    islem_sinifi: create
+    veri_bileseni: ["Service Creation"]
+    anlamli_alanlar: ["service.name", "service.image_path", "account.name"]
+    not: "Kritik bilgi servisin ADI degil, isaret ettigi BINARY'dir."
+  "4697":
+    anlam: "Sisteme bir servis kuruldu (guvenlik gunlugu)"
+    islem_sinifi: create
+    veri_bileseni: ["Service Creation"]
+    anlamli_alanlar: ["service.name", "service.image_path", "account.name"]
+
+  # --- politika / denetim
+  "4719":
+    anlam: "Sistem denetim politikasi degistirildi"
+    islem_sinifi: write
+    anlamli_alanlar: ["account.name", "host.name"]
+  "1102":
+    anlam: "Denetim gunlugu temizlendi"
+    islem_sinifi: delete
+    veri_bileseni: ["Windows Event Log Deletion"]
+    anlamli_alanlar: ["account.name", "host.name"]
+
+  # --- ag / paylasim
+  "5140":
+    anlam: "Bir ag paylasim nesnesine erisildi"
+    islem_sinifi: read
+    veri_bileseni: ["Network Share Access"]
+    anlamli_alanlar: ["share.name", "account.name", "source.ip"]
+  "5156":
+    anlam: "Windows Filtreleme Platformu bir baglantiya IZIN VERDI"
+    islem_sinifi: audit
+    veri_bileseni: ["Network Connection Creation"]
+    anlamli_alanlar: ["source.ip", "destination.ip", "destination.port", "process.name"]
+    not: "IZIN VERILDI kaydi, guvenlik kontrolunun CALISTIGINI gosterir. Kontrolun bozuldugunu degil -- bu ayrim projenin en pahali halusinasyonunun kaynagiydi (5156'dan T1686.003 uretilmisti)."
+  "5158":
+    anlam: "Windows Filtreleme Platformu bir yerel porta baglanmaya izin verdi"
+    islem_sinifi: audit
+    anlamli_alanlar: ["source.ip", "source.port", "process.name"]
+
+  # --- Sysmon
+  "3":
+    anlam: "Ag baglantisi kuruldu (Sysmon)"
+    islem_sinifi: audit
+    veri_bileseni: ["Network Connection Creation"]
+    anlamli_alanlar: ["process.name", "destination.ip", "destination.port"]
+  "10":
+    anlam: "Baska bir surecin bellegine erisildi (Sysmon)"
+    islem_sinifi: read
+    veri_bileseni: ["Process Access"]
+    anlamli_alanlar: ["process.name", "target.image", "access.mask"]
+  "11":
+    anlam: "Dosya olusturuldu (Sysmon)"
+    islem_sinifi: create
+    veri_bileseni: ["File Creation"]
+    anlamli_alanlar: ["process.name", "file.name", "file.path"]
+  "13":
+    anlam: "Registry degeri degistirildi (Sysmon)"
+    islem_sinifi: write
+    veri_bileseni: ["Windows Registry Key Modification"]
+    anlamli_alanlar: ["object.name", "value.new", "process.name"]
+  "4104":
+    anlam: "PowerShell script block calistirildi"
+    islem_sinifi: create
+    veri_bileseni: ["Script Execution"]
+    anlamli_alanlar: ["script.block_text", "account.name", "host.name"]

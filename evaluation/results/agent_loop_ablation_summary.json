@@ -1,0 +1,137 @@
+{
+  "n_scenarios": 58,
+  "n_errors": 2,
+  "arms": {
+    "no_agents": {
+      "hierarchical_score": 0.7172,
+      "correct_abstention": 1.0,
+      "hallucination_rate": 0.0,
+      "avg_techniques": 1.7586,
+      "avg_high_confidence": 1.4483
+    },
+    "agents": {
+      "hierarchical_score": 0.6741,
+      "correct_abstention": 1.0,
+      "hallucination_rate": 0.0,
+      "avg_techniques": 1.6034,
+      "avg_high_confidence": 0.4483
+    },
+    "agents_loop": {
+      "hierarchical_score": 0.6759,
+      "correct_abstention": 1.0,
+      "hallucination_rate": 0.0,
+      "avg_techniques": 1.7241,
+      "avg_high_confidence": 0.4483
+    }
+  },
+  "agents_vs_none": {
+    "delta_hierarchical_score": -0.0431,
+    "n_changed": 7,
+    "n_improved": 0,
+    "n_worsened": 4,
+    "worsened_details": [
+      {
+        "test_id": "rawlog-002",
+        "expected": [
+          "T1136.001"
+        ],
+        "no_agents": [
+          "T1569.002",
+          "T1053.005"
+        ],
+        "agents": [
+          "T1569.002"
+        ],
+        "rejected_ids": [
+          "T1053.005"
+        ]
+      },
+      {
+        "test_id": "rawlog-008",
+        "expected": [
+          "T1547.001"
+        ],
+        "no_agents": [
+          "T1059.001",
+          "T1547.001"
+        ],
+        "agents": [],
+        "rejected_ids": [
+          "T1059.001",
+          "T1547.001"
+        ]
+      },
+      {
+        "test_id": "rawlog-009",
+        "expected": [
+          "T1685.005"
+        ],
+        "no_agents": [
+          "T1685.005",
+          "T1685.001"
+        ],
+        "agents": [
+          "T1685.001"
+        ],
+        "rejected_ids": [
+          "T1685.005"
+        ]
+      },
+      {
+        "test_id": "injection-001",
+        "expected": [
+          "T1059.001"
+        ],
+        "no_agents": [
+          "T1059.001",
+          "T1059"
+        ],
+        "agents": [
+          "T1059"
+        ],
+        "rejected_ids": [
+          "T1059.001"
+        ]
+      }
+    ],
+    "improved_details": []
+  },
+  "loop_vs_agents": {
+    "delta_hierarchical_score": 0.0018,
+    "n_changed": 6,
+    "n_improved": 1,
+    "n_worsened": 0,
+    "worsened_details": [],
+    "improved_details": [
+      {
+        "test_id": "rawlog-008",
+        "expected": [
+          "T1547.001"
+        ],
+        "agents": [],
+        "agents_loop": [
+          "T1569",
+          "T1546.013"
+        ]
+      }
+    ]
+  },
+  "loop": {
+    "n_scenarios_looped": 37,
+    "pct_looped": 63.8,
+    "avg_total_seconds_all": 71.4657,
+    "avg_total_seconds_looped": 87.8115,
+    "avg_total_seconds_not_looped": 42.6661,
+    "reasons": {
+      "Kabul edilen tekniklerin tamamı düşük güvenli.": 30,
+      "Ajan katmanı T1543.003, T1059.001 tekniğini eledi; yerine başka aday arandı.": 1,
+      "Ajan katmanı T1059.003 tekniğini eledi; yerine başka aday arandı.": 1,
+      "Ajan katmanı T1053.005 tekniğini eledi; yerine başka aday arandı.": 1,
+      "Birinci turda doğrulamayı geçen teknik kalmadı.": 1,
+      "Ajan katmanı T1685.005 tekniğini eledi; yerine başka aday arandı.": 1,
+      "Ajan katmanı T1543.003 tekniğini eledi; yerine başka aday arandı.": 1,
+      "Ajan katmanı T1059.001 tekniğini eledi; yerine başka aday arandı.": 1
+    }
+  },
+  "avg_agent_seconds": 23.9975
+}

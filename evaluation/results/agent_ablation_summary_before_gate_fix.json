@@ -1,0 +1,321 @@
+{
+  "n_scenarios": 60,
+  "n_errors": 0,
+  "without_agents": {
+    "hierarchical_score": 0.7267,
+    "correct_abstention": 1.0,
+    "hallucination_rate": 0.0,
+    "avg_techniques": 1.7833,
+    "avg_high_confidence": 1.4833
+  },
+  "with_agents": {
+    "hierarchical_score": 0.2933,
+    "correct_abstention": 1.0,
+    "hallucination_rate": 0.0,
+    "avg_techniques": 1.0,
+    "avg_high_confidence": 0.8667
+  },
+  "n_scenarios_touched": 41,
+  "n_scenarios_improved": 1,
+  "n_scenarios_worsened": 31,
+  "worsened_details": [
+    {
+      "test_id": "single-001",
+      "rejected": [
+        "T1204.002"
+      ],
+      "reasons": [
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 1, 4688)."
+      ]
+    },
+    {
+      "test_id": "single-003",
+      "rejected": [
+        "T1018"
+      ],
+      "reasons": [
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 4688)."
+      ]
+    },
+    {
+      "test_id": "single-004",
+      "rejected": [
+        "T1082"
+      ],
+      "reasons": [
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 1, 4688)."
+      ]
+    },
+    {
+      "test_id": "single-005",
+      "rejected": [
+        "T1071.001"
+      ],
+      "reasons": [
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 3, 5156)."
+      ]
+    },
+    {
+      "test_id": "single-006",
+      "rejected": [
+        "T1486"
+      ],
+      "reasons": [
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 1, 4688)."
+      ]
+    },
+    {
+      "test_id": "single-007",
+      "rejected": [
+        "T1490"
+      ],
+      "reasons": [
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 1, 4688)."
+      ]
+    },
+    {
+      "test_id": "single-008",
+      "rejected": [
+        "T1057"
+      ],
+      "reasons": [
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 1, 4688)."
+      ]
+    },
+    {
+      "test_id": "single-009",
+      "rejected": [
+        "T1105"
+      ],
+      "reasons": [
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 1, 4688)."
+      ]
+    },
+    {
+      "test_id": "single-010",
+      "rejected": [
+        "T1016"
+      ],
+      "reasons": [
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 1, 4688)."
+      ]
+    },
+    {
+      "test_id": "subtech-001",
+      "rejected": [
+        "T1003.001"
+      ],
+      "reasons": [
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 4656, 4663)."
+      ]
+    },
+    {
+      "test_id": "subtech-003",
+      "rejected": [
+        "T1059.001"
+      ],
+      "reasons": [
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 4104, 4688)."
+      ]
+    },
+    {
+      "test_id": "subtech-004",
+      "rejected": [
+        "T1059.003"
+      ],
+      "reasons": [
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 4688)."
+      ]
+    },
+    {
+      "test_id": "subtech-007",
+      "rejected": [
+        "T1547.001"
+      ],
+      "reasons": [
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 12, 13, 4657)."
+      ]
+    },
+    {
+      "test_id": "subtech-008",
+      "rejected": [
+        "T1055.001"
+      ],
+      "reasons": [
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 7, 8)."
+      ]
+    },
+    {
+      "test_id": "subtech-009",
+      "rejected": [
+        "T1021.001"
+      ],
+      "reasons": [
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 4624, 4778)."
+      ]
+    },
+    {
+      "test_id": "subtech-010",
+      "rejected": [
+        "T1071.004"
+      ],
+      "reasons": [
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 22)."
+      ]
+    },
+    {
+      "test_id": "multi-001",
+      "rejected": [
+        "T1547.001",
+        "T1059.001"
+      ],
+      "reasons": [
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 12, 13, 4657).",
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 4104, 4688)."
+      ]
+    },
+    {
+      "test_id": "multi-002",
+      "rejected": [
+        "T1003.001",
+        "T1078"
+      ],
+      "reasons": [
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 4656, 4663).",
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 4624)."
+      ]
+    },
+    {
+      "test_id": "multi-005",
+      "rejected": [
+        "T1558.003",
+        "T1550.002"
+      ],
+      "reasons": [
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 4769).",
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 4624)."
+      ]
+    },
+    {
+      "test_id": "multi-006",
+      "rejected": [
+        "T1505.003",
+        "T1053.005"
+      ],
+      "reasons": [
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 11, 4663).",
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 4688, 4698, 4699, 4700, 4702)."
+      ]
+    },
+    {
+      "test_id": "rawlog-002",
+      "rejected": [
+        "T1053.005"
+      ],
+      "reasons": [
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 4688, 4698, 4699, 4700, 4702)."
+      ]
+    },
+    {
+      "test_id": "rawlog-008",
+      "rejected": [
+        "T1059.001",
+        "T1547.001"
+      ],
+      "reasons": [
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 4104, 4688).",
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 12, 13, 4657)."
+      ]
+    },
+    {
+      "test_id": "rawlog-009",
+      "rejected": [
+        "T1685.005"
+      ],
+      "reasons": [
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 1, 4688)."
+      ]
+    },
+    {
+      "test_id": "ambig-001",
+      "rejected": [
+        "T1204.002"
+      ],
+      "reasons": [
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 1, 4688)."
+      ]
+    },
+    {
+      "test_id": "platform-002",
+      "rejected": [
+        "T1543.001"
+      ],
+      "reasons": [
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 13, 4657)."
+      ]
+    },
+    {
+      "test_id": "platform-003",
+      "rejected": [
+        "T1070.003"
+      ],
+      "reasons": [
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 1, 4104, 4688)."
+      ]
+    },
+    {
+      "test_id": "revoked-001",
+      "rejected": [
+        "T1059.001"
+      ],
+      "reasons": [
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 4104, 4688)."
+      ]
+    },
+    {
+      "test_id": "revoked-002",
+      "rejected": [
+        "T1564.003"
+      ],
+      "reasons": [
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 1, 400, 4104, 4688)."
+      ]
+    },
+    {
+      "test_id": "injection-001",
+      "rejected": [
+        "T1059.001"
+      ],
+      "reasons": [
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 4104, 4688)."
+      ]
+    },
+    {
+      "test_id": "crosslang-001",
+      "rejected": [
+        "T1059.001"
+      ],
+      "reasons": [
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 4104, 4688)."
+      ]
+    },
+    {
+      "test_id": "crosslang-002",
+      "rejected": [
+        "T1003.001"
+      ],
+      "reasons": [
+        "evidence-gate: Bu teknik için tanımlı kanıt koşulları girdide sağlanmıyor (beklenen olay ID'leri: 4656, 4663)."
+      ]
+    }
+  ],
+  "improved_details": [
+    {
+      "test_id": "negative-001",
+      "rejected": [
+        "T1053.005"
+      ]
+    }
+  ],
+  "avg_agent_seconds": 0.0493
+}

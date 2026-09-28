@@ -1,0 +1,118 @@
+# Aktor baseline -- Yol B'nin (kritiklik + erisim) BASTIRICISI.
+#
+# Beklenti: docs/beklenti_5_karar_katmani.md bolum 5.
+#
+# ANAHTAR AKTOR DEGIL, (VARLIK AILESI, AKTOR) CIFTIDIR. Olculdu: ayni aktor
+# (SYSTEM/TrustedInstaller) hem mesru yazilim kurulumu yapiyor hem de
+# Defender'i kapatabiliyor; mevcut detect_benign_signals ikisine de ayni
+# 'strong' sinyalini veriyordu. Aktor bazli bastirma, ayricalik
+# yukseltmenin VARIS NOKTASINDA kor nokta uretir.
+#
+# BU TABLO BILEREK KUCUK. Bir cift buraya ancak o aktorun o varlik ailesine
+# yazmasinin ISLETIM SISTEMI TASARIMI GEREGI oldugu gosterilebiliyorsa
+# girer. "Fixture benign ciksin diye ekledim" kabul edilmez (bolum 5.6).
+# Eksik tablo yalnizca fazladan alarm uretir; fazla tablo KOR NOKTA uretir.
+# Ikisi ayni agirlikta degil.
+#
+# BASTIRMA TEK YOLLUDUR: burasi yalnizca Yol B'yi susturabilir. Yol A
+# (teknik + dogrulanmis kanit) bu tablodan ETKILENMEZ -- aktor alani taklit
+# edilebilir ve dogrulanmis kaniti taklit edilebilir bir alanla sildirmek,
+# kanit kapisini aktor alanina devretmek olurdu.
+
+version: 1
+
+# --- SUREC YOLU DESENLERI ---------------------------------------------------
+#
+# Gorev 17: `surecler` listesi TABAN AD tutuyordu ve eslesme TAM ESITLIKTI.
+# Gercek veri tam yol tasiyor -- olculdu (docs/sonuc_17_ek2_bastirma_bicimi.md):
+#
+#     fixture T4/T5      0 tam yol / 2 taban ad
+#     S kolu (60 log)   32 tam yol / 0 taban ad
+#     G kolu (51 satir) 45 tam yol / 4 taban ad
+#
+# Yani bastirma gercek veride HIC atesleyemiyordu; fixture'in yesil olmasinin
+# sebebi uretimde bulunmayan bir bicimi ornekliyor olmasiydi (yontem madde 17).
+#
+# DUZELTME TABAN ADA INMEK DEGIL. Yalnizca taban ada bakmak
+# C:\Temp\msiexec.exe'yi de bastirirdi -- bu dosyanin kendi kuraliyla ("fazla
+# tablo KOR NOKTA uretir") dogrudan celisir ve kor nokta tam olarak
+# saldirganin mesru bir ikili adini kopyalayacagi yerde acilir.
+#
+# Kural: TABAN AD `surecler`de olacak VE dizin asagidaki desenlerden biriyle
+# eslesecek. Desen yazilir, tek tek exe yolu degil -- tablo buyudugunde kod
+# degismez (yontem madde 6).
+#
+# SURUCU HARFI KASITLI OLARAK YOK: Program Files bir D: bolumunde olabilir.
+# Anlamli olan surucu degil, dizinin Windows'un kendi kurulum agacinda
+# olmasidir. Esleme AYRAC SINIRINDA yapilir: `\Temp\Windows\System32` bir
+# System32 degildir, cunku desen dizinin BASINDAN itibaren tutmak zorundadir.
+#
+# DIZINSIZ DEGER BASTIRILMAZ. Taban ad tek basina geldiginde (G kolunda 4
+# satir) surecin nereden calistigi BILINMIYOR demektir ve bilinmeyen
+# dogrulanmis sayilmaz. Ayni yonde hata: eksik tablo fazladan alarm uretir.
+guvenilir_dizinler:
+  - '\Windows\System32'
+  - '\Windows\SysWOW64'
+  - '\Windows\WinSxS'
+  - '\Windows\servicing'
+  - '\Program Files'
+  - '\Program Files (x86)'
+
+beklenen_ciftler:
+  - aile: service
+    # Surec adi ZORUNLU eslesme; hesap adi da eslesmek zorunda.
+    # Ikisini birden istemek bastirmayi DARALTIR, yani guvenli yonde hata
+    # yapar: yanlis hesapla calisan bir TrustedInstaller bastirilmaz.
+    surecler: [trustedinstaller.exe, msiexec.exe, tiworker.exe]
+    hesaplar: [system, "nt authority\\system", localsystem]
+    gerekce: >-
+      Yeni bir servis kaydi olusturmak (HKLM\SYSTEM\CurrentControlSet\Services
+      altina ImagePath yazmak) yazilim kurulumunun normal adimidir ve Windows
+      Modules Installer / Windows Installer'in tanimli isidir. Bu cift
+      bastirilmazsa her kurulum ve her yama Yol B'den alarm uretir.
+    kaynak: >-
+      Windows Installer servis kaydi: msiexec ServiceInstall tablosu;
+      TrustedInstaller (WMI/TiWorker) bilesen kurulumu.
+
+# --- BILEREK ALINMAYANLAR (gerekceli) ------------------------------------
+#
+# autorun-run <- msiexec/trustedinstaller
+#     Kurulumlar gercekten Run anahtari yazar. YINE DE ALINMADI: Run
+#     anahtari kaliciligin bir numarali yeridir (T1547.001) ve buraya
+#     konacak bir muafiyet, saldirganin en cok istedigi bastirmadir.
+#     Fazladan alarma katlanmak, kor noktaya katlanmaktan ucuzdur.
+#
+# defender-policy <- HERHANGI BIR AKTOR
+#     Guvenlik kontrolunun kendisini devre disi birakan yazma, hicbir
+#     aktor icin rutin sayilmaz. T5 fixture'i tam olarak bunu kilitliyor.
+#
+# credential-hive <- HERHANGI BIR AKTOR
+#     SAM/SECURITY/LSA kovanlarina erisim icin mesru rutin bir aktor
+#     tanimlanmadi. Yedekleme ajanlari VSS uzerinden calisir, kovana
+#     dogrudan erismez.
+#
+# service <- svchost.exe
+#     G kolundaki bes yanlis alarmin DORDU svchost.exe -> Services\<ad>\
+#     Performance (besincisi Defender'in MpDefenderCoreService.exe'si).
+#     Yani bu cift alinsaydi bes yanlis alarmin dordu aninda susardi.
+#     TAM DA BU YUZDEN ALINMADI.
+#
+#     Yanlis alarmi susturmak icin bastirici eklemek, olculecek seyi yok
+#     etmektir. 2B'deki ilkenin aynisi: birlestirme isabet olcumunu
+#     duzeltmez, yalnizca olcumu gorunmez yapar. Bu tablo bir OLCUM
+#     ARACI degil, bir ISLETIM SISTEMI TASARIMI beyanidir; bir cift
+#     buraya "sayilar duzelsin" diye giremez (bolum 5.6).
+#
+#     Kaldi ki svchost.exe bir kimlik degil bir KONAK adidir: hangi
+#     servisin calistigini soylemez ve Windows'ta en cok taklit edilen
+#     surectir. Bastirici aktor yapmak bu dosyanin kendi kuraliyla
+#     ("fazla tablo KOR NOKTA uretir") dogrudan celisir -- ve kor nokta
+#     tam olarak saldirganin svchost adiyla yazacagi yerde acilir.
+#
+#     Bu bes satirin gercek kusuru bu dosyada DEGIL: 4656 bir handle
+#     TALEBIDIR, gerceklesen erisim degil (Gorev 16,
+#     docs/sonuc_16_services_altanahtar.md bolum 4). Kritiklik dogru --
+#     ATT&CK T1574.011 Performance anahtarini acikca bir hijack noktasi
+#     sayar; maske de dogru -- 0x2001F, ATT&CK'in on kosul saydigi
+#     Create sub-key iznini icerir. Duzeltilecek yer karar katmani degil
+#     anlambilim katmani, ve sirasi S kolundan SONRA.

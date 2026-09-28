@@ -1,0 +1,97 @@
+{
+  "_aciklama": "Komut satirinda registry yolunun NEREDE BITTIGINI sabitleyen vakalar. Beklenti: docs/beklenti_6_komut_satiri_yol_siniri.md. Beklenen degerler kod yazilmadan ONCE yazildi.",
+
+  "_kabul_olcutu": "V1'dir. reg.exe save HKLM\\SAM C:\\Users\\Public\\sam.hive komut satirindan HKLM\\SAM cikmali, 'HKLM\\SAM C' degil. Bu SAM hirsizliginin komut satiri bicimi -- T1003.002, known_regression'daki teknik.",
+
+  "_regresyon_sarti": "V3-V6 naif desenle BUGUN DOGRU calisiyor. Yeni kural onlari bozarsa kural geri alinir: V1'i kazanip V3'u kaybetmek ilerleme degildir.",
+
+  "vakalar": [
+    {
+      "id": "V1",
+      "baslik": "amiral gemisi -- ikinci pozisyonel surucu yolu",
+      "command_line": "reg.exe save HKLM\\SAM C:\\Users\\Public\\sam.hive",
+      "expected_paths": ["HKLM\\SAM"],
+      "expected_criticality": "critical",
+      "bugunku_naif_cikti": "HKLM\\SAM C",
+      "kural": "K2 yeni kok (C:\\) + K3 arite 2 (save)"
+    },
+    {
+      "id": "V2",
+      "baslik": "goreli dosya adi",
+      "command_line": "reg save HKLM\\SAM sam.hive",
+      "expected_paths": ["HKLM\\SAM"],
+      "expected_criticality": "critical",
+      "bugunku_naif_cikti": "HKLM\\SAM sam.hive",
+      "kural": "K2 dosya adi bicimi"
+    },
+    {
+      "id": "V3",
+      "baslik": "bosluklu son segment -- BOSLUK YOLA AITTIR",
+      "command_line": "reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender /v DisableAntiSpyware /t REG_DWORD /d 1 /f",
+      "expected_paths": ["HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender"],
+      "expected_criticality": "high",
+      "kural": "K2 bayrak (/v) + K3 arite 1 (add)",
+      "not": "Bu vaka boslugu yasaklayan bir kuralin neden yanlis olacagini gosterir: 'Windows Defender' tek anahtardir."
+    },
+    {
+      "id": "V4",
+      "baslik": "tirnakli, icinde bosluk",
+      "command_line": "reg add \"HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Windows\" /v Load /d evil.exe",
+      "expected_paths": ["HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Windows"],
+      "expected_criticality": "high",
+      "kural": "K1 tirnak sinirdir"
+    },
+    {
+      "id": "V5",
+      "baslik": "bayrakla biten",
+      "command_line": "reg query HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /s",
+      "expected_paths": ["HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run"],
+      "expected_criticality": "high",
+      "kural": "K2 bayrak"
+    },
+    {
+      "id": "V6",
+      "baslik": "deger olarak dosya yolu tasiyan komut",
+      "command_line": "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\AcmeAgent /v ImagePath /d \"C:\\Program Files\\Acme\\agent.exe\"",
+      "expected_paths": ["HKLM\\SYSTEM\\CurrentControlSet\\Services\\AcmeAgent"],
+      "expected_criticality": "high",
+      "kural": "K2 bayrak; tirnakli dosya yolu registry yolu DEGILDIR, cikmamali"
+    },
+    {
+      "id": "V7",
+      "baslik": "powershell surucu gosterimi",
+      "command_line": "Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\" -Name DisableAntiSpyware -Value 1",
+      "expected_paths": ["HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender"],
+      "expected_criticality": "high",
+      "bugunku_naif_cikti": null,
+      "kural": "K1 tirnak + K4 surucu gosterimi",
+      "not": "Naif desen bunu HIC yakalamiyordu. Yakalansa bile _kanonik ilk segmenti 'hklm:' goruyor ve eslesmiyordu."
+    },
+    {
+      "id": "V8",
+      "baslik": "negatif -- registry yolu yok",
+      "command_line": "net use z: \\\\server\\share /persistent:no",
+      "expected_paths": [],
+      "expected_criticality": null,
+      "kural": "kovan oneki yok"
+    },
+    {
+      "id": "V9",
+      "baslik": "uzantisiz ikinci pozisyonel -- yalnizca arite cozer",
+      "command_line": "reg save HKLM\\SAM backup",
+      "expected_paths": ["HKLM\\SAM"],
+      "expected_criticality": "critical",
+      "kural": "K3 arite 2; K2 tek basina yetmez ('backup' ne kok, ne bayrak, ne dosya adi bicimi)",
+      "not": "K2 ve K3'un neden IKISININ birden gerektigini gosteren vaka."
+    },
+    {
+      "id": "V10",
+      "baslik": "negatif -- yalin kovan",
+      "command_line": "reg query HKLM",
+      "expected_paths": [],
+      "expected_criticality": null,
+      "kural": "K5 yalin kovan yol degildir",
+      "not": "path_normalizer'daki mevcut kararla ayni: yalin kovan ayirt edici bilgi tasimaz."
+    }
+  ]
+}

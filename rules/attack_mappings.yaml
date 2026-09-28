@@ -1,0 +1,784 @@
+techniques:
+- technique_id: T1686.003
+  tactic: TA0112
+  name: Windows Host Firewall
+  required:
+    event_ids:
+    - 4946
+    - 4947
+    - 4948
+    - 4949
+    - 4950
+    - 4954
+    - 5025
+  forbidden:
+    event_ids:
+    - 5156
+    - 5158
+  field_conditions:
+  - field: Message
+    must_match: (?i)(rule (was )?(added|deleted|modified|changed)|setting.{0,30}changed|exception list|was restored
+      to the default|service.{0,20}stopped)
+    tasinmadi: S
+    not: olay anlambilimi -- config/event_semantics.yaml'a tasinacak
+  min_events: 1
+  confidence: high
+  note: Yalnızca güvenlik duvarı YAPILANDIRMASININ değiştiği olaylardan tetiklenir. Trafik denetim kayıtları (5156/5158)
+    kanıt değildir.
+- technique_id: T1685.001
+  tactic: TA0112
+  name: Disable or Modify Windows Event Log
+  required:
+    event_ids:
+    - 4719
+  field_conditions:
+  - field: Message
+    must_match: (?i)audit polic(y|ies).{0,40}changed
+    tasinmadi: S
+    not: olay anlambilimi -- config/event_semantics.yaml'a tasinacak
+  min_events: 1
+  confidence: high
+  note: 'K1a: emekli T1562.002''den tasindi. 1102 (denetim gunlugu TEMIZLENDI) ve "audit log was cleared" kolu
+    CIKARILDI -- o olay ailesi T1685.005''e (Clear Windows Event Logs) aittir; bu kural yalnizca denetim
+    politikasinin degistirilmesini kapsar.'
+- technique_id: T1685.001
+  tactic: TA0112
+  name: Disable or Modify Windows Event Log
+  required:
+    event_ids:
+    - 7040
+  field_conditions:
+  - field: Message
+    must_match: (?i)Windows Event Log service was changed from .{0,30} to disabled
+    tasinmadi: S
+    not: olay anlambilimi -- config/event_semantics.yaml'a tasinacak
+  min_events: 1
+  confidence: high
+  note: 'K1a'' (D4 c): 7040 herhangi bir hizmetin baslangic turu degisikligidir; YALNIZCA Windows Event Log
+    hizmetinin devre disi birakilmasi bu teknigin kanitidir. Baska hizmet ya da devre disi olmayan gecis eslesmez.'
+- technique_id: T1685
+  tactic: TA0112
+  name: Disable or Modify Tools
+  required:
+    event_ids:
+    - 5001
+    - 5010
+    - 5012
+    - 5101
+  field_conditions:
+  - field: Message
+    must_match: (?i)(disabled|turned off|stopped)
+    tasinmadi: S
+    not: olay anlambilimi -- config/event_semantics.yaml'a tasinacak
+  min_events: 1
+  confidence: high
+  note: Microsoft Defender'ın gerçek zamanlı korumasının kapatıldığı olaylar.
+- technique_id: T1059.001
+  tactic: TA0002
+  name: PowerShell
+  required:
+    event_ids:
+    - 4104
+  field_conditions:
+  - any_of:
+    - field: script.block_text
+      must_match: (?i)(scriptblock|script block)
+    - field: event.message
+      must_match: (?i)(scriptblock|script block)
+  min_events: 1
+  confidence: high
+  note: Yalnızca 4104 (script block logging) kanıt sayılır — betiğin İÇERİĞİ görülebilir. 400/403/600 yalnızca motorun
+    başlayıp durduğunu söyler, ne çalıştırıldığını söylemez; bunlar teknik üretmez.
+- technique_id: T1059.003
+  tactic: TA0002
+  name: Windows Command Shell
+  required:
+    event_ids:
+    - 4688
+    - 1
+  field_conditions:
+  - field: process.name
+    must_match: (?i)(?:^|\\)cmd\.exe
+  min_events: 1
+  confidence: high
+- technique_id: T1053.005
+  tactic: TA0002
+  name: Scheduled Task
+  required:
+    event_ids:
+    - 4698
+    - 4699
+    - 4700
+    - 4702
+  min_events: 1
+  confidence: high
+- technique_id: T1053.005
+  tactic: TA0002
+  name: Scheduled Task
+  required:
+    event_ids:
+    - 4688
+    - 1
+  field_conditions:
+  - field: process.name
+    must_match: (?i)schtasks(\.exe)?\b
+  - field: process.command_line
+    must_match: (?i)/(create|change)\b
+  min_events: 1
+  confidence: high
+  note: schtasks.exe'nin yalnizca CALISMASI yeterli degil; /create ya da /change argumani sart. "schtasks /query"
+    envanter komutudur, gorev olusturmaz.
+- technique_id: T1059.001
+  tactic: TA0002
+  name: PowerShell
+  required:
+    event_ids:
+    - 4688
+    - 1
+  field_conditions:
+  - field: process.name
+    must_match: (?i)powershell(\.exe)?\b
+  - field: process.command_line
+    must_match: (?i)(-enc\b|-encodedcommand|downloadstring|downloadfile|\biex\b|invoke-expression|-executionpolicy\s+bypass|-w(indowstyle)?\s+hidden)
+  min_events: 1
+  confidence: high
+  note: PowerShell'in calismasi tek basina kanit DEGILDIR -- kurumsal ortamda gunde binlerce kez mesru calisir.
+    Yalnizca kodun gizlendigini/indirildigini gosteren argumanlarla birlikte teknik uretilir.
+- technique_id: T1543.003
+  tactic: TA0003
+  name: Windows Service
+  required:
+    event_ids:
+    - 7045
+    - 4697
+  min_events: 1
+  confidence: high
+- technique_id: T1003.001
+  tactic: TA0006
+  name: LSASS Memory
+  required:
+    event_ids:
+    - 4656
+    - 4663
+    - 10
+  field_conditions:
+  - any_of:
+    - field: target.image
+      must_match: (?i)lsass\.exe
+    - field: object.name
+      must_match: (?i)lsass\.exe
+  min_events: 1
+  confidence: high
+  note: 4656/4663 tek başına yeterli DEĞİL — bu olaylar rutin registry/dosya erişiminde de üretilir. Nesnenin lsass.exe
+    olması şart.
+- technique_id: T1021.002
+  tactic: TA0008
+  name: SMB/Windows Admin Shares
+  required:
+    event_ids:
+    - 5140
+    - 5145
+  field_conditions:
+  - field: share.name
+    must_match: (?i)(ADMIN\$|C\$|IPC\$)
+  min_events: 1
+  confidence: high
+- technique_id: T1078
+  tactic: TA0001
+  name: Valid Accounts
+  required:
+    event_ids:
+    - 4624
+  field_conditions:
+  - field: logon.type
+    must_match: (?i)logon type:\s*(3|10)
+  min_events: 1
+  confidence: medium
+  note: Ağ/RDP oturumu; tek başına kötücül değil, bu yüzden medium.
+- technique_id: T1018
+  tactic: TA0007
+  name: Remote System Discovery
+  required:
+    event_ids:
+    - 4688
+    - 1
+  field_conditions:
+  - field: process.name
+    must_match: (?i)(?:^|\\)(net|net1|nltest|arp)\.exe
+  min_events: 1
+  confidence: medium
+- technique_id: T1016
+  tactic: TA0007
+  name: System Network Configuration Discovery
+  required:
+    event_ids:
+    - 4688
+    - 1
+  field_conditions:
+  - field: process.name
+    must_match: (?i)(?:^|\\)(ipconfig|netsh|route|arp|nbtstat)\.exe
+  min_events: 1
+  confidence: medium
+- technique_id: T1057
+  tactic: TA0007
+  name: Process Discovery
+  required:
+    event_ids:
+    - 4688
+    - 1
+  field_conditions:
+  - any_of:
+    - field: process.name
+      must_match: (tasklist\.exe|qprocess\.exe)
+    - field: process.command_line
+      must_match: get-process
+  min_events: 1
+  confidence: medium
+- technique_id: T1082
+  tactic: TA0007
+  name: System Information Discovery
+  required:
+    event_ids:
+    - 4688
+    - 1
+  field_conditions:
+  - field: process.name
+    must_match: (?i)(?:^|\\)(systeminfo|hostname|wmic)\.exe
+  min_events: 1
+  confidence: medium
+- technique_id: T1083
+  tactic: TA0007
+  name: File and Directory Discovery
+  required:
+    event_ids:
+    - 4688
+    - 1
+  field_conditions:
+  - any_of:
+    - field: process.name
+      must_match: (tree\.com|where\.exe)
+    - field: process.command_line
+      must_match: (dir /s|get-childitem -recurse)
+  min_events: 1
+  confidence: medium
+- technique_id: T1047
+  tactic: TA0002
+  name: Windows Management Instrumentation
+  required:
+    event_ids:
+    - 4688
+    - 1
+  field_conditions:
+  - field: process.name
+    must_match: (?i)(?:^|\\)(wmic|wmiprvse)\.exe
+  - field: process.command_line
+    must_match: (?i)(process\s+call\s+create|/node:|node=)
+  min_events: 1
+  confidence: high
+  note: wmic.exe'nin calismasi tek basina kanit degil; envanter sorgusu da wmic kullanir. Uzak dugum (/node:) ya
+    da process call create sart.
+- technique_id: T1218.010
+  tactic: TA0005
+  name: Regsvr32
+  required:
+    event_ids:
+    - 4688
+    - 1
+  field_conditions:
+  - field: process.name
+    must_match: (?i)(?:^|\\)regsvr32\.exe
+  - field: process.command_line
+    must_match: (?i)(/i:|scrobj\.dll|https?://|\\\\)
+  min_events: 1
+  confidence: high
+  note: Squiblydoo deseni -- uzak scriptlet ya da scrobj.dll ile proxy calistirma.
+- technique_id: T1218.011
+  tactic: TA0005
+  name: Rundll32
+  required:
+    event_ids:
+    - 4688
+    - 1
+  field_conditions:
+  - field: process.name
+    must_match: (?i)(?:^|\\)rundll32\.exe
+  - field: process.command_line
+    must_match: (?i)(javascript:|\.dll\s*,\s*\w+|url\.dll|shell32\.dll\s*,\s*shellexec)
+  min_events: 1
+  confidence: high
+- technique_id: T1204.002
+  tactic: TA0002
+  name: Malicious File
+  required:
+    event_ids:
+    - 4688
+    - 1
+  field_conditions:
+  - field: parent.process.name
+    must_match: (?i)(winword|excel|powerpnt|outlook)\.exe
+  - field: process.name
+    must_match: (?i)(?:^|\\)(cmd|powershell|wscript|cscript|mshta|regsvr32|rundll32)\.exe
+  min_events: 1
+  confidence: high
+  note: Office uygulamasinin komut yorumlayicisi baslatmasi. Ana surec-alt surec iliskisi tek satirda gorunmuyorsa
+    bu kural tetiklenmez.
+- technique_id: T1566.001
+  tactic: TA0001
+  name: Spearphishing Attachment
+  required:
+    event_ids:
+    - 4688
+    - 1
+  field_conditions:
+  - field: parent.process.name
+    must_match: (?i)outlook\.exe
+  - field: process.name
+    must_match: (?i)(?:^|\\)(cmd|powershell|wscript|cscript|mshta)\.exe
+  min_events: 1
+  confidence: medium
+- technique_id: T1547.001
+  tactic: TA0003
+  name: Registry Run Keys / Startup Folder
+  required:
+    event_ids:
+    - 4657
+    - 12
+    - 13
+    - 11
+  field_conditions:
+  - any_of:
+    - field: object.name
+      must_match: (?i)(\\CurrentVersion\\Run|\\CurrentVersion\\RunOnce|\\Start Menu\\Programs\\Startup)
+    - field: file.name
+      must_match: (?i)(\\CurrentVersion\\Run|\\CurrentVersion\\RunOnce|\\Start Menu\\Programs\\Startup)
+  min_events: 1
+  confidence: high
+  note: 'K1d: desen Baslangic klasoru varyantini zaten taniyordu ama olay listesi ve alan yalnizca registry''di.
+    Baslangic klasorune dosya birakmak bir DOSYA OLUSTURMA olayidir (Sysmon 11, TargetFilename -> file.name).'
+- technique_id: T1543.003
+  tactic: TA0003
+  name: Windows Service
+  required:
+    event_ids:
+    - 4657
+    - 13
+  field_conditions:
+  - field: object.name
+    must_match: (?i)\\Services\\[^\\]+\\ImagePath
+  min_events: 1
+  confidence: high
+  note: 'K1a (D1): hizmetin ImagePath degerinin registry uzerinden degistirilmesi -- T1543.003''un IKINCI kurali
+    (ilki 7045/4697 hizmet kurulumu). Eskiden T1543.001 altindaydi; 19.2''de T1543.001 = Launch Agent (macOS).'
+- technique_id: T1136.001
+  tactic: TA0003
+  name: Local Account
+  required:
+    event_ids:
+    - 4720
+  min_events: 1
+  confidence: high
+- technique_id: T1098
+  tactic: TA0003
+  name: Account Manipulation
+  required:
+    event_ids:
+    - 4728
+    - 4732
+    - 4756
+    - 4738
+  min_events: 1
+  confidence: high
+  note: Ayricalikli gruba uye ekleme ya da hesap ozelliklerinin degistirilmesi.
+- technique_id: T1505.003
+  tactic: TA0003
+  name: Web Shell
+  required:
+    event_ids:
+    - 11
+    - 4663
+  field_conditions:
+  - any_of:
+    - field: file.name
+      must_match: (?i)\\(inetpub\\wwwroot|wwwroot|htdocs)\\
+    - field: file.path
+      must_match: (?i)\\(inetpub\\wwwroot|wwwroot|htdocs)\\
+    - field: process.command_line
+      must_match: (?i)\\(inetpub\\wwwroot|wwwroot|htdocs)\\
+  - field: file.name
+    must_match: (?i)\.(aspx?|jsp|php)\b
+  min_events: 1
+  confidence: high
+- technique_id: T1055
+  tactic: TA0004
+  name: Process Injection
+  required:
+    event_ids:
+    - 8
+    - 10
+  field_conditions:
+  - field: process.name
+    must_not_match: (?i)(?:^|\\)(MsMpEng|CSFalconService|SentinelAgent|xagt)\.exe
+  min_events: 1
+  confidence: medium
+  note: Sysmon 8 (CreateRemoteThread) ve 10 (ProcessAccess) enjeksiyonun temel telemetrisi; EDR urunleri de ayni
+    olaylari uretir, o yuzden disariniyorlar.
+- technique_id: T1055.001
+  tactic: TA0004
+  name: Dynamic-link Library Injection
+  required:
+    event_ids:
+    - 8
+    - 7
+  field_conditions:
+  - field: file.name
+    must_match: (?i)\.dll\b
+  - any_of:
+    - field: file.name
+      must_match: (?i)(\\users\\|\\temp\\|\\programdata\\|\\appdata\\)
+    - field: file.path
+      must_match: (?i)(\\users\\|\\temp\\|\\programdata\\|\\appdata\\)
+    - field: process.command_line
+      must_match: (?i)(\\users\\|\\temp\\|\\programdata\\|\\appdata\\)
+  min_events: 1
+  confidence: high
+  note: Kullanicinin yazabildigi bir dizinden DLL yuklenmesi.
+- technique_id: T1055.012
+  tactic: TA0004
+  name: Process Hollowing
+  required:
+    event_ids:
+    - 8
+  field_conditions:
+  - field: Message
+    must_match: (?i)(NtUnmapViewOfSection|SetThreadContext|WriteProcessMemory)
+    tasinmadi: KANITSIZ
+    not: 'hedef alan semada yok, gercek log ornegi bekleniyor (aday: api.call)'
+  min_events: 1
+  confidence: high
+- technique_id: T1003.002
+  tactic: TA0006
+  name: Security Account Manager
+  required:
+    event_ids:
+    - 4688
+    - 4656
+    - 4663
+    - 1
+  field_conditions:
+  - any_of:
+    - field: process.command_line
+      must_match: reg\s+save\s+hklm\\sam
+    - field: object.name
+      must_match: (\\config\\SAM\b|HKLM\\SAM)
+    - field: process.command_line
+      must_match: (\\config\\SAM\b|HKLM\\SAM)
+  min_events: 1
+  confidence: high
+- technique_id: T1110.001
+  tactic: TA0006
+  name: Password Guessing
+  required:
+    event_ids:
+    - 4625
+  min_events: 5
+  confidence: medium
+  note: Tek bir basarisiz oturum acma normaldir. min_events=5 ile ancak tekrarlayan basarisizlik kaba kuvvet sayilir.
+- technique_id: T1558.003
+  tactic: TA0006
+  name: Kerberoasting
+  required:
+    event_ids:
+    - 4769
+  field_conditions:
+  - field: Message
+    must_match: (?i)(0x17|rc4[-_ ]?hmac)
+    tasinmadi: KANITSIZ
+    not: 'hedef alan semada yok, gercek log ornegi bekleniyor (aday: ticket.encryption_type)'
+  min_events: 1
+  confidence: high
+  note: RC4 sifreleme talebi (etype 0x17) kerberoasting'in klasik izidir.
+- technique_id: T1550.002
+  tactic: TA0008
+  name: Pass the Hash
+  required:
+    event_ids:
+    - 4624
+  field_conditions:
+  - field: logon.type
+    must_match: (?i)logon type:\s*3
+  - field: Message
+    must_match: (?i)(NtLmSsp|NTLM)
+    tasinmadi: KANITSIZ
+    not: 'hedef alan semada yok, gercek log ornegi bekleniyor (aday: auth.package)'
+  min_events: 1
+  confidence: medium
+- technique_id: T1021.001
+  tactic: TA0008
+  name: Remote Desktop Protocol
+  required:
+    event_ids:
+    - 4624
+    - 4778
+  field_conditions:
+  - field: logon.type
+    must_match: (?i)logon type:\s*10
+  min_events: 1
+  confidence: medium
+- technique_id: T1685.005
+  tactic: TA0112
+  name: Clear Windows Event Logs
+  required:
+    event_ids:
+    - 1102
+    - 104
+    - 4688
+    - 1
+  field_conditions:
+  - any_of:
+    - field: Message
+      must_match: (audit log was cleared|log file was cleared)
+    - field: process.command_line
+      must_match: (wevtutil\s+cl\b|clear-eventlog)
+  min_events: 1
+  confidence: high
+- technique_id: T1070.003
+  tactic: TA0112
+  name: Clear Command History
+  required:
+    event_ids:
+    - 4688
+    - 4104
+    - 1
+  field_conditions:
+  - field: process.command_line
+    must_match: (?i)(clear-history|remove-item.*consolehost_history|set-psreadlineoption\s+-historysavestyle\s+savenothing)
+  min_events: 1
+  confidence: high
+- technique_id: T1564.003
+  tactic: TA0005
+  name: Hidden Window
+  required:
+    event_ids:
+    - 4688
+    - 4104
+    - 400
+    - 1
+  field_conditions:
+  - field: process.command_line
+    must_match: (?i)-w(indowstyle)?\s+hidden
+  min_events: 1
+  confidence: medium
+- technique_id: T1140
+  tactic: TA0005
+  name: Deobfuscate/Decode Files or Information
+  required:
+    event_ids:
+    - 4688
+    - 1
+  field_conditions:
+  - field: process.command_line
+    must_match: (?i)certutil.*-decode
+  min_events: 1
+  confidence: high
+- technique_id: T1620
+  tactic: TA0005
+  name: Reflective Code Loading
+  required:
+    event_ids:
+    - 4104
+  field_conditions:
+  - field: script.block_text
+    must_match: (?i)(\[reflection\.assembly\]::load|system\.reflection\.assembly)
+  min_events: 1
+  confidence: high
+- technique_id: T1105
+  tactic: TA0011
+  name: Ingress Tool Transfer
+  required:
+    event_ids:
+    - 4688
+    - 1
+  field_conditions:
+  - any_of:
+    - field: process.name
+      must_match: (curl\.exe|wget\.exe)
+    - field: process.command_line
+      must_match: (certutil.*-urlcache|bitsadmin.*/transfer|invoke-webrequest|downloadfile)
+  min_events: 1
+  confidence: high
+- technique_id: T1071.001
+  tactic: TA0011
+  name: Web Protocols
+  required:
+    event_ids:
+    - 3
+    - 5156
+  field_conditions:
+  - field: destination.port
+    must_match: (?i)destination port:\s*(80|443|8080|8443)\b
+  - any_of:
+    - field: file.name
+      must_match: (?i)\\(users|programdata|temp|appdata)\\
+    - field: file.path
+      must_match: (?i)\\(users|programdata|temp|appdata)\\
+    - field: process.command_line
+      must_match: (?i)\\(users|programdata|temp|appdata)\\
+  min_events: 1
+  confidence: medium
+  note: Standart web portuna baglanti tek basina kanit DEGILDIR -- her tarayici bunu yapar. Ancak baglantiyi kuran
+    ikili kullanicinin yazabildigi bir dizindeyse anlamli hale gelir.
+- technique_id: T1071.004
+  tactic: TA0011
+  name: DNS
+  required:
+    event_ids:
+    - 22
+  field_conditions:
+  - field: Message
+    must_match: (?i)query name:\s*\S{40,}
+    tasinmadi: KANITSIZ
+    not: 'hedef alan semada yok, gercek log ornegi bekleniyor (aday: dns.question.name)'
+  min_events: 1
+  confidence: medium
+  note: Alisilmadik uzunlukta DNS sorgusu -- DNS tunelleme izi.
+- technique_id: T1560
+  tactic: TA0009
+  name: Archive Collected Data
+  required:
+    event_ids:
+    - 4688
+    - 1
+  field_conditions:
+  - field: process.name
+    must_match: (?i)(?:^|\\)(rar|7z|7za|winrar|tar)\.exe
+  - field: process.command_line
+    must_match: (?i)(\s-hp|\s-p\S|\sa\s+-|compress-archive)
+  min_events: 1
+  confidence: high
+  note: Parola korumali ya da acik arsivleme komutu -- yalnizca arac adi yeterli degil.
+- technique_id: T1074
+  tactic: TA0009
+  name: Data Staged
+  required:
+    event_ids:
+    - 11
+    - 4663
+  field_conditions:
+  - any_of:
+    - field: file.name
+      must_match: (?i)\\(users\\public|programdata|windows\\temp)\\
+    - field: file.path
+      must_match: (?i)\\(users\\public|programdata|windows\\temp)\\
+    - field: process.command_line
+      must_match: (?i)\\(users\\public|programdata|windows\\temp)\\
+    - field: object.name
+      must_match: (?i)\\(users\\public|programdata|windows\\temp)\\
+  - any_of:
+    - field: file.name
+      must_match: (?i)\.(zip|rar|7z|cab|tar|gz)\b
+    - field: object.name
+      must_match: (?i)\.(zip|rar|7z|cab|tar|gz)\b
+  min_events: 1
+  confidence: medium
+  note: 'K1d (D3): 4663 eklendi AMA object.name koluyla birlikte -- 4663''un anlamli alanlarinda file.name yok
+    (config/event_semantics.yaml); kolsuz eklenen olay hic saglanamayacak bir kosul uretirdi.'
+- technique_id: T1490
+  tactic: TA0040
+  name: Inhibit System Recovery
+  required:
+    event_ids:
+    - 4688
+    - 1
+  field_conditions:
+  - field: process.command_line
+    must_match: (?i)(vssadmin.*delete\s+shadows|wbadmin.*delete|bcdedit.*recoveryenabled\s+no|bcdedit.*bootstatuspolicy\s+ignoreallfailures)
+  min_events: 1
+  confidence: high
+- technique_id: T1486
+  tactic: TA0040
+  name: Data Encrypted for Impact
+  required:
+    event_ids:
+    - 4688
+    - 1
+  field_conditions:
+  - any_of:
+    - field: process.command_line
+      must_match: (cipher\s+/w|bcdedit.*safeboot)
+    - field: file.name
+      must_match: \.(locked|encrypted|crypt)\b
+  min_events: 1
+  confidence: medium
+- technique_id: T1489
+  tactic: TA0040
+  name: Service Stop
+  required:
+    event_ids:
+    - 4688
+    - 7040
+    - 1
+  field_conditions:
+  - field: process.command_line
+    must_match: (?i)(net\s+stop\s|sc\s+(stop|config).*disabled|stop-service)
+  min_events: 1
+  confidence: medium
+- technique_id: T1686
+  tactic: TA0112
+  name: Disable or Modify System Firewall
+  required:
+    event_ids:
+    - 4688
+    - 1
+  field_conditions:
+  - field: process.command_line
+    must_match: (?i)netsh.*(advfirewall|firewall).*(off|disable)
+  min_events: 1
+  confidence: high
+  note: 'K1a: bu kural T1685.005 ID''si altinda duruyordu; 19.2''de T1685.005 = Clear Windows Event Logs. Ad alani
+    her zaman guvenlik duvarini soyluyordu, ID''si yanlisti.'
+- technique_id: T1686
+  tactic: TA0112
+  name: Disable or Modify System Firewall
+  required:
+    event_ids:
+    - 4946
+    - 4947
+    - 4948
+    - 4949
+    - 4950
+    - 4954
+    - 5025
+  forbidden:
+    event_ids:
+    - 5156
+    - 5158
+  field_conditions:
+  - field: Message
+    must_match: (?i)(rule (was )?(added|deleted|modified|changed)|setting.{0,30}changed|exception list|was restored
+      to the default|service.{0,20}stopped)
+    tasinmadi: S
+    not: olay anlambilimi -- config/event_semantics.yaml'a tasinacak
+  min_events: 1
+  confidence: high
+  note: 'K1a'' (D4 c): T1686''nin guvenlik duvari YAPILANDIRMA olaylari. Olay kumesi, yasak liste ve desen
+    T1686.003 kuralinin BIREBIR aynisi -- ust teknik alt teknigiyle ayni kanitla onaylanir. 4951-4953 (kural
+    yok sayildi / ayristirilamadi) bilerek YOK: yapilandirma degisikligi degiller.'
+review_findings:
+- id: powershell_hidden_bypass
+  title: Gizli pencerede ExecutionPolicy Bypass ile çalıştırılan PowerShell betiği
+  field_conditions:
+  - field: Message
+    must_match: (?i)executionpolicy\s+bypass
+  - field: Message
+    must_match: (?i)windowstyle\s+hidden
+  min_events: 1
+  note: Bu kombinasyon meşru yönetim betiklerinde de görülür; tek başına saldırı kanıtı değildir. Betiğin kaynağı
+    ve imzası doğrulanmalı.
+- id: binary_in_user_writable_path
+  title: Kullanıcının yazabildiği dizinden ağ bağlantısı kuran ikili dosya
+  field_conditions:
+  - field: Message
+    must_match: (?i)\\users\\public\\[^\\\s]+\.exe
+  min_events: 1
+  note: C:\Users\Public standart kurulum dizini değildir ve her kullanıcı yazabilir; kötü amaçlı yazılımın klasik
+    hazırlık konumudur. İkilinin imzası ve kaynağı doğrulanmalı.

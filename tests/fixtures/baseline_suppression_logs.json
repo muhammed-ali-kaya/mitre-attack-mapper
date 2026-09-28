@@ -1,0 +1,64 @@
+{
+  "_aciklama": "Gorev 5 -- aktor baseline'in Yol B (kritiklik+erisim) uzerindeki BASTIRICI rolunu sabitleyen fixture cifti. Beklenti: docs/beklenti_5_karar_katmani.md bolum 5.",
+  "_neden_ayri_dosya": "registry_object_access_logs.json'daki dort log VERILEN teshis probudur; o dosya kendi basliginda bunu iddia ediyor. Buradaki iki log SENTETIKTIR -- bir kararin sinirini sinamak icin elle kuruldular. Ikisini ayni dosyaya koymak, verilen veri ile kurulan veri arasindaki farki silerdi.",
+  "_neden_CIFT": "Tek fixture bu karari sabitleyemez. Karar 'aktore gore' degil '(varlik ailesi, aktor) CIFTINE gore'. T4 ve T5'in aktoru BIREBIR AYNI; yalnizca varlik ailesi farkli. Siniflari farkli cikiyorsa kural cifte bakiyordur, ayni cikiyorsa aktore bakiyordur ve kural uygulanmamistir.",
+  "attack_version": "19.1",
+  "format": "brace_comma_kv",
+  "_olculen_durum_2026_08_19": {
+    "aciklama": "Kod yazilmadan ONCE olculdu. scripts/measure_baseline_inputs.py ile tekrarlanabilir.",
+    "T4": {
+      "kritiklik": "high",
+      "aile": "service",
+      "erisim": "write",
+      "benign_strong_MEVCUT_KATMAN": true
+    },
+    "T5": {
+      "kritiklik": "high",
+      "aile": "defender-policy",
+      "erisim": "write",
+      "benign_strong_MEVCUT_KATMAN": true
+    },
+    "BULGU": "Mevcut detect_benign_signals ikisine de ayni 'strong' sinyalini veriyor -- ayirt edemiyor. Bastirma aktore bakarak yapilirsa T5 de bastirilir ve Defender'in kapatilmasi meşru ilan edilir.",
+    "SPOOF_OLCUMU": "T3 alinip aktor OLMAYAN bir alana 'trustedinstaller.exe' dizesi konunca benign_strong False -> True oluyor, process.name hala powershell.exe. Bu yuzden baseline yapisal alandan okunacak, ham metinden degil."
+  },
+  "logs": [
+    {
+      "id": "T4",
+      "baslik": "mesru yazilim kurulumu -- BEKLENEN cift",
+      "raw": "{Process Path=C:\\Windows\\servicing\\TrustedInstaller.exe, User Domain=NT AUTHORITY, Event ID=4657, Process Name=C:\\Windows\\servicing\\TrustedInstaller.exe, User Workstation=SRV-APP02, Account Name=SYSTEM, Object Type=Key, Object Name=\\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Services\\AcmeAgent, Object Value Name=ImagePath, Operation Type=New registry value created, New Value Type=REG_EXPAND_SZ, New Value=C:\\Program Files\\Acme\\agent.exe, Handle ID=0x4a10, Process ID=0x9c4, Logon ID=0x3e7}",
+      "expected_criticality": "high",
+      "expected_criticality_family": "service",
+      "expected_access_class": "write",
+      "expected_actor": {
+        "account.name": "SYSTEM",
+        "process.name": "C:\\Windows\\servicing\\TrustedInstaller.exe"
+      },
+      "expected_decision": "SUFFICIENT_BENIGN",
+      "expected_techniques": [],
+      "expected_suppressed_path": "B",
+      "expected_suppression_rule_reported": true,
+      "_gerekce_zinciri": "Yol A bos -- dogrulanmis teknik yok. Yol B tetikleniyor (high + write) ama (service, TrustedInstaller) cifti BEKLENEN listede. Bu bir YOKLUK degil ESLESME; SUFFICIENT_BENIGN'in pozitif iddia olma sarti bu sekilde karsilaniyor.",
+      "_neden_bu_yol": "HKLM\\SYSTEM\\CurrentControlSet\\Services Gorev 4 tablosunda 'high'. Yeni bir servis kaydi olusturmak yazilim kurulumunun NORMAL adimidir ve isletim sistemi tasarimi geregi TrustedInstaller'in isidir. Bastirici konmazsa her kurulum alarm uretir -- kullanicinin isaret ettigi yanlis alarm fabrikasi tam olarak budur.",
+      "not": "Cikti SUFFICIENT_BENIGN ise ve eslesen beklenti kurali adiyla raporlanmiyorsa test GECMEZ. Sessiz bastirma, bastirmanin en tehlikeli bicimidir."
+    },
+    {
+      "id": "T5",
+      "baslik": "ayni aktor, Defender politikasi -- BEKLENMEYEN cift",
+      "raw": "{Process Path=C:\\Windows\\servicing\\TrustedInstaller.exe, User Domain=NT AUTHORITY, Event ID=4657, Process Name=C:\\Windows\\servicing\\TrustedInstaller.exe, User Workstation=SRV-APP02, Account Name=SYSTEM, Object Type=Key, Object Name=\\REGISTRY\\MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows Defender, Object Value Name=DisableAntiSpyware, Operation Type=Existing registry value modified, Old Value Type=REG_DWORD, Old Value=0, New Value Type=REG_DWORD, New Value=1, Handle ID=0x4a11, Process ID=0x9c4, Logon ID=0x3e7}",
+      "expected_criticality": "high",
+      "expected_criticality_family": "defender-policy",
+      "expected_access_class": "write",
+      "expected_actor": {
+        "account.name": "SYSTEM",
+        "process.name": "C:\\Windows\\servicing\\TrustedInstaller.exe"
+      },
+      "expected_decision": "SUFFICIENT_SUSPICIOUS",
+      "expected_techniques": [],
+      "expected_suppressed_path": null,
+      "_gerekce_zinciri": "Aktor T4 ile BIREBIR AYNI. (defender-policy, TrustedInstaller) cifti beklenen listede YOK -- bastirma yok, Yol B'nin sinifi ayakta kalir.",
+      "_neden_kritik": "SYSTEM ve TrustedInstaller ayricalik yukseltmenin VARIS NOKTASIDIR, muafiyet listesi degil. Aktor bazli bastirma tam burada kor nokta uretir. Bu fixture'in cevabi SUFFICIENT_BENIGN cikarsa, bastirma aktore kaymis demektir.",
+      "not": "expected_techniques BOS -- T1685 su an retrieval'da bulunamiyor (2A'nin isi, bkz. HANDOFF). Bu fixture'in olctugu sey teknik degil, KARARIN teknik setinden bagimsizligi. T3 ile ayni rol."
+    }
+  ],
+  "_neden_TAM_YOL": "Gorev 17: bu fixture 'Process Name' alanina TABAN AD yaziyordu ve yesildi -- ama olctugu bicim uretimde neredeyse hic yok. Olculdu (docs/sonuc_17_ek2_bastirma_bicimi.md): fixture 0 tam yol / 2 taban ad, gercek ve olcum korpuslari 77 tam yol / 4 taban ad. TAM TERSI dagilim. Gercek Windows 4657 govdesi tek alan tasir ve ici tam yoldur; bu fixture'in ayrica bir 'Process Path' alani tasimasi da o el yapiminin izidir. Alan artik gercek bicimi tasiyor. Yontem maddesi 17: bir fixture'in bicimi, temsil ettigi iddia edilen korpusta SAYILMALIDIR; sayi sifirsa fixture bir sozlesme degil bir temennidir."
+}

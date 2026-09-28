@@ -1,0 +1,282 @@
+# Varlık kritikliği tablosu (Görev 4)
+#
+# NE İŞE YARAR: bir registry yolunun ne kadar kritik olduğunu söyler.
+# Görev 5'in karar fonksiyonunun girdisidir: \REGISTRY\MACHINE\SAM kritik,
+# Time Zones gürültü -- bu ayrım olmadan karar yazılamaz.
+#
+# KOD TABLOYU OKUR, tabloyu İÇERMEZ. Tablo büyüdüğünde kod değişmez.
+#
+# LEHÇE BAĞIMSIZ: eşleştirme öncesi path_normalizer çalışır, yani
+# HKLM\SAM · HKEY_LOCAL_MACHINE\SAM · \REGISTRY\MACHINE\SAM aynı sonucu
+# verir. Bu 2B'de motora bağlandı; burada YENİDEN YAZILMADI.
+#
+# SEVİYELER
+#   critical  kimlik bilgisi deposu / doğrudan yetki yükseltme
+#   high      persistence ya da güvenlik kontrolünü devre dışı bırakma
+#   medium    yapılandırma; bağlamı olmadan karar verilemez
+#   noise     ölçülmüş gürültü
+#   (eşleşmeyen) -> unknown. `noise` DEĞİL. Bilinmeyeni zararsız saymak,
+#   tablonun kapsamadığı her saldırıyı görünmez yapar. Görev 5'e bağlayıcı:
+#   unknown tek başına SUFFICIENT_BENIGN üretemez.
+#
+# HER SATIR KAYNAĞINI BEYAN EDER. Kaynağı "fixture'da vardı" olan satır
+# kabul edilmez -- \REGISTRY\MACHINE\SAM tabloda çünkü SAM bir credential
+# deposu, T1'de geçtiği için değil.
+#
+# KAYNAK KODLARI
+#   attack     ATT&CK teknik metinlerinde geçiyor (291 yolun içinde)
+#   persist    kamuya açık Windows persistence konumu (autoruns ailesi)
+#   cred       kamuya açık Windows credential deposu
+#   defense    güvenlik kontrolü yapılandırması
+#   measured   bu projede gürültü olduğu ÖLÇÜLDÜ
+
+version: 1
+
+# Eşleşme, yol NORMALİZE edildikten sonra segment sınırında ÖNEK/İÇERME
+# olarak yapılır. En UZUN eşleşen desen kazanır: Services\... genel olarak
+# high, ama Services\EventLog daha spesifik olduğu için o kazanır.
+desenler:
+
+  # ------------------------------------------------------------- critical
+  # Kimlik bilgisi depoları. Bu hive'lara erişim, kimlik bilgisi
+  # çıkarımının ön koşuludur (T1003.002/.004/.005).
+  - {desen: 'HKLM\SAM',                        seviye: critical, aile: credential-hive,  kaynak: [cred, attack]}
+  - {desen: 'HKLM\SECURITY',                   seviye: critical, aile: credential-hive,  kaynak: [cred, attack]}
+  - {desen: 'HKLM\SECURITY\Policy\Secrets',    seviye: critical, aile: lsa-secrets,      kaynak: [cred, attack]}
+  - {desen: 'HKLM\SYSTEM\CurrentControlSet\Control\Lsa', seviye: critical, aile: lsa-config, kaynak: [cred, attack]}
+  - {desen: 'HKLM\SYSTEM\CurrentControlSet\Control\Lsa\Security Packages', seviye: critical, aile: lsa-provider, kaynak: [persist, attack]}
+  - {desen: 'HKLM\SYSTEM\CurrentControlSet\Control\Lsa\OSConfig\Security Packages', seviye: critical, aile: lsa-provider, kaynak: [persist, attack]}
+  - {desen: 'HKCU\Software\Microsoft\Terminal Server Client\Servers', seviye: critical, aile: saved-credentials, kaynak: [cred, attack]}
+  - {desen: 'HKCU\Software\Microsoft\Terminal Server Client\Default',  seviye: critical, aile: saved-credentials, kaynak: [cred, attack]}
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\DefaultPassword', seviye: critical, aile: autologon-password, kaynak: [cred]}
+  - {desen: 'HKCU\Software\SimonTatham\PuTTY\Sessions', seviye: critical, aile: saved-credentials, kaynak: [cred, attack]}
+
+  # ----------------------------------------------------------------- high
+  # PERSISTENCE -- otomatik çalıştırma noktaları
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run',            seviye: high, aile: autorun-run, kaynak: [persist, attack]}
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce',        seviye: high, aile: autorun-run, kaynak: [persist, attack]}
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnceEx',      seviye: high, aile: autorun-run, kaynak: [persist]}
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunServices',    seviye: high, aile: autorun-run, kaynak: [persist, attack]}
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunServicesOnce', seviye: high, aile: autorun-run, kaynak: [persist, attack]}
+  - {desen: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Run',            seviye: high, aile: autorun-run, kaynak: [persist, attack]}
+  - {desen: 'HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnce',        seviye: high, aile: autorun-run, kaynak: [persist, attack]}
+  - {desen: 'HKCU\Software\Microsoft\Windows\CurrentVersion\RunServices',    seviye: high, aile: autorun-run, kaynak: [persist, attack]}
+  - {desen: 'HKCU\Software\Microsoft\Windows\CurrentVersion\RunServicesOnce', seviye: high, aile: autorun-run, kaynak: [persist, attack]}
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run', seviye: high, aile: autorun-policy, kaynak: [persist]}
+
+  # PERSISTENCE -- oturum açma zinciri
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon',        seviye: high, aile: winlogon, kaynak: [persist, attack]}
+  - {desen: 'HKCU\Software\Microsoft\Windows NT\CurrentVersion\Winlogon',        seviye: high, aile: winlogon, kaynak: [persist, attack]}
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify', seviye: high, aile: winlogon, kaynak: [persist, attack]}
+  - {desen: 'HKCU\Software\Microsoft\Windows NT\CurrentVersion\Windows\Load',    seviye: high, aile: winlogon, kaynak: [persist, attack]}
+  - {desen: 'HKCU\Software\Microsoft\Windows NT\CurrentVersion\Windows\Run',     seviye: high, aile: winlogon, kaynak: [persist, attack]}
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders', seviye: high, aile: startup-folder, kaynak: [persist, attack]}
+  - {desen: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders', seviye: high, aile: startup-folder, kaynak: [persist, attack]}
+  - {desen: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders', seviye: high, aile: startup-folder, kaynak: [persist]}
+
+  # PERSISTENCE -- DLL yükleme yolları
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows\AppInit_DLLs', seviye: high, aile: appinit-dll, kaynak: [persist, attack]}
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options', seviye: high, aile: ifeo, kaynak: [persist, attack]}
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCertDlls', seviye: high, aile: appcert-dll, kaynak: [persist, attack]}
+  - {desen: 'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\BootExecute', seviye: high, aile: boot-execute, kaynak: [persist, attack]}
+  - {desen: 'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\AppCertDlls', seviye: high, aile: appcert-dll, kaynak: [persist]}
+  - {desen: 'HKLM\SYSTEM\CurrentControlSet\Services\WinSock2\Parameters', seviye: high, aile: winsock-provider, kaynak: [persist, attack]}
+  - {desen: 'HKLM\SYSTEM\CurrentControlSet\Control\Print\Monitors',   seviye: high, aile: print-provider, kaynak: [persist, attack]}
+  - {desen: 'HKLM\SYSTEM\CurrentControlSet\Control\Print\Environments', seviye: high, aile: print-provider, kaynak: [persist]}
+  - {desen: 'HKLM\SYSTEM\CurrentControlSet\Control\TimeProviders',    seviye: high, aile: time-provider, kaynak: [persist, attack]}
+  - {desen: 'HKLM\SYSTEM\CurrentControlSet\Control\NetworkProvider\Order', seviye: high, aile: network-provider, kaynak: [persist]}
+
+  # PERSISTENCE -- servisler ve COM
+  - {desen: 'HKLM\SYSTEM\CurrentControlSet\Services',        seviye: high, aile: service, kaynak: [persist, attack]}
+  - {desen: 'HKCU\Software\Classes\CLSID',                   seviye: high, aile: com-hijack, kaynak: [persist, attack]}
+  - {desen: 'HKCU\Software\Classes\mscfile\shell\open\command', seviye: high, aile: com-hijack, kaynak: [persist, attack]}
+  - {desen: 'HKCU\Software\Classes\Folder\shell\open\command', seviye: high, aile: com-hijack, kaynak: [persist, attack]}
+  - {desen: 'HKCU\Software\Classes\ms-settings\shell\open\command', seviye: high, aile: uac-bypass, kaynak: [persist, attack]}
+  - {desen: 'HKCU\Software\Classes\exefile\shell\open\command', seviye: high, aile: com-hijack, kaynak: [persist]}
+  - {desen: 'HKCU\Environment\COR_PROFILER',                 seviye: high, aile: cor-profiler, kaynak: [persist, attack]}
+  - {desen: 'HKCU\Environment\UserInitMprLogonScript',       seviye: high, aile: logon-script, kaynak: [persist, attack]}
+  - {desen: 'HKCU\Control Panel\Desktop\SCRNSAVE.EXE',       seviye: high, aile: screensaver, kaynak: [persist, attack]}
+
+  # GÜVENLİK KONTROLÜNÜ DEVRE DIŞI BIRAKMA
+  - {desen: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender', seviye: high, aile: defender-policy, kaynak: [defense, attack]}
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Windows Defender',          seviye: high, aile: defender-policy, kaynak: [defense]}
+  - {desen: 'HKLM\SYSTEM\CurrentControlSet\Services\EventLog',   seviye: high, aile: eventlog-config, kaynak: [defense, attack]}
+  - {desen: 'HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy', seviye: high, aile: firewall-policy, kaynak: [defense]}
+  - {desen: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate', seviye: high, aile: update-policy, kaynak: [defense]}
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', seviye: high, aile: uac-policy, kaynak: [defense, attack]}
+  - {desen: 'HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot',    seviye: high, aile: safeboot, kaynak: [defense, attack]}
+  - {desen: 'HKLM\SYSTEM\CurrentControlSet\Control\WMI\Security', seviye: high, aile: wmi-security, kaynak: [defense, attack]}
+
+  # PERSISTENCE -- kapsama olcumunun ortaya cikardigi aileler
+  # (ATT&CK'te geciyorlardi ve tablo onlari kacirmisti; unknown listesi
+  #  tablonun nereye buyumesi gerektigini soyleyen sey oldu)
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Active Setup\Installed Components', seviye: high, aile: active-setup, kaynak: [persist, attack]}
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SilentProcessExit', seviye: high, aile: silent-process-exit, kaynak: [persist, attack]}
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SvcHost', seviye: high, aile: svchost-group, kaynak: [persist, attack]}
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows\LoadAppInit_DLLs', seviye: high, aile: appinit-dll, kaynak: [persist, attack]}
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths', seviye: high, aile: app-paths, kaynak: [persist, attack]}
+  - {desen: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Control Panel\Cpls', seviye: high, aile: control-panel-cpl, kaynak: [persist, attack]}
+  - {desen: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run', seviye: high, aile: autorun-policy, kaynak: [persist, attack]}
+  - {desen: 'HKCR\CLSID',                                    seviye: high, aile: com-hijack, kaynak: [persist, attack]}
+  - {desen: 'HKCR\http\shell\open\command',                  seviye: high, aile: protocol-handler, kaynak: [persist, attack]}
+  - {desen: 'HKCU\Software\Policies\Google\Chrome\ExtensionInstallForcelist', seviye: high, aile: browser-extension, kaynak: [persist, attack]}
+  - {desen: 'HKCU\Software\Microsoft\Office test\Special\Perf', seviye: high, aile: office-persistence, kaynak: [persist, attack]}
+  - {desen: 'HKCU\Software\Microsoft\Office\16.0\Outlook\Profiles', seviye: high, aile: office-persistence, kaynak: [persist, attack]}
+
+  # GUVENLIK KONTROLU -- olcumden gelen ek aileler
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\LocalAccountTokenFilterPolicy', seviye: high, aile: token-filter-policy, kaynak: [defense, attack]}
+  - {desen: 'HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger', seviye: high, aile: eventlog-config, kaynak: [defense, attack]}
+  - {desen: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap', seviye: high, aile: zone-policy, kaynak: [defense, attack]}
+
+  # PERSISTENCE -- kalan 93'un baglamina bakilarak eklenenler
+  # "Gurultu adayi" diye hizli gecilmedi: payda ATT&CK'ten geldigi icin
+  # her yol BIR TEKNIKTE geciyor, soru hangi baglamda gectigiydi.
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Netsh',                seviye: high, aile: netsh-helper, kaynak: [persist, attack]}   # T1546.007
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Custom', seviye: high, aile: app-shim, kaynak: [persist, attack]}      # T1546.011
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\InstalledSDB', seviye: high, aile: app-shim, kaynak: [persist, attack]}
+  - {desen: 'HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest', seviye: high, aile: wdigest, kaynak: [cred, attack]}                   # duz metin parola
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows', seviye: high, aile: appinit-dll, kaynak: [persist, attack]}                  # T1546.010 ust dugum
+  - {desen: 'HKCU\Control Panel\Desktop',                   seviye: high, aile: screensaver, kaynak: [persist, attack]}    # T1546.002 ust dugum
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Print\Components',     seviye: high, aile: fileless-storage, kaynak: [persist, attack]}  # T1027.011
+  - {desen: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer\AlwaysInstallElevated', seviye: high, aile: installer-elevation, kaynak: [defense, attack]}
+  - {desen: 'HKCU\Software\Policies\Microsoft\Windows\Installer\AlwaysInstallElevated', seviye: high, aile: installer-elevation, kaynak: [defense, attack]}
+  - {desen: 'HKLM\SYSTEM\CurrentControlSet\Control\CrashControl', seviye: high, aile: crashdump-policy, kaynak: [defense, attack]}                    # T1685
+  - {desen: 'HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters', seviye: high, aile: share-config, kaynak: [attack]}
+  - {desen: 'HKCU\Console',                                 seviye: medium, aile: console-config, kaynak: [attack]}         # T1564.003
+  # HKCR dosya turu iliskilendirmesi: T1546.001. Tek tur degil, AILE --
+  # txtfile/http/enc hepsi ayni mekanizma.
+  - {desen: 'HKCR\txtfile\shell',                           seviye: high, aile: file-association-hijack, kaynak: [persist, attack]}
+  - {desen: 'HKCR\enc\shell\open\command',                  seviye: high, aile: file-association-hijack, kaynak: [persist, attack]}
+
+  # SON TUR -- "gurultu adayi" diye hizli gecilmemesi gereken ucu.
+  # Uce de baglamina bakildi ve ucu de TEKNIK TASIYOR:
+  - {desen: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', seviye: high, aile: hidden-files, kaynak: [defense, attack]}
+    # ^ T1564.001. 'Hidden' ve 'ShowSuperHidden' degerleri burada; dosya
+    #   gizleme icin degistirilir. Yapilandirma gibi gorunuyor ama gurultu DEGIL.
+  - {desen: 'HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\Windows', seviye: high, aile: appinit-dll, kaynak: [persist, attack]}
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ICM\Calibration', seviye: high, aile: uac-bypass, kaynak: [defense, attack]}   # T1548.002
+  - {desen: 'HKLM\Software\Microsoft\Office test\Special\Perf', seviye: high, aile: office-persistence, kaynak: [persist, attack]}            # T1137.002
+  # 'Windows NT\CurrentVersion\Run' -- 'Windows\CurrentVersion\Run'un eski
+  # kardesi. Ayri bir yol, ayri satir gerektiriyor.
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Run', seviye: high, aile: autorun-run, kaynak: [persist, attack]}
+  - {desen: 'HKCU\Software\Microsoft\Windows NT\CurrentVersion\Run', seviye: high, aile: autorun-run, kaynak: [persist, attack]}
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Print\Printers', seviye: medium, aile: print-config, kaynak: [attack]}
+
+  # --------------------------------------------------------------- medium
+  # Yapılandırma: değiştirilmesi anlamlı olabilir ama bağlam gerekir.
+  - {desen: 'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager', seviye: medium, aile: session-manager, kaynak: [attack]}
+  - {desen: 'HKCU\Environment',                              seviye: medium, aile: environment, kaynak: [attack]}
+  - {desen: 'HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server', seviye: medium, aile: rdp-config, kaynak: [attack]}
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies', seviye: medium, aile: policy-config, kaynak: [defense]}
+  # Internet Settings NOISE DEGIL: proxy yapilandirmasi burada tutulur ve
+  # C2 yonlendirmesi icin degistirilebilir. Kesif hedefi olmasi (T1012)
+  # onu zararsiz yapmiyor -- varlik olarak yapilandirmadir.
+  - {desen: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings', seviye: medium, aile: proxy-config, kaynak: [attack]}
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings', seviye: medium, aile: proxy-config, kaynak: [attack]}
+  # IE Privacy: gezinme izlerinin tutuldugu yer, T1070 Indicator Removal.
+  - {desen: 'HKCU\Software\Microsoft\Internet Explorer\Privacy', seviye: medium, aile: browser-history, kaynak: [attack]}
+  - {desen: 'HKCU\Software\Microsoft\Internet Explorer',        seviye: medium, aile: browser-config, kaynak: [attack]}
+  - {desen: 'HKLM\SOFTWARE\Classes',                         seviye: medium, aile: file-association, kaynak: [attack]}
+  - {desen: 'HKCU\Software\Classes',                         seviye: medium, aile: file-association, kaynak: [attack]}
+
+  # ---------------------------------------------------------------- noise
+  # Bu projede gürültü olduğu ÖLÇÜLDÜ ya da salt okunur sistem bilgisi.
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones', seviye: noise, aile: time-zone, kaynak: [measured]}
+  - {desen: 'HKCU\Software\Classes\Local Settings\MuiCache', seviye: noise, aile: muicache, kaynak: [measured]}
+  - {desen: 'HKCU\Control Panel\International',              seviye: noise, aile: locale, kaynak: [measured]}
+  - {desen: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs', seviye: noise, aile: recent-docs, kaynak: [measured]}
+  - {desen: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Themes', seviye: noise, aile: theme, kaynak: [measured]}
+  - {desen: 'HKLM\SYSTEM\CurrentControlSet\Services\W32Time', seviye: noise, aile: time-service, kaynak: [measured]}
+
+  # NOISE'IN ATT&CK KAYNAGI -- olcum sirasinda bulundu (2026-08-18)
+  #
+  # "Payda ATT&CK'ten geliyorsa gercekten zararsiz yollar orada zaten
+  # yok mudur?" diye soruldu. Cevap: VAR, ama yalnizca KESIF
+  # tekniklerinde -- T1012 Query Registry, T1082, T1614.001, T1652,
+  # T1497.001. O tekniklerde yol saldirganin YAZDIGI degil OKUDUGU seydir.
+  #
+  # Varligin kendisi hassas degil: MachineGuid bir makine kimligi,
+  # ProcessorNameString bir donanim adi. Bunlari okumak kesiftir ama ayni
+  # anahtarlari normal yazilim da surekli okur -- yani VARLIK olarak
+  # gurultudurler.
+  #
+  # AYRIM GOREV 5'E BIRAKILIYOR: kritiklik VARLIGIN ozelligi, okuma/yazma
+  # ise ERISIM SINIFI -- Gorev 5'in ayri girdisi. Ayni anahtari OKUMAK
+  # kesif, YAZMAK baska sey olabilir; tablo bunu karistirmaz.
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Cryptography\MachineGuid', seviye: noise, aile: machine-identity, kaynak: [attack]}
+  - {desen: 'HKLM\HARDWARE\DESCRIPTION\System',              seviye: noise, aile: hardware-info, kaynak: [attack]}
+  - {desen: 'HKLM\SYSTEM\CurrentControlSet\Control\Nls\Language', seviye: noise, aile: locale, kaynak: [attack]}
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProductName', seviye: noise, aile: os-version, kaynak: [attack]}
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall', seviye: noise, aile: installed-software, kaynak: [attack]}
+  - {desen: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Uninstall', seviye: noise, aile: installed-software, kaynak: [attack]}
+  - {desen: 'HKLM\SOFTWARE\Microsoft\.NETFramework',        seviye: noise, aile: runtime-version, kaynak: [attack]}
+  - {desen: 'HKLM\SOFTWARE\WBEM\WDM',                       seviye: noise, aile: driver-inventory, kaynak: [attack]}
+  - {desen: 'HKCU\SOFTWARE\Microsoft\CTF',                  seviye: noise, aile: input-framework, kaynak: [attack]}
+  - {desen: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders', seviye: high, aile: startup-folder, kaynak: [persist, attack]}
+
+# KAPSAM DIŞI İLAN EDİLEN AİLELER
+# ATT&CK metinlerinde geçen ama tabloya GİRMEYECEK yollar ve gerekçeleri.
+# Bunlar bir AİLE değil, tek bir zararlıya özgü ARTEFAKT anahtarlarıdır;
+# tabloya girerlerse tablo fixture biçimli olur (bkz. Ö1).
+kapsam_disi:
+  - {desen_izi: 'Software\NFC\IPA',            gerekce: 'tek zararliya ozgu artefakt anahtari, aile degil'}
+  - {desen_izi: 'Office365DCOMCheck',          gerekce: 'tek zararliya ozgu artefakt anahtari'}
+  - {desen_izi: 'ApplicationContainer\Appsw64', gerekce: 'tek zararliya ozgu artefakt anahtari'}
+  - {desen_izi: 'CurrentVersion\GameCon',      gerekce: 'tek zararliya ozgu artefakt anahtari'}
+  - {desen_izi: 'CurrentVersion\sibot',        gerekce: 'tek zararliya ozgu artefakt anahtari'}
+  - {desen_izi: 'CurrentVersion\PrintConfigs', gerekce: 'tek zararliya ozgu artefakt anahtari'}
+  - {desen_izi: 'Microsoft\DRM',               gerekce: 'tek zararliya ozgu artefakt anahtari'}
+  - {desen_izi: 'scConfig',                    gerekce: 'tek zararliya ozgu artefakt anahtari'}
+  - {desen_izi: 'ShellCompatibility\Appl',     gerekce: 'kirpilmis cikarim artefakti, gercek yol degil'}
+
+  # --- tek zararliya ozgu artefakt anahtarlari (aile degil, ORNEK)
+  - {desen_izi: 'Backtsaleht',    gerekce: 'tek zararliya ozgu artefakt anahtari, aile degil'}
+  - {desen_izi: 'dnimtsoleht',    gerekce: 'tek zararliya ozgu artefakt anahtari, aile degil'}
+  - {desen_izi: 'snimtsOleht',    gerekce: 'tek zararliya ozgu artefakt anahtari, aile degil'}
+  - {desen_izi: 'bkfouerioyou',   gerekce: 'tek zararliya ozgu artefakt anahtari, aile degil'}
+  - {desen_izi: 'UIF2IS20VK',     gerekce: 'tek zararliya ozgu artefakt anahtari, aile degil'}
+  - {desen_izi: 'last_edate',     gerekce: 'tek zararliya ozgu artefakt anahtari, aile degil'}
+  - {desen_izi: 'Pniumj',         gerekce: 'tek zararliya ozgu artefakt anahtari, aile degil'}
+  - {desen_izi: 'DC3_FEXEC',      gerekce: 'tek zararliya ozgu artefakt anahtari, aile degil'}
+  - {desen_izi: 'DDE\tpid',       gerekce: 'tek zararliya ozgu artefakt anahtari, aile degil'}
+  - {desen_izi: 'spreadCpuXmr',   gerekce: 'tek zararliya ozgu artefakt anahtari, aile degil'}
+  - {desen_izi: 'SOFTWARE\Plus',  gerekce: 'tek zararliya ozgu artefakt anahtari, aile degil'}
+  - {desen_izi: 'Microsoft\COM3', gerekce: 'tek zararliya ozgu artefakt anahtari, aile degil'}
+  - {desen_izi: 'WABE\DataPath',  gerekce: 'tek zararliya ozgu artefakt anahtari, aile degil'}
+  - {desen_izi: 'MSDTC\MTxOCI',   gerekce: 'tek zararliya ozgu artefakt anahtari, aile degil'}
+  - {desen_izi: '{8 random characters}', gerekce: 'ATT&CK metninde yer tutucu, gercek yol degil'}
+  - {desen_izi: 'Run auto_update', gerekce: 'tek zararliya ozgu deger adi'}
+
+  # --- UCUNCU TARAF URUN anahtarlari: kesif hedefi ama Windows varligi degil
+  - {desen_izi: 'KasperskyLab',   gerekce: 'ucuncu taraf urun anahtari; kritiklik Windows varligina gore tanimli'}
+  - {desen_izi: 'Bitcoin-Qt',     gerekce: 'ucuncu taraf urun anahtari'}
+  - {desen_izi: 'Foxit Reader',   gerekce: 'ucuncu taraf urun anahtari'}
+  - {desen_izi: 'Software\NFC',   gerekce: 'ucuncu taraf urun anahtari'}
+  - {desen_izi: 'VMwareHostOpen', gerekce: 'ucuncu taraf urun anahtari (sanal makine tespiti)'}
+
+  # --- ATT&CK METNINDEKI BOZUK YAZIMLAR
+  # Bunlar tablo eksigi DEGIL, kaynak metnin kusuru. Yol ile DEGER ADI
+  # ayracsiz bitisik yazilmis ya da harf hatasi var. Duzeltilmis bicimleri
+  # tabloda ZATEN VAR -- bu satirlar yalnizca "gerekcesiz unknown"
+  # sayilmasinlar diye.
+  - {desen_izi: 'Control SystemStartOptions', gerekce: 'ATT&CK metninde yol ve deger adi ayracsiz yazilmis'}
+  - {desen_izi: 'Lsa Name',                   gerekce: 'ATT&CK metninde yol ve deger adi ayracsiz yazilmis'}
+  - {desen_izi: 'CurrentVersion ProductName', gerekce: 'ATT&CK metninde yol ve deger adi ayracsiz yazilmis'}
+  - {desen_izi: 'ProcessorNameString',        gerekce: 'ATT&CK metninde yol ve deger adi ayracsiz yazilmis'}
+  - {desen_izi: 'System Enable LUA',          gerekce: 'ATT&CK metninde yol ve deger adi ayracsiz yazilmis'}
+  - {desen_izi: 'Run vpdn',                   gerekce: 'ATT&CK metninde yol ve deger adi ayracsiz yazilmis'}
+  - {desen_izi: 'Cryptography MachineGuid',   gerekce: 'ATT&CK metninde yol ve deger adi ayracsiz yazilmis'}
+  - {desen_izi: 'strDataDir',                 gerekce: 'ATT&CK metninde yol ve deger adi ayracsiz yazilmis'}
+  - {desen_izi: 'Windows\nNT',                gerekce: 'ATT&CK metninde harf hatasi (nNT)'}
+  - {desen_izi: 'HKEY_CURRENT_USERS',         gerekce: 'ATT&CK metninde harf hatasi (USERS/USER)'}
+  - {desen_izi: 'Installed. Components',      gerekce: 'ATT&CK metninde nokta hatasi'}
+  - {desen_izi: 'Paramenters',                gerekce: 'ATT&CK metninde harf hatasi (Paramenters/Parameters)'}
+  - {desen_izi: 'SOFTWARE{',                  gerekce: 'ATT&CK metninde parantezli yer tutucu'}
+  - {desen_izi: 'NT\ CurrentVersion',         gerekce: 'ATT&CK metninde fazladan bosluk'}
+  - {desen_izi: 'SYSTEM\Microsoft\Cryptography', gerekce: 'ATT&CK metninde eksik ara dugum (CurrentControlSet yok)'}
+  - {desen_izi: 'Microsoft\CurrentVersion\Run', gerekce: 'ATT&CK metninde eksik ara dugum (Windows yok)'}
+  - {desen_izi: 'Windows\Current Version',    gerekce: 'ATT&CK metninde fazladan bosluk (Current Version)'}
+  - {desen_izi: 'Windows\Run',                gerekce: 'ATT&CK metninde eksik ara dugum (CurrentVersion yok)'}
+  - {desen_izi: 'CurrentVersion\InternetSettings', gerekce: 'ATT&CK metninde eksik bosluk (Internet Settings)'}
+  - {desen_izi: 'Internet Explorer\ PhishingFilter', gerekce: 'ATT&CK metninde fazladan bosluk'}
+  - {desen_izi: 'Console\%SystemRoot%', gerekce: 'ortam degiskeni genisletilmemis yer tutucu'}

@@ -1,0 +1,196 @@
+{
+  "kosular": [
+    {
+      "ad": "V-BASTIRMA",
+      "sure_sn": 321.2,
+      "split": {
+        "rule": "brace_blocks",
+        "event_count": 2,
+        "marker_count": 2,
+        "warning": null
+      },
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "belirleyen_event": 0,
+      "dagilim": {
+        "SUFFICIENT_BENIGN": 0,
+        "INSUFFICIENT_DATA": 1,
+        "SUFFICIENT_SUSPICIOUS": 1
+      },
+      "event_kararlari": [
+        {
+          "index": 0,
+          "decision": "SUFFICIENT_SUSPICIOUS",
+          "reason": "high varlık (service) + yazma erişimi, doğrulanmış teknik olmadan",
+          "reason_chain": [
+            "Yol B: high varlık (service) + yazma erişimi",
+            "Yol A kurulamadı: 2 teknik, 0 doğrulanmış kanıt",
+            "Baseline bastırmadı: (service, TrustedInstaller.exe) çifti beklenen listede yok"
+          ],
+          "suppression": null
+        },
+        {
+          "index": 1,
+          "decision": "INSUFFICIENT_DATA",
+          "reason": "karar için yeterli girdi yok",
+          "reason_chain": [
+            "Yol A kurulamadı: 2 teknik, 0 doğrulanmış kanıt",
+            "Yol B kurulamadı: girdide varlık yolu YOK — kritiklik bu kararda girdi değil",
+            "BENIGN üretilmedi: yokluktan BENIGN çıkarılmaz (§4)"
+          ],
+          "suppression": null
+        }
+      ],
+      "mappings": [
+        {
+          "attack_id": "T1112",
+          "source_event_indices": [
+            0
+          ],
+          "confidence_level": "medium"
+        },
+        {
+          "attack_id": "T1574.011",
+          "source_event_indices": [
+            0
+          ],
+          "confidence_level": "high"
+        },
+        {
+          "attack_id": "T1134.003",
+          "source_event_indices": [
+            1
+          ],
+          "confidence_level": "low"
+        },
+        {
+          "attack_id": "T1078.003",
+          "source_event_indices": [
+            1
+          ],
+          "confidence_level": "low"
+        }
+      ],
+      "reason_chain": [
+        "Alarm 2 event'e bölündü (sınır kuralı: brace_blocks)",
+        "Alarm kararı EN SERT event'ten: #0 → SUFFICIENT_SUSPICIOUS",
+        "Dağılım: INSUFFICIENT_DATA=1, SUFFICIENT_SUSPICIOUS=1",
+        "event #0 · Yol B: high varlık (service) + yazma erişimi",
+        "event #0 · Yol A kurulamadı: 2 teknik, 0 doğrulanmış kanıt",
+        "event #0 · Baseline bastırmadı: (service, TrustedInstaller.exe) çifti beklenen listede yok"
+      ]
+    },
+    {
+      "ad": "V-CAPRAZ",
+      "sure_sn": 160.0,
+      "split": {
+        "rule": "lines",
+        "event_count": 2,
+        "marker_count": 1,
+        "warning": null
+      },
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "belirleyen_event": 1,
+      "dagilim": {
+        "SUFFICIENT_BENIGN": 0,
+        "INSUFFICIENT_DATA": 1,
+        "SUFFICIENT_SUSPICIOUS": 1
+      },
+      "event_kararlari": [
+        {
+          "index": 0,
+          "decision": "INSUFFICIENT_DATA",
+          "reason": "karar için yeterli girdi yok",
+          "reason_chain": [
+            "Yol A kurulamadı: 0 teknik, 0 doğrulanmış kanıt",
+            "Yol B kurulamadı: girdide varlık yolu YOK — kritiklik bu kararda girdi değil",
+            "BENIGN üretilmedi: yokluktan BENIGN çıkarılmaz (§4)"
+          ],
+          "suppression": null
+        },
+        {
+          "index": 1,
+          "decision": "SUFFICIENT_SUSPICIOUS",
+          "reason": "critical varlık + yazma erişimi + 2 doğrulanmış teknik",
+          "reason_chain": [
+            "Yol A: 2 teknik (T1003.002, T1552.002) + 2 doğrulanmış kanıt",
+            "Yol B de tetiklendi: critical varlık (credential-hive) + yazma erişimi",
+            "Bastırma uygulanmadı: aktör baseline Yol A'yı bastıramaz (§5.2)"
+          ],
+          "suppression": null
+        }
+      ],
+      "mappings": [
+        {
+          "attack_id": "T1003.002",
+          "source_event_indices": [
+            1
+          ],
+          "confidence_level": "low"
+        },
+        {
+          "attack_id": "T1552.002",
+          "source_event_indices": [
+            1
+          ],
+          "confidence_level": "low"
+        }
+      ],
+      "reason_chain": [
+        "Alarm 2 event'e bölündü (sınır kuralı: lines)",
+        "Alarm kararı EN SERT event'ten: #1 → SUFFICIENT_SUSPICIOUS",
+        "Dağılım: INSUFFICIENT_DATA=1, SUFFICIENT_SUSPICIOUS=1",
+        "event #1 · Yol A: 2 teknik (T1003.002, T1552.002) + 2 doğrulanmış kanıt",
+        "event #1 · Yol B de tetiklendi: critical varlık (credential-hive) + yazma erişimi",
+        "event #1 · Bastırma uygulanmadı: aktör baseline Yol A'yı bastıramaz (§5.2)"
+      ]
+    },
+    {
+      "ad": "TEKIL[single-001]",
+      "sure_sn": 118.2,
+      "split": {
+        "rule": "single",
+        "event_count": 1,
+        "marker_count": 0,
+        "warning": null
+      },
+      "karar": "INSUFFICIENT_DATA",
+      "belirleyen_event": 0,
+      "dagilim": {
+        "SUFFICIENT_BENIGN": 0,
+        "INSUFFICIENT_DATA": 1,
+        "SUFFICIENT_SUSPICIOUS": 0
+      },
+      "event_kararlari": [
+        {
+          "index": 0,
+          "decision": "INSUFFICIENT_DATA",
+          "reason": "karar için yeterli girdi yok",
+          "reason_chain": [
+            "Yol A kurulamadı: 2 teknik, 0 doğrulanmış kanıt",
+            "Yol B kurulamadı: girdide varlık yolu YOK — kritiklik bu kararda girdi değil",
+            "BENIGN üretilmedi: yokluktan BENIGN çıkarılmaz (§4)"
+          ],
+          "suppression": null
+        }
+      ],
+      "mappings": [
+        {
+          "attack_id": "T1566.001",
+          "source_event_indices": null,
+          "confidence_level": "medium"
+        },
+        {
+          "attack_id": "T1204.002",
+          "source_event_indices": null,
+          "confidence_level": "low"
+        }
+      ],
+      "reason_chain": [
+        "Yol A kurulamadı: 2 teknik, 0 doğrulanmış kanıt",
+        "Yol B kurulamadı: girdide varlık yolu YOK — kritiklik bu kararda girdi değil",
+        "BENIGN üretilmedi: yokluktan BENIGN çıkarılmaz (§4)"
+      ]
+    }
+  ],
+  "basarisiz": []
+}

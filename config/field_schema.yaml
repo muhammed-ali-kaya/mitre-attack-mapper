@@ -1,0 +1,204 @@
+# Windows olay alanlari icin ad semasi.
+#
+# NEDEN VERI, NEDEN KOD DEGIL: tablo buyudukce kod degismemeli. Yeni bir log
+# kaynagi yeni alan adlari getirdiginde buraya satir eklenir; ayristirici
+# dokunulmadan kalir.
+#
+# YAPISI
+#   canonical_name:
+#     aliases: [ham logda gorulebilecek yazimlar]
+#     legacy:  eski kodun bekledigi ad (varsa) -- extracted_facts izdusumu
+#              bu adi kullanir, boylece kural motoru/QRadar yolu kirilmaz
+#     list_separator: deger coklu ise ayrac
+#
+# Alias eslesmesi BUYUK/kucuk harf ve bosluk duyarsizdir ("Object Value Name",
+# "objectvaluename", "OBJECT_VALUE_NAME" ayni sayilir).
+
+version: 1
+
+# "Deger yok" gosterimleri. Alan SILINMEZ -- yalnizca informative=false olur.
+# Gerekce: analist "bu alan bos" bilgisini gormeli; retrieval sorgusu ise
+# gormemeli. Ayni veriden iki farkli davranis, tek yerde tanimli.
+non_informative_values:
+  - "N/A"
+  - "-"
+  - ""
+  - "NULL SID"
+  - "null"
+
+fields:
+  # --- surec
+  process.name:
+    aliases: ["Process Name", "New Process Name", "NewProcessName", "ProcessName", "Image", "Application Name"]
+    legacy: NewProcessName
+  process.path:
+    aliases: ["Process Path", "ProcessPath"]
+  process.id:
+    aliases: ["Process ID", "ProcessId", "PID"]
+  process.command_line:
+    # "Command" GERCEK bir QRadar yazimi -- tests/fixtures/powercfg_4688_brace.json.
+    # Eklenmeden once bu ad `unknown.Command` altina dusuyordu ve komut satirini
+    # okuyan 22 kural kosulu bos aliyordu (docs/beklenti_24_sema_alan_boslugu.md §4).
+    aliases: ["Command Line", "CommandLine", "Process Command Line", "Command"]
+    legacy: CommandLine
+  parent.process.name:
+    aliases: ["Parent Process Name", "ParentProcessName", "ParentImage"]
+    # TURETIM: kaynak ebeveyn icin YALNIZCA yol yaziyorsa taban ad ondan
+    # cikarilir. Gercek kayitta (powercfg_4688_brace.json) cocuk surec icin
+    # HEM `Process Path` HEM `Process Name` var, ebeveyn icin YALNIZCA yol --
+    # asimetri semada degil LOGDA. Turetim olmadan `parent.process.path`
+    # HICBIR kural acmiyor (olculdu: 0 kosul), yani alan olu dogardi.
+    #
+    # YON TEK TARAFLI: yol -> ad. Ters yon YASAK; taban addan dizin
+    # uretilemez ve Gorev 17 tam burada "dizinsiz deger dogrulanmis
+    # sayilmaz" kuralini koydu.
+    #
+    # ACIK DEGER KAZANIR: kaynak `Parent Process Name`i de yaziyorsa turetim
+    # onu EZMEZ (yalnizca bosluk doldurur, ic govde kurtarmasiyla ayni yetki
+    # sirasi). Bilgi tasimayan yol ('N/A', '-') turetim uretmez.
+    derive:
+      from: parent.process.path
+      rule: basename
+  parent.process.path:
+    aliases: ["Parent Process Path", "ParentProcessPath"]
+  parent.process.id:
+    aliases: ["Parent Process ID", "ParentProcessId", "PPID"]
+
+  # --- hesap / oturum
+  account.name:
+    aliases: ["Account Name", "AccountName", "SubjectUserName", "User"]
+    legacy: SubjectUserName
+  user.domain:
+    aliases: ["User Domain", "Account Domain", "SubjectDomainName"]
+  user.workstation:
+    aliases: ["User Workstation", "Workstation Name", "WorkstationName"]
+  user.account_control:
+    aliases: ["User Account Control"]
+  logon.id:
+    aliases: ["Logon ID", "LogonId", "Subject Logon ID"]
+    legacy: LogonId
+  logon.type:
+    aliases: ["Logon Type", "LogonType"]
+    legacy: LogonType
+  # OLCULDU (2026-08-18): TargetUserName sema alani DEGILDI, bu yuzden
+  # space_kv sinir kurali onu bir alan basi saymiyor ve onceki alanin
+  # degeri onu YUTUYORDU: "LogonType=3 TargetUserName=svc" girdisinde
+  # logon.type = "3 TargetUserName=svc" cikiyordu. Kural kosullari
+  # logon.type'a tasinirken bu tasma sessiz bir yanlis eslesme uretirdi.
+  #
+  # account.name'in aliasi YAPILMADI: SubjectUserName EYLEMI YAPAN,
+  # TargetUserName EYLEMIN UZERINDE YAPILDIGI hesaptir. Ikisini ayni
+  # alana koymak T1078/T1021 gibi kurallarda ozne-nesne ayrimini siler --
+  # T1003.001'de lsass.exe'nin process.name mi target.image mi oldugu
+  # sorusunun aynisi.
+  # "Account Name" BILEREK YOK: Windows mesaj govdesinde o etiket hem
+  # "Subject:" hem "Target:" bolumunde geciyor, yani tek basina hangi tarafi
+  # anlattigini soylemiyor. target.user.name'e vermek olculdu ve dort
+  # fixture'da account.name'i kaybetti. Belirsiz etiket sahiplenilmez.
+  target.user.name:
+    aliases: ["Target User Name", "TargetUserName"]
+  group.id:
+    aliases: ["Group ID", "GroupId"]
+
+  # --- olay
+  event.id:
+    aliases: ["Event ID", "EventID", "EventCode", "Event Code"]
+    legacy: EventID
+  event.message:
+    aliases: ["Message"]
+    legacy: Message
+    # Bu alanin DEGERI kendi basina bir logdur (Gorev 15). Toplu mod
+    # satiri KV metnine cevirirken Message'i tirnakli TEK degere sariyor
+    # (app/batch/serialize.py); sarmalanan govde bir windows_message
+    # logudur ve alt alanlari (Access Mask, Object Name, ...) yalnizca
+    # ic ice ayristirmayla gorunur. Bayrak VERIDE duruyor cunku "hangi
+    # alan log tasir" bir mekanizma sorusu degil bir sema sorusudur.
+    # Bkz. docs/beklenti_15_kv_alan_kaybi.md
+    nested: true
+  event.timestamp:
+    aliases: ["Timestamp", "TimeCreated", "Event Time"]
+    legacy: Timestamp
+  host.name:
+    aliases: ["Hostname", "Computer", "ComputerName", "Host"]
+    legacy: Hostname
+
+  # --- nesne (registry / dosya / pipe)
+  object.name:
+    aliases: ["Object Name", "ObjectName", "TargetObject"]
+    legacy: ObjectName
+  object.type:
+    aliases: ["Object Type", "ObjectType"]
+  object.server:
+    aliases: ["Object Server", "ObjectServer"]
+  object.value_name:
+    aliases: ["Object Value Name", "ObjectValueName", "Value Name"]
+  object.class:
+    aliases: ["Class"]
+  handle.id:
+    aliases: ["Handle ID", "HandleId"]
+  pipe.name:
+    aliases: ["Pipe Name", "PipeName"]
+
+  # --- registry deger degisimi (4657)
+  operation.type:
+    aliases: ["Operation Type", "OperationType"]
+  value.old:
+    aliases: ["Old Value", "OldValue"]
+  value.old_type:
+    aliases: ["Old Value Type", "OldValueType"]
+  value.new:
+    aliases: ["New Value", "NewValue"]
+  value.new_type:
+    aliases: ["New Value Type", "NewValueType"]
+
+  # --- erisim
+  access.list:
+    aliases: ["Accesses", "Access List", "AccessList"]
+    legacy: Accesses
+    list_separator: "|"
+  access.mask:
+    aliases: ["Access Mask", "AccessMask"]
+    legacy: AccessMask
+
+  # --- dosya
+  file.name:
+    aliases: ["Filename", "File Name", "TargetFilename"]
+    legacy: TargetFilename
+  file.path:
+    aliases: ["File Path", "FilePath"]
+    legacy: FilePath
+  file.directory:
+    aliases: ["File Directory", "FileDirectory"]
+
+  # --- servis
+  service.name:
+    aliases: ["Service Name", "ServiceName"]
+    legacy: ServiceName
+  service.image_path:
+    aliases: ["Service File Name", "ImagePath"]
+    legacy: ImagePath
+
+  # --- ag
+  source.ip:
+    aliases: ["Source Address", "SourceIp", "SrcIP", "Source IP"]
+    legacy: SourceIp
+  source.port:
+    aliases: ["Source Port", "SourcePort"]
+    legacy: SourcePort
+  destination.ip:
+    aliases: ["Destination Address", "DestinationIp", "DstIP", "Destination IP"]
+    legacy: DestinationIp
+  destination.port:
+    aliases: ["Destination Port", "DestinationPort"]
+    legacy: DestinationPort
+  share.name:
+    aliases: ["Share Name", "ShareName"]
+    legacy: ShareName
+
+  # --- script
+  script.block_text:
+    aliases: ["ScriptBlockText", "Script Block Text"]
+    legacy: ScriptBlockText
+  target.image:
+    aliases: ["TargetImage", "Target Image"]
+    legacy: TargetImage

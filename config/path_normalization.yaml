@@ -1,0 +1,89 @@
+# Yol gosterim normalizasyonu -- log dili ile ATT&CK dilini bulusturur.
+#
+# OLCULEN SORUN (2026-08-16, 697 canli teknik taranarak)
+#     ATT&CK metinlerinde : HKLM/HKCU kisa 247 gecis
+#                           HKEY_ uzun     121 gecis
+#                           \REGISTRY\     1 (BIR) gecis
+#     Windows loglarinda  : \REGISTRY\MACHINE\...  (4656/4657'nin TEK bicimi)
+#
+#     Iki taraf neredeyse hic ayni gosterimi kullanmiyor. Ham string
+#     eslesmesi bu yuzden YAPISAL OLARAK calisamaz.
+#
+# BU ZATEN BIR KEZ ISIRDI
+#     rules/attack_mappings.yaml'daki T1003.002 kurali 'HKLM\SAM' ariyor,
+#     log '\REGISTRY\MACHINE\SAM' yaziyor. Kural, kapsadigini iddia ettigi
+#     4656 olayinda hicbir zaman eslesemiyor
+#     (bkz. tests/fixtures/registry_object_access_logs.json known_regression).
+#
+# IKI YERDE KULLANILIR, BIR KEZ YAZILIR
+#     2B: kural kosullari yapisal alanlara tasinirken yol karsilastirmasi
+#     2C: retrieval tarafinda log yolu <-> ATT&CK yolu eslestirmesi
+#
+# KAPSAM UYARISI: bu tablo T3/T1685 vakasini COZMEZ ve cozmesi beklenmiyor.
+# T1685'in metninde HKLM YALIN geciyor, ardinda yol yok -- normalizasyon
+# eslemeyi kursa bile eslesecek bir yol mevcut degil. Tablonun bayrak vakasi
+# T1003.002'dir.
+
+version: 1
+
+# Kok kovan esdegerlikleri. Her satirdaki TUM yazimlar ayni koku gosterir;
+# normalize edilmis bicim listenin ILK ogesidir.
+hive_aliases:
+  - canonical: "HKLM"
+    aliases:
+      - "HKEY_LOCAL_MACHINE"
+      - "\\REGISTRY\\MACHINE"
+      - "REGISTRY\\MACHINE"
+      - "<HKLM>"
+  - canonical: "HKCU"
+    aliases:
+      - "HKEY_CURRENT_USER"
+      - "\\REGISTRY\\USER"
+      - "REGISTRY\\USER"
+      - "<HKCU>"
+  - canonical: "HKCR"
+    aliases:
+      - "HKEY_CLASSES_ROOT"
+  - canonical: "HKU"
+    aliases:
+      - "HKEY_USERS"
+  - canonical: "HKCC"
+    aliases:
+      - "HKEY_CURRENT_CONFIG"
+
+# Ayrac ve bicim kurallari.
+separators:
+  # Ters boluyu tekillestir: "\\\\" -> "\\". Loglarda kacisli hali sik.
+  collapse_backslashes: true
+  # Egik cizgiyi ters boluye cevir: bazi kaynaklar "HKLM/Software" yaziyor.
+  slash_to_backslash: true
+  # Bastaki/sondaki ayraclari at.
+  strip_edges: true
+
+# Karsilastirma buyuk/kucuk harf DUYARSIZ yapilir: Windows registry yollari
+# zaten harf duyarsizdir ve ATT&CK metinleri tutarsiz yaziyor
+# ("Software" / "SOFTWARE" / "software").
+case_insensitive: true
+
+# Gurultu segmentleri: yol karsilastirmasinda ANLAM TASIMAYAN ara dugumler.
+#
+# BOS DEGIL ARTIK -- olculmus vaka geldi (2026-08-18, Gorev 4 kapsama olcumu).
+# WOW6432Node, 64-bit Windows'un 32-bit uygulamalar icin uyguladigi kayit
+# defteri YONLENDIRMESIDIR. Su ikisi AYNI varliktir:
+#     SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run
+#     SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+# Kapsama olcumunde ikincisi 'high', birincisi 'unknown' cikiyordu. Bu bir
+# TABLO EKSIGI DEGIL, LEHCE farkidir -- tabloya WOW6432Node'lu ikinci bir
+# satir eklemek her satirda tekrarlanacak bir cozum olurdu.
+noise_segments:
+  - "WOW6432Node"
+
+# Segment esdegerlikleri: FARKLI yazilan ama AYNI dugumu gosteren segmentler.
+#
+# ControlSet001/002/003 diskteki numarali kopyalardir; CurrentControlSet
+# calisan sisteme bagli olandir. Bir kural "CurrentControlSet\Services"
+# derken, "ControlSet001\Services" yazan bir logu kacirmamalidir.
+# OLCULDU: kapsama olcumunde ControlSet001 yollari unknown cikiyordu.
+segment_aliases:
+  - canonical: "CurrentControlSet"
+    pattern: "ControlSet[0-9]{3}"

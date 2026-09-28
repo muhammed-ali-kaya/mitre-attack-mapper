@@ -1,0 +1,70 @@
+# Windows erisim maskesi bit tablosu (Gorev 3).
+#
+# NEDEN VERI, NEDEN LLM DEGIL: bir bit maskesini cozmek deterministik bir
+# lookup'tir. Dil modeline "0x2000d ne demek" diye sormak, cevabi
+# olasiliksal hale getirmek demektir -- ustelik cevabi zaten kesin bilinen
+# bir soruda.
+#
+# KULLANIMI: cozulmus read/write etiketi retrieval sorgusuna ve karar
+# mantigina beslenir. Salt okuma -> T1012/T1003 ailesi; yazma/silme ->
+# T1112/T1562/T1685 ailesi. Bu ayrim olmadan "SAM anahtari okundu" ile
+# "Defender anahtari yazildi" ayni sinyal gorunur.
+#
+# TUTARSIZ MASKE UYARISI: gercek loglarda Access Mask ile Accesses metni
+# CELISEBILIR. Ornek (tests/fixtures/registry_object_access_logs.json, T1):
+#   Accesses    = Query key value | Enumerate sub-keys | Read Control
+#   Access Mask = 0x2000d  -> QUERY_VALUE | CREATE_SUB_KEY |
+#                             ENUMERATE_SUB_KEYS | READ_CONTROL
+# Maskede CREATE_SUB_KEY (yazma biti) var, metin listesinde yok. Cozucu
+# ikisini de raporlar ve tutarsizligi ISARETLER; sessizce birini secmez.
+# Hangisinin dogru oldugu bir POLITIKA karari: bu sistemde MASKE kazanir,
+# cunku maske cekirdegin verdigi ham degerdir, metin ise onun insan icin
+# uretilmis ozetidir ve eksik olabilir.
+
+version: 1
+
+# Registry anahtari erisim haklari (winnt.h)
+registry:
+  "0x00000001": { ad: KEY_QUERY_VALUE,        sinif: read }
+  "0x00000002": { ad: KEY_SET_VALUE,          sinif: write }
+  "0x00000004": { ad: KEY_CREATE_SUB_KEY,     sinif: write }
+  "0x00000008": { ad: KEY_ENUMERATE_SUB_KEYS, sinif: read }
+  "0x00000010": { ad: KEY_NOTIFY,             sinif: read }
+  "0x00000020": { ad: KEY_CREATE_LINK,        sinif: write }
+
+# Standart erisim haklari -- her nesne turu icin gecerli
+standard:
+  "0x00010000": { ad: DELETE,       sinif: write }
+  "0x00020000": { ad: READ_CONTROL, sinif: read }
+  "0x00040000": { ad: WRITE_DAC,    sinif: write }
+  "0x00080000": { ad: WRITE_OWNER,  sinif: write }
+  "0x00100000": { ad: SYNCHRONIZE,  sinif: read }
+
+# Dosya nesnesi erisim haklari
+file:
+  "0x00000001": { ad: FILE_READ_DATA,      sinif: read }
+  "0x00000002": { ad: FILE_WRITE_DATA,     sinif: write }
+  "0x00000004": { ad: FILE_APPEND_DATA,    sinif: write }
+  "0x00000020": { ad: FILE_EXECUTE,        sinif: read }
+  "0x00000040": { ad: FILE_DELETE_CHILD,   sinif: write }
+  "0x00000080": { ad: FILE_READ_ATTRIBUTES,  sinif: read }
+  "0x00000100": { ad: FILE_WRITE_ATTRIBUTES, sinif: write }
+
+# Surec erisim haklari -- Sysmon 10 (Process Access) icin
+process:
+  "0x00000010": { ad: PROCESS_VM_READ,      sinif: read }
+  "0x00000020": { ad: PROCESS_VM_WRITE,     sinif: write }
+  "0x00000008": { ad: PROCESS_VM_OPERATION, sinif: write }
+  "0x00000400": { ad: PROCESS_QUERY_INFORMATION, sinif: read }
+
+# Object Type degerinin hangi bit tablosuna karsilik geldigi.
+# 'Key' KRIPTOGRAFIK ANAHTAR DEGIL, Windows registry anahtaridir -- bu
+# ayrim yapilmadigi icin T0'da T1552.004 (Private Keys) aday olarak
+# gelmisti. Serbest metin olarak retrieval'a verilmemeli.
+object_type_map:
+  key: registry
+  registry: registry
+  file: file
+  directory: file
+  process: process
+  token: standard

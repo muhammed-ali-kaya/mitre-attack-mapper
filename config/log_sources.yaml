@@ -1,0 +1,46 @@
+# Olay ID -> hangi log kaynagini acmak gerekir (Gorev 25, madde 5).
+#
+# NEDEN VAR: "Tespit Kapsami" tablosu boslugu gosteriyordu ama AKSIYONU
+# soylemiyordu. Analist "4657 yok" satirini gorup ne yapacagini bilemiyor;
+# gereken sey hangi log kaynaginin devrede olmadigidir.
+#
+# NEDEN KOD DEGIL VERI: kullanicinin onerdigi basit araliklarin en az bir
+# ID'yi yanlis siniflandirdigi OLCULDU (asagiya bak). Ikinci bir istisna
+# ciktiginda yerinin belli olmasi icin tablo veri olarak duruyor.
+#
+# BU DOSYA ANALIZI ETKILEMEZ. Yalnizca ekranda "su log kaynagi gerekli"
+# cumlesini kurar; hicbir kural kosulu, skor veya kapsam hesabi buradan
+# okumaz.
+
+version: 1
+
+# Kullanicinin verdigi aralik kurali. Sirayla denenir, ILK eslesen kazanir;
+# istisnalar (asagida) araliklardan ONCE bakilir.
+araliklar:
+  - {min: 1, max: 30, kaynak: "Sysmon (Microsoft-Windows-Sysmon/Operational)"}
+  - {min: 4000, max: 5999, kaynak: "Windows Güvenlik denetimi (Security)"}
+  - {min: 7000, max: 7999, kaynak: "Windows System log"}
+
+# ISTISNALAR -- aralik kuralinin YANLIS sonuc verdigi ID'ler.
+#
+# Ö6 OLCULDU VE DOGRULANDI (scripts/measure_task25_readability.py):
+# `4104` aralik kuralina gore "Windows Güvenlik denetimi" cikiyor, oysa
+# event_semantics.yaml onu "PowerShell script block calistirildi" diye
+# tanimliyor ve o olay Security kanalinda DEGIL. Analist yanlis log
+# kaynagini acardi.
+#
+# 400/403/104 ayni ailenin klasik (Windows PowerShell) kanalindaki
+# karsiliklaridir; ayni sebeple burada.
+istisnalar:
+  "4104": "PowerShell (Microsoft-Windows-PowerShell/Operational)"
+  "400": "Windows PowerShell (klasik kanal)"
+  "403": "Windows PowerShell (klasik kanal)"
+  "104": "Windows PowerShell (klasik kanal)"
+  # IKINCI BOSLUK, testle bulundu (test_katalogdaki_her_olay_bir_kaynaga_
+  # baglanabiliyor): 1102 "Denetim gunlugu temizlendi" Security kanalinin
+  # olayidir ama 30 ile 4000 arasinda kaldigi icin HICBIR aralik kuralina
+  # dusmuyordu -- kaynagi "bilinmiyor" cikiyordu. Aralik kurali bu ID icin
+  # eksik, yanlis degil; sonucu yine de analistin isine yaramazdi.
+  "1102": "Windows Güvenlik denetimi (Security)"
+
+bilinmiyor: "kaynağı bilinmiyor"

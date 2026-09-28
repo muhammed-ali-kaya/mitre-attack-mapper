@@ -1,0 +1,450 @@
+{
+  "S": {
+    "S-B1-1A": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-B1-1B": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-B1-2A": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-B1-2B": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-B1-3A": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-B1-3B": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-A-01": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "S-A-02": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-A-03": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "S-A-04": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-A-05": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "S-A-06": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-A-07": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-A-08": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-A-09": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-A-10": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "S-A-11": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "S-A-12": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-A-13": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "S-A-14": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "S-B-01": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-B-02": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-B-03": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-B-04": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-B-05": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-B-06": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-B-07": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-B-08": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-B-09": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-B-10": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-EK2-01": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-EK2-02": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-EK2-03": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-EK2-04": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-ID-01": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "S-ID-02": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "S-ID-03": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "S-ID-04": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-ID-05": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "S-ID-06": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-ID-07": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "S-ID-08": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-ID-09": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-ID-10": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-ID-11": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "S-ID-12": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "S-ID-13": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "S-ID-14": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "S-N-01": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "S-N-02": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "S-N-03": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-N-04": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "S-N-05": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "S-N-06": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "S-N-07": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "S-N-08": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "S-N-09": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "S-N-10": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "S-N-11": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "S-N-12": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    }
+  },
+  "G": {
+    "G-000": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-001": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-002": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-003": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-004": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-005": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-006": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-007": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "G-008": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-009": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-010": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-011": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-012": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-013": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-014": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-015": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "G-016": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-017": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-018": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-019": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-020": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-021": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-022": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-023": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-024": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-025": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-026": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-027": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-028": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-029": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "G-030": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "G-031": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-032": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-033": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-034": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-035": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-036": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-037": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-038": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-039": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-040": {
+      "karar": "SUFFICIENT_SUSPICIOUS",
+      "bastirma": false
+    },
+    "G-041": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-042": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-043": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-044": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-045": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-046": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-047": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-048": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-049": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    },
+    "G-050": {
+      "karar": "INSUFFICIENT_DATA",
+      "bastirma": false
+    }
+  }
+}

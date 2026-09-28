@@ -1,0 +1,133 @@
+{
+  "_aciklama": "G kolu iki kosu karsilastirmasi -- karar ve teknik AYRI eksen",
+  "once": "g_arm_run.json",
+  "sonra": "g_arm_run_v2.json",
+  "karsilastirilan": 51,
+  "eksen1_karar": {
+    "once": {
+      "isabet": 50,
+      "dagilim": {
+        "INSUFFICIENT_DATA": 51
+      },
+      "yanlis_alarm": [],
+      "negatif": 49,
+      "yol_B": [],
+      "yol_A": [],
+      "bastirma": []
+    },
+    "sonra": {
+      "isabet": 45,
+      "dagilim": {
+        "INSUFFICIENT_DATA": 46,
+        "SUFFICIENT_SUSPICIOUS": 5
+      },
+      "yanlis_alarm": [
+        "G-007",
+        "G-015",
+        "G-029",
+        "G-030",
+        "G-040"
+      ],
+      "negatif": 49,
+      "yol_B": [
+        "G-007",
+        "G-015",
+        "G-029",
+        "G-030",
+        "G-040"
+      ],
+      "yol_A": [],
+      "bastirma": []
+    },
+    "karari_degisen": [
+      "G-007",
+      "G-015",
+      "G-029",
+      "G-030",
+      "G-040"
+    ],
+    "tahmin_yol_b": [
+      "G-007",
+      "G-015",
+      "G-029",
+      "G-030",
+      "G-040"
+    ],
+    "tahmin_tuttu": true
+  },
+  "eksen2_teknik": {
+    "toplam_once": 109,
+    "toplam_sonra": 105,
+    "essiz_yanlis_pozitif_once": 22,
+    "essiz_yanlis_pozitif_sonra": 24,
+    "listesi_degisen_satir": [
+      "G-000",
+      "G-002",
+      "G-003",
+      "G-004",
+      "G-005",
+      "G-007",
+      "G-008",
+      "G-010",
+      "G-012",
+      "G-013",
+      "G-014",
+      "G-015",
+      "G-016",
+      "G-018",
+      "G-019",
+      "G-020",
+      "G-021",
+      "G-022",
+      "G-024",
+      "G-025",
+      "G-027",
+      "G-029",
+      "G-030",
+      "G-031",
+      "G-033",
+      "G-036",
+      "G-039",
+      "G-040",
+      "G-042",
+      "G-043",
+      "G-044",
+      "G-046",
+      "G-047",
+      "G-048",
+      "G-050"
+    ],
+    "sadece_once": {
+      "T1218.012": 4,
+      "T1134": 7,
+      "T1555.004": 1,
+      "T1547.010": 1,
+      "T1559": 1,
+      "T1571": 1,
+      "T1205.001": 2,
+      "T1095": 3,
+      "T1546": 1,
+      "T1012": 1,
+      "T1563.002": 1,
+      "T1049": 2,
+      "T1552.002": 1,
+      "T1574.001": 1
+    },
+    "sadece_sonra": {
+      "T1571": 2,
+      "T1095": 2,
+      "T1559": 1,
+      "T1134.005": 1,
+      "T1106": 3,
+      "T1546.003": 2,
+      "T1007": 1,
+      "T1552.002": 1,
+      "T1185": 1,
+      "T1555.004": 4,
+      "T1205.002": 2,
+      "T1112": 1,
+      "T1547.004": 1,
+      "T1547.010": 1
+    }
+  }
+}

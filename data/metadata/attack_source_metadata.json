@@ -1,0 +1,9 @@
+{
+  "source_url": "https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/enterprise-attack/enterprise-attack-19.2.json",
+  "downloaded_at_utc": "2026-09-27T20:37:10.472722+00:00",
+  "sha256": "dc1639caa5501d720e280cf1cbd8fbe009884a0c9b3e6e9ed9d0c25166c3d8f4",
+  "file_size_bytes": 53835637,
+  "requested_version": "19.2",
+  "attack_version": "19.2",
+  "object_count": 26086
+}

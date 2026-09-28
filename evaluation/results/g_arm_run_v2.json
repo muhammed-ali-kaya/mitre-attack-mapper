@@ -1,0 +1,3038 @@
+{
+ "G-000": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 3,
+   "teknikler": [
+    "T1571",
+    "T1095",
+    "T1559"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "\\device\\harddiskvolume3\\program files\\google\\chrome\\application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1571",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1095",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1559",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1686.003"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1686.003"
+  ],
+  "retrieval_candidates": [
+   "T1106",
+   "T1564.003",
+   "T1047",
+   "M1037",
+   "T1095",
+   "T1559",
+   "T1571",
+   "T1055.012",
+   "T1049"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 251.10193061828613,
+  "kosu_sn": 252.5
+ },
+ "G-001": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1571",
+    "T1095"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "\\device\\harddiskvolume3\\program files\\google\\chrome\\application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1571",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1095",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1571",
+   "T1095"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1047",
+   "T1564.003",
+   "T1686.003",
+   "T1095",
+   "T1571",
+   "T1055",
+   "T1559",
+   "T1055.012"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 118.83625483512878,
+  "kosu_sn": 118.8
+ },
+ "G-002": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1548.002",
+    "T1546"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": "Administrator",
+    "process": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1548.002",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1546",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1548.002",
+   "T1546"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1548.002",
+   "T1543.003",
+   "T1134.005",
+   "M1026",
+   "T1185",
+   "T1546",
+   "T1078.003",
+   "T1078",
+   "T1555.004"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 121.51264309883118,
+  "kosu_sn": 121.5
+ },
+ "G-003": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1133",
+    "T1095"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "System"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1133",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1095",
+    "confidence_level": "insufficient"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1686.003"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1686.003"
+  ],
+  "retrieval_candidates": [
+   "T1558.003",
+   "T1021.006",
+   "T1133",
+   "T1082",
+   "T1071.001",
+   "T1559",
+   "T1095",
+   "T1047",
+   "T1049"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 127.55254125595093,
+  "kosu_sn": 127.6
+ },
+ "G-004": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1571",
+    "T1205.001"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "\\device\\harddiskvolume3\\program files\\google\\chrome\\application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1571",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1205.001",
+    "confidence_level": "medium"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1686.003"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1686.003"
+  ],
+  "retrieval_candidates": [
+   "T1106",
+   "T1205.001",
+   "T1553.003",
+   "T1218.012",
+   "T1055.012",
+   "T1571",
+   "T1205.002",
+   "T1547.010",
+   "T1574.012"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 199.20289754867554,
+  "kosu_sn": 200.5
+ },
+ "G-005": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 1,
+   "teknikler": [
+    "T1548.002"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": "Administrator",
+    "process": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1548.002",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1548.002",
+   "T1078"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1078",
+   "T1543.003"
+  ],
+  "retrieval_candidates": [
+   "T1543.003",
+   "T1548.002",
+   "T1185",
+   "T1078.003",
+   "M1026",
+   "T1134.005",
+   "T1546",
+   "T1555.004"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 123.49261283874512,
+  "kosu_sn": 123.5
+ },
+ "G-006": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1571",
+    "T1095"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "\\device\\harddiskvolume3\\program files\\google\\chrome\\application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1571",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1095",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1686.003"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1686.003"
+  ],
+  "retrieval_candidates": [
+   "T1095",
+   "T1564.003",
+   "T1047",
+   "T1571",
+   "T1559",
+   "T1055.012",
+   "T1049",
+   "M1037",
+   "T1016.001"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 122.41605377197266,
+  "kosu_sn": 122.4
+ },
+ "G-007": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": false,
+   "B": true
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1547.004",
+    "T1134.005"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "high",
+   "kritiklik_ailesi": "service",
+   "varlik_yolu": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Services\\tapisrv\\Performance",
+   "erisim_sinifi": "write",
+   "aktor": {
+    "account": "LOCAL SERVICE",
+    "process": "C:\\Windows\\System32\\svchost.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "high varlık (service) + yazma erişimi, doğrulanmış teknik olmadan",
+  "mappings": [
+   {
+    "attack_id": "T1547.004",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1134.005",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1543.003",
+   "T1547.004"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1543.003"
+  ],
+  "retrieval_candidates": [
+   "T1134.005",
+   "T1547.004",
+   "T1558.003",
+   "T1003.001",
+   "T1134",
+   "T1555.004",
+   "T1056.001",
+   "T1686.003",
+   "T1078.003",
+   "T1068"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 198.03299474716187,
+  "kosu_sn": 199.4
+ },
+ "G-008": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1548.002",
+    "T1546"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": "Administrator",
+    "process": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1548.002",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1546",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1548.002",
+   "T1546"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1548.002",
+   "T1543.003",
+   "T1134.005",
+   "M1026",
+   "T1546",
+   "T1185",
+   "T1078.003",
+   "T1078",
+   "T1555.004"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 109.92771029472351,
+  "kosu_sn": 109.9
+ },
+ "G-009": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1571",
+    "T1095"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "\\device\\harddiskvolume3\\program files\\google\\chrome\\application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1571",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1095",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1571",
+   "T1686.003"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1686.003"
+  ],
+  "retrieval_candidates": [
+   "T1564.003",
+   "T1095",
+   "T1047",
+   "T1571",
+   "M1037",
+   "T1559",
+   "T1055.012",
+   "T1049",
+   "T1204.002"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 137.45287442207336,
+  "kosu_sn": 137.5
+ },
+ "G-010": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1571",
+    "T1106"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "\\device\\harddiskvolume3\\program files\\google\\chrome\\application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1571",
+    "confidence_level": "medium"
+   },
+   {
+    "attack_id": "T1106",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1686.003"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1686.003"
+  ],
+  "retrieval_candidates": [
+   "T1106",
+   "T1547.010",
+   "T1553.003",
+   "T1005",
+   "T1571",
+   "T1055.002",
+   "T1056.004",
+   "T1574.012",
+   "T1205.001"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 174.40319776535034,
+  "kosu_sn": 175.8
+ },
+ "G-011": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1007",
+    "T1571"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "\\device\\harddiskvolume3\\windows\\system32\\svchost.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1007",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1571",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1686.003",
+   "T1007"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1686.003"
+  ],
+  "retrieval_candidates": [
+   "T1007",
+   "T1057",
+   "T1571",
+   "T1082",
+   "T1047",
+   "T1543.003",
+   "T1518"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 119.47691702842712,
+  "kosu_sn": 119.5
+ },
+ "G-012": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1007",
+    "T1546.003"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "\\device\\harddiskvolume3\\windows\\system32\\svchost.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1007",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1546.003",
+    "confidence_level": "medium"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1007",
+   "T1546.003"
+  ],
+  "rejected_mappings": [
+   "T1047"
+  ],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1007",
+   "T1057",
+   "T1047",
+   "T1082",
+   "T1546.003",
+   "T1567.004",
+   "T1686.003",
+   "T1049"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 0,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 56.78216624259949,
+  "kosu_sn": 56.8
+ },
+ "G-013": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1205.002",
+    "T1571"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "\\device\\harddiskvolume3\\program files\\google\\chrome\\application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1205.002",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1571",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1686.003",
+   "T1205.002"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1686.003"
+  ],
+  "retrieval_candidates": [
+   "T1106",
+   "T1205.002",
+   "T1205.001",
+   "T1553.003",
+   "T1218.012",
+   "T1571",
+   "T1547.010",
+   "T1005"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 136.10828351974487,
+  "kosu_sn": 136.1
+ },
+ "G-014": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1095",
+    "T1571"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "\\device\\harddiskvolume3\\program files\\google\\chrome\\application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1095",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1571",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1095",
+   "T1571"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1564.003",
+   "T1095",
+   "T1047",
+   "T1571",
+   "T1686.003",
+   "T1055",
+   "T1559",
+   "T1055.012"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 171.80686926841736,
+  "kosu_sn": 173.2
+ },
+ "G-015": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": false,
+   "B": true
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1552.002",
+    "T1547.004"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "high",
+   "kritiklik_ailesi": "service",
+   "varlik_yolu": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Services\\UGatherer\\Performance",
+   "erisim_sinifi": "write",
+   "aktor": {
+    "account": "LOCAL SERVICE",
+    "process": "C:\\Windows\\System32\\svchost.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "high varlık (service) + yazma erişimi, doğrulanmış teknik olmadan",
+  "mappings": [
+   {
+    "attack_id": "T1552.002",
+    "confidence_level": "insufficient"
+   },
+   {
+    "attack_id": "T1547.004",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1552.002",
+   "T1003.001"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1003.001",
+   "T1543.003"
+  ],
+  "retrieval_candidates": [
+   "T1547.004",
+   "T1555.004",
+   "T1543.003",
+   "T1685.001",
+   "T1056.001",
+   "T1686.003",
+   "T1078.003",
+   "T1003.003",
+   "T1068",
+   "T1134"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 140.38603162765503,
+  "kosu_sn": 140.4
+ },
+ "G-016": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1548.002",
+    "T1546"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": "Administrator",
+    "process": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1548.002",
+    "confidence_level": "medium"
+   },
+   {
+    "attack_id": "T1546",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1548.002",
+   "T1546"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1218.012",
+   "T1548.002",
+   "T1543.003",
+   "T1134.005",
+   "M1026",
+   "T1546",
+   "T1078.003",
+   "T1078",
+   "T1555.004",
+   "T1548"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 0,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 58.483243465423584,
+  "kosu_sn": 58.5
+ },
+ "G-017": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1571",
+    "T1205.001"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "\\device\\harddiskvolume3\\program files\\google\\chrome\\application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1571",
+    "confidence_level": "medium"
+   },
+   {
+    "attack_id": "T1205.001",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1686.003"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1686.003"
+  ],
+  "retrieval_candidates": [
+   "T1106",
+   "T1205.001",
+   "T1553.003",
+   "T1218.012",
+   "T1571",
+   "T1205.002",
+   "T1505.003",
+   "T1547.010",
+   "T1005"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 121.11384558677673,
+  "kosu_sn": 121.1
+ },
+ "G-018": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 3,
+   "teknikler": [
+    "T1548.002",
+    "T1185",
+    "T1555.004"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": "Administrator",
+    "process": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1548.002",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1185",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1555.004",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1543.003",
+   "T1548.002"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1543.003"
+  ],
+  "retrieval_candidates": [
+   "T1548.002",
+   "T1185",
+   "T1078.003",
+   "T1134.005",
+   "M1026",
+   "T1546",
+   "T1078",
+   "T1555.004",
+   "T1548"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 176.78949117660522,
+  "kosu_sn": 178.2
+ },
+ "G-019": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1571",
+    "T1049"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "\\device\\harddiskvolume3\\program files\\google\\chrome\\application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1571",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1049",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1571",
+   "T1049"
+  ],
+  "rejected_mappings": [
+   "T1047"
+  ],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1564.003",
+   "T1095",
+   "T1049",
+   "T1047",
+   "T1571",
+   "T1559",
+   "T1686.003",
+   "M1037",
+   "T1055.012",
+   "T1055"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 99.24603056907654,
+  "kosu_sn": 99.3
+ },
+ "G-020": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1548.002",
+    "T1546"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": "Administrator",
+    "process": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1548.002",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1546",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1543.003",
+   "T1548.002"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1543.003"
+  ],
+  "retrieval_candidates": [
+   "T1548.002",
+   "T1185",
+   "T1078.003",
+   "T1134.005",
+   "M1026",
+   "T1546",
+   "T1555.004",
+   "T1078",
+   "T1548"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 106.63880348205566,
+  "kosu_sn": 106.6
+ },
+ "G-021": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1571",
+    "T1205.002"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "\\device\\harddiskvolume3\\program files\\google\\chrome\\application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1571",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1205.002",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1686.003"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1686.003"
+  ],
+  "retrieval_candidates": [
+   "T1106",
+   "T1218.012",
+   "T1205.001",
+   "T1553.003",
+   "T1571",
+   "T1205.002",
+   "T1005",
+   "T1574.012"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 197.57448601722717,
+  "kosu_sn": 198.9
+ },
+ "G-022": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1095",
+    "T1571"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "\\device\\harddiskvolume3\\program files\\google\\chrome\\application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1095",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1571",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1095",
+   "T1686.003"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1686.003"
+  ],
+  "retrieval_candidates": [
+   "T1047",
+   "T1564.003",
+   "T1095",
+   "T1055",
+   "M1037",
+   "T1571",
+   "T1559",
+   "T1055.012"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 99.97797656059265,
+  "kosu_sn": 100.0
+ },
+ "G-023": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1007",
+    "T1571"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "\\device\\harddiskvolume3\\windows\\system32\\svchost.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1007",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1571",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1686.003",
+   "T1007"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1686.003"
+  ],
+  "retrieval_candidates": [
+   "T1007",
+   "T1057",
+   "T1047",
+   "T1082",
+   "T1571",
+   "T1543.003",
+   "T1518"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 82.56345081329346,
+  "kosu_sn": 82.6
+ },
+ "G-024": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1546.003",
+    "T1571"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "\\device\\harddiskvolume3\\windows\\system32\\svchost.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1546.003",
+    "confidence_level": "medium"
+   },
+   {
+    "attack_id": "T1571",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1686.003",
+   "T1546.003"
+  ],
+  "rejected_mappings": [
+   "T1047"
+  ],
+  "agent_rejected_mappings": [
+   "T1686.003"
+  ],
+  "retrieval_candidates": [
+   "T1007",
+   "T1124",
+   "T1082",
+   "T1057",
+   "T1571",
+   "T1047",
+   "T1567.004",
+   "T1518"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 107.48439431190491,
+  "kosu_sn": 108.2
+ },
+ "G-025": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1548.002",
+    "T1555.004"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": "Administrator",
+    "process": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1548.002",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1555.004",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1543.003",
+   "T1548.002"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1543.003"
+  ],
+  "retrieval_candidates": [
+   "T1548.002",
+   "T1185",
+   "T1078.003",
+   "M1026",
+   "T1134.005",
+   "T1546",
+   "T1078",
+   "T1555.004",
+   "T1548"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 91.99172329902649,
+  "kosu_sn": 92.0
+ },
+ "G-026": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 1,
+   "teknikler": [
+    "T1685.001"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": "WINHOST-01$",
+    "process": "C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26070.9-0\\MpDefenderCoreService.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1685.001",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1685.001"
+  ],
+  "rejected_mappings": [
+   "T1685.005"
+  ],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1685.005",
+   "T1686.003",
+   "T1685.001",
+   "T1047",
+   "T1563.002",
+   "T1059.003",
+   "T1564.003",
+   "T1021.006"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 73.67767024040222,
+  "kosu_sn": 73.7
+ },
+ "G-027": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 3,
+   "teknikler": [
+    "T1571",
+    "T1049",
+    "T1095"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "\\device\\harddiskvolume3\\program files\\google\\chrome\\application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1571",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1049",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1095",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1571",
+   "T1049"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1564.003",
+   "T1095",
+   "T1571",
+   "T1047",
+   "T1049",
+   "T1686.003",
+   "T1559",
+   "T1055.012",
+   "M1037"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 91.56908392906189,
+  "kosu_sn": 91.6
+ },
+ "G-028": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1134",
+    "T1134.002"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": null,
+   "aktor": {
+    "account": "WINHOST-01$",
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1134",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1134.002",
+    "confidence_level": "medium"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1134",
+   "T1134.002"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1053.005",
+   "T1547.004",
+   "T1204.002",
+   "T1563.002",
+   "T1134",
+   "T1003.006",
+   "T1134.002",
+   "T1003.001",
+   "T1134.001"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 0,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 55.986494064331055,
+  "kosu_sn": 56.0
+ },
+ "G-029": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": false,
+   "B": true
+  },
+  "inputs": {
+   "teknik_sayisi": 3,
+   "teknikler": [
+    "T1012",
+    "T1552.002",
+    "T1112"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "high",
+   "kritiklik_ailesi": "service",
+   "varlik_yolu": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Services\\WSearchIdxPi\\Performance",
+   "erisim_sinifi": "write",
+   "aktor": {
+    "account": "WINHOST-01$",
+    "process": "C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26070.9-0\\MpDefenderCoreService.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "high varlık (service) + yazma erişimi, doğrulanmış teknik olmadan",
+  "mappings": [
+   {
+    "attack_id": "T1012",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1552.002",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1112",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1012",
+   "T1552.002"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1555.004",
+   "T1543.003",
+   "T1686.003",
+   "T1112",
+   "T1012",
+   "T1685.001",
+   "T1056.001"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 121.0210530757904,
+  "kosu_sn": 121.7
+ },
+ "G-030": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": false,
+   "B": true
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1547.004",
+    "T1555.004"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "high",
+   "kritiklik_ailesi": "service",
+   "varlik_yolu": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Services\\WmiApRpl\\Performance",
+   "erisim_sinifi": "write",
+   "aktor": {
+    "account": "LOCAL SERVICE",
+    "process": "C:\\Windows\\System32\\svchost.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "high varlık (service) + yazma erişimi, doğrulanmış teknik olmadan",
+  "mappings": [
+   {
+    "attack_id": "T1547.004",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1555.004",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1003.001",
+   "T1547.004",
+   "T1003.002"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1003.001",
+   "T1003.002",
+   "T1543.003"
+  ],
+  "retrieval_candidates": [
+   "T1555.004",
+   "T1543.003",
+   "T1056.001",
+   "T1686.003",
+   "T1547.003",
+   "T1003.003",
+   "T1068",
+   "T1112",
+   "T1561.001"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 105.43354654312134,
+  "kosu_sn": 105.4
+ },
+ "G-031": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 3,
+   "teknikler": [
+    "T1205.002",
+    "T1571",
+    "T1547.010"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "\\device\\harddiskvolume3\\program files\\google\\chrome\\application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1205.002",
+    "confidence_level": "medium"
+   },
+   {
+    "attack_id": "T1571",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1547.010",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1686.003",
+   "T1205.002"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1686.003"
+  ],
+  "retrieval_candidates": [
+   "T1106",
+   "T1218.012",
+   "T1553.003",
+   "T1547.010",
+   "T1571",
+   "T1005",
+   "T1205.001",
+   "T1574.012",
+   "T1056.004"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 95.01102113723755,
+  "kosu_sn": 95.0
+ },
+ "G-032": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1571",
+    "T1205.001"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "\\device\\harddiskvolume3\\program files\\google\\chrome\\application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1571",
+    "confidence_level": "medium"
+   },
+   {
+    "attack_id": "T1205.001",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1686.003"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1686.003"
+  ],
+  "retrieval_candidates": [
+   "T1106",
+   "T1553.003",
+   "T1205.001",
+   "T1218.012",
+   "T1571",
+   "T1205.002",
+   "T1005",
+   "T1574.012",
+   "T1505.003"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 84.29293942451477,
+  "kosu_sn": 84.3
+ },
+ "G-033": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 3,
+   "teknikler": [
+    "T1106",
+    "T1571",
+    "T1095"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "\\device\\harddiskvolume3\\program files\\google\\chrome\\application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1106",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1571",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1095",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1564.003",
+   "T1106"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1564.003"
+  ],
+  "retrieval_candidates": [
+   "T1047",
+   "T1095",
+   "T1559",
+   "T1571",
+   "T1686.003",
+   "M1037",
+   "T1055.012",
+   "T1049",
+   "T1016.001"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 122.90677046775818,
+  "kosu_sn": 123.6
+ },
+ "G-034": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1548.002",
+    "T1546"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": "Administrator",
+    "process": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1548.002",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1546",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1543.003",
+   "T1548.002"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1543.003"
+  ],
+  "retrieval_candidates": [
+   "T1548.002",
+   "T1185",
+   "T1078.003",
+   "T1134.005",
+   "M1026",
+   "T1546",
+   "T1078",
+   "T1555.004",
+   "T1548"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 88.2818067073822,
+  "kosu_sn": 88.3
+ },
+ "G-035": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1548.002",
+    "T1546"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": "Administrator",
+    "process": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1548.002",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1546",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1543.003",
+   "T1548.002"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1543.003"
+  ],
+  "retrieval_candidates": [
+   "T1548.002",
+   "T1185",
+   "T1078.003",
+   "T1134.005",
+   "M1026",
+   "T1546",
+   "T1078",
+   "T1555.004",
+   "T1548"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 85.69671273231506,
+  "kosu_sn": 85.7
+ },
+ "G-036": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1571",
+    "T1095"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "\\device\\harddiskvolume3\\program files\\google\\chrome\\application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1571",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1095",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1571"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1564.003",
+   "T1095",
+   "T1047",
+   "T1571",
+   "T1559",
+   "T1686.003",
+   "T1016.001",
+   "M1037",
+   "T1055.012"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 80.7596046924591,
+  "kosu_sn": 80.8
+ },
+ "G-037": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1571",
+    "T1205.001"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "\\device\\harddiskvolume3\\program files\\google\\chrome\\application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1571",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1205.001",
+    "confidence_level": "medium"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1686.003"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1686.003"
+  ],
+  "retrieval_candidates": [
+   "T1106",
+   "T1205.001",
+   "T1553.003",
+   "T1218.012",
+   "T1571",
+   "T1547.010",
+   "T1205.002",
+   "T1005"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 84.33294749259949,
+  "kosu_sn": 84.3
+ },
+ "G-038": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1548.002",
+    "T1546"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": "Administrator",
+    "process": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1548.002",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1546",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1543.003",
+   "T1548.002"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1543.003"
+  ],
+  "retrieval_candidates": [
+   "T1548.002",
+   "T1185",
+   "T1078.003",
+   "T1134.005",
+   "M1026",
+   "T1546",
+   "T1078",
+   "T1555.004",
+   "T1548"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 119.44584918022156,
+  "kosu_sn": 120.1
+ },
+ "G-039": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 1,
+   "teknikler": [
+    "T1571"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "\\device\\harddiskvolume3\\windows\\system32\\svchost.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1571",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1686.003"
+  ],
+  "rejected_mappings": [
+   "T1047"
+  ],
+  "agent_rejected_mappings": [
+   "T1686.003"
+  ],
+  "retrieval_candidates": [
+   "T1007",
+   "T1057",
+   "T1082",
+   "T1047",
+   "T1124",
+   "T1571",
+   "T1049",
+   "M1037"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 73.01900148391724,
+  "kosu_sn": 73.0
+ },
+ "G-040": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": false,
+   "B": true
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1547.004",
+    "T1555.004"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "high",
+   "kritiklik_ailesi": "service",
+   "varlik_yolu": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Services\\WSearchIdxPi\\Performance",
+   "erisim_sinifi": "write",
+   "aktor": {
+    "account": "LOCAL SERVICE",
+    "process": "C:\\Windows\\System32\\svchost.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "high varlık (service) + yazma erişimi, doğrulanmış teknik olmadan",
+  "mappings": [
+   {
+    "attack_id": "T1547.004",
+    "confidence_level": "medium"
+   },
+   {
+    "attack_id": "T1555.004",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1547.004",
+   "T1003.001"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1003.001",
+   "T1543.003"
+  ],
+  "retrieval_candidates": [
+   "T1555.004",
+   "T1056.001",
+   "T1543.003",
+   "T1547.003",
+   "T1078.003",
+   "T1686.003",
+   "T1003.003",
+   "T1012"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 95.02198433876038,
+  "kosu_sn": 95.0
+ },
+ "G-041": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1007",
+    "T1571"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "\\device\\harddiskvolume3\\windows\\system32\\svchost.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1007",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1571",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1686.003",
+   "T1007"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1686.003"
+  ],
+  "retrieval_candidates": [
+   "T1007",
+   "T1571",
+   "T1057",
+   "T1082",
+   "T1047",
+   "T1567.004",
+   "T1518"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 82.42637252807617,
+  "kosu_sn": 82.4
+ },
+ "G-042": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1571",
+    "T1095"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "\\device\\harddiskvolume3\\program files\\google\\chrome\\application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1571",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1095",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1686.003"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1686.003"
+  ],
+  "retrieval_candidates": [
+   "T1564.003",
+   "T1095",
+   "T1047",
+   "T1571",
+   "T1559",
+   "M1037",
+   "T1049",
+   "T1055.012",
+   "T1016.001"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 70.10131216049194,
+  "kosu_sn": 70.1
+ },
+ "G-043": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 3,
+   "teknikler": [
+    "T1548.002",
+    "T1555.004",
+    "T1546"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": "Administrator",
+    "process": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1548.002",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1555.004",
+    "confidence_level": "medium"
+   },
+   {
+    "attack_id": "T1546",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1543.003",
+   "T1548.002"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1543.003"
+  ],
+  "retrieval_candidates": [
+   "T1548.002",
+   "T1078.003",
+   "T1134.005",
+   "M1026",
+   "T1546",
+   "T1555.004",
+   "T1078",
+   "T1548"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 127.00895643234253,
+  "kosu_sn": 127.5
+ },
+ "G-044": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 3,
+   "teknikler": [
+    "T1571",
+    "T1205.001",
+    "T1205.002"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "\\device\\harddiskvolume3\\program files\\google\\chrome\\application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1571",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1205.001",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1205.002",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1686.003"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1686.003"
+  ],
+  "retrieval_candidates": [
+   "T1106",
+   "T1553.003",
+   "T1205.001",
+   "T1218.012",
+   "T1571",
+   "T1205.002",
+   "M1037",
+   "T1547.010",
+   "T1505.003"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 102.40497469902039,
+  "kosu_sn": 102.4
+ },
+ "G-045": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 1,
+   "teknikler": [
+    "T1653"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": null,
+   "aktor": {
+    "account": null,
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1653",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1059.003",
+   "T1653"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1059.003",
+   "T1564.003"
+  ],
+  "retrieval_candidates": [
+   "T1070.006",
+   "T1678",
+   "T1053.005",
+   "T1055.012",
+   "T1489",
+   "T1653",
+   "T1564.003",
+   "T1553.006"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 74.04307985305786,
+  "kosu_sn": 74.0
+ },
+ "G-046": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 1,
+   "teknikler": [
+    "T1133"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "System"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1133",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1686.003"
+  ],
+  "rejected_mappings": [
+   "T1021.006"
+  ],
+  "agent_rejected_mappings": [
+   "T1686.003"
+  ],
+  "retrieval_candidates": [
+   "T1558.003",
+   "T1021.006",
+   "T1133",
+   "T1047",
+   "T1082",
+   "T1071.001",
+   "T1559",
+   "T1095"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 96.81844568252563,
+  "kosu_sn": 96.8
+ },
+ "G-047": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 1,
+   "teknikler": [
+    "T1133"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "System"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1133",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1686.003"
+  ],
+  "rejected_mappings": [
+   "T1021.006"
+  ],
+  "agent_rejected_mappings": [
+   "T1686.003"
+  ],
+  "retrieval_candidates": [
+   "T1558.003",
+   "T1021.006",
+   "T1133",
+   "T1047",
+   "T1082",
+   "T1071.001",
+   "T1559",
+   "T1095"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 128.76409816741943,
+  "kosu_sn": 129.4
+ },
+ "G-048": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 3,
+   "teknikler": [
+    "T1049",
+    "T1095",
+    "T1106"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "\\device\\harddiskvolume3\\users\\public\\tdrfagent.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1049",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1095",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1106",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1049"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1561.001",
+   "T1574.001",
+   "T1095",
+   "T1106",
+   "T1049",
+   "T1685.005",
+   "T1047",
+   "T1018",
+   "T1686",
+   "T1543.003"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 88.59937882423401,
+  "kosu_sn": 88.6
+ },
+ "G-049": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1205.001",
+    "T1205.002"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "System"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1205.001",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1205.002",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1205.001",
+   "T1205.002"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1686.003"
+  ],
+  "retrieval_candidates": [
+   "T1205.001",
+   "T1553.003",
+   "T1205.002",
+   "T1686.003",
+   "T1047",
+   "T1134.004",
+   "T1095",
+   "T1078"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 108.71471667289734,
+  "kosu_sn": 108.7
+ },
+ "G-050": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1205.002",
+    "T1571"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "\\device\\harddiskvolume3\\windows\\system32\\svchost.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1205.002",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1571",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1205.002",
+   "T1686.003"
+  ],
+  "rejected_mappings": [
+   "T1047"
+  ],
+  "agent_rejected_mappings": [
+   "T1686.003"
+  ],
+  "retrieval_candidates": [
+   "T1561.001",
+   "T1057",
+   "T1055.012",
+   "T1124",
+   "T1571",
+   "T1569.002",
+   "M1037",
+   "T1047",
+   "T1049",
+   "T1543.003"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 76.69604992866516,
+  "kosu_sn": 76.7
+ }
+}

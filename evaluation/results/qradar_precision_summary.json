@@ -1,0 +1,85 @@
+{
+  "premises": {
+    "n_rows": 51,
+    "firewall_change_rows": [],
+    "process_creation_rows": [],
+    "premises_hold": true
+  },
+  "n_rows_analyzed": 10,
+  "n_errors": 0,
+  "techniques_total": {
+    "before": 18,
+    "after": 27
+  },
+  "techniques_unique": {
+    "before": [
+      "T1133",
+      "T1205.001",
+      "T1543.003",
+      "T1546",
+      "T1546.003",
+      "T1548.002",
+      "T1557",
+      "T1569.002",
+      "T1571",
+      "T1574.011",
+      "T1686.003"
+    ],
+    "after": [
+      "T1053",
+      "T1095",
+      "T1106",
+      "T1133",
+      "T1205",
+      "T1205.001",
+      "T1546",
+      "T1546.003",
+      "T1547.003",
+      "T1548.002",
+      "T1557",
+      "T1569.002",
+      "T1571",
+      "T1574.011"
+    ],
+    "n_before": 11,
+    "n_after": 14
+  },
+  "high_confidence_total": {
+    "before": 5,
+    "after": 0
+  },
+  "impossible_family": {
+    "before": 2,
+    "after": 0
+  },
+  "unsupported_execution_claims": {
+    "before": 1,
+    "after": 4
+  },
+  "rows_with_high_confidence": {
+    "before": 3,
+    "after": 0
+  },
+  "signal_rows": {
+    "expected": {
+      "46": "PowerShell izi",
+      "49": "tdrfagent"
+    },
+    "kept": [],
+    "lost": []
+  },
+  "n_agent_rejections": 8,
+  "loop_triggered_rows": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "avg_seconds": 103.1
+}

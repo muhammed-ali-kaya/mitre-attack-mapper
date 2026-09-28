@@ -1,0 +1,3512 @@
+{
+ "S-B1-1A": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": true,
+   "B": true
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1012",
+    "T1003.002"
+   ],
+   "dogrulanmis_kanit": 1,
+   "kritiklik": "critical",
+   "kritiklik_ailesi": "credential-hive",
+   "varlik_yolu": "\\REGISTRY\\MACHINE\\SAM\\SAM\\Domains\\Account",
+   "erisim_sinifi": "write",
+   "aktor": {
+    "account": "svc-inventory",
+    "process": "C:\\Windows\\System32\\svchost.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "critical varlık + yazma erişimi + 2 doğrulanmış teknik",
+  "mappings": [
+   {
+    "attack_id": "T1012",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1003.002",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1012",
+   "T1098"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1098"
+  ],
+  "retrieval_candidates": [
+   "T1003.002",
+   "T1012",
+   "T1112",
+   "T1134",
+   "T1003.006",
+   "T1053.005",
+   "T1686.003",
+   "T1547.004"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 163.90338587760925,
+  "kosu_sn": 164.5
+ },
+ "S-B1-1B": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": true,
+   "B": true
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1003.002",
+    "T1552.002"
+   ],
+   "dogrulanmis_kanit": 2,
+   "kritiklik": "critical",
+   "kritiklik_ailesi": "credential-hive",
+   "varlik_yolu": "\\REGISTRY\\MACHINE\\SAM\\SAM\\Domains\\Account",
+   "erisim_sinifi": "write",
+   "aktor": {
+    "account": "svc-inventory",
+    "process": "C:\\Windows\\System32\\svchost.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "critical varlık + yazma erişimi + 2 doğrulanmış teknik",
+  "mappings": [
+   {
+    "attack_id": "T1003.002",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1552.002",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1003.002",
+   "T1552.002"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1003.002",
+   "T1546.008",
+   "T1552.002",
+   "T1003.006",
+   "T1003.003",
+   "T1547.004",
+   "T1548.002",
+   "T1012",
+   "T1547.001",
+   "T1053.005"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 96.33920645713806,
+  "kosu_sn": 96.3
+ },
+ "S-B1-2A": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": false,
+   "B": true
+  },
+  "inputs": {
+   "teknik_sayisi": 4,
+   "teknikler": [
+    "T1552.002",
+    "T1003.006",
+    "T1012",
+    "T1112"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "critical",
+   "kritiklik_ailesi": "lsa-secrets",
+   "varlik_yolu": "\\REGISTRY\\MACHINE\\SECURITY\\Policy\\Secrets",
+   "erisim_sinifi": "write",
+   "aktor": {
+    "account": "svc-inventory",
+    "process": "C:\\Windows\\System32\\svchost.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "critical varlık (lsa-secrets) + yazma erişimi, doğrulanmış teknik olmadan",
+  "mappings": [
+   {
+    "attack_id": "T1552.002",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1003.006",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1012",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1112",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1552.002",
+   "T1003.006"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1056.001",
+   "T1012",
+   "T1543.003",
+   "T1098",
+   "T1112",
+   "T1068",
+   "T1053.005",
+   "T1134"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 88.03002095222473,
+  "kosu_sn": 88.0
+ },
+ "S-B1-2B": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": false,
+   "B": true
+  },
+  "inputs": {
+   "teknik_sayisi": 3,
+   "teknikler": [
+    "T1552.002",
+    "T1003.004",
+    "T1003.003"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "critical",
+   "kritiklik_ailesi": "lsa-secrets",
+   "varlik_yolu": "\\REGISTRY\\MACHINE\\SECURITY\\Policy\\Secrets",
+   "erisim_sinifi": "write",
+   "aktor": {
+    "account": "svc-inventory",
+    "process": "C:\\Windows\\System32\\svchost.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "critical varlık (lsa-secrets) + yazma erişimi, doğrulanmış teknik olmadan",
+  "mappings": [
+   {
+    "attack_id": "T1552.002",
+    "confidence_level": "insufficient"
+   },
+   {
+    "attack_id": "T1003.004",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1003.003",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1552.002",
+   "T1003.004"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1003.003",
+   "T1546.008",
+   "T1552.002",
+   "T1012",
+   "T1547.004",
+   "T1053.005",
+   "T1547.001",
+   "T1134.005",
+   "T1548.002",
+   "T1555.004"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 98.23365712165833,
+  "kosu_sn": 98.2
+ },
+ "S-B1-3A": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": false,
+   "B": true
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1012",
+    "T1134"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "critical",
+   "kritiklik_ailesi": "lsa-config",
+   "varlik_yolu": "\\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Lsa",
+   "erisim_sinifi": "write",
+   "aktor": {
+    "account": "svc-inventory",
+    "process": "C:\\Windows\\System32\\svchost.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "critical varlık (lsa-config) + yazma erişimi, doğrulanmış teknik olmadan",
+  "mappings": [
+   {
+    "attack_id": "T1012",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1134",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1012",
+   "T1053.005"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1053.005"
+  ],
+  "retrieval_candidates": [
+   "T1068",
+   "T1012",
+   "T1112",
+   "T1056.001",
+   "T1134",
+   "T1098",
+   "T1003.001",
+   "T1546.008"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 86.21938300132751,
+  "kosu_sn": 86.2
+ },
+ "S-B1-3B": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": false,
+   "B": true
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1012",
+    "T1552.002"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "critical",
+   "kritiklik_ailesi": "lsa-config",
+   "varlik_yolu": "\\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Lsa",
+   "erisim_sinifi": "write",
+   "aktor": {
+    "account": "svc-inventory",
+    "process": "C:\\Windows\\System32\\svchost.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "critical varlık (lsa-config) + yazma erişimi, doğrulanmış teknik olmadan",
+  "mappings": [
+   {
+    "attack_id": "T1012",
+    "confidence_level": "medium"
+   },
+   {
+    "attack_id": "T1552.002",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1012",
+   "T1552.002"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1012",
+   "T1552.002",
+   "T1546.008",
+   "T1558.003",
+   "T1053.005",
+   "T1218.012",
+   "T1134",
+   "T1547.004"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 0,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 50.12435293197632,
+  "kosu_sn": 50.1
+ },
+ "S-A-01": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1552.002",
+    "T1134.002"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "critical",
+   "kritiklik_ailesi": "credential-hive",
+   "varlik_yolu": "HKLM\\SECURITY",
+   "erisim_sinifi": "create",
+   "aktor": {
+    "account": "jdoe",
+    "process": "C:\\Windows\\System32\\reg.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1552.002",
+    "confidence_level": "medium"
+   },
+   {
+    "attack_id": "T1134.002",
+    "confidence_level": "high"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1552.002",
+   "T1134.002"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1134.002",
+   "T1055.012",
+   "T1134.003",
+   "T1003.001",
+   "T1053.005",
+   "T1552.002",
+   "T1564.002",
+   "T1547.014",
+   "T1547.004"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 0,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 84.99315810203552,
+  "kosu_sn": 85.8
+ },
+ "S-A-02": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": true,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 1,
+   "teknikler": [
+    "T1490"
+   ],
+   "dogrulanmis_kanit": 1,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "create",
+   "aktor": {
+    "account": "jdoe",
+    "process": "C:\\Windows\\System32\\vssadmin.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "1 doğrulanmış teknik",
+  "mappings": [
+   {
+    "attack_id": "T1490",
+    "confidence_level": "high"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1490"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1490",
+   "T1055.012",
+   "T1543.003",
+   "T1564.010",
+   "T1134.002",
+   "T1564.003",
+   "T1134.004",
+   "T1134.003",
+   "T1685.005"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 0,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 40.948684215545654,
+  "kosu_sn": 40.9
+ },
+ "S-A-03": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 3,
+   "teknikler": [
+    "T1546.003",
+    "T1070.006",
+    "T1134.004"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "create",
+   "aktor": {
+    "account": "jdoe",
+    "process": "C:\\Windows\\System32\\wbem\\WMIC.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1546.003",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1070.006",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1134.004",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1047",
+   "T1546.003"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1047"
+  ],
+  "retrieval_candidates": [
+   "T1070.006",
+   "T1685.005",
+   "T1055.012",
+   "T1543.003",
+   "T1053.005",
+   "T1134.004",
+   "T1134.003"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 83.03293037414551,
+  "kosu_sn": 83.0
+ },
+ "S-A-04": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": true,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1218.011",
+    "T1134.004"
+   ],
+   "dogrulanmis_kanit": 2,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "create",
+   "aktor": {
+    "account": "jdoe",
+    "process": "C:\\Windows\\System32\\rundll32.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "2 doğrulanmış teknik",
+  "mappings": [
+   {
+    "attack_id": "T1218.011",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1134.004",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1218.011",
+   "T1134.004"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1134.004",
+   "T1053.005",
+   "T1134.002",
+   "T1218.011",
+   "T1543.003",
+   "T1134.003",
+   "T1218.002",
+   "T1055.012",
+   "T1555.004"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 97.1979250907898,
+  "kosu_sn": 97.2
+ },
+ "S-A-05": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 3,
+   "teknikler": [
+    "T1220",
+    "T1202",
+    "T1059"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "create",
+   "aktor": {
+    "account": null,
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1220",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1202",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1059",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1220",
+   "T1202"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1053.005"
+  ],
+  "retrieval_candidates": [
+   "T1220",
+   "T1070.006",
+   "T1505.003",
+   "T1218.005",
+   "T1053.005",
+   "T1124",
+   "T1204.002",
+   "T1059.001"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 88.07240772247314,
+  "kosu_sn": 88.1
+ },
+ "S-A-06": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": true,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 3,
+   "teknikler": [
+    "T1543.003",
+    "T1569.002",
+    "T1569"
+   ],
+   "dogrulanmis_kanit": 1,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "create",
+   "aktor": {
+    "account": null,
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "3 doğrulanmış teknik",
+  "mappings": [
+   {
+    "attack_id": "T1543.003",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1569.002",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1569",
+    "confidence_level": "medium"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1543.003",
+   "T1569.002",
+   "T1569"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1543.003",
+   "T1543",
+   "T1195.002",
+   "T1569.002",
+   "T1569",
+   "T1505.005",
+   "T1007"
+  ],
+  "retrieved_chunk_sayisi": 9,
+  "loop_passes": 0,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 46.27660799026489,
+  "kosu_sn": 46.3
+ },
+ "S-A-07": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": true,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 3,
+   "teknikler": [
+    "T1543.003",
+    "T1569.002",
+    "T1543"
+   ],
+   "dogrulanmis_kanit": 1,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "create",
+   "aktor": {
+    "account": "WINHOST-01$",
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "3 doğrulanmış teknik",
+  "mappings": [
+   {
+    "attack_id": "T1543.003",
+    "confidence_level": "high"
+   },
+   {
+    "attack_id": "T1569.002",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1543",
+    "confidence_level": "medium"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1543.003",
+   "T1569.002",
+   "T1543"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1543.003",
+   "T1136.001",
+   "T1569.002",
+   "T1569",
+   "T1543",
+   "T1007",
+   "T1555.004"
+  ],
+  "retrieved_chunk_sayisi": 9,
+  "loop_passes": 0,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 52.28042817115784,
+  "kosu_sn": 52.3
+ },
+ "S-A-08": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": true,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1053.005",
+    "T1053"
+   ],
+   "dogrulanmis_kanit": 1,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": null,
+   "aktor": {
+    "account": "jdoe",
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "2 doğrulanmış teknik",
+  "mappings": [
+   {
+    "attack_id": "T1053.005",
+    "confidence_level": "medium"
+   },
+   {
+    "attack_id": "T1053",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1053.005",
+   "T1053"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1053.005",
+   "T1053",
+   "T1036.004",
+   "T1546"
+  ],
+  "retrieved_chunk_sayisi": 7,
+  "loop_passes": 0,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 32.68672728538513,
+  "kosu_sn": 32.7
+ },
+ "S-A-09": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": true,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1053.005",
+    "T1053"
+   ],
+   "dogrulanmis_kanit": 2,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": null,
+   "aktor": {
+    "account": "jdoe",
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "2 doğrulanmış teknik",
+  "mappings": [
+   {
+    "attack_id": "T1053.005",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1053",
+    "confidence_level": "insufficient"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1053.005",
+   "T1053",
+   "T1059.001"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1059.001"
+  ],
+  "retrieval_candidates": [
+   "T1070.006",
+   "T1053.005",
+   "T1053",
+   "T1036.004",
+   "T1559.002"
+  ],
+  "retrieved_chunk_sayisi": 8,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 114.26081848144531,
+  "kosu_sn": 115.0
+ },
+ "S-A-10": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 1,
+   "teknikler": [
+    "T1685.001"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "delete",
+   "aktor": {
+    "account": "jdoe",
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1685.001",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1685.005"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1685.005",
+   "T1070.003"
+  ],
+  "retrieval_candidates": [
+   "T1685.001",
+   "T1087.002",
+   "T1547.004",
+   "T1070.003",
+   "T1070.009",
+   "T1070.007",
+   "T1690",
+   "T1078"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 70.28880453109741,
+  "kosu_sn": 70.3
+ },
+ "S-A-11": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1685.001",
+    "T1685.006"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": null,
+   "aktor": {
+    "account": "WINHOST-01\\jdoe",
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1685.001",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1685.006",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1685.001"
+  ],
+  "rejected_mappings": [
+   "T1685.005"
+  ],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1685.006",
+   "T1685.005",
+   "T1070.006",
+   "T1070.003",
+   "T1070.007",
+   "T1685.001",
+   "T1070"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 61.208914279937744,
+  "kosu_sn": 61.2
+ },
+ "S-A-12": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": true,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 1,
+   "teknikler": [
+    "T1564.003"
+   ],
+   "dogrulanmis_kanit": 2,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "create",
+   "aktor": {
+    "account": "WINHOST-01\\jdoe",
+    "process": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "1 doğrulanmış teknik",
+  "mappings": [
+   {
+    "attack_id": "T1564.003",
+    "confidence_level": "high"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1059.001",
+   "T1564.003"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1059.001",
+   "T1059.003"
+  ],
+  "retrieval_candidates": [
+   "T1070.006",
+   "T1564.003",
+   "T1059.003",
+   "T1053.005",
+   "T1204.002",
+   "T1134.002",
+   "T1134.003"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 72.49724769592285,
+  "kosu_sn": 72.5
+ },
+ "S-A-13": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 0,
+   "teknikler": [],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "create",
+   "aktor": {
+    "account": null,
+    "process": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [],
+  "mappings_before_agents": [
+   "T1547.001",
+   "T1059.001",
+   "T1204.002"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1547.001",
+   "T1059.001",
+   "T1204.002",
+   "T1505.003",
+   "T1053.005"
+  ],
+  "retrieval_candidates": [
+   "T1070.006",
+   "T1505.003",
+   "T1134.002",
+   "T1218.002",
+   "T1053.005",
+   "T1137.005",
+   "T1059.003",
+   "T1543.003"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 120.49363470077515,
+  "kosu_sn": 120.5
+ },
+ "S-A-14": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 1,
+   "teknikler": [
+    "T1218.012"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": null,
+   "aktor": {
+    "account": null,
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1218.012",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1003.001"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1003.001",
+   "T1218.010",
+   "T1218.011"
+  ],
+  "retrieval_candidates": [
+   "T1218.010",
+   "T1059.003",
+   "T1221",
+   "T1218.012",
+   "T1053.005",
+   "T1047",
+   "T1021.006",
+   "T1218.011",
+   "T1686.003",
+   "T1218.005"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 193.48803734779358,
+  "kosu_sn": 194.7
+ },
+ "S-B-01": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": true,
+   "B": true
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1547.001",
+    "T1112"
+   ],
+   "dogrulanmis_kanit": 2,
+   "kritiklik": "high",
+   "kritiklik_ailesi": "autorun-run",
+   "varlik_yolu": "\\REGISTRY\\MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
+   "erisim_sinifi": "write",
+   "aktor": {
+    "account": "WINHOST-01$",
+    "process": "C:\\Users\\Public\\u.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "high varlık + yazma erişimi + 2 doğrulanmış teknik",
+  "mappings": [
+   {
+    "attack_id": "T1547.001",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1112",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1547.001",
+   "T1112"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1685.001",
+   "T1112",
+   "T1012",
+   "T1547.001",
+   "T1547.004"
+  ],
+  "retrieved_chunk_sayisi": 8,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 105.12685632705688,
+  "kosu_sn": 105.1
+ },
+ "S-B-02": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": false,
+   "B": true
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1547.004",
+    "T1112"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "high",
+   "kritiklik_ailesi": "winlogon",
+   "varlik_yolu": "\\REGISTRY\\MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon",
+   "erisim_sinifi": "write",
+   "aktor": {
+    "account": "WINHOST-01$",
+    "process": "C:\\Windows\\System32\\reg.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "high varlık (winlogon) + yazma erişimi, doğrulanmış teknik olmadan",
+  "mappings": [
+   {
+    "attack_id": "T1547.004",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1112",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1547.004"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1685.001",
+   "T1547.001",
+   "T1012",
+   "T1547.004",
+   "T1112"
+  ],
+  "retrieved_chunk_sayisi": 9,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 84.23756217956543,
+  "kosu_sn": 84.2
+ },
+ "S-B-03": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": false,
+   "B": true
+  },
+  "inputs": {
+   "teknik_sayisi": 3,
+   "teknikler": [
+    "T1546.012",
+    "T1547.004",
+    "T1112"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "high",
+   "kritiklik_ailesi": "ifeo",
+   "varlik_yolu": "\\REGISTRY\\MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\sethc.exe",
+   "erisim_sinifi": "write",
+   "aktor": {
+    "account": "WINHOST-01$",
+    "process": "C:\\Windows\\System32\\reg.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "high varlık (ifeo) + yazma erişimi, doğrulanmış teknik olmadan",
+  "mappings": [
+   {
+    "attack_id": "T1546.012",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1547.004",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1112",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1546.012",
+   "T1547.004"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1685.001",
+   "T1546.012",
+   "T1547.001",
+   "T1012",
+   "T1546.001",
+   "T1112"
+  ],
+  "retrieved_chunk_sayisi": 9,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 94.97995209693909,
+  "kosu_sn": 95.0
+ },
+ "S-B-04": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": false,
+   "B": true
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1112",
+    "T1552.002"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "high",
+   "kritiklik_ailesi": "defender-policy",
+   "varlik_yolu": "\\REGISTRY\\MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows Defender",
+   "erisim_sinifi": "write",
+   "aktor": {
+    "account": "jdoe",
+    "process": "C:\\Windows\\System32\\reg.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "high varlık (defender-policy) + yazma erişimi, doğrulanmış teknik olmadan",
+  "mappings": [
+   {
+    "attack_id": "T1112",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1552.002",
+    "confidence_level": "medium"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1112",
+   "T1552.002"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1012",
+   "T1112",
+   "T1552.002",
+   "T1053.005",
+   "T1556.005",
+   "T1563.002",
+   "T1547.004",
+   "T1546.008",
+   "T1685.001",
+   "T1547.001"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 0,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 113.99621677398682,
+  "kosu_sn": 115.3
+ },
+ "S-B-05": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": false,
+   "B": true
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1112",
+    "T1552.002"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "high",
+   "kritiklik_ailesi": "wdigest",
+   "varlik_yolu": "\\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\WDigest",
+   "erisim_sinifi": "write",
+   "aktor": {
+    "account": "WINHOST-01$",
+    "process": "C:\\Windows\\System32\\reg.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "high varlık (wdigest) + yazma erişimi, doğrulanmış teknik olmadan",
+  "mappings": [
+   {
+    "attack_id": "T1112",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1552.002",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1112",
+   "T1552.002"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1685.001",
+   "T1012",
+   "T1112",
+   "T1547.001",
+   "T1547.004"
+  ],
+  "retrieved_chunk_sayisi": 8,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 86.87063145637512,
+  "kosu_sn": 86.9
+ },
+ "S-B-06": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": false,
+   "B": true
+  },
+  "inputs": {
+   "teknik_sayisi": 3,
+   "teknikler": [
+    "T1552.002",
+    "T1112",
+    "T1012"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "high",
+   "kritiklik_ailesi": "service",
+   "varlik_yolu": "\\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Services\\WinDefend",
+   "erisim_sinifi": "write",
+   "aktor": {
+    "account": "jdoe",
+    "process": "C:\\Windows\\System32\\reg.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "high varlık (service) + yazma erişimi, doğrulanmış teknik olmadan",
+  "mappings": [
+   {
+    "attack_id": "T1552.002",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1112",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1012",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1552.002",
+   "T1112"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1552.002",
+   "T1003.003",
+   "T1078.003",
+   "T1012",
+   "T1547.004",
+   "T1547.001",
+   "T1685.001",
+   "T1036.005"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 113.08487439155579,
+  "kosu_sn": 113.1
+ },
+ "S-B-07": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": false,
+   "B": true
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1112",
+    "T1547.014"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "high",
+   "kritiklik_ailesi": "appinit-dll",
+   "varlik_yolu": "\\REGISTRY\\MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Windows",
+   "erisim_sinifi": "write",
+   "aktor": {
+    "account": "WINHOST-01$",
+    "process": "C:\\Windows\\System32\\reg.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "high varlık (appinit-dll) + yazma erişimi, doğrulanmış teknik olmadan",
+  "mappings": [
+   {
+    "attack_id": "T1112",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1547.014",
+    "confidence_level": "medium"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1112",
+   "T1547.014"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1547.014",
+   "T1012",
+   "T1547.001",
+   "T1112",
+   "T1547.004",
+   "T1547.002",
+   "T1552.002",
+   "T1546.001"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 0,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 45.50201773643494,
+  "kosu_sn": 45.5
+ },
+ "S-B-08": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": false,
+   "B": true
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1547.004",
+    "T1112"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "high",
+   "kritiklik_ailesi": "winlogon",
+   "varlik_yolu": "\\REGISTRY\\MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\Notify\\evil",
+   "erisim_sinifi": "write",
+   "aktor": {
+    "account": "WINHOST-01$",
+    "process": "C:\\Windows\\System32\\reg.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "high varlık (winlogon) + yazma erişimi, doğrulanmış teknik olmadan",
+  "mappings": [
+   {
+    "attack_id": "T1547.004",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1112",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1547.004",
+   "T1112"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1685.001",
+   "T1012",
+   "T1547.001",
+   "T1112",
+   "T1547.004"
+  ],
+  "retrieved_chunk_sayisi": 9,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 96.79216742515564,
+  "kosu_sn": 96.8
+ },
+ "S-B-09": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": false,
+   "B": true
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1112",
+    "T1685.001"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "high",
+   "kritiklik_ailesi": "service",
+   "varlik_yolu": "\\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters",
+   "erisim_sinifi": "write",
+   "aktor": {
+    "account": "WINHOST-01$",
+    "process": "C:\\Windows\\System32\\reg.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "high varlık (service) + yazma erişimi, doğrulanmış teknik olmadan",
+  "mappings": [
+   {
+    "attack_id": "T1112",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1685.001",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1112",
+   "T1547.001"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1547.001"
+  ],
+  "retrieval_candidates": [
+   "T1685.001",
+   "T1012",
+   "T1112",
+   "T1546.001"
+  ],
+  "retrieved_chunk_sayisi": 6,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 148.24306273460388,
+  "kosu_sn": 149.6
+ },
+ "S-B-10": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": false,
+   "B": true
+  },
+  "inputs": {
+   "teknik_sayisi": 1,
+   "teknikler": [
+    "T1547.012"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "high",
+   "kritiklik_ailesi": "print-provider",
+   "varlik_yolu": "\\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Print\\Environments\\Windows x64\\Print Processors\\evil",
+   "erisim_sinifi": "write",
+   "aktor": {
+    "account": "jdoe",
+    "process": "C:\\Windows\\System32\\spoolsv.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "high varlık (print-provider) + yazma erişimi, doğrulanmış teknik olmadan",
+  "mappings": [
+   {
+    "attack_id": "T1547.012",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1547.012"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1003.003",
+   "T1547.012",
+   "T1059.003",
+   "T1053.005",
+   "T1203",
+   "T1547.004",
+   "T1555.004",
+   "T1036.005"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 86.7904646396637,
+  "kosu_sn": 86.8
+ },
+ "S-EK2-01": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": false,
+   "B": true
+  },
+  "inputs": {
+   "teknik_sayisi": 3,
+   "teknikler": [
+    "T1112",
+    "T1574.011",
+    "T1547.014"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "high",
+   "kritiklik_ailesi": "service",
+   "varlik_yolu": "\\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Services\\WixSvc",
+   "erisim_sinifi": "write",
+   "aktor": {
+    "account": "SYSTEM",
+    "process": "C:\\Windows\\servicing\\TrustedInstaller.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "high varlık (service) + yazma erişimi, doğrulanmış teknik olmadan",
+  "mappings": [
+   {
+    "attack_id": "T1112",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1574.011",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1547.014",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1112",
+   "T1574.011"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1685.001",
+   "T1012",
+   "T1547.014",
+   "T1112",
+   "T1547.001"
+  ],
+  "retrieved_chunk_sayisi": 8,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 89.6801450252533,
+  "kosu_sn": 89.7
+ },
+ "S-EK2-02": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": false,
+   "B": true
+  },
+  "inputs": {
+   "teknik_sayisi": 5,
+   "teknikler": [
+    "T1547.002",
+    "T1012",
+    "T1685.001",
+    "T1112",
+    "T1547.014"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "high",
+   "kritiklik_ailesi": "service",
+   "varlik_yolu": "\\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Services\\MsiSvc",
+   "erisim_sinifi": "write",
+   "aktor": {
+    "account": "SYSTEM",
+    "process": "C:\\Windows\\System32\\msiexec.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "high varlık (service) + yazma erişimi, doğrulanmış teknik olmadan",
+  "mappings": [
+   {
+    "attack_id": "T1547.002",
+    "confidence_level": "medium"
+   },
+   {
+    "attack_id": "T1012",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1685.001",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1112",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1547.014",
+    "confidence_level": "medium"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1547.001",
+   "T1547.002",
+   "T1012",
+   "T1685.001"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1547.001"
+  ],
+  "retrieval_candidates": [
+   "T1685.001",
+   "T1012",
+   "T1547.014",
+   "T1112"
+  ],
+  "retrieved_chunk_sayisi": 6,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 113.65384888648987,
+  "kosu_sn": 113.7
+ },
+ "S-EK2-03": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": false,
+   "B": true
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1112",
+    "T1574.011"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "high",
+   "kritiklik_ailesi": "defender-policy",
+   "varlik_yolu": "\\REGISTRY\\MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows Defender",
+   "erisim_sinifi": "write",
+   "aktor": {
+    "account": "SYSTEM",
+    "process": "C:\\Windows\\servicing\\TrustedInstaller.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "high varlık (defender-policy) + yazma erişimi, doğrulanmış teknik olmadan",
+  "mappings": [
+   {
+    "attack_id": "T1112",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1574.011",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1112",
+   "T1574.011"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1685.001",
+   "T1686.003",
+   "T1012",
+   "T1112",
+   "T1547.001",
+   "T1547.014"
+  ],
+  "retrieved_chunk_sayisi": 9,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 135.16148924827576,
+  "kosu_sn": 136.5
+ },
+ "S-EK2-04": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": true,
+   "B": true
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1003.002",
+    "T1552.002"
+   ],
+   "dogrulanmis_kanit": 1,
+   "kritiklik": "critical",
+   "kritiklik_ailesi": "credential-hive",
+   "varlik_yolu": "\\REGISTRY\\MACHINE\\SAM\\SAM\\Domains\\Account",
+   "erisim_sinifi": "write",
+   "aktor": {
+    "account": "SYSTEM",
+    "process": "C:\\Windows\\servicing\\TrustedInstaller.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "critical varlık + yazma erişimi + 2 doğrulanmış teknik",
+  "mappings": [
+   {
+    "attack_id": "T1003.002",
+    "confidence_level": "medium"
+   },
+   {
+    "attack_id": "T1552.002",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1003.002",
+   "T1552.002"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1003.002",
+   "T1003.006",
+   "T1552.002",
+   "T1547.004",
+   "T1012",
+   "T1218.012",
+   "T1134",
+   "T1547.001"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 0,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 60.45679068565369,
+  "kosu_sn": 60.5
+ },
+ "S-ID-01": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1136.002",
+    "T1136"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "create",
+   "aktor": {
+    "account": "jdoe",
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1136.002",
+    "confidence_level": "high"
+   },
+   {
+    "attack_id": "T1136",
+    "confidence_level": "medium"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1136.002",
+   "T1136"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1136.002",
+   "T1136.001",
+   "T1078.002",
+   "T1136.003",
+   "T1136",
+   "T1078",
+   "T1564.002"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 0,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 46.478962898254395,
+  "kosu_sn": 46.5
+ },
+ "S-ID-02": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1098.007",
+    "T1069.001"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "write",
+   "aktor": {
+    "account": "jdoe",
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1098.007",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1069.001",
+    "confidence_level": "insufficient"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1098.007",
+   "T1069.001"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1098.007",
+   "T1069.001",
+   "T1136.001",
+   "T1078.003",
+   "T1484.002",
+   "M1052"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 83.76774764060974,
+  "kosu_sn": 83.8
+ },
+ "S-ID-03": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1098.007",
+    "T1069.002"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": null,
+   "aktor": {
+    "account": null,
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1098.007",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1069.002",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1098.007",
+   "T1069.002"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1069.002",
+   "T1078.002",
+   "T1098.007",
+   "T1484.002",
+   "T1003.006",
+   "T1134.005",
+   "T1484.001"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 84.1044774055481,
+  "kosu_sn": 84.1
+ },
+ "S-ID-04": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": true,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1098",
+    "T1531"
+   ],
+   "dogrulanmis_kanit": 2,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "write",
+   "aktor": {
+    "account": "svc-helper",
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "2 doğrulanmış teknik",
+  "mappings": [
+   {
+    "attack_id": "T1098",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1531",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1098",
+   "T1531"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1531",
+   "M1052",
+   "T1564.002",
+   "T1098",
+   "M1018",
+   "T1556.005",
+   "T1078.003",
+   "T1087"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 116.77226901054382,
+  "kosu_sn": 117.6
+ },
+ "S-ID-05": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 3,
+   "teknikler": [
+    "T1098.007",
+    "T1484.001",
+    "T1484.002"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": null,
+   "aktor": {
+    "account": null,
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1098.007",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1484.001",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1484.002",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1098.007",
+   "T1484.001"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1484.002",
+   "M1052",
+   "T1098.007",
+   "T1003.006",
+   "T1134.005",
+   "T1069.001",
+   "T1078.004",
+   "T1098"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 113.3665726184845,
+  "kosu_sn": 113.4
+ },
+ "S-ID-06": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": true,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 3,
+   "teknikler": [
+    "T1558.003",
+    "T1550.003",
+    "T1558"
+   ],
+   "dogrulanmis_kanit": 2,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": null,
+   "aktor": {
+    "account": "jdoe@CORP.LOCAL",
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "3 doğrulanmış teknik",
+  "mappings": [
+   {
+    "attack_id": "T1558.003",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1550.003",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1558",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1558.003",
+   "T1550.003"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1558.003",
+   "T1550.003",
+   "T1558.004",
+   "T1558",
+   "T1558.001",
+   "T1558.002"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 102.69973278045654,
+  "kosu_sn": 102.7
+ },
+ "S-ID-07": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1112",
+    "T1685.001"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "write",
+   "aktor": {
+    "account": null,
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1112",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1685.001",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1112",
+   "T1685.001"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1686.003",
+   "T1685.004",
+   "T1112",
+   "T1553.006",
+   "T1685.005",
+   "M1047",
+   "T1685.001",
+   "T1134.005",
+   "T1546.008"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 100.05891990661621,
+  "kosu_sn": 100.1
+ },
+ "S-ID-08": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": true,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1686.003",
+    "T1685.001"
+   ],
+   "dogrulanmis_kanit": 4,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": null,
+   "aktor": {
+    "account": null,
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "2 doğrulanmış teknik",
+  "mappings": [
+   {
+    "attack_id": "T1686.003",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1685.001",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1489",
+   "T1686.003"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1489"
+  ],
+  "retrieval_candidates": [
+   "T1686.003",
+   "T1685.001",
+   "T1053.005",
+   "T1543.003",
+   "T1685.005",
+   "T1685",
+   "T1529"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 127.5287127494812,
+  "kosu_sn": 128.5
+ },
+ "S-ID-09": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": true,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 3,
+   "teknikler": [
+    "T1686.003",
+    "T1686",
+    "T1685"
+   ],
+   "dogrulanmis_kanit": 2,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": null,
+   "aktor": {
+    "account": null,
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "3 doğrulanmış teknik",
+  "mappings": [
+   {
+    "attack_id": "T1686.003",
+    "confidence_level": "high"
+   },
+   {
+    "attack_id": "T1686",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1685",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1686.003",
+   "T1686",
+   "T1685"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1686.003",
+   "T1685",
+   "T1685.003",
+   "T1686",
+   "T1688",
+   "T1484.002",
+   "T1685.001",
+   "T1484"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 0,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 54.40843057632446,
+  "kosu_sn": 54.4
+ },
+ "S-ID-10": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": true,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 3,
+   "teknikler": [
+    "T1686.003",
+    "T1686",
+    "T1571"
+   ],
+   "dogrulanmis_kanit": 4,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": null,
+   "aktor": {
+    "account": null,
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "3 doğrulanmış teknik",
+  "mappings": [
+   {
+    "attack_id": "T1686.003",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1686",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1571",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1686.003",
+   "T1686"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1686.003",
+   "T1686",
+   "T1563.002",
+   "T1571",
+   "T1505.005",
+   "T1112",
+   "T1556.005",
+   "T1021.001"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 105.84161972999573,
+  "kosu_sn": 105.8
+ },
+ "S-ID-11": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1039",
+    "T1135"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "read",
+   "aktor": {
+    "account": "jdoe",
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1039",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1135",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1039",
+   "T1135"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1039",
+   "T1070.005",
+   "T1135",
+   "T1080",
+   "T1021.003",
+   "T1498",
+   "T1049"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 86.2638590335846,
+  "kosu_sn": 86.3
+ },
+ "S-ID-12": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1039",
+    "T1135"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": null,
+   "aktor": {
+    "account": null,
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1039",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1135",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1039",
+   "T1135"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1686.003",
+   "T1039",
+   "T1070.005",
+   "T1187",
+   "M1035",
+   "T1135",
+   "T1021.003"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 94.1220543384552,
+  "kosu_sn": 94.1
+ },
+ "S-ID-13": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 1,
+   "teknikler": [
+    "T1685.001"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": null,
+   "aktor": {
+    "account": null,
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1685.001",
+    "confidence_level": "high"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1685.001",
+   "T1489"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1489"
+  ],
+  "retrieval_candidates": [
+   "T1685.001",
+   "T1685.005",
+   "T1070.006",
+   "T1053.005",
+   "T1547.004",
+   "T1543.003",
+   "T1574.011",
+   "T1688"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 113.46386957168579,
+  "kosu_sn": 114.2
+ },
+ "S-ID-14": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1205",
+    "T1036.005"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": null,
+   "aktor": {
+    "account": null,
+    "process": "C:\\Users\\Public\\u.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1205",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1036.005",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1205",
+   "T1071.001"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1071.001"
+  ],
+  "retrieval_candidates": [
+   "T1686.003",
+   "T1185",
+   "T1036.005",
+   "T1053.005",
+   "T1205",
+   "T1505.003",
+   "T1012",
+   "T1059.003",
+   "T1007",
+   "T1204.002"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 120.5103280544281,
+  "kosu_sn": 120.5
+ },
+ "S-N-01": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1016.001",
+    "T1571"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": null,
+    "process": "\\device\\harddiskvolume3\\program files\\google\\chrome\\application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1016.001",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1571",
+    "confidence_level": "high"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1016.001",
+   "T1686.003"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1686.003",
+   "T1071.001"
+  ],
+  "retrieval_candidates": [
+   "T1571",
+   "T1564.003",
+   "T1016.001",
+   "M1037",
+   "T1071.001",
+   "T1204.002",
+   "T1557",
+   "M1033",
+   "T1505.003",
+   "T1559"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 111.78325057029724,
+  "kosu_sn": 111.8
+ },
+ "S-N-02": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 6,
+   "teknikler": [
+    "T1556",
+    "T1134.003",
+    "T1547.002",
+    "T1037.001",
+    "T1547.004",
+    "T1056.001"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "auth",
+   "aktor": {
+    "account": "jdoe",
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1556",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1134.003",
+    "confidence_level": "medium"
+   },
+   {
+    "attack_id": "T1547.002",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1037.001",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1547.004",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1056.001",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1078",
+   "T1556"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1078",
+   "T1098"
+  ],
+  "retrieval_candidates": [
+   "T1134.003",
+   "T1547.002",
+   "T1037.001",
+   "T1547.004",
+   "T1556",
+   "T1056.001",
+   "T1098",
+   "T1053.005",
+   "M1036"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 160.06363892555237,
+  "kosu_sn": 160.1
+ },
+ "S-N-03": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": true,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 3,
+   "teknikler": [
+    "T1110.001",
+    "T1110",
+    "T1110.003"
+   ],
+   "dogrulanmis_kanit": 2,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "auth",
+   "aktor": {
+    "account": "jdoe",
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "3 doğrulanmış teknik",
+  "mappings": [
+   {
+    "attack_id": "T1110.001",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1110",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1110.003",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1110.001",
+   "T1110",
+   "T1110.003"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1110.001",
+   "T1110",
+   "T1110.003",
+   "T1531",
+   "T1078.002",
+   "T1078",
+   "M1036",
+   "T1098",
+   "T1111"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 168.227929353714,
+  "kosu_sn": 169.1
+ },
+ "S-N-04": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1012",
+    "T1552.002"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "noise",
+   "kritiklik_ailesi": "time-service",
+   "varlik_yolu": "\\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Services\\W32Time\\Config",
+   "erisim_sinifi": "write",
+   "aktor": {
+    "account": "LOCAL SERVICE",
+    "process": "C:\\Windows\\System32\\svchost.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1012",
+    "confidence_level": "medium"
+   },
+   {
+    "attack_id": "T1552.002",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1012",
+   "T1543.003"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1543.003"
+  ],
+  "retrieval_candidates": [
+   "T1056.001",
+   "T1552.002",
+   "T1012",
+   "T1053.005",
+   "T1547.001",
+   "T1547.004",
+   "T1561.001",
+   "T1078.003",
+   "T1685.001"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 107.59961605072021,
+  "kosu_sn": 107.6
+ },
+ "S-N-05": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1218.007",
+    "T1134.002"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "create",
+   "aktor": {
+    "account": "SYSTEM",
+    "process": "C:\\Windows\\System32\\msiexec.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1218.007",
+    "confidence_level": "medium"
+   },
+   {
+    "attack_id": "T1134.002",
+    "confidence_level": "medium"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1218.007",
+   "T1134.002"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1134.004",
+   "T1543.003",
+   "T1134.002",
+   "T1134.003",
+   "T1546.003",
+   "T1218.007",
+   "T1134",
+   "T1053.005"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 0,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 57.03101944923401,
+  "kosu_sn": 57.0
+ },
+ "S-N-06": {
+  "decision": "SUFFICIENT_SUSPICIOUS",
+  "paths": {
+   "A": true,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 3,
+   "teknikler": [
+    "T1543.003",
+    "T1543",
+    "T1205.002"
+   ],
+   "dogrulanmis_kanit": 2,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "create",
+   "aktor": {
+    "account": null,
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "3 doğrulanmış teknik",
+  "mappings": [
+   {
+    "attack_id": "T1543.003",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1543",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1205.002",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1543.003",
+   "T1543"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1543.003",
+   "T1205.002",
+   "T1569.002",
+   "T1036.004",
+   "T1007",
+   "T1040",
+   "T1055"
+  ],
+  "retrieved_chunk_sayisi": 9,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 105.68024110794067,
+  "kosu_sn": 105.7
+ },
+ "S-N-07": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1112",
+    "T1685.001"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "noise",
+   "kritiklik_ailesi": "os-version",
+   "varlik_yolu": "\\REGISTRY\\MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\ProductName",
+   "erisim_sinifi": "write",
+   "aktor": {
+    "account": "SYSTEM",
+    "process": "C:\\Windows\\servicing\\TrustedInstaller.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1112",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1685.001",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1112"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1685.001",
+   "T1012",
+   "T1112",
+   "T1547.001"
+  ],
+  "retrieved_chunk_sayisi": 7,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 125.37663841247559,
+  "kosu_sn": 126.1
+ },
+ "S-N-08": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1550.003",
+    "T1558"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": null,
+   "aktor": {
+    "account": "jdoe@CORP.LOCAL",
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1550.003",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1558",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1558.003",
+   "T1550.003"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [
+   "T1558.003"
+  ],
+  "retrieval_candidates": [
+   "T1550.003",
+   "T1558",
+   "T1558.004",
+   "T1558.001",
+   "T1558.002",
+   "T1558.005"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 88.2705647945404,
+  "kosu_sn": 88.3
+ },
+ "S-N-09": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 3,
+   "teknikler": [
+    "T1070.005",
+    "T1135",
+    "T1039"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": null,
+   "aktor": {
+    "account": null,
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1070.005",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1135",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1039",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1070.005",
+   "T1135"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1135",
+   "M1035",
+   "T1686.003",
+   "T1039",
+   "T1021.003",
+   "T1040",
+   "T1046",
+   "T1049"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 77.22959876060486,
+  "kosu_sn": 77.2
+ },
+ "S-N-10": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1102.003",
+    "T1049"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "audit",
+   "aktor": {
+    "account": "WINHOST-01\\jdoe",
+    "process": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1102.003",
+    "confidence_level": "medium"
+   },
+   {
+    "attack_id": "T1049",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1102.003",
+   "T1049"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1016",
+   "T1049",
+   "T1102.003",
+   "T1539",
+   "T1518",
+   "T1505.003",
+   "T1016.001"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 0,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 52.8436336517334,
+  "kosu_sn": 52.9
+ },
+ "S-N-11": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1546",
+    "T1220"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "create",
+   "aktor": {
+    "account": null,
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1546",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1220",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1546"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1070.006",
+   "T1134.002",
+   "T1220",
+   "T1218.001",
+   "T1505.003",
+   "T1546",
+   "T1659",
+   "T1053.005",
+   "T1218.005"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 96.7918004989624,
+  "kosu_sn": 96.8
+ },
+ "S-N-12": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1134.003",
+    "T1098.007"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": "auth",
+   "aktor": {
+    "account": "SYSTEM",
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1134.003",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1098.007",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1134.003",
+   "T1098.007"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1134.003",
+   "T1037.001",
+   "T1037.003",
+   "T1134.005",
+   "T1098.007",
+   "T1037",
+   "T1548.002",
+   "T1548"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 131.4800157546997,
+  "kosu_sn": 132.2
+ }
+}

@@ -1,0 +1,9 @@
+# Controlled ATT&CK 19.2 benchmark result files: store the exact bytes of the
+# verified run (CRLF line endings). comparison_summary.json records the sha256
+# of the JSONL files, and PROVENANCE.md records all four hashes; line-ending
+# normalisation would change those bytes and break the provenance check on
+# every checkout. Scoped to these four paths only.
+/evaluation/results/controlled_attack_19_2/comparison_summary.json -text
+/evaluation/results/controlled_attack_19_2/eval_baseline.jsonl -text
+/evaluation/results/controlled_attack_19_2/eval_improved.jsonl -text
+/evaluation/results/controlled_attack_19_2/eval_raw_outputs.jsonl -text

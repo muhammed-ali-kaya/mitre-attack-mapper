@@ -1,0 +1,52 @@
+[
+  {
+    "query": "Bir PowerShell süreci internetten kod indirerek bellekte çalıştırdı.",
+    "expected_attack_id": "T1059.001",
+    "source": "dokuman bolum 4.1"
+  },
+  {
+    "query": "schtasks /create /s 10.10.20.15 /tn UpdateCheck /tr powershell.exe /sc onlogon komutuyla uzak sistemde zamanlanmis gorev olusturuldu",
+    "expected_attack_id": "T1053.005",
+    "source": "dokuman bolum 4.2"
+  },
+  {
+    "query": "The actor dumped credentials from LSASS memory using a credential dumping tool",
+    "expected_attack_id": "T1003.001",
+    "source": "dokuman bolum 4.3 (bolunmus)"
+  },
+  {
+    "query": "Attacker authenticated to remote systems using stolen valid administrative credentials",
+    "expected_attack_id": "T1078",
+    "source": "dokuman bolum 4.3 (bolunmus)"
+  },
+  {
+    "query": "Office uygulamasi child process olarak cmd.exe baslatti",
+    "expected_attack_id": "T1059.003",
+    "source": "dokuman bolum 4.4"
+  },
+  {
+    "query": "regsvr32.exe kullanilarak sistemde bir DLL kaydedildi ve calistirildi",
+    "expected_attack_id": "T1218.010",
+    "source": "dokuman bolum 17.3 keyword listesi"
+  },
+  {
+    "query": "rundll32.exe uzerinden zararli bir DLL calistirildi",
+    "expected_attack_id": "T1218.011",
+    "source": "dokuman bolum 17.3 keyword listesi"
+  },
+  {
+    "query": "wmic.exe kullanilarak uzak bir sistemde komut calistirildi",
+    "expected_attack_id": "T1047",
+    "source": "dokuman bolum 17.3 keyword listesi"
+  },
+  {
+    "query": "sekurlsa::logonpasswords komutu ile bellekte saklanan sifreler elde edildi",
+    "expected_attack_id": "T1003.001",
+    "source": "dokuman bolum 17.3 keyword listesi (mimikatz)"
+  },
+  {
+    "query": "saldirgan bir kimlik avi e-postasi ile kullaniciyi kotu amacli ek dosyayi acmaya ikna etti",
+    "expected_attack_id": "T1566.001",
+    "source": "genel bilgi"
+  }
+]

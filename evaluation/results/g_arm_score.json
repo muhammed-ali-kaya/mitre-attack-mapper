@@ -1,0 +1,84 @@
+{
+ "puanlanan": 51,
+ "eksen1_karar": {
+  "sinif_isabeti": "50/51",
+  "cikan_dagilim": {
+   "INSUFFICIENT_DATA": 51
+  },
+  "yanlis_alarm": "0/49",
+  "kacirilan_pozitif": [
+   "G-045"
+  ],
+  "onemsiz_taban": "50/51",
+  "yol_dagilimi": {
+   "A=False B=False": 51
+  },
+  "bastirma_atesleyen": []
+ },
+ "eksen2_teknik": {
+  "toplam_uretilen": 109,
+  "satir_basina": 2.14,
+  "essiz_yanlis_pozitif": 22,
+  "en_sik": [
+   [
+    "T1571",
+    25
+   ],
+   [
+    "T1095",
+    13
+   ],
+   [
+    "T1548.002",
+    11
+   ],
+   [
+    "T1546",
+    9
+   ],
+   [
+    "T1134",
+    8
+   ],
+   [
+    "T1205.001",
+    8
+   ],
+   [
+    "T1049",
+    5
+   ],
+   [
+    "T1218.012",
+    4
+   ],
+   [
+    "T1205.002",
+    4
+   ],
+   [
+    "T1133",
+    3
+   ]
+  ],
+  "teknik_beklenmeyip_bos_kalan": "0/50"
+ },
+ "eksen3_kayip_katmani": {
+  "retrieval aday havuzuna HIC girmedi": 1,
+  "ajan katmani eledi": 1
+ },
+ "eksen3_ayrinti": [
+  [
+   "G-045",
+   "T1059.001",
+   "retrieval aday havuzuna HIC girmedi"
+  ],
+  [
+   "G-045",
+   "T1564.003",
+   "ajan katmani eledi"
+  ]
+ ],
+ "_not": "recall bilerek yazilmadi -- tek pozitif satir",
+ "_damga": "YOL B KAPALIYKEN ALINMIS OLCUM (2026-08-30). access.mask KV yolunda dusuyordu, bu yuzden erisim_sinifi olay ID varsayilanina dusuyor ve Yol B hicbir registry satirinda ateslenemiyordu. 0/49 yanlis alarm orani KAZANILMIS DEGILDIR. Kok neden ve kapanis: docs/beklenti_15_kv_alan_kaybi.md. Duzeltmeden sonraki kosu ayri dosyada: g_arm_run_v2.json / g_arm_score_v2.json. BU DOSYA SILINMEZ."
+}

@@ -1,0 +1,238 @@
+{
+  "_aciklama": "Teshis probu olarak verilen 4 log (Object Access / registry). Bunlar SPESIFIKASYON DEGIL ALT SINIRDIR: hattin hangi katmaninin kirik oldugunu gostermek icin secildiler. Genelleme olcumu icin ayri ve daha buyuk bir set gerekir.",
+  "attack_version": "19.1",
+  "format": "brace_comma_kv",
+  "_2c_cesitlilik_siniri_sozlesmesi": {
+    "_aciklama": "Cesitlilik siniri KOD YAZILMADAN ONCE olculecek hedeflerle birlikte yazildi. Sonradan yazilan hedef, cikan sonuca bakip 'evet boyle olmali' demenin kibar halidir.",
+    "olculen_durum_2026_08_16": {
+      "T3_llm_e_giden_10_chunk": "7'si T1059.001 procedure_example",
+      "T3_benzersiz_teknik": 4,
+      "T3_baglamda_gecen": "T1685 (yalnizca ID), 'Defender' YOK, 'disable' YOK, 'security tool' YOK",
+      "yorum": "Bu retrieval'in yanlis SIRALAMASI degil, LLM'e dogru cevabi secme IMKANI VERILMEMESI. Bu sartlarda modelin T1059.001 demesi hata degil -- elindeki tek sey o."
+    },
+    "nerede_uygulanacak": "Aday havuzunda, RRF SONRASI ve reranker ONCESI. Reranker'in son 10'unda degil. Gerekce: havuzda cesitlilik korunur, reranker yine serbest siralar; 'dogru teknik havuza girsin' ile 'en iyi chunk'lar siralansin' hedefleri cakismaz.",
+    "sinir_degeri": "Teknik basina 2-3 chunk. 1 fazla kati: bir teknik bazen gercekten cok chunk hak eder (T1685'in 8 procedure_example'i). Kesin deger OLCULEREK secilecek -- 2 ve 3 ayri ayri denenip asagidaki hedeflere gore karar verilecek.",
+    "hedefler": {
+      "T3_baglamda_T1685_chunk": ">= 1  (su an 0 -- ID gecen tek yer bir alt teknigin basligi)",
+      "T3_benzersiz_teknik": ">= 7  (su an 4)",
+      "T1_T1003_002_reranker_sirasi": "<= 10  (su an 7 -- BOZULMAMALI)"
+    },
+    "regresyon_riski": "Cesitlilik siniri HALIHAZIRDA CALISAN bir vakayi kirabilir. T1'de T1003.002 su an reranker'in 7. sirasinda; havuz yeniden kurulunca siralama kayar ve teknik top-10'dan dusebilir. Bu, siniri geri almak icin yeterli sebeptir -- T3'u kazanip T1'i kaybetmek ilerleme degildir.",
+    "olcum_sirasi": "Her adimdan SONRA ayri ayri raporlanacak: T1685'in semantic sirasi, T1685'in BM25 sirasi, benzersiz teknik sayisi, T1003.002'nin reranker sirasi. Tek seferde her seyi degistirip 'duzeldi' demek, bu oturumda kacinilan sey."
+  },
+  "_parser_sozlesmesi": {
+    "amac": "Beklenen ayristirma ciktisi, parser YAZILMADAN ONCE elle yazildi. Once kodu yazip sonra ciktisina bakarak 'evet boyle olmali' demek, dort ornege asiri uyumun en kolay bicimi olurdu.",
+    "isimlendirme": "Alan adlari namespace'li: <varlik>.<ozellik>. Tam alan adi korunur; son kelimeye indirgeme YOK (eski parser 'Pipe Name', 'Process Name', 'Object Name' alanlarinin hepsini 'Name' yapip dedup ile ilkini tutuyordu).",
+    "deger_kurallari": [
+      "Deger bir sonraki ', ' ayracina kadar okunur -- ilk BOSLUGA kadar degil (eski parser 'NT AUTHORITY' -> 'NT', 'Query key value|...' -> 'Query' yapiyordu).",
+      "Bastaki '{' ve sondaki '}' strip edilir (eski parser sondaki alani '0}' olarak birakiyordu).",
+      "Anahtar cakismasinda dedup YAPILMAZ -- her alan kendi adiyla durur.",
+      "'N/A' degeri OLDUGU GIBI korunur; 'bilgi tasimayan alan' ayrimi ayri bir sayimla (informative_field_count) yapilir, ayristirma sirasinda silinerek degil."
+    ],
+    "sema_disi_alanlar": "Bilinen Windows sema alanlari disindaki her alan 'unknown.<ad>' altina konur. Kanit tablosunda GORUNUR ama retrieval sorgusuna GIRMEZ.",
+    "listeye_cevrilenler": "access.list gibi coklu-deger alanlari '|' ayracindan bolunup LISTE olarak tutulur, tek string olarak degil.",
+    "tip_sozlesmesi": {
+      "varsayilan": "str",
+      "_kural": "expected_list_fields disindaki HER alan str'dir. Sayisal gorunen degerler de str kalir: '0', '1', '0x2000d', '4657'. Gerekce: ayristirma katmani YORUM yapmaz, ham metni tasir. '0x2000d' -> int cevirimi ya da 'New Value=1' -> 1 cevirimi bir SEMANTIK karardir ve Gorev 3'un (erisim maskesi / olay anlambilimi) isidir; parser'in degil. Tip beklentisi yazilmazsa parser value.old icin 0 (int) donduren bir sürüme kayabilir ve karsilastirma sessizce degisir.",
+      "expected_list_fields": [
+        "access.list"
+      ],
+      "liste_oge_tipi": "str"
+    },
+    "informative_tanimi": "unknown.* ile baslamayan VE degeri 'N/A' / bos / '-' olmayan alan sayisi. Gorev 12'deki ucuz on kapi bu sayiya bakacak. Sayilar ham loglardan tek tek dogrulandi (ham alan sayisi - N/A sayisi - unknown sayisi)."
+  },
+  "logs": [
+    {
+      "id": "T0",
+      "baslik": "bos 4656 -- bilgilendirici alan yok",
+      "raw": "{Pipe Name=N/A, Process Path=N/A, File Directory=N/A, Filename=N/A, User Domain=NT, Event ID=4656, Process Name=svchost.exe, User Workstation=N/A, Account Name=LOCAL SERVICE, Object Type=Key, Class=N/A, Group ID=N/A, User Account Control=N/A, File Path=N/A, CustomProp=0}",
+      "expected_field_count": 15,
+      "expected_informative_field_count": 5,
+      "_informative_notu": "15 alan - 9 N/A - 1 unknown (CustomProp) = 5. Bilgilendirici olanlar: user.domain, event.id, process.name, account.name, object.type. Bu bes alan bir teknige baglanmak icin YETMEZ -- object.name ve access.list yok.",
+      "expected_parsed_fields": {
+        "pipe.name": "N/A",
+        "process.path": "N/A",
+        "file.directory": "N/A",
+        "file.name": "N/A",
+        "user.domain": "NT",
+        "event.id": "4656",
+        "process.name": "svchost.exe",
+        "user.workstation": "N/A",
+        "account.name": "LOCAL SERVICE",
+        "object.type": "Key",
+        "object.class": "N/A",
+        "group.id": "N/A",
+        "user.account_control": "N/A",
+        "file.path": "N/A",
+        "unknown.CustomProp": "0"
+      },
+      "expected_excluded_from_retrieval": [
+        "unknown.CustomProp"
+      ],
+      "expected_decision": "INSUFFICIENT_DATA",
+      "expected_techniques": [],
+      "expected_missing_fields": [
+        "object.name",
+        "access.list"
+      ],
+      "not": "Alarm yok. Gerekce 'yetersiz veri' ve hangi alanlarin eksik oldugu listelenmeli. Object Name ve Accesses olmadan 4656 hicbir teknige baglanamaz."
+    },
+    {
+      "id": "T1",
+      "baslik": "SAM hive erisimi",
+      "raw": "{Pipe Name=N/A, Process Path=C:\\Windows\\System32\\reg.exe, File Directory=N/A, Filename=N/A, User Domain=CORP, Event ID=4656, Process Name=reg.exe, User Workstation=WKS-4471, Account Name=svc_backup, Object Server=Security, Object Type=Key, Object Name=\\REGISTRY\\MACHINE\\SAM, Handle ID=0x3f4c, Process ID=0x1a2c, Logon ID=0x3e7a1, Accesses=Query key value|Enumerate sub-keys|Read Control, Access Mask=0x2000d, Class=N/A, Group ID=N/A, User Account Control=N/A, File Path=N/A}",
+      "expected_field_count": 21,
+      "expected_informative_field_count": 14,
+      "_informative_notu": "21 alan - 7 N/A (pipe.name, file.directory, file.name, object.class, group.id, user.account_control, file.path) = 14.",
+      "expected_parsed_fields": {
+        "pipe.name": "N/A",
+        "process.path": "C:\\Windows\\System32\\reg.exe",
+        "file.directory": "N/A",
+        "file.name": "N/A",
+        "user.domain": "CORP",
+        "event.id": "4656",
+        "process.name": "reg.exe",
+        "user.workstation": "WKS-4471",
+        "account.name": "svc_backup",
+        "object.server": "Security",
+        "object.type": "Key",
+        "object.name": "\\REGISTRY\\MACHINE\\SAM",
+        "handle.id": "0x3f4c",
+        "process.id": "0x1a2c",
+        "logon.id": "0x3e7a1",
+        "access.list": [
+          "Query key value",
+          "Enumerate sub-keys",
+          "Read Control"
+        ],
+        "access.mask": "0x2000d",
+        "object.class": "N/A",
+        "group.id": "N/A",
+        "user.account_control": "N/A",
+        "file.path": "N/A"
+      },
+      "_access_list_notu": "UC OGELI LISTE, tek string degil. Eski parser degeri ilk bosluktan kesip 'Query' birakiyordu.",
+      "expected_access_class": "read",
+      "expected_mask_bits": [
+        "KEY_CREATE_SUB_KEY",
+        "KEY_ENUMERATE_SUB_KEYS",
+        "KEY_QUERY_VALUE",
+        "READ_CONTROL"
+      ],
+      "expected_mask_text_inconsistency": true,
+      "_access_class_notu": "GOREV 18'DE DEGISTI. Onceki degeri 'write' idi ve Gorev 3 tablosundan dogru turetilmisti: 0x2000d = 0x1 QUERY_VALUE | 0x4 CREATE_SUB_KEY | 0x8 ENUMERATE_SUB_KEYS | 0x20000 READ_CONTROL, ve CREATE_SUB_KEY bir yazma bitidir. Eksik olan sey maskenin cozumu degil, olayin kendisiydi: 4656 bir HANDLE TALEBIDIR. Maske orada TALEP EDILEN hakki anlatir -- 0x2000d 'alt anahtar olusturma hakki ISTEDI' der, 'olusturdu' demez. Bu yuzden erisim sinifi artik 'read' (olayin kendi sinifi) ve yazma biti expected_requested_class'ta ayrica duruyor: bilgi kaybolmuyor, karara girdigi sifat degisiyor. Gerceklesen erisim 4663'tur; ayrimi olcen cift docs/sonuc_13_s_kolu.md §3 (B1).",
+      "expected_decision": "SUFFICIENT_SUSPICIOUS",
+      "expected_techniques": [
+        "T1003.002"
+      ],
+      "expected_top1": "T1003.002",
+      "expected_tactics": [
+        "Credential Access"
+      ],
+      "expected_tactic_ids": [
+        "TA0006"
+      ],
+      "expected_min_confidence": "medium",
+      "not": "Alarm. T1003.002 (Security Account Manager) 1. sirada. SAM hive kritik varliktir; svc_backup hesabinin reg.exe ile ona erismesi rutin degildir.",
+      "kapanmis_gerileme": {
+        "id": "T1-T1003.002-gate-notation",
+        "kapanis": "2026-08-18, 2B tasimasi",
+        "kriter_1_2A": "T1'de T1003.002 in_retrieval TRUE -- OLCULDU (probe izi)",
+        "kriter_2_2B": "kural kosulu object.name'e bakiyor VE cekirdek ad-uzayi gosterimini taniyor -- OLCULDU",
+        "kanit": "kanit kapisi T1'de T1003.002 icin REJECT -> CONFIRM. Kosul Message'dan object.name'e tasindi (f6ec2c7) ve rule_engine registry lehce normalizasyonunu ekledi: \\REGISTRY\\MACHINE\\SAM artik HKLM\\SAM desenine uyuyor.",
+        "not": "Kayit SILINMIYOR, KAPANDI olarak duruyor: bu vaka 'dogru cevap, yanlis sebep' desenini gosteren en iyi ornek ve tekrar acilirsa gecmisi gerekiyor."
+      },
+      "expected_requested_class": "write",
+      "_gorev_18_notu": "T1'in KARARI DEGISMEDI: SUFFICIENT_SUSPICIOUS. Ama artik yalnizca Yol A'dan geliyor (T1003.002 + dogrulanmis kanit), Yol B'den degil. Bu, beklenti_18 §3.2'de KOSULMADAN ONCE yazilan iki sonuctan birincisidir ve iyi olanidir: amiral gemisi vakanin alarm gucu, talebi eylem sayan kusura DAYANMIYORMUS."
+    },
+    {
+      "id": "T2",
+      "baslik": "zararsiz timezone okumasi",
+      "raw": "{Pipe Name=N/A, Process Path=C:\\Windows\\System32\\svchost.exe, File Directory=N/A, Filename=N/A, User Domain=NT AUTHORITY, Event ID=4656, Process Name=svchost.exe, User Workstation=N/A, Account Name=LOCAL SERVICE, Object Server=Security, Object Type=Key, Object Name=\\REGISTRY\\MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Time Zones\\Turkey Standard Time, Handle ID=0x84c, Process ID=0x2f8, Logon ID=0x3e5, Accesses=Query key value, Access Mask=0x1, Class=N/A, Group ID=N/A, User Account Control=N/A, File Path=N/A}",
+      "expected_field_count": 21,
+      "expected_informative_field_count": 13,
+      "expected_parsed_fields": {
+        "pipe.name": "N/A",
+        "process.path": "C:\\Windows\\System32\\svchost.exe",
+        "file.directory": "N/A",
+        "file.name": "N/A",
+        "user.domain": "NT AUTHORITY",
+        "event.id": "4656",
+        "process.name": "svchost.exe",
+        "user.workstation": "N/A",
+        "account.name": "LOCAL SERVICE",
+        "object.server": "Security",
+        "object.type": "Key",
+        "object.name": "\\REGISTRY\\MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Time Zones\\Turkey Standard Time",
+        "handle.id": "0x84c",
+        "process.id": "0x2f8",
+        "logon.id": "0x3e5",
+        "access.list": [
+          "Query key value"
+        ],
+        "access.mask": "0x1",
+        "object.class": "N/A",
+        "group.id": "N/A",
+        "user.account_control": "N/A",
+        "file.path": "N/A"
+      },
+      "_user_domain_notu": "'NT AUTHORITY' -- iki kelime. Eski parser bunu 'NT' yapiyordu; hesabin SISTEM hesabi oldugu bilgisi tam da burada kayboluyordu.",
+      "_object_name_notu": "Yol icinde 'Windows NT' gecer, yani bosluk iceren cok parcali bir deger. Ilk bosluktan kesen bir parser bu yolu tanınmaz hale getirir.",
+      "expected_access_class": "read",
+      "expected_decision": "SUFFICIENT_BENIGN",
+      "expected_techniques": [],
+      "not": "Alarm YOK, ama gerekce 'yetersiz veri' DEGIL -- veri yeterli (13 bilgilendirici alan), benign baseline eslesmesi: svchost.exe + NT AUTHORITY + salt okuma + gurultu seviyesindeki registry yolu."
+    },
+    {
+      "id": "T3",
+      "baslik": "Defender kapatma",
+      "raw": "{Pipe Name=N/A, Process Path=C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe, File Directory=N/A, Filename=N/A, User Domain=CORP, Event ID=4657, Process Name=powershell.exe, User Workstation=SRV-APP02, Account Name=administrator, Object Type=Key, Object Name=\\REGISTRY\\MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows Defender, Object Value Name=DisableAntiSpyware, Operation Type=Existing registry value modified, Old Value Type=REG_DWORD, Old Value=0, New Value Type=REG_DWORD, New Value=1, Handle ID=0x2b1c, Process ID=0x1e40, Logon ID=0x8a3f2, Class=N/A, Group ID=N/A, User Account Control=N/A, File Path=N/A}",
+      "expected_field_count": 24,
+      "expected_informative_field_count": 17,
+      "_sayim_notu": "24 alan ham logdan tek tek dogrulandi. T1/T2'den +3 olmasinin hesabi: +6 yeni alan (object.value_name, operation.type, value.old_type, value.old, value.new_type, value.new) -3 eksik alan (object.server, access.list, access.mask). Informative: 24 - 7 N/A = 17.",
+      "expected_parsed_fields": {
+        "pipe.name": "N/A",
+        "process.path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "file.directory": "N/A",
+        "file.name": "N/A",
+        "user.domain": "CORP",
+        "event.id": "4657",
+        "process.name": "powershell.exe",
+        "user.workstation": "SRV-APP02",
+        "account.name": "administrator",
+        "object.type": "Key",
+        "object.name": "\\REGISTRY\\MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows Defender",
+        "object.value_name": "DisableAntiSpyware",
+        "operation.type": "Existing registry value modified",
+        "value.old_type": "REG_DWORD",
+        "value.old": "0",
+        "value.new_type": "REG_DWORD",
+        "value.new": "1",
+        "handle.id": "0x2b1c",
+        "process.id": "0x1e40",
+        "logon.id": "0x8a3f2",
+        "object.class": "N/A",
+        "group.id": "N/A",
+        "user.account_control": "N/A",
+        "file.path": "N/A"
+      },
+      "_old_new_notu": "value.old ve value.new AYRI anahtarlardir ve IKISI DE mevcuttur. Eski parser ikisini 'Value' anahtarinda cakistirip ilkini (0) tutuyordu; kanit tablosunda 'Value: 0' yaziyordu, yani 'Defender acik' -- logun tam tersi. Kanit tablosu aktif olarak yaniltiyordu.",
+      "_object_server_notu": "Bu logda Object Server alani YOK; bu yuzden alan sayisi T1/T2'den farkli.",
+      "expected_access_class": "write",
+      "_access_class_notu": "4657 = 'registry degeri degistirildi', yani tanimi geregi YAZMA islemi. Bu logda Access Mask alani yok; erisim sinifi olay ID'sinden turemeli (Gorev 3).",
+      "expected_decision": "SUFFICIENT_SUSPICIOUS",
+      "expected_techniques": [
+        "T1685"
+      ],
+      "expected_top1": "T1685",
+      "expected_tactics": [
+        "Defense Impairment"
+      ],
+      "expected_tactic_ids": [
+        "TA0112"
+      ],
+      "revoked_crosswalk_notu": "T1562, T1562.001 ve T1562.006 v19.1'de REVOKED ve revoked-by iliskisiyle T1685'e yonlendiriliyor (bundle'da 149 ID->ID yonlendirmesi var). Eski ID beklenen cevap olarak yazilamaz.",
+      "not": "Alarm. Defender politika anahtarina yazma; DisableAntiSpyware=1 kontrolu devre disi birakir."
+    }
+  ]
+}

@@ -1,0 +1,275 @@
+{
+  "_aciklama": "Services alt anahtarlarinin ATT&CK'teki dagilimi + tablonun cevabi",
+  "_hipotez": "Services\\<ad>\\Performance high olmamali (yapilandirma)",
+  "_sonuc": "HIPOTEZ CURUDU. T1574.011 Performance anahtarini bir hijack noktasi olarak anlatiyor ve ATT&CK'in kendi tespit rehberi onu ImagePath/ServiceDll/FailureCommand ile AYNI cumlede sayiyor. Tablo dogru; kusur talep/gerceklesme ayriminin yapilmamasinda.",
+  "olay_sinifi": {
+    "dagilim": {
+      "5156": 23,
+      "4673": 11,
+      "5158": 9,
+      "4656": 5,
+      "4658": 1,
+      "4690": 1,
+      "403": 1
+    },
+    "alarm_olaylari": {
+      "G-007": "4656",
+      "G-015": "4656",
+      "G-029": "4656",
+      "G-030": "4656",
+      "G-040": "4656"
+    },
+    "n_4663": 0,
+    "n_4657": 0,
+    "not_4656": "Handle TALEBIDIR. Erisimin gerceklestigini GOSTERMEZ -- gerceklesen erisim 4663'tur. Tek basina 'okudu' demek fazla ileri gitmektir."
+  },
+  "taranan_teknik": 697,
+  "gecisler": [
+    {
+      "teknik": "T1685.001",
+      "servis": "EventLog",
+      "alt": null,
+      "tam": "Services\\EventLog",
+      "yer_tutucu_servis": false
+    },
+    {
+      "teknik": "T1574.011",
+      "servis": "WinSock2",
+      "alt": "Parameters",
+      "tam": "Services\\WinSock2\\Parameters",
+      "yer_tutucu_servis": false
+    },
+    {
+      "teknik": "T1543.003",
+      "servis": "DeviceSync",
+      "alt": null,
+      "tam": "Services\\DeviceSync\\",
+      "yer_tutucu_servis": false
+    },
+    {
+      "teknik": "T1505.005",
+      "servis": "TermService",
+      "alt": "Parameters",
+      "tam": "Services\\TermService\\Parameters\\",
+      "yer_tutucu_servis": false
+    },
+    {
+      "teknik": "T1112",
+      "servis": "[service_name]",
+      "alt": "Start",
+      "tam": "Services\\[service_name]\\Start",
+      "yer_tutucu_servis": true
+    },
+    {
+      "teknik": "T1112",
+      "servis": "SharedAccess",
+      "alt": "Parameters",
+      "tam": "Services\\SharedAccess\\Parameters\\FirewallPolicy\\StandardProfileGloballyOpenPorts\\List",
+      "yer_tutucu_servis": false
+    },
+    {
+      "teknik": "T1112",
+      "servis": "lanmanserver",
+      "alt": "parameters",
+      "tam": "Services\\lanmanserver\\parameters\\NullSessionPipes",
+      "yer_tutucu_servis": false
+    },
+    {
+      "teknik": "T1547.003",
+      "servis": "W32Time",
+      "alt": "TimeProviders",
+      "tam": "Services\\W32Time\\TimeProviders\\",
+      "yer_tutucu_servis": false
+    },
+    {
+      "teknik": "T1012",
+      "servis": "mssmbios",
+      "alt": "Data",
+      "tam": "Services\\mssmbios\\Data\\SMBiosData",
+      "yer_tutucu_servis": false
+    },
+    {
+      "teknik": "T1012",
+      "servis": "Tcpip",
+      "alt": "Parameters",
+      "tam": "Services\\Tcpip\\Parameters\\Interfaces",
+      "yer_tutucu_servis": false
+    },
+    {
+      "teknik": "T1012",
+      "servis": "[service",
+      "alt": null,
+      "tam": "Services\\[service",
+      "yer_tutucu_servis": false
+    },
+    {
+      "teknik": "T1686",
+      "servis": "SharedAccess",
+      "alt": "Parameters",
+      "tam": "Services\\SharedAccess\\Parameters\\FirewallPolicy",
+      "yer_tutucu_servis": false
+    },
+    {
+      "teknik": "T1686",
+      "servis": "SharedAccess",
+      "alt": "Parameters",
+      "tam": "Services\\SharedAccess\\Parameters\\FirewallPolicy\\StandardProfile",
+      "yer_tutucu_servis": false
+    },
+    {
+      "teknik": "T1680",
+      "servis": "Disk",
+      "alt": "Enum",
+      "tam": "Services\\Disk\\Enum",
+      "yer_tutucu_servis": false
+    }
+  ],
+  "alt_anahtar": {
+    "parameters": [
+      "T1012",
+      "T1112",
+      "T1505.005",
+      "T1574.011",
+      "T1686"
+    ],
+    "start": [
+      "T1112"
+    ],
+    "timeproviders": [
+      "T1547.003"
+    ],
+    "data": [
+      "T1012"
+    ],
+    "enum": [
+      "T1680"
+    ]
+  },
+  "aranan_adlar": {
+    "ImagePath": [
+      "T1543.003",
+      "T1574.011"
+    ],
+    "ServiceDll": [
+      "T1112",
+      "T1505.005",
+      "T1543.003",
+      "T1574.011"
+    ],
+    "Performance": [
+      "T1036.004",
+      "T1053.005",
+      "T1574.011"
+    ],
+    "Start": [
+      "T1047",
+      "T1112",
+      "T1218.011",
+      "T1543.003",
+      "T1547.001",
+      "T1547.009",
+      "T1569.002",
+      "T1685.001"
+    ],
+    "FailureCommand": [
+      "T1574.011"
+    ],
+    "Parameters": [
+      "T1012",
+      "T1027.011",
+      "T1112",
+      "T1505.005",
+      "T1564.003",
+      "T1574.011",
+      "T1686"
+    ],
+    "Enum": [
+      "T1680"
+    ],
+    "Data": [
+      "T1005",
+      "T1012",
+      "T1027",
+      "T1027.011",
+      "T1036.005",
+      "T1070",
+      "T1070.009",
+      "T1074.001",
+      "T1112",
+      "T1217",
+      "T1485",
+      "T1539",
+      "T1555.003",
+      "T1560",
+      "T1564",
+      "T1564.004",
+      "T1565.003",
+      "T1567.002",
+      "T1574",
+      "T1583",
+      "T1583.001",
+      "T1584",
+      "T1584.001",
+      "T1584.002"
+    ],
+    "TimeProviders": [
+      "T1547.003"
+    ],
+    "Type": [
+      "T1008",
+      "T1217"
+    ]
+  },
+  "tablo_cevabi": {
+    "data": {
+      "seviye": "high",
+      "aile": "service",
+      "desen": "HKLM\\SYSTEM\\CurrentControlSet\\Services"
+    },
+    "enum": {
+      "seviye": "high",
+      "aile": "service",
+      "desen": "HKLM\\SYSTEM\\CurrentControlSet\\Services"
+    },
+    "failurecommand": {
+      "seviye": "high",
+      "aile": "service",
+      "desen": "HKLM\\SYSTEM\\CurrentControlSet\\Services"
+    },
+    "imagepath": {
+      "seviye": "high",
+      "aile": "service",
+      "desen": "HKLM\\SYSTEM\\CurrentControlSet\\Services"
+    },
+    "parameters": {
+      "seviye": "high",
+      "aile": "service",
+      "desen": "HKLM\\SYSTEM\\CurrentControlSet\\Services"
+    },
+    "performance": {
+      "seviye": "high",
+      "aile": "service",
+      "desen": "HKLM\\SYSTEM\\CurrentControlSet\\Services"
+    },
+    "servicedll": {
+      "seviye": "high",
+      "aile": "service",
+      "desen": "HKLM\\SYSTEM\\CurrentControlSet\\Services"
+    },
+    "start": {
+      "seviye": "high",
+      "aile": "service",
+      "desen": "HKLM\\SYSTEM\\CurrentControlSet\\Services"
+    },
+    "timeproviders": {
+      "seviye": "high",
+      "aile": "service",
+      "desen": "HKLM\\SYSTEM\\CurrentControlSet\\Services"
+    },
+    "type": {
+      "seviye": "high",
+      "aile": "service",
+      "desen": "HKLM\\SYSTEM\\CurrentControlSet\\Services"
+    }
+  }
+}

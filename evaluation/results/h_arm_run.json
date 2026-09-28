@@ -1,0 +1,857 @@
+{
+ "H-01": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1003.002",
+    "T1134.002"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": null,
+   "aktor": {
+    "account": null,
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1003.002",
+    "confidence_level": "insufficient"
+   },
+   {
+    "attack_id": "T1134.002",
+    "confidence_level": "medium"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1003.002"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1134.002",
+   "T1055.012",
+   "T1003.002",
+   "T1134.004",
+   "T1543",
+   "T1134.003",
+   "T1218.002",
+   "T1543.003"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 150.39771628379822,
+  "kosu_sn": 150.9
+ },
+ "H-02": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1112",
+    "T1574.011"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": null,
+   "aktor": {
+    "account": null,
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1112",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1574.011",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1112",
+   "T1574.011"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1112",
+   "T1574.011",
+   "T1553.003",
+   "T1574.012",
+   "T1685.001",
+   "T1547.014",
+   "T1547.004",
+   "T1552.002",
+   "T1547.001"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 79.61482834815979,
+  "kosu_sn": 79.6
+ },
+ "H-03": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 1,
+   "teknikler": [
+    "T1112"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": null,
+   "aktor": {
+    "account": null,
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1112",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1112"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1112",
+   "T1546.009",
+   "T1546.012",
+   "T1547.014",
+   "T1552.002",
+   "T1546.002",
+   "T1003.002",
+   "T1547.005",
+   "T1547.001"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 70.0731565952301,
+  "kosu_sn": 70.1
+ },
+ "H-04": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1547.001",
+    "T1112"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": null,
+   "aktor": {
+    "account": null,
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1547.001",
+    "confidence_level": "insufficient"
+   },
+   {
+    "attack_id": "T1112",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1547.001",
+   "T1112"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1112",
+   "T1012",
+   "T1547.014",
+   "T1546.013",
+   "T1547.001",
+   "T1552.002",
+   "T1134.005",
+   "T1574.012"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 80.3490252494812,
+  "kosu_sn": 80.3
+ },
+ "H-05": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 4,
+   "teknikler": [
+    "T1112",
+    "T1505.005",
+    "T1547.004",
+    "T1569"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": null,
+   "aktor": {
+    "account": null,
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1112",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1505.005",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1547.004",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1569",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1112",
+   "T1505.005",
+   "T1547.004"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1112",
+   "T1505.005",
+   "T1547.004",
+   "T1546.002",
+   "T1547.002",
+   "T1569",
+   "T1003.002",
+   "T1543.003",
+   "T1547.005"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 101.51563334465027,
+  "kosu_sn": 101.5
+ },
+ "H-06": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1685.006",
+    "T1070.003"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": null,
+   "aktor": {
+    "account": null,
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1685.006",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1070.003",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1685.006",
+   "T1070.003"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1685.006",
+   "T1070.003",
+   "T1685.005",
+   "T1685.004",
+   "T1078.002",
+   "T1531",
+   "T1087.002",
+   "T1078"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 75.09466934204102,
+  "kosu_sn": 75.1
+ },
+ "H-07": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 1,
+   "teknikler": [
+    "T1543.003"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": null,
+   "aktor": {
+    "account": null,
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1543.003",
+    "confidence_level": "medium"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1543.003"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1543",
+   "T1202",
+   "T1136.001",
+   "T1543.003",
+   "T1204.002",
+   "T1078.003",
+   "T1569",
+   "T1569.002"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 0,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 29.810035943984985,
+  "kosu_sn": 29.8
+ },
+ "H-08": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1053.005",
+    "T1053"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": null,
+   "aktor": {
+    "account": null,
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1053.005",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1053",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1053.005",
+   "T1053"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1053.005",
+   "T1053",
+   "T1685.001",
+   "T1574.009",
+   "T1574.013",
+   "T1037.001",
+   "T1574.012",
+   "T1685.005"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 78.22635912895203,
+  "kosu_sn": 78.2
+ },
+ "H-09": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1136",
+    "T1136.002"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": null,
+   "aktor": {
+    "account": null,
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1136",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1136.002",
+    "confidence_level": "medium"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1136",
+   "T1136.002"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1136.002",
+   "T1136",
+   "T1098.007",
+   "T1136.001",
+   "T1036.010",
+   "T1136.003",
+   "T1078.004"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 0,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 45.43663477897644,
+  "kosu_sn": 45.4
+ },
+ "H-10": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1098.007",
+    "T1069.001"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": null,
+   "aktor": {
+    "account": null,
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1098.007",
+    "confidence_level": "high"
+   },
+   {
+    "attack_id": "T1069.001",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1098.007",
+   "T1069.001"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1098.007",
+   "T1069.001",
+   "T1087.001",
+   "T1136.001",
+   "T1087.002",
+   "T1136.002",
+   "T1078.003",
+   "T1134.005"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 0,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 38.04640579223633,
+  "kosu_sn": 38.0
+ },
+ "H-11": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1059.001",
+    "T1564.003"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": null,
+   "aktor": {
+    "account": null,
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1059.001",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1564.003",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1059.001",
+   "T1564.003"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1547.001",
+   "T1564.003",
+   "T1059.001",
+   "T1218.002",
+   "T1218.007",
+   "T1546.013"
+  ],
+  "retrieved_chunk_sayisi": 7,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 79.24530363082886,
+  "kosu_sn": 79.2
+ },
+ "H-12": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1049",
+    "T1016.001"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": null,
+   "aktor": {
+    "account": null,
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1049",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1016.001",
+    "confidence_level": "low"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1049",
+   "T1016.001"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1049",
+   "T1016.001",
+   "T1205.001",
+   "T1218.007",
+   "T1011",
+   "T1040",
+   "T1071.001",
+   "T1505.003",
+   "T1105"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 108.7486457824707,
+  "kosu_sn": 108.7
+ },
+ "H-13": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 1,
+   "teknikler": [
+    "T1078"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": null,
+   "aktor": {
+    "account": null,
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1078",
+    "confidence_level": "medium"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1078"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1021.001",
+   "T1547.004",
+   "T1078",
+   "T1187",
+   "T1547.002",
+   "T1556",
+   "M1015",
+   "T1078.002",
+   "T1556.001"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 0,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 36.85741972923279,
+  "kosu_sn": 36.9
+ },
+ "H-14": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 2,
+   "teknikler": [
+    "T1110.001",
+    "T1110"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": null,
+   "aktor": {
+    "account": null,
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1110.001",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1110",
+    "confidence_level": "high"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1110.001",
+   "T1110"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "T1110",
+   "T1110.003",
+   "T1110.001",
+   "T1078.002",
+   "T1556.004",
+   "T1556.001",
+   "T1078",
+   "T1087.002"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 0,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 33.393829107284546,
+  "kosu_sn": 33.4
+ },
+ "H-15": {
+  "decision": "INSUFFICIENT_DATA",
+  "paths": {
+   "A": false,
+   "B": false
+  },
+  "inputs": {
+   "teknik_sayisi": 3,
+   "teknikler": [
+    "T1059.007",
+    "T1202",
+    "T1204"
+   ],
+   "dogrulanmis_kanit": 0,
+   "kritiklik": "YOK",
+   "kritiklik_ailesi": null,
+   "varlik_yolu": null,
+   "erisim_sinifi": null,
+   "aktor": {
+    "account": null,
+    "process": null
+   }
+  },
+  "suppression": null,
+  "reason": "karar için yeterli girdi yok",
+  "mappings": [
+   {
+    "attack_id": "T1059.007",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1202",
+    "confidence_level": "low"
+   },
+   {
+    "attack_id": "T1204",
+    "confidence_level": "medium"
+   }
+  ],
+  "mappings_before_agents": [
+   "T1059.007",
+   "T1202"
+  ],
+  "rejected_mappings": [],
+  "agent_rejected_mappings": [],
+  "retrieval_candidates": [
+   "M1038",
+   "T1218.001",
+   "T1059.007",
+   "T1202",
+   "T1216.001",
+   "T1505.003",
+   "T1220",
+   "T1204",
+   "T1659"
+  ],
+  "retrieved_chunk_sayisi": 10,
+  "loop_passes": 1,
+  "split_event_count": 1,
+  "split_warning": null,
+  "toplam_sn": 91.30214715003967,
+  "kosu_sn": 91.3
+ }
+}

@@ -1,0 +1,30 @@
+--extra-index-url https://download.pytorch.org/whl/cu126
+
+requests==2.34.2
+mitreattack-python==6.1.0
+stix2==3.0.2
+
+torch==2.13.0+cu126
+torchvision==0.28.0+cu126
+chromadb==1.5.9
+sentence-transformers==5.6.1
+rank-bm25==0.2.2
+
+fastapi==0.141.1
+uvicorn[standard]==0.52.0
+pydantic==2.13.4
+python-dotenv==1.2.2
+
+streamlit==1.60.0
+pandas==3.0.5
+
+# Ajan akisinin orkestrasyonu (app/agents/graph.py): dugumler, kosullu
+# dallanma ve yeniden retrieval dongusu. DIKKAT: sozlesme zorlamasi
+# (ajan teknik ekleyemez / guven yukseltemez) LangGraph'a DEGIL,
+# app/agents/runner.py::apply_decisions'a bagli -- framework yalnizca
+# akisi yurutuyor.
+langgraph==1.2.11
+
+tqdm==4.70.0
+
+pytest==9.1.1

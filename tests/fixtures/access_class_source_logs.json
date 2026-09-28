@@ -1,0 +1,48 @@
+{
+  "_aciklama": "Gorev 19 -- erisim sinifi cikariminin IKI kusuru. Kullanicinin arayuzden gecirdigi iki gercek QRadar logu bunlari ayni belirtiyle gosterdi: gerekce zinciri her ikisinde de 'Erisim sinifi: salt okuma' diyordu. Sebepleri FARKLI ve fixture ikisini ayri kilitler.",
+  "_KAYNAK_UYARISI": "Ham satirlar, kullanicinin BILDIRDIGI ALANLARDAN yeniden kuruldu; orijinal metinler birebir yakalanmadi. Tasidiklari alanlar (olay ID, Access Mask, Accesses, Object Name, Object Type) bildirilenle ayni ve sarmalayici bicim G kolunun gercek QRadar bicimidir. Orijinaller elde edilirse buradaki `raw` degerleri onlarla DEGISTIRILMELIDIR -- yontem maddesi 17 bicimin gercekligini sart kosar ve bu dosya su an o sarti KISMEN karsiliyor.",
+  "_neden_bu_iki_log": "L1 (4656 + hex maske) RAPORLAMA kusurunu kilitler: karar dogru (Gorev 18 talebi eylem saymaz) ama metin 'salt okuma' diyordu. L2 (4663 + yalnizca Accesses metni) GERCEK kusuru kilitler: decode_access_mask maske yoksa metni hic okumuyordu. Ikisi ayni dosyada duruyor cunku belirtileri ayniydi; ayri ayri test edilmezse biri duzeltilip digeri yerinde kalir.",
+  "_neden_UCUNCU_kayit": "L3, L2'nin kritik varlik hali ve RISKI kilitler. L1/L2 gurultu seviyesinde oldugu icin karar zaten degismiyordu; kusur ancak kritik varlikta alarm KACIRIYOR. Bu kayit olmadan fixture, duzeltmenin neyi kurtardigini gostermez.",
+  "attack_version": "19.1",
+  "format": "qradar_wrapped_windows_message",
+  "logs": [
+    {
+      "id": "L1",
+      "baslik": "4656 + hex maske (iki yazma biti) -- TALEP",
+      "raw": "Timestamp=\"2026-09-01 10:00:00\" EventID=4656 Hostname=WINHOST-01 Message=\"An attempt was made to access an object.  Subject:  Security ID:  NT AUTHORITY\\SYSTEM  Account Name:  svc-inventory  Account Domain:  WORKGROUP  Logon ID:  0x3E7  Object:  Object Server:  Security  Object Type:  Key  Object Name:  \\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Services\\W32Time\\SecureTimeLimits  Handle ID:  0x2f4  Process Information:  Process ID:  0x2b8  Process Name:  C:\\Windows\\System32\\svchost.exe  Access Request Information:  Accesses:  Set key value  Access Mask:  0x20006\"",
+      "expected_access_class": "read",
+      "expected_requested_class": "write",
+      "expected_access_class_source": "mask+text",
+      "expected_criticality": "noise",
+      "expected_decision": "SUFFICIENT_BENIGN",
+      "_not": "0x20006 = 0x2 KEY_SET_VALUE | 0x4 KEY_CREATE_SUB_KEY | 0x20000 READ_CONTROL -- IKI yazma biti. Erisim sinifi yine de 'read' cunku 4656 bir handle TALEBIDIR (Gorev 18). Bu DOGRU. Kusur metindeydi: ozet ve gerekce zinciri artik talebi soyler.",
+      "_beklenen_metin": "talep edildi, gerçekleşme kanıtı yok"
+    },
+    {
+      "id": "L2",
+      "baslik": "4663 + yalnizca Accesses metni (maske YOK) -- GERCEKLESEN",
+      "raw": "Timestamp=\"2026-09-01 10:00:00\" EventID=4663 Hostname=WINHOST-01 Message=\"An attempt was made to access an object.  Subject:  Security ID:  NT AUTHORITY\\SYSTEM  Account Name:  svc-inventory  Account Domain:  WORKGROUP  Logon ID:  0x3E7  Object:  Object Server:  Security  Object Type:  Key  Object Name:  \\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Services\\W32Time\\SecureTimeLimits  Handle ID:  0x2f4  Process Information:  Process ID:  0x2b8  Process Name:  C:\\Windows\\System32\\svchost.exe  Access Request Information:  Accesses:  Set key value\"",
+      "expected_access_class": "write",
+      "expected_requested_class": null,
+      "expected_access_class_source": "text",
+      "expected_criticality": "noise",
+      "expected_decision": "INSUFFICIENT_DATA",
+      "_not": "Duzeltmeden ONCE erisim 'read' cikiyordu, cunku decode_access_mask'in ilk satiri `if not mask: return None` idi ve access_text yalnizca capraz kontrol icindi. Karar da SUFFICIENT_BENIGN'di ('gurultu seviyesindeki varliga salt okuma'). Artik erisim write, o dal dusuyor ve karar INSUFFICIENT_DATA. Gurultu seviyesindeki bir anahtara YAZMA, 'mesru salt okuma' diye kapatilamaz."
+    },
+    {
+      "id": "L3",
+      "baslik": "KRITIK varlik + 4663 + yalnizca Accesses metni -- KACAN ALARM",
+      "raw": "Timestamp=\"2026-09-01 10:00:00\" EventID=4663 Hostname=WINHOST-01 Message=\"An attempt was made to access an object.  Subject:  Security ID:  NT AUTHORITY\\SYSTEM  Account Name:  svc-inventory  Account Domain:  WORKGROUP  Logon ID:  0x3E7  Object:  Object Server:  Security  Object Type:  Key  Object Name:  \\REGISTRY\\MACHINE\\SAM  Handle ID:  0x2f4  Process Information:  Process ID:  0x2b8  Process Name:  C:\\Windows\\System32\\svchost.exe  Access Request Information:  Accesses:  Set key value\"",
+      "expected_access_class": "write",
+      "expected_requested_class": null,
+      "expected_access_class_source": "text",
+      "expected_criticality": "critical",
+      "expected_decision": "SUFFICIENT_SUSPICIOUS",
+      "expected_paths": {
+        "A": false,
+        "B": true
+      },
+      "_not": "RISKIN KENDISI. Duzeltmeden once bu kayit erisim=read alip INSUFFICIENT_DATA donuyordu: SAM hive'a yazma, Yol B hic ateslenmeden gecip gidiyordu. Ayni log HEX MASKE tasisaydi SUSPICIOUS cikiyordu -- yani alarmin varligi, kaynagin maskeyi yazip yazmamasina bagliydi."
+    }
+  ]
+}

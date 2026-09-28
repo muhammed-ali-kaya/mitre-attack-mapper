@@ -1,0 +1,120 @@
+{
+  "_aciklama": "Olay bolucusunun SINIR KURALI, ornekle sabitlenmis hali (Gorev 14). Kural once yazildi (app/normalization/formats.py modul basligi + docs/beklenti_14_girdi_bolme_alarm_karari.md), fixture onu kilitliyor.",
+
+  "_neden_fixture": [
+    "Yanlis bolmek, birlestirmek kadar zararlidir: bir event ikiye bolunurse kanitin yarisi bir tarafta, teknigin geldigi satir obur tarafta kalir ve kanit kapisi kendi bulgusunu curutur.",
+    "Bu yuzden vakalarin cogu BOLUNMEMESI gerekenlerdir. Bolen kurali test etmek kolay; bolmemesi gereken yerde bolmedigini gostermek asil sinav.",
+    "Her vaka `kural` alanini da tasiyor: 'iki olay bulundu' yetmez, HANGI sinir kuralinin buldugu denetlenebilir olmali."
+  ],
+
+  "_bolunemeyen_durum": "Bagimsiz bir sayac girdideki olay isaretlerini ('Event ID=' / 'Event ID:') BOLGE BASINA sayar (blok ici / blok disi) ve buyugunu alir. Isaret sayisi uretilen olay sayisindan buyukse sonuc UYARI tasir. Sessiz geri donus yok.",
+
+  "_bolge_basina_sayimin_gerekcesi": "Duz sayim 51 gercek QRadar satirinin 51'inde yaniliyordu: bir QRadar satiri ayni olayi iki kodlamada tasiyor (yapisal alanda 'Event ID=5156', ham payload'da 'EventID=5156'). Her satirda yanan bir uyari, uyari degil gurultudur.",
+
+  "vakalar": [
+    {
+      "id": "BRACE-IKI-SATIR",
+      "aciklama": "brace_comma_kv: satir basina bir olay -- acigin fixture'indaki bicim",
+      "raw": "{Event ID=4657, Object Name=\\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Services\\AcmeAgent, Process Name=TrustedInstaller.exe, Account Name=corp\\attacker}\n{Event ID=4624, Logon Type=5, Account Name=SYSTEM}",
+      "beklenen_olay": 2,
+      "beklenen_kural": "brace_blocks",
+      "uyari_bekleniyor": false
+    },
+    {
+      "id": "BRACE-TEK-SATIRDA-IKI-BLOK",
+      "aciklama": "Sinir satir sonu DEGIL, blok dengesi: ayni satirda iki blok da bolunur",
+      "raw": "{Event ID=4657, Process Name=a.exe} {Event ID=4624, Account Name=SYSTEM}",
+      "beklenen_olay": 2,
+      "beklenen_kural": "brace_blocks",
+      "uyari_bekleniyor": false
+    },
+    {
+      "id": "BRACE-COK-SATIRA-YAYILMIS-TEK-BLOK",
+      "aciklama": "Bir blok satirlara yayilmissa satir sonu SINIR DEGILDIR -- bolunmemeli",
+      "raw": "{Event ID=4657,\n Object Name=\\REGISTRY\\MACHINE\\SAM,\n Process Name=reg.exe}",
+      "beklenen_olay": 1,
+      "beklenen_kural": "single",
+      "uyari_bekleniyor": false
+    },
+    {
+      "id": "DUZYAZI-ARTI-OLAY",
+      "aciklama": "Duzyazi satiri kendi olayidir; yapisal satir kendi olayidir",
+      "raw": "Bir kullanici sirket ici wiki sayfasini goruntuledi.\n{Event ID=4624, Logon Type=5, Account Name=SYSTEM}",
+      "beklenen_olay": 2,
+      "beklenen_kural": "lines",
+      "uyari_bekleniyor": false
+    },
+    {
+      "id": "DUZYAZI-COK-SATIR",
+      "aciklama": "Duzyazi BOLUNMEZ: ardisik duzyazi satirlari tek olayda birlesir, bos satir da bolmez",
+      "raw": "Bir kullanici ekli Word belgesini acti.\n\nBelge kotu amacli bir makro iceriyordu ve makro calisti.",
+      "beklenen_olay": 1,
+      "beklenen_kural": "single",
+      "uyari_bekleniyor": false
+    },
+    {
+      "id": "SPACE-KV-IKI-SATIR",
+      "aciklama": "space_kv: ayristirici zaten satir sonunu deger siniri sayiyor, bolucu bunu acik hale getiriyor",
+      "raw": "EventID=4688 NewProcessName=powershell.exe CommandLine=powershell -enc ABC\nEventID=4688 NewProcessName=schtasks.exe CommandLine=schtasks /create /tn X",
+      "beklenen_olay": 2,
+      "beklenen_kural": "lines",
+      "uyari_bekleniyor": false
+    },
+    {
+      "id": "SPACE-KV-TEK-SATIRDA-IKI-OLAY",
+      "aciklama": "BOLUNEMEYEN durum: iki olay tek satira yapistirilmis, sinir yok. 60 senaryodaki multi-010 tam olarak bu.",
+      "raw": "EventID=4688 NewProcessName=powershell.exe ParentProcessName=WINWORD.EXE followed by EventID=4688 NewProcessName=schtasks.exe",
+      "beklenen_olay": 1,
+      "beklenen_kural": "single",
+      "uyari_bekleniyor": true
+    },
+    {
+      "id": "JSON-DIZI",
+      "aciklama": "JSON dizisi: oge basina bir olay",
+      "raw": "[{\"Event ID\": \"4657\", \"Process Name\": \"a.exe\"}, {\"Event ID\": \"4624\", \"Account Name\": \"SYSTEM\"}]",
+      "beklenen_olay": 2,
+      "beklenen_kural": "json_array",
+      "uyari_bekleniyor": false
+    },
+    {
+      "id": "JSON-TEK-NESNE",
+      "aciklama": "Tek JSON nesnesi tek olaydir -- ic ice alanlar bolme sebebi degil",
+      "raw": "{\"Event ID\": \"4657\", \"Process Name\": \"a.exe\", \"Detay\": {\"Yol\": \"C:\\\\a\"}}",
+      "beklenen_olay": 1,
+      "beklenen_kural": "single",
+      "uyari_bekleniyor": false
+    },
+    {
+      "id": "WINDOWS-MESSAGE-TEK-KAYIT",
+      "aciklama": "Windows Event Log govdesi: kayit sinirlari satir sonlari DEGILDIR, bolunmez",
+      "raw": "An account was successfully logged on.\n\nSubject:\n  Event ID:  4688\n  Process Name:  powershell.exe\n  Account Name:  jdoe\n  Command Line:  powershell -enc ABC\n",
+      "beklenen_olay": 1,
+      "beklenen_kural": "cok_satirli_kayit",
+      "uyari_bekleniyor": false
+    },
+    {
+      "id": "WINDOWS-MESSAGE-IKI-KAYIT",
+      "aciklama": "BOLUNEMEYEN durum: iki Windows kaydi yan yana. Bolunmez ama SESSIZ de gecilmez.",
+      "raw": "An account was successfully logged on.\n\nEvent ID:  4624\nAccount Name:  jdoe\n\nA new process has been created.\n\nEvent ID:  4688\nProcess Name:  powershell.exe\n",
+      "beklenen_olay": 1,
+      "beklenen_kural": "cok_satirli_kayit",
+      "uyari_bekleniyor": true
+    },
+    {
+      "id": "TEK-OLAY-TEK-SATIR",
+      "aciklama": "En sik durum: tek olay, tek satir. Bolucu dokunmamali.",
+      "raw": "{Event ID=4656, Object Name=\\REGISTRY\\MACHINE\\SAM, Process Name=reg.exe, Account Name=svc_backup}",
+      "beklenen_olay": 1,
+      "beklenen_kural": "single",
+      "uyari_bekleniyor": false
+    },
+    {
+      "id": "BOS-GIRDI",
+      "aciklama": "Bos girdi de bir olaydir: cagiran taraf hicbir zaman bos listeyle karsilasmaz",
+      "raw": "",
+      "beklenen_olay": 1,
+      "beklenen_kural": "bos",
+      "uyari_bekleniyor": false
+    }
+  ]
+}

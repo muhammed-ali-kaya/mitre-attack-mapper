@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "generated_at": "2026-09-27T16:19:32+00:00",
+    "sources": [
+      {
+        "file": "eval_baseline.jsonl",
+        "sha256": "c4cc112d695660b8",
+        "n_rows": 60
+      },
+      {
+        "file": "eval_improved.jsonl",
+        "sha256": "87619a3fe148da05",
+        "n_rows": 60
+      }
+    ],
+    "n_scenarios_expected": 60,
+    "missing_test_ids": []
+  },
+  "baseline": {
+    "n_total": 60,
+    "n_errors": 0,
+    "mean_hierarchical_score": 0.66,
+    "top1_exact_accuracy": 0.6166666666666667,
+    "partial_or_better_rate": 0.6666666666666666,
+    "mean_recall_at_5": 0.8103448275862069,
+    "mean_recall_at_10": 0.8103448275862069,
+    "mean_hallucination_rate": 0.0,
+    "abstention_accuracy": 1.0,
+    "n_abstention_applicable": 9,
+    "mean_total_seconds": 19.958846259117127,
+    "score_by_category": {
+      "tek_teknik_acik_girdi": 0.6900000000000001,
+      "alt_teknik_gerektiren": 0.9099999999999999,
+      "birden_fazla_teknik": 0.67,
+      "raw_log": 0.6799999999999999,
+      "belirsiz_girdi": 0.4,
+      "negatif_ornek": 0.0,
+      "platform_celiskisi": 1.0,
+      "deprecated_revoked": 1.0,
+      "prompt_injection": 0.3666666666666667,
+      "turkce_ingilizce_capraz": 1.0
+    }
+  },
+  "improved": {
+    "n_total": 60,
+    "n_errors": 3,
+    "mean_hierarchical_score": 0.6719298245614035,
+    "top1_exact_accuracy": 0.6491228070175439,
+    "partial_or_better_rate": 0.6666666666666666,
+    "mean_recall_at_5": 0.7454545454545455,
+    "mean_recall_at_10": 0.8,
+    "mean_hallucination_rate": 0.0,
+    "abstention_accuracy": 1.0,
+    "n_abstention_applicable": 9,
+    "mean_total_seconds": 63.12751272268463,
+    "score_by_category": {
+      "tek_teknik_acik_girdi": 1.0,
+      "alt_teknik_gerektiren": 1.0,
+      "birden_fazla_teknik": 0.7,
+      "raw_log": 0.63,
+      "belirsiz_girdi": 0.3,
+      "negatif_ornek": 0.0,
+      "platform_celiskisi": 1.0,
+      "deprecated_revoked": 0.55,
+      "prompt_injection": 0.03333333333333333,
+      "turkce_ingilizce_capraz": 1.0
+    }
+  }
+}

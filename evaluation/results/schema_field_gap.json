@@ -1,0 +1,667 @@
+{
+  "A_kural_haritasi_hedefleri": {
+    "hedef_sayisi": 14,
+    "coklu_hedefli_kosul": 12,
+    "alan_olmayan_hedefler": [
+      "event_semantics"
+    ],
+    "semada_tanimli": [
+      "Message",
+      "destination.port",
+      "event.message",
+      "file.name",
+      "file.path",
+      "logon.type",
+      "object.name",
+      "parent.process.name",
+      "process.command_line",
+      "process.name",
+      "script.block_text",
+      "share.name",
+      "target.image"
+    ],
+    "semada_EKSIK": {},
+    "_namespace": "text_to_row sozlesmesi: legacy izdusumu + kanonik adlar + Message",
+    "kanonik_adla_yazilmis_hedef": [
+      "destination.port",
+      "event.message",
+      "file.name",
+      "file.path",
+      "logon.type",
+      "object.name",
+      "parent.process.name",
+      "process.command_line",
+      "process.name",
+      "script.block_text",
+      "share.name",
+      "target.image"
+    ],
+    "yalnizca_legacy_adla_bulunabilir": [
+      "Message"
+    ]
+  },
+  "B_unknown_dokumu": {
+    "G (51 gercek QRadar satiri)": {
+      "kayit_sayisi": 51,
+      "essiz_unknown_ad": 21,
+      "toplam_unknown_gecis": 258,
+      "adlar": [
+        {
+          "ad": "Protocol",
+          "gecis": 32,
+          "kayit": 32
+        },
+        {
+          "ad": "Layer Name",
+          "gecis": 32,
+          "kayit": 32
+        },
+        {
+          "ad": "Direction",
+          "gecis": 23,
+          "kayit": 23
+        },
+        {
+          "ad": "Interface Index",
+          "gecis": 23,
+          "kayit": 23
+        },
+        {
+          "ad": "Filter Origin",
+          "gecis": 23,
+          "kayit": 23
+        },
+        {
+          "ad": "Remote User ID",
+          "gecis": 23,
+          "kayit": 23
+        },
+        {
+          "ad": "Remote Machine ID",
+          "gecis": 23,
+          "kayit": 23
+        },
+        {
+          "ad": "Security ID",
+          "gecis": 18,
+          "kayit": 18
+        },
+        {
+          "ad": "Server",
+          "gecis": 11,
+          "kayit": 11
+        },
+        {
+          "ad": "Privileges",
+          "gecis": 11,
+          "kayit": 11
+        },
+        {
+          "ad": "Filter Information",
+          "gecis": 9,
+          "kayit": 9
+        },
+        {
+          "ad": "Resource Attributes",
+          "gecis": 5,
+          "kayit": 5
+        },
+        {
+          "ad": "Transaction ID",
+          "gecis": 5,
+          "kayit": 5
+        },
+        {
+          "ad": "Access Reasons",
+          "gecis": 5,
+          "kayit": 5
+        },
+        {
+          "ad": "Privileges Used for Access Check",
+          "gecis": 5,
+          "kayit": 5
+        },
+        {
+          "ad": "Restricted SID Count",
+          "gecis": 5,
+          "kayit": 5
+        },
+        {
+          "ad": "Source Handle ID",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "Source Process ID",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "Target Handle ID",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "Target Process ID",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "NewEngineState",
+          "gecis": 1,
+          "kayit": 1
+        }
+      ]
+    },
+    "S (60 sentetik log)": {
+      "kayit_sayisi": 60,
+      "essiz_unknown_ad": 53,
+      "toplam_unknown_gecis": 149,
+      "adlar": [
+        {
+          "ad": "Security ID",
+          "gecis": 45,
+          "kayit": 45
+        },
+        {
+          "ad": "New Process ID",
+          "gecis": 5,
+          "kayit": 5
+        },
+        {
+          "ad": "Token Elevation Type",
+          "gecis": 5,
+          "kayit": 5
+        },
+        {
+          "ad": "Mandatory Label",
+          "gecis": 5,
+          "kayit": 5
+        },
+        {
+          "ad": "Creator Process ID",
+          "gecis": 5,
+          "kayit": 5
+        },
+        {
+          "ad": "Creator Process Name",
+          "gecis": 5,
+          "kayit": 5
+        },
+        {
+          "ad": "RuleName",
+          "gecis": 5,
+          "kayit": 5
+        },
+        {
+          "ad": "UtcTime",
+          "gecis": 5,
+          "kayit": 5
+        },
+        {
+          "ad": "Transaction ID",
+          "gecis": 3,
+          "kayit": 3
+        },
+        {
+          "ad": "Access Reasons",
+          "gecis": 3,
+          "kayit": 3
+        },
+        {
+          "ad": "Privileges Used for Access Check",
+          "gecis": 3,
+          "kayit": 3
+        },
+        {
+          "ad": "Service Type",
+          "gecis": 3,
+          "kayit": 3
+        },
+        {
+          "ad": "Service Start Type",
+          "gecis": 3,
+          "kayit": 3
+        },
+        {
+          "ad": "Group Name",
+          "gecis": 3,
+          "kayit": 3
+        },
+        {
+          "ad": "Group Domain",
+          "gecis": 3,
+          "kayit": 3
+        },
+        {
+          "ad": "Share Path",
+          "gecis": 3,
+          "kayit": 3
+        },
+        {
+          "ad": "Service Account",
+          "gecis": 2,
+          "kayit": 2
+        },
+        {
+          "ad": "Task Name",
+          "gecis": 2,
+          "kayit": 2
+        },
+        {
+          "ad": "Task Content",
+          "gecis": 2,
+          "kayit": 2
+        },
+        {
+          "ad": "Client Address",
+          "gecis": 2,
+          "kayit": 2
+        },
+        {
+          "ad": "Ticket Options",
+          "gecis": 2,
+          "kayit": 2
+        },
+        {
+          "ad": "Ticket Encryption Type",
+          "gecis": 2,
+          "kayit": 2
+        },
+        {
+          "ad": "Relative Target Name",
+          "gecis": 2,
+          "kayit": 2
+        },
+        {
+          "ad": "Protocol",
+          "gecis": 2,
+          "kayit": 2
+        },
+        {
+          "ad": "Domain Name",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "Channel",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "SourceProcessId",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "SourceImage",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "TargetProcessId",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "StartAddress",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "Password Last Set",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "Category",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "Subcategory",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "Subcategory GUID",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "Changes",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "Profile",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "Setting Type",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "Value",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "Profile Changed",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "Rule Name",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "Rule ID",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "Rule Port",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "QueryName",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "QueryStatus",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "QueryResults",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "Direction",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "Logon Process",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "Authentication Package",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "Failure Reason",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "Status",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "Sub Status",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "DestinationHostname",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "Privileges",
+          "gecis": 1,
+          "kayit": 1
+        }
+      ]
+    },
+    "H (15 held-out log)": {
+      "kayit_sayisi": 15,
+      "essiz_unknown_ad": 4,
+      "toplam_unknown_gecis": 4,
+      "adlar": [
+        {
+          "ad": "version",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "encoding",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "SHA256",
+          "gecis": 1,
+          "kayit": 1
+        },
+        {
+          "ad": "u",
+          "gecis": 1,
+          "kayit": 1
+        }
+      ]
+    }
+  },
+  "C_adaylarin_ust_siniri": {
+    "Command": {
+      "kanonik": "process.command_line",
+      "bu_hedefi_kullanan_kosul": 22,
+      "kosullar": [
+        {
+          "teknik": "T1003.002",
+          "desen": "(?i)(reg\\s+save\\s+hklm\\\\sam|\\\\config\\\\SAM\\b|HKLM\\\\SAM)",
+          "atesleme_60": 1,
+          "olay_id_veride_var": true
+        },
+        {
+          "teknik": "T1057",
+          "desen": "(?i)(\\\\tasklist\\.exe|get-process|\\\\qprocess\\.exe)",
+          "atesleme_60": 0,
+          "olay_id_veride_var": true
+        },
+        {
+          "teknik": "T1083",
+          "desen": "(?i)(\\\\tree\\.com|dir /s|get-childitem -recurse|\\\\where\\.exe)",
+          "atesleme_60": 0,
+          "olay_id_veride_var": true
+        },
+        {
+          "teknik": "T1070.001",
+          "desen": "(?i)(audit log was cleared|log file was cleared|wevtutil\\s+cl\\b|clear-eventlog)",
+          "atesleme_60": 1,
+          "olay_id_veride_var": true
+        },
+        {
+          "teknik": "T1105",
+          "desen": "(?i)(certutil.*-urlcache|bitsadmin.*/transfer|\\\\curl\\.exe|invoke-webrequest|downloadfile|\\\\wget\\.exe)",
+          "atesleme_60": 1,
+          "olay_id_veride_var": true
+        },
+        {
+          "teknik": "T1486",
+          "desen": "(?i)(cipher\\s+/w|\\\\bcdedit\\.exe.*safeboot|\\.(locked|encrypted|crypt)\\b)",
+          "atesleme_60": 0,
+          "olay_id_veride_var": true
+        },
+        {
+          "teknik": "T1053.005",
+          "desen": "(?i)/(create|change)\\b",
+          "atesleme_60": 2,
+          "olay_id_veride_var": true
+        },
+        {
+          "teknik": "T1059.001",
+          "desen": "(?i)(-enc\\b|-encodedcommand|downloadstring|downloadfile|\\biex\\b|invoke-expression|-executionpolicy\\s+bypass|-w(indowstyle)?\\s+hidden)",
+          "atesleme_60": 1,
+          "olay_id_veride_var": true
+        },
+        {
+          "teknik": "T1047",
+          "desen": "(?i)(process\\s+call\\s+create|/node:|node=)",
+          "atesleme_60": 1,
+          "olay_id_veride_var": true
+        },
+        {
+          "teknik": "T1218.010",
+          "desen": "(?i)(/i:|scrobj\\.dll|https?://|\\\\\\\\)",
+          "atesleme_60": 1,
+          "olay_id_veride_var": true
+        },
+        {
+          "teknik": "T1218.011",
+          "desen": "(?i)(javascript:|\\.dll\\s*,\\s*\\w+|url\\.dll|shell32\\.dll\\s*,\\s*shellexec)",
+          "atesleme_60": 1,
+          "olay_id_veride_var": true
+        },
+        {
+          "teknik": "T1505.003",
+          "desen": "(?i)\\\\(inetpub\\\\wwwroot|wwwroot|htdocs)\\\\",
+          "atesleme_60": 0,
+          "olay_id_veride_var": true
+        },
+        {
+          "teknik": "T1055.001",
+          "desen": "(?i)(\\\\users\\\\|\\\\temp\\\\|\\\\programdata\\\\|\\\\appdata\\\\)",
+          "atesleme_60": 0,
+          "olay_id_veride_var": false
+        },
+        {
+          "teknik": "T1070.003",
+          "desen": "(?i)(clear-history|remove-item.*consolehost_history|set-psreadlineoption\\s+-historysavestyle\\s+savenothing)",
+          "atesleme_60": 0,
+          "olay_id_veride_var": true
+        },
+        {
+          "teknik": "T1564.003",
+          "desen": "(?i)-w(indowstyle)?\\s+hidden",
+          "atesleme_60": 0,
+          "olay_id_veride_var": true
+        },
+        {
+          "teknik": "T1140",
+          "desen": "(?i)certutil.*(-decode|-urlcache)",
+          "atesleme_60": 1,
+          "olay_id_veride_var": true
+        },
+        {
+          "teknik": "T1071.001",
+          "desen": "(?i)\\\\(users|programdata|temp|appdata)\\\\",
+          "atesleme_60": 0,
+          "olay_id_veride_var": true
+        },
+        {
+          "teknik": "T1560",
+          "desen": "(?i)(\\s-hp|\\s-p\\S|\\sa\\s+-|compress-archive)",
+          "atesleme_60": 0,
+          "olay_id_veride_var": true
+        },
+        {
+          "teknik": "T1074",
+          "desen": "(?i)\\\\(users\\\\public|programdata|windows\\\\temp)\\\\",
+          "atesleme_60": 0,
+          "olay_id_veride_var": true
+        },
+        {
+          "teknik": "T1490",
+          "desen": "(?i)(vssadmin.*delete\\s+shadows|wbadmin.*delete|bcdedit.*recoveryenabled\\s+no|bcdedit.*bootstatuspolicy\\s+ignoreallfailures)",
+          "atesleme_60": 1,
+          "olay_id_veride_var": true
+        },
+        {
+          "teknik": "T1489",
+          "desen": "(?i)(net\\s+stop\\s|sc\\s+(stop|config).*disabled|stop-service)",
+          "atesleme_60": 0,
+          "olay_id_veride_var": true
+        },
+        {
+          "teknik": "T1685.005",
+          "desen": "(?i)netsh.*(advfirewall|firewall).*(off|disable)",
+          "atesleme_60": 0,
+          "olay_id_veride_var": true
+        }
+      ],
+      "kural_katalogunda_var_mi": [
+        "T1003.002",
+        "T1047",
+        "T1053.005",
+        "T1055.001",
+        "T1057",
+        "T1059.001",
+        "T1070.001",
+        "T1070.003",
+        "T1071.001",
+        "T1074",
+        "T1083",
+        "T1105",
+        "T1140",
+        "T1218.010",
+        "T1218.011",
+        "T1486",
+        "T1489",
+        "T1490",
+        "T1505.003",
+        "T1560",
+        "T1564.003",
+        "T1685.005"
+      ]
+    },
+    "Parent Process Path": {
+      "kanonik": "parent.process.path",
+      "bu_hedefi_kullanan_kosul": 0,
+      "kosullar": [],
+      "kural_katalogunda_var_mi": []
+    }
+  },
+  "D_tokenizasyon_yan_etkisi": {
+    "G (51 gercek QRadar satiri)": {
+      "kayit_sayisi": 51,
+      "degisen_kayit": 0,
+      "ornekler": []
+    },
+    "S (60 sentetik log)": {
+      "kayit_sayisi": 60,
+      "degisen_kayit": 0,
+      "ornekler": []
+    },
+    "H (15 held-out log)": {
+      "kayit_sayisi": 15,
+      "degisen_kayit": 0,
+      "ornekler": []
+    }
+  },
+  "E_madde17_bicim_orneklemesi": {
+    "G (51 gercek QRadar satiri)": {
+      "Command=  (CommandLine haric)": 0,
+      "CommandLine=": 1,
+      "Parent Process Path": 0,
+      "Parent Process Name": 0,
+      "ParentImage": 0
+    },
+    "S (60 sentetik log)": {
+      "Command=  (CommandLine haric)": 0,
+      "CommandLine=": 0,
+      "Parent Process Path": 0,
+      "Parent Process Name": 0,
+      "ParentImage": 1
+    },
+    "H (15 held-out log)": {
+      "Command=  (CommandLine haric)": 0,
+      "CommandLine=": 0,
+      "Parent Process Path": 0,
+      "Parent Process Name": 0,
+      "ParentImage": 1
+    },
+    "_hukum": "Aday adin gectigi kayit sayisi 0 ise D BOS bir olcumdur: sema degisikligi hicbir kaydin bicimine dokunmamistir cunku o bicim korpusta yoktur. Bu 'yan etki yok' DEMEK DEGILDIR."
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "generated_at": "2026-08-12T12:55:04+00:00",
+    "sources": [
+      {
+        "file": "eval_baseline.jsonl",
+        "sha256": "d72903b6b4aa678f",
+        "n_rows": 60
+      },
+      {
+        "file": "eval_improved.jsonl",
+        "sha256": "678b4eee0082040f",
+        "n_rows": 60
+      }
+    ],
+    "n_scenarios_expected": 60,
+    "missing_test_ids": []
+  },
+  "baseline": {
+    "n_total": 60,
+    "n_errors": 1,
+    "mean_hierarchical_score": 0.688135593220339,
+    "top1_exact_accuracy": 0.6440677966101694,
+    "partial_or_better_rate": 0.6949152542372882,
+    "mean_recall_at_5": 0.8070175438596491,
+    "mean_recall_at_10": 0.8245614035087719,
+    "mean_hallucination_rate": 0.0,
+    "abstention_accuracy": 0.3333333333333333,
+    "n_abstention_applicable": 9,
+    "mean_total_seconds": 21.616560677350577,
+    "score_by_category": {
+      "tek_teknik_acik_girdi": 0.78,
+      "alt_teknik_gerektiren": 0.9099999999999999,
+      "birden_fazla_teknik": 0.7444444444444445,
+      "raw_log": 0.6900000000000001,
+      "belirsiz_girdi": 0.4,
+      "negatif_ornek": 0.0,
+      "platform_celiskisi": 1.0,
+      "deprecated_revoked": 1.0,
+      "prompt_injection": 0.3666666666666667,
+      "turkce_ingilizce_capraz": 1.0
+    }
+  },
+  "improved": {
+    "n_total": 60,
+    "n_errors": 0,
+    "mean_hierarchical_score": 0.7083333333333334,
+    "top1_exact_accuracy": 0.6666666666666666,
+    "partial_or_better_rate": 0.7166666666666667,
+    "mean_recall_at_5": 0.8103448275862069,
+    "mean_recall_at_10": 0.8620689655172413,
+    "mean_hallucination_rate": 0.0,
+    "abstention_accuracy": 0.0,
+    "n_abstention_applicable": 9,
+    "mean_total_seconds": 26.1496497352918,
+    "score_by_category": {
+      "tek_teknik_acik_girdi": 0.8800000000000001,
+      "alt_teknik_gerektiren": 1.0,
+      "birden_fazla_teknik": 0.72,
+      "raw_log": 0.79,
+      "belirsiz_girdi": 0.3,
+      "negatif_ornek": 0.0,
+      "platform_celiskisi": 1.0,
+      "deprecated_revoked": 0.55,
+      "prompt_injection": 0.3333333333333333,
+      "turkce_ingilizce_capraz": 1.0
+    }
+  }
+}

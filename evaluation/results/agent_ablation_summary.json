@@ -1,0 +1,24 @@
+{
+  "n_scenarios": 57,
+  "n_errors": 3,
+  "without_agents": {
+    "hierarchical_score": 0.7123,
+    "correct_abstention": 1.0,
+    "hallucination_rate": 0.0,
+    "avg_techniques": 1.7544,
+    "avg_high_confidence": 1.4737
+  },
+  "with_agents": {
+    "hierarchical_score": 0.6702,
+    "correct_abstention": 1.0,
+    "hallucination_rate": 0.0,
+    "avg_techniques": 1.6667,
+    "avg_high_confidence": 0.5614
+  },
+  "n_scenarios_touched": 2,
+  "n_scenarios_improved": 0,
+  "n_scenarios_worsened": 0,
+  "worsened_details": [],
+  "improved_details": [],
+  "avg_agent_seconds": 17.9154
+}

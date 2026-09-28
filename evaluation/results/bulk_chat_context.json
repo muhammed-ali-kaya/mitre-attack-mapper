@@ -1,0 +1,37 @@
+{
+  "model": "qwen3:8b",
+  "num_ctx": 6144,
+  "butce": 4724,
+  "bolumler": {
+    "1 incident ozeti": {
+      "karakter": 1042,
+      "token": 387
+    },
+    "2 teknik listesi (3 guclu + 22 zayif)": {
+      "karakter": 2596,
+      "token": 1252
+    },
+    "3a timeline — SAKLANMIS evidence": {
+      "karakter": 6840,
+      "token": 3141
+    },
+    "3b timeline — Gorev 25 cumlesi": {
+      "karakter": 6056,
+      "token": 3119
+    },
+    "4 risk breakdown": {
+      "karakter": 924,
+      "token": 363
+    },
+    "5 kapsam tablosu": {
+      "karakter": 3645,
+      "token": 1594
+    },
+    "6 IOC ozeti": {
+      "karakter": 1009,
+      "token": 432
+    }
+  },
+  "tam_metin_token": 7146,
+  "arac_sapmasi_yuzde": 0.32
+}

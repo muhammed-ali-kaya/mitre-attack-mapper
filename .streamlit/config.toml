@@ -1,0 +1,59 @@
+[server]
+# Toplu analiz, satir basina ~25 saniye suren yerel LLM cagrilari yapiyor --
+# 10 satirlik bir dosya 4 dakika demek. Bu sure boyunca tarayici websocket
+# baglantisi kopabiliyor (sekme arka plana atilinca, makine uyuyunca, ya da
+# CPU'daki reranker sunucu event loop'unu acliga dusurup ping'leri
+# geciktirince). Streamlit, baglantisi kopan bir oturumu VARSAYILAN OLARAK
+# yalnizca 120 saniye sakliyor; toplu analiz bundan uzun surdugu icin oturum
+# temizleniyor ve o ana kadar yapilan butun analizler cope gidiyor. Terminalde
+# gorulen "Error sending websocket payload / Unexpected ASGI message
+# 'websocket.send', after sending 'websocket.close'" hatasi bunun belirtisi:
+# sunucu, kapanmis bir sokete ilerleme cubugu guncellemesi gondermeye
+# calisiyor.
+#
+# 1800 saniye (30 dk), en uzun toplu analizden bile uzun olacak sekilde
+# secildi -- kopan baglanti geri geldiginde ayni oturuma donuluyor ve sonuc
+# kaybolmuyor. Bellek maliyeti: kullanilmayan oturumlar 30 dk daha tutuluyor,
+# tek kullanicili yerel bir demoda onemsiz.
+disconnectedSessionTTL = 1800
+
+[client]
+# Gelistirici arac cubugu (Deploy dugmesi, menu) urun ekranini kalabaliklastiriyor.
+toolbarMode = "minimal"
+
+# Tema: shadcn/ui "zinc" koyu paleti. Mavi YALNIZCA kontrol vurgusudur
+# (dugme, secim, baglanti); kirmizi/turuncu/sari/yesil durum anlamina ayrildi
+# (karar, siddet, guven). Yazi tipi sistem yigini -- cevrimdisi calisir, dis
+# yazi tipi yuklenmez (bkz. app/ui/theme.py).
+[theme]
+base = "dark"
+primaryColor = "#4f7fd6"
+backgroundColor = "#09090b"
+secondaryBackgroundColor = "#18181b"
+textColor = "#e4e4e7"
+borderColor = "#27272a"
+dataframeBorderColor = "#27272a"
+dataframeHeaderBackgroundColor = "#18181b"
+linkColor = "#7ea2e6"
+linkUnderline = false
+codeBackgroundColor = "#111113"
+# Varsayilan kod rengi YESIL -- ATT&CK kimlikleri `kod` olarak basildigi icin
+# her ID bir durum rengi tasiyordu. Notr tutuluyor.
+codeTextColor = "#d4d4d8"
+font = "sans-serif"
+baseFontSize = 14
+baseRadius = "8px"
+buttonRadius = "6px"
+showWidgetBorder = true
+showSidebarBorder = true
+redColor = "#e5484d"
+orangeColor = "#e8833a"
+yellowColor = "#d6a42c"
+greenColor = "#3fa66b"
+blueColor = "#4f7fd6"
+grayColor = "#71717a"
+
+[theme.sidebar]
+backgroundColor = "#0c0c0e"
+secondaryBackgroundColor = "#18181b"
+borderColor = "#27272a"

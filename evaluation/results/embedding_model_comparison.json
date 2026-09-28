@@ -1,0 +1,226 @@
+[
+  {
+    "model": "qwen3-embedding",
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 0.7833333333333333,
+    "corpus_embed_seconds": 267.8311975002289,
+    "corpus_embed_per_chunk_ms": 377.759093794399,
+    "query_embed_seconds": 3.4939332008361816,
+    "embedding_dim": 4096,
+    "per_query": [
+      {
+        "query": "Bir PowerShell süreci internetten kod indirerek bellekte çalıştırdı.",
+        "expected": "T1059.001",
+        "rank": 1,
+        "top3": [
+          "T1059.001",
+          "T1620",
+          "T1216.002"
+        ]
+      },
+      {
+        "query": "schtasks /create /s 10.10.20.15 /tn UpdateCheck /tr powershell.exe /sc onlogon komutuyla uzak sistemde zamanlanmis gorev olusturuldu",
+        "expected": "T1053.005",
+        "rank": 2,
+        "top3": [
+          "T1053",
+          "T1053.005",
+          "T1053.003"
+        ]
+      },
+      {
+        "query": "The actor dumped credentials from LSASS memory using a credential dumping tool",
+        "expected": "T1003.001",
+        "rank": 2,
+        "top3": [
+          "T1003",
+          "T1003.001",
+          "T1003.004"
+        ]
+      },
+      {
+        "query": "Attacker authenticated to remote systems using stolen valid administrative credentials",
+        "expected": "T1078",
+        "rank": 1,
+        "top3": [
+          "T1078",
+          "T1078.003",
+          "T1212"
+        ]
+      },
+      {
+        "query": "Office uygulamasi child process olarak cmd.exe baslatti",
+        "expected": "T1059.003",
+        "rank": 3,
+        "top3": [
+          "T1134.004",
+          "T1010",
+          "T1059.003"
+        ]
+      },
+      {
+        "query": "regsvr32.exe kullanilarak sistemde bir DLL kaydedildi ve calistirildi",
+        "expected": "T1218.010",
+        "rank": 1,
+        "top3": [
+          "T1218.010",
+          "T1218.009",
+          "T1546.009"
+        ]
+      },
+      {
+        "query": "rundll32.exe uzerinden zararli bir DLL calistirildi",
+        "expected": "T1218.011",
+        "rank": 1,
+        "top3": [
+          "T1218.011",
+          "T1574.001",
+          "T1546.009"
+        ]
+      },
+      {
+        "query": "wmic.exe kullanilarak uzak bir sistemde komut calistirildi",
+        "expected": "T1047",
+        "rank": 1,
+        "top3": [
+          "T1047",
+          "T1021.006",
+          "T1059.003"
+        ]
+      },
+      {
+        "query": "sekurlsa::logonpasswords komutu ile bellekte saklanan sifreler elde edildi",
+        "expected": "T1003.001",
+        "rank": 2,
+        "top3": [
+          "T1003.004",
+          "T1003.001",
+          "T1003"
+        ]
+      },
+      {
+        "query": "saldirgan bir kimlik avi e-postasi ile kullaniciyi kotu amacli ek dosyayi acmaya ikna etti",
+        "expected": "T1566.001",
+        "rank": 1,
+        "top3": [
+          "T1566.001",
+          "T1684.001",
+          "T1566"
+        ]
+      }
+    ]
+  },
+  {
+    "model": "bge-m3",
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 0.8033333333333333,
+    "corpus_embed_seconds": 153.25817894935608,
+    "corpus_embed_per_chunk_ms": 216.161042241687,
+    "query_embed_seconds": 18.925537109375,
+    "embedding_dim": 1024,
+    "per_query": [
+      {
+        "query": "Bir PowerShell süreci internetten kod indirerek bellekte çalıştırdı.",
+        "expected": "T1059.001",
+        "rank": 1,
+        "top3": [
+          "T1059.001",
+          "T1055.009",
+          "T1055.003"
+        ]
+      },
+      {
+        "query": "schtasks /create /s 10.10.20.15 /tn UpdateCheck /tr powershell.exe /sc onlogon komutuyla uzak sistemde zamanlanmis gorev olusturuldu",
+        "expected": "T1053.005",
+        "rank": 1,
+        "top3": [
+          "T1053.005",
+          "T1053.003",
+          "T1053"
+        ]
+      },
+      {
+        "query": "The actor dumped credentials from LSASS memory using a credential dumping tool",
+        "expected": "T1003.001",
+        "rank": 1,
+        "top3": [
+          "T1003.001",
+          "T1003",
+          "T1556"
+        ]
+      },
+      {
+        "query": "Attacker authenticated to remote systems using stolen valid administrative credentials",
+        "expected": "T1078",
+        "rank": 1,
+        "top3": [
+          "T1078",
+          "T1649",
+          "T1212"
+        ]
+      },
+      {
+        "query": "Office uygulamasi child process olarak cmd.exe baslatti",
+        "expected": "T1059.003",
+        "rank": 5,
+        "top3": [
+          "T1134.004",
+          "T1036.009",
+          "T1218.002"
+        ]
+      },
+      {
+        "query": "regsvr32.exe kullanilarak sistemde bir DLL kaydedildi ve calistirildi",
+        "expected": "T1218.010",
+        "rank": 1,
+        "top3": [
+          "T1218.010",
+          "T1574.011",
+          "T1547.004"
+        ]
+      },
+      {
+        "query": "rundll32.exe uzerinden zararli bir DLL calistirildi",
+        "expected": "T1218.011",
+        "rank": 1,
+        "top3": [
+          "T1218.011",
+          "T1218.010",
+          "T1546.010"
+        ]
+      },
+      {
+        "query": "wmic.exe kullanilarak uzak bir sistemde komut calistirildi",
+        "expected": "T1047",
+        "rank": 1,
+        "top3": [
+          "T1047",
+          "T1218.014",
+          "T1059"
+        ]
+      },
+      {
+        "query": "sekurlsa::logonpasswords komutu ile bellekte saklanan sifreler elde edildi",
+        "expected": "T1003.001",
+        "rank": 2,
+        "top3": [
+          "T1555.005",
+          "T1003.001",
+          "T1003.004"
+        ]
+      },
+      {
+        "query": "saldirgan bir kimlik avi e-postasi ile kullaniciyi kotu amacli ek dosyayi acmaya ikna etti",
+        "expected": "T1566.001",
+        "rank": 3,
+        "top3": [
+          "T1667",
+          "T1586.002",
+          "T1566.001"
+        ]
+      }
+    ]
+  }
+]
