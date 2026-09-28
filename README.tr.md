@@ -134,6 +134,9 @@ Yöntem, tüm metrikler ve kategori sonuçları:
 
 ## Belgeler
 
+**Teknik derinlemesine inceleme:** [`docs/technical-deep-dive.md`](docs/technical-deep-dive.md) —
+pipeline'ın uçtan uca nasıl çalıştığı, mühendisler için (İngilizce).
+
 | Belge | İçerik |
 |---|---|
 | [`docs/architecture.md`](docs/architecture.md) | pipeline diyagramları, tasarım ilkeleri, çalışılmış örnek |

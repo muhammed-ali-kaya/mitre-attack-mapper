@@ -130,6 +130,9 @@ Methodology, all metrics and per-category results:
 
 ## Documentation
 
+**Technical deep dive:** [`docs/technical-deep-dive.md`](docs/technical-deep-dive.md) —
+how the pipeline works end to end, for engineers.
+
 | Document | Contents |
 |---|---|
 | [`docs/architecture.md`](docs/architecture.md) | pipeline diagrams, design principles, worked example |
